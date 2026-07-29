@@ -1,0 +1,17 @@
+{
+  "app_mode": "item",
+  "craft_logic": "generic_item",
+  "item_base": "Blizzard Crown",
+  "item_influence": "Warlord",
+  "item_level": 75,
+  "item_target_ids": [
+    "MaximumPowerChargeInfluence1"
+  ],
+  "item_required_count": 1,
+  "item_use_augment": true,
+  "item_use_regal": false,
+  "item_use_exalt": false,
+  "item_use_annul": false,
+  "chain_craft": false,
+  "chain_count": 1
+}

@@ -163,6 +163,7 @@ try {
         "--add-data", "$(Join-Path $Root 'itemcraft');itemcraft",
         "--add-data", "$(Join-Path $Root 'mapcraft');mapcraft",
         "--add-data", "$(Join-Path $Root 'basejewelcraft');basejewelcraft",
+        "--add-data", "$(Join-Path $Root 'genericitemcraft');genericitemcraft",
         "--add-data", "$UpdaterPayload;updater",
         (Join-Path $Root "cluster_craft.pyw")
     )

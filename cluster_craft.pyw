@@ -266,6 +266,7 @@ try:
 except ModuleNotFoundError as exc:
     ensure_runtime_dependencies(APP_NAME, extra_modules=[exc.name])
     import pyautogui, keyboard, pyperclip, requests
+import generic_item_craft as generic_item
 try:
     import dxcam
 except ModuleNotFoundError as exc:
@@ -310,6 +311,7 @@ DATA_DIR = os.path.join(BASE_DIR, "data")
 TEMPLATE_DIR = os.path.join(BASE_DIR, "itemcraft")
 MAP_TEMPLATE_DIR = os.path.join(BASE_DIR, "mapcraft")
 BASE_JEWEL_TEMPLATE_DIR = os.path.join(BASE_DIR, "basejewelcraft")
+GENERIC_ITEM_TEMPLATE_DIR = os.path.join(BASE_DIR, "genericitemcraft")
 LOGS_DIR = os.path.join(BASE_DIR, "logs")
 SETTINGS_INI = os.path.join(BASE_DIR, "settings.ini")
 APP_ICON_PNG = os.path.join(BASE_DIR, "assets", "wca_icon.png")
@@ -319,6 +321,7 @@ UPDATER_EXE = os.path.join(BASE_DIR, "updater", "WCA Updater.exe")
 CLUSTER_P_PATH = os.path.join(DATA_DIR, "cluster_p.txt")
 CLUSTER_S_PATH = os.path.join(DATA_DIR, "cluster_s.txt")
 BASE_JEWEL_AFFIX_PATH = os.path.join(DATA_DIR, "base_jewel_affixes.json")
+ITEM_AFFIX_CATALOG_PATH = os.path.join(DATA_DIR, "item_affixes.json")
 DEFAULT_BASE_JEWEL_CRIT_MODS = [
     "+#% to Global Critical Strike Multiplier",
     "+#% to Critical Strike Multiplier with Fire Skills",
@@ -328,6 +331,7 @@ DEFAULT_BASE_JEWEL_CRIT_MODS = [
 ]
 DEFAULT_BASE_JEWEL_LIFE_MODS = ["#% increased maximum Life"]
 BASE_JEWEL_STALE_READ_LIMIT = 6
+GENERIC_ITEM_STALE_READ_LIMIT = 6
 
 try:
     with open(BUILD_INFO_PATH, "r", encoding="utf-8") as build_info_file:
@@ -337,7 +341,7 @@ except Exception:
 
 # cluster paths korunuyor — classify_mod_type() combcraft prefix/suffix tespiti için kullanıyor
 
-WINDOW_W, WINDOW_H = 300, 470
+WINDOW_W, WINDOW_H = 360, 470
 PADX, PADY = 5, 5
 shift_spam_active = False
 socket_shift_spam_orb = None
@@ -3460,6 +3464,118 @@ def handle_base_jewel_craft_state(rarity, mods, item_text, settings):
     stop_shift_spam()
     return "done"
 
+@functools.lru_cache(maxsize=1)
+def get_item_affix_catalog():
+    return generic_item.load_catalog(ITEM_AFFIX_CATALOG_PATH)
+
+def generic_item_state_key(rarity, mods):
+    return (
+        (rarity or "").strip().lower(),
+        tuple(sorted(normalize_mod_text(mod) for mod in mods)),
+    )
+
+def _format_generic_item_summary(summary):
+    return (
+        f"Target={summary['matched_count']}/{summary['required_count']} "
+        f"Affix={summary['affix_count']}/6 "
+        f"P={summary['prefix_count']} S={summary['suffix_count']} "
+        f"Junk={len(summary['junk_records'])}"
+    )
+
+def handle_generic_item_craft_state(rarity, mods, item_text, settings):
+    base_name = settings["item_base"]
+    influence = settings.get("item_influence", "None")
+    valid, reason, actual_item_level = generic_item.validate_item(
+        item_text,
+        base_name,
+        influence,
+    )
+    if not valid:
+        log_message(f"[ITEM CRAFT] {reason} Craft durduruldu.")
+        stop_event.set()
+        stop_shift_spam()
+        return "done"
+    if item_has_fractured_mod(mods):
+        log_message("[ITEM CRAFT] Fractured item bu modda desteklenmiyor. Craft durduruldu.")
+        stop_event.set()
+        stop_shift_spam()
+        return "done"
+
+    catalog = get_item_affix_catalog()
+    target_ids = list(settings.get("item_target_ids", []))
+    summary = generic_item.analyze(
+        catalog,
+        base_name,
+        influence,
+        actual_item_level,
+        mods,
+        target_ids,
+        settings.get("item_required_count", 1),
+    )
+    if len(summary["targets"]) != len(target_ids):
+        log_message(
+            "[ITEM CRAFT] Secili hedeflerden biri itemin gercek ilvl/base/influence "
+            "havuzunda yok. Craft durduruldu."
+        )
+        stop_event.set()
+        stop_shift_spam()
+        return "done"
+
+    if mods:
+        log_message(f"--- {rarity.upper()} ITEM CRAFT ---")
+        record_by_index = {
+            index: record["type"]
+            for record in summary["records"]
+            for index in record["indices"]
+        }
+        for index, mod in enumerate(mods):
+            mod_type = record_by_index.get(index, "unknown")
+            tag = mod_type[0].upper() if mod_type != "unknown" else "?"
+            log_message(f"  [{tag}] {mod}")
+
+    log_message(f"[ITEM CRAFT] {_format_generic_item_summary(summary)}")
+    action, reason = generic_item.choose_action(rarity, summary, settings)
+    log_message(f"[ITEM CRAFT] {reason}")
+
+    if action == "done":
+        stop_shift_spam()
+        return "done"
+    if action == "transmute":
+        stop_shift_spam()
+        apply_orb("Orb of Transmutation", ITEM_POS)
+        return "continue"
+    if action == "augment":
+        stop_shift_spam()
+        apply_augmentation_with_failover(
+            chain_craft=settings.get("chain_craft", False)
+        )
+        return "continue"
+    if action == "alter":
+        apply_alteration_with_failover(
+            chain_craft=settings.get("chain_craft", False)
+        )
+        return "continue"
+    if action == "regal":
+        stop_shift_spam()
+        apply_orb("Regal Orb", ITEM_POS)
+        return "continue"
+    if action == "exalt":
+        stop_shift_spam()
+        apply_orb("Exalted Orb", ITEM_POS)
+        return "continue"
+    if action == "annul":
+        stop_shift_spam()
+        apply_orb("Orb of Annulment", ITEM_POS)
+        return "continue"
+    if action == "scour":
+        stop_shift_spam()
+        apply_orb("Orb of Scouring", ITEM_POS)
+        return "reset_to_magic"
+
+    stop_event.set()
+    stop_shift_spam()
+    return "done"
+
 def _count_template_matches(entries, mods):
     item_mods_normalized = _normalized_mod_list(mods)
     return sum(
@@ -3951,6 +4067,11 @@ def _hotkeys_enabled_in_current_view():
             return not bool(map_affix_visible[0])
         except Exception:
             return True
+    if mode == "item":
+        try:
+            return not bool(item_mod_pool_visible[0])
+        except Exception:
+            return True
     try:
         return current_mode == "normal"
     except Exception:
@@ -3995,6 +4116,7 @@ def start_craft():
             is_map = mode == "map"
             is_socket = mode == "socket"
             is_base_jewel = mode == "base_jewel"
+            is_item = mode == "item"
 
             def _parse_optional_nonnegative(raw_value, label):
                 raw = (raw_value or "").strip()
@@ -4121,6 +4243,88 @@ def start_craft():
                     "safe_mode": False,
                 }
                 ITEM_POS = pyautogui.position()
+            elif is_item:
+                catalog = get_item_affix_catalog()
+                base_name = item_base_var.get().strip()
+                influence = item_influence_var.get().strip() or "None"
+                base = generic_item.find_base(catalog, base_name)
+                if not base:
+                    gui_error("Gecerli bir item base sec.")
+                    return
+                if influence != "None" and influence not in base.get("influences", {}):
+                    gui_error(f"{base_name} base'i {influence} influence alamiyor.")
+                    return
+                try:
+                    item_level = int(item_level_var.get().strip())
+                    required_count = int(item_required_count_var.get().strip())
+                except (ValueError, AttributeError):
+                    gui_error("Item Level ve gerekli hedef sayisi tam sayi olmali.")
+                    return
+                if item_level < 1 or item_level > 100:
+                    gui_error("Item Level 1 ile 100 arasinda olmali.")
+                    return
+                if not item_target_ids:
+                    gui_error("Item Craft icin en az bir hedef mod sec.")
+                    return
+                eligible = generic_item.eligible_mods(
+                    catalog,
+                    base_name,
+                    influence,
+                    item_level,
+                )
+                eligible_by_id = {mod["id"]: mod for mod in eligible}
+                selected_targets = [
+                    eligible_by_id[target_id]
+                    for target_id in item_target_ids
+                    if target_id in eligible_by_id
+                ]
+                if len(selected_targets) != len(item_target_ids):
+                    gui_error(
+                        "Secili hedeflerden biri mevcut base/influence/ilvl havuzunda yok. "
+                        "Mod havuzunu yenileyip hedefi tekrar sec."
+                    )
+                    return
+                target_group_capacity = len(
+                    {
+                        (target["type"], target.get("group"))
+                        for target in selected_targets
+                    }
+                )
+                if (
+                    required_count < 1
+                    or required_count > len(selected_targets)
+                    or required_count > target_group_capacity
+                ):
+                    gui_error(
+                        "Gerekli hedef sayisi secili modlardan ve birlikte gelebilen "
+                        "mod ailelerinden fazla olamaz."
+                    )
+                    return
+
+                snapshot = {
+                    "craft_logic": "generic_item",
+                    "item_base": base_name,
+                    "item_influence": influence,
+                    "item_level": item_level,
+                    "item_target_ids": list(item_target_ids),
+                    "item_required_count": required_count,
+                    "item_use_augment": item_use_augment_var.get(),
+                    "item_use_regal": item_use_regal_var.get(),
+                    "item_use_exalt": item_use_exalt_var.get(),
+                    "item_use_annul": item_use_annul_var.get(),
+                    "comb_craft": False,
+                    "chain_craft": chain_craft.get(),
+                    "chain_count": int(chain_count_var.get() or 1),
+                    "safe_mode": False,
+                }
+                if snapshot["chain_craft"]:
+                    slots = calculate_inventory_slots()
+                    if not slots:
+                        gui_error("Chain Craft icin Inventory 1st Slot ve Last Slot ayarla.")
+                        return
+                    snapshot["inventory_slots"] = slots
+                else:
+                    ITEM_POS = pyautogui.position()
             elif is_base_jewel:
                 try:
                     crit_count = int(base_jewel_crit_count_var.get().strip())
@@ -4225,12 +4429,20 @@ def start_craft():
                 "Socket"
                 if is_socket
                 else (
-                    "Base Jewel Chain"
-                    if is_base_jewel and snapshot.get("chain_craft")
+                    "Item Chain"
+                    if is_item and snapshot.get("chain_craft")
                     else (
-                        "Base Jewel"
-                        if is_base_jewel
-                        else ("Chain" if snapshot.get("chain_craft") else "Single")
+                        "Item"
+                        if is_item
+                        else (
+                            "Base Jewel Chain"
+                            if is_base_jewel and snapshot.get("chain_craft")
+                            else (
+                                "Base Jewel"
+                                if is_base_jewel
+                                else ("Chain" if snapshot.get("chain_craft") else "Single")
+                            )
+                        )
                     )
                 )
             )
@@ -4290,6 +4502,8 @@ def craft_thread_loop(settings):
         single_done = False
         last_base_jewel_state = None
         unchanged_base_jewel_reads = 0
+        last_generic_item_state = None
+        unchanged_generic_item_reads = 0
         while not single_done and not stop_event.is_set():
 
             # Adamın isCrafted() → GetItemInfo() — önce oku
@@ -4306,6 +4520,35 @@ def craft_thread_loop(settings):
                 continue
 
             rarity, mods = parse_item_text(item_text)
+
+            if settings.get("craft_logic") == "generic_item":
+                current_state = generic_item_state_key(rarity, mods)
+                if current_state == last_generic_item_state:
+                    unchanged_generic_item_reads += 1
+                else:
+                    last_generic_item_state = current_state
+                    unchanged_generic_item_reads = 1
+                if unchanged_generic_item_reads >= GENERIC_ITEM_STALE_READ_LIMIT:
+                    log_message(
+                        "[ITEM CRAFT] Item 6 okumadir degismedi. Currency bitmis veya tiklama "
+                        "uygulanmamis olabilir; guvenlik icin craft durduruldu."
+                    )
+                    stop_shift_spam()
+                    stop_event.set()
+                    return "stopped"
+                result = handle_generic_item_craft_state(
+                    rarity,
+                    mods,
+                    item_text,
+                    settings,
+                )
+                if result == "done":
+                    single_done = True
+                elif result == "reset_to_magic":
+                    safe_wait(0.2)
+                    apply_orb("Orb of Transmutation", ITEM_POS)
+                safe_wait(get_delay_s())
+                continue
 
             if settings.get("craft_logic") == "base_jewel":
                 current_state = base_jewel_state_key(rarity, mods)
@@ -4682,6 +4925,8 @@ def craft_thread_loop_safe(settings):
         single_done = False
         last_base_jewel_state = None
         unchanged_base_jewel_reads = 0
+        last_generic_item_state = None
+        unchanged_generic_item_reads = 0
         while not single_done and not stop_event.is_set():
             try:
                 item_text = get_item_info_safe()
@@ -4697,6 +4942,36 @@ def craft_thread_loop_safe(settings):
                     continue
 
                 rarity, mods = parse_item_text(item_text)
+
+                if settings.get("craft_logic") == "generic_item":
+                    current_state = generic_item_state_key(rarity, mods)
+                    if current_state == last_generic_item_state:
+                        unchanged_generic_item_reads += 1
+                    else:
+                        last_generic_item_state = current_state
+                        unchanged_generic_item_reads = 1
+                    if unchanged_generic_item_reads >= GENERIC_ITEM_STALE_READ_LIMIT:
+                        log_message(
+                            "[ITEM CRAFT] Item 6 okumadir degismedi. Currency bitmis veya tiklama "
+                            "uygulanmamis olabilir; guvenlik icin craft durduruldu."
+                        )
+                        stop_shift_spam()
+                        stop_event.set()
+                        return "stopped"
+                    result = handle_generic_item_craft_state(
+                        rarity,
+                        mods,
+                        item_text,
+                        settings,
+                    )
+                    if result == "done":
+                        single_done = True
+                    elif result == "reset_to_magic":
+                        safe_wait(0.2)
+                        apply_orb("Orb of Transmutation", ITEM_POS)
+                    safe_wait(get_delay_s())
+                    consecutive_errors = 0
+                    continue
 
                 if settings.get("craft_logic") == "base_jewel":
                     current_state = base_jewel_state_key(rarity, mods)
@@ -4968,8 +5243,13 @@ def list_templates_from_folder():
     template_dir = (
         MAP_TEMPLATE_DIR
         if mode == "map"
-        else (BASE_JEWEL_TEMPLATE_DIR if mode == "base_jewel" else TEMPLATE_DIR)
+        else (
+            BASE_JEWEL_TEMPLATE_DIR
+            if mode == "base_jewel"
+            else (GENERIC_ITEM_TEMPLATE_DIR if mode == "item" else TEMPLATE_DIR)
+        )
     )
+    os.makedirs(template_dir, exist_ok=True)
     return sorted(os.path.splitext(f)[0] for f in os.listdir(template_dir) if f.endswith(".json"))
 
 def template_path(name: str):
@@ -4977,7 +5257,11 @@ def template_path(name: str):
     template_dir = (
         MAP_TEMPLATE_DIR
         if mode == "map"
-        else (BASE_JEWEL_TEMPLATE_DIR if mode == "base_jewel" else TEMPLATE_DIR)
+        else (
+            BASE_JEWEL_TEMPLATE_DIR
+            if mode == "base_jewel"
+            else (GENERIC_ITEM_TEMPLATE_DIR if mode == "item" else TEMPLATE_DIR)
+        )
     )
     return os.path.join(template_dir, f"{name}.json")
 
@@ -5134,11 +5418,15 @@ def load_template():
             data.get("app_mode") == "base_jewel"
             or data.get("craft_logic") == "base_jewel"
         )
+        is_item_template = bool(
+            data.get("app_mode") == "item"
+            or data.get("craft_logic") == "generic_item"
+        )
         if is_map_template and logic_val not in ("Rare (alchemy)", "Rare (chaos)"):
             logic_val = "Rare (chaos)"
-        if not is_base_jewel_template:
+        if not is_base_jewel_template and not is_item_template:
             craft_logic.set(logic_val)
-        if not is_map_template and not is_base_jewel_template:
+        if not is_map_template and not is_base_jewel_template and not is_item_template:
             augment_mode.set(data.get("augment_mode", "Use if needed"))
             cluster_no_regal_two_var.set(
                 bool(data.get("cluster_no_regal_two_mods", False))
@@ -5149,9 +5437,9 @@ def load_template():
         comb_craft_data_raw = data.get("comb_craft_data", {}) if not is_map_template else {}
         is_effect35 = any(len(v) >= 4 for v in comb_craft_data_raw.values())
         is_effect35_template = is_effect35
-        if not is_map_template and not is_base_jewel_template:
+        if not is_map_template and not is_base_jewel_template and not is_item_template:
             use_exalt.set(True if is_effect35 else bool(data.get("use_exalt", False)))
-        if not is_map_template and not is_base_jewel_template:
+        if not is_map_template and not is_base_jewel_template and not is_item_template:
             use_annul.set(bool(data.get("use_annul", False)))
         chain_craft.set(bool(data.get("chain_craft", False)))
         chain_count_var.set(str(data.get("chain_count", 1)))
@@ -5166,6 +5454,22 @@ def load_template():
             set_base_jewel_crit_patterns(
                 data.get("base_jewel_crit_mods") or DEFAULT_BASE_JEWEL_CRIT_MODS
             )
+        if is_item_template:
+            item_base_var.set(str(data.get("item_base", "Blizzard Crown")))
+            item_influence_var.set(str(data.get("item_influence", "None")))
+            item_level_var.set(str(data.get("item_level", 75)))
+            item_required_count_var.set(str(data.get("item_required_count", 1)))
+            item_use_augment_var.set(bool(data.get("item_use_augment", True)))
+            item_use_regal_var.set(bool(data.get("item_use_regal", False)))
+            item_use_exalt_var.set(bool(data.get("item_use_exalt", False)))
+            item_use_annul_var.set(bool(data.get("item_use_annul", False)))
+            item_target_ids[:] = [
+                str(target_id)
+                for target_id in data.get("item_target_ids", [])
+                if str(target_id).strip()
+            ]
+            populate_item_target_list()
+            reload_item_mod_pool()
         map_orb_mode.set("alchemy" if logic_val == "Rare (alchemy)" else "chaos")
         map_use_exalt.set(bool(data.get("map_use_exalt", False)))
         map_forbidden[:] = data.get("map_forbidden", [])
@@ -5185,7 +5489,7 @@ def load_template():
             val = data.get(key, "")
             var.set("" if val is None else str(val))
 
-        if not is_map_template and not is_base_jewel_template:
+        if not is_map_template and not is_base_jewel_template and not is_item_template:
             template_comb_craft_data = _copy_combo_data(
                 data.get("comb_craft_data", {})
             )
@@ -5222,7 +5526,7 @@ def load_template():
                 no_regal_mods_config[:] = template_no_regal_mods_config
                 _clear_comb_match_caches()
                 apply_cluster_price_filter()
-        elif is_map_template or is_base_jewel_template:
+        elif is_map_template or is_base_jewel_template or is_item_template:
             comb_craft_data = {}
             combo_price_data = {}
             template_price_meta = {}
@@ -5262,7 +5566,11 @@ def save_template():
     mode_label = (
         "Map"
         if app_mode.get() == "map"
-        else ("Base Jewel" if app_mode.get() == "base_jewel" else "Cluster")
+        else (
+            "Base Jewel"
+            if app_mode.get() == "base_jewel"
+            else ("Item" if app_mode.get() == "item" else "Cluster")
+        )
     )
     name = simpledialog.askstring(
         "Save Template",
@@ -5280,9 +5588,14 @@ def save_template():
         populate_comb_list()
         is_map = app_mode.get() == "map"
         is_base_jewel = app_mode.get() == "base_jewel"
+        is_item = app_mode.get() == "item"
         data = {
             "app_mode": app_mode.get(),
-            "craft_logic": "base_jewel" if is_base_jewel else craft_logic.get(),
+            "craft_logic": (
+                "base_jewel"
+                if is_base_jewel
+                else ("generic_item" if is_item else craft_logic.get())
+            ),
             "chain_craft": chain_craft.get(),
             "chain_count": int(chain_count_var.get() or 1),
         }
@@ -5303,6 +5616,24 @@ def save_template():
                 "map_scarab_thresh": _optional_int(map_scarab_thresh),
                 "map_divination_thresh": _optional_int(map_divination_thresh),
                 "map_use_exalt": map_use_exalt.get(),
+            })
+        elif is_item:
+            item_level = int(item_level_var.get().strip())
+            required_count = int(item_required_count_var.get().strip())
+            if not item_target_ids:
+                raise ValueError("En az bir Item Craft hedef modu sec.")
+            if required_count < 1 or required_count > len(item_target_ids):
+                raise ValueError("Gerekli hedef sayisi secili hedef sayisini asamaz.")
+            data.update({
+                "item_base": item_base_var.get().strip(),
+                "item_influence": item_influence_var.get().strip() or "None",
+                "item_level": item_level,
+                "item_target_ids": list(item_target_ids),
+                "item_required_count": required_count,
+                "item_use_augment": item_use_augment_var.get(),
+                "item_use_regal": item_use_regal_var.get(),
+                "item_use_exalt": item_use_exalt_var.get(),
+                "item_use_annul": item_use_annul_var.get(),
             })
         elif is_base_jewel:
             crit_count = int(base_jewel_crit_count_var.get().strip())
@@ -6016,6 +6347,19 @@ base_jewel_no_regal_var = tk.BooleanVar(value=False)
 base_jewel_use_augment_var = tk.BooleanVar(value=True)
 base_jewel_use_exalt_var = tk.BooleanVar(value=True)
 base_jewel_use_annul_var = tk.BooleanVar(value=True)
+item_base_var = tk.StringVar(value="Blizzard Crown")
+item_influence_var = tk.StringVar(value="Warlord")
+item_level_var = tk.StringVar(value="75")
+item_required_count_var = tk.StringVar(value="1")
+item_use_augment_var = tk.BooleanVar(value=True)
+item_use_regal_var = tk.BooleanVar(value=False)
+item_use_exalt_var = tk.BooleanVar(value=False)
+item_use_annul_var = tk.BooleanVar(value=False)
+item_mod_search_var = tk.StringVar(value="")
+item_affix_filter_var = tk.StringVar(value="All")
+item_target_ids = []
+item_mod_pool_entries = []
+item_mod_pool_visible = [False]
 
 # ── top bar: Cluster Craft / Map Craft toggle + gear ──────────────────────
 settings_bar = ttk.Frame(root)
@@ -6024,8 +6368,9 @@ settings_bar.grid_columnconfigure(0, weight=1, uniform="mode_row")
 settings_bar.grid_columnconfigure(1, weight=1, uniform="mode_row")
 settings_bar.grid_columnconfigure(2, weight=1, uniform="mode_row")
 settings_bar.grid_columnconfigure(3, weight=1, uniform="mode_row")
-settings_bar.grid_columnconfigure(4, weight=0)
+settings_bar.grid_columnconfigure(4, weight=1, uniform="mode_row")
 settings_bar.grid_columnconfigure(5, weight=0)
+settings_bar.grid_columnconfigure(6, weight=0)
 
 app_mode = tk.StringVar(value="cluster")
 
@@ -6033,10 +6378,12 @@ btn_cluster = ttk.Button(settings_bar, text="Cluster", style="Dark.TButton")
 btn_map     = ttk.Button(settings_bar, text="Map",     style="Dark.TButton")
 btn_socket  = ttk.Button(settings_bar, text="Socket",  style="Dark.TButton")
 btn_base_jewel = ttk.Button(settings_bar, text="Jewel", style="Dark.TButton")
+btn_item = ttk.Button(settings_bar, text="Item", style="Dark.TButton")
 btn_cluster.grid(row=0, column=0, sticky="ew")
 btn_map.grid(row=0, column=1, sticky="ew", padx=(2, 2))
 btn_socket.grid(row=0, column=2, sticky="ew", padx=(0, 2))
-btn_base_jewel.grid(row=0, column=3, sticky="ew", padx=(0, 4))
+btn_base_jewel.grid(row=0, column=3, sticky="ew", padx=(0, 2))
+btn_item.grid(row=0, column=4, sticky="ew", padx=(0, 4))
 
 settings_btn = ttk.Button(settings_bar, text="⚙", style="Dark.TButton")
 
@@ -6056,7 +6403,7 @@ always_on_top_cb = ttk.Checkbutton(
     variable=always_on_top_var,
     command=toggle_always_on_top,
 )
-always_on_top_cb.grid(row=0, column=4, sticky="e", padx=(0, 4))
+always_on_top_cb.grid(row=0, column=5, sticky="e", padx=(0, 4))
 always_on_top_cb.config(text="\U0001F4CC", width=2)
 safe_mode_cb = ttk.Checkbutton(
     settings_bar,
@@ -6064,7 +6411,7 @@ safe_mode_cb = ttk.Checkbutton(
     variable=safe_mode_var,
     command=toggle_safe_mode,
 )
-safe_mode_cb.grid(row=0, column=5, sticky="e")
+safe_mode_cb.grid(row=0, column=6, sticky="e")
 safe_mode_cb.state(["disabled"])
 toggle_safe_mode()
 root.attributes("-topmost", True)
@@ -6317,6 +6664,277 @@ ttk.Label(
     justify="left",
     font=("Segoe UI", 8, "italic"),
 ).grid(row=8, column=0, columnspan=4, sticky="w", pady=(8, 0))
+
+item_frame = ttk.Frame(root)
+item_frame.configure(padding=(7, 6))
+item_frame.grid_columnconfigure(1, weight=1)
+item_frame.grid_columnconfigure(3, weight=1)
+
+ttk.Label(item_frame, text="Item Craft", font=("Segoe UI", 9, "bold")).grid(
+    row=0, column=0, columnspan=4, sticky="w", pady=(0, 5)
+)
+
+ttk.Label(item_frame, text="Base:").grid(row=1, column=0, sticky="w")
+item_base_cb = ttk.Combobox(
+    item_frame,
+    textvariable=item_base_var,
+    values=generic_item.base_names(get_item_affix_catalog()),
+    state="normal",
+    style="Dark.TCombobox",
+)
+item_base_cb.grid(row=1, column=1, columnspan=3, sticky="ew", padx=(5, 0))
+
+ttk.Label(item_frame, text="Influence:").grid(row=2, column=0, sticky="w", pady=(5, 0))
+item_influence_cb = ttk.Combobox(
+    item_frame,
+    textvariable=item_influence_var,
+    values=["None", "Shaper", "Elder", "Warlord", "Hunter", "Crusader", "Redeemer"],
+    state="readonly",
+    width=10,
+    style="Dark.TCombobox",
+)
+item_influence_cb.grid(row=2, column=1, sticky="w", padx=(5, 8), pady=(5, 0))
+ttk.Label(item_frame, text="iLvl:").grid(row=2, column=2, sticky="e", pady=(5, 0))
+tk.Entry(
+    item_frame,
+    width=4,
+    textvariable=item_level_var,
+    font=("Tahoma", 8),
+    bg="#000",
+    fg="#fff",
+    insertbackground="#fff",
+).grid(row=2, column=3, sticky="w", padx=(4, 0), pady=(5, 0))
+
+item_flags = ttk.Frame(item_frame)
+item_flags.grid(row=3, column=0, columnspan=4, sticky="w", pady=(6, 1))
+ttk.Checkbutton(item_flags, text="Augment", variable=item_use_augment_var).pack(side="left")
+ttk.Checkbutton(item_flags, text="Regal", variable=item_use_regal_var).pack(side="left", padx=(6, 0))
+ttk.Checkbutton(item_flags, text="Exalt", variable=item_use_exalt_var).pack(side="left", padx=(6, 0))
+ttk.Checkbutton(item_flags, text="Annul", variable=item_use_annul_var).pack(side="left", padx=(6, 0))
+
+item_goal_line = ttk.Frame(item_frame)
+item_goal_line.grid(row=4, column=0, columnspan=4, sticky="w", pady=(2, 5))
+ttk.Label(item_goal_line, text="Need:").pack(side="left")
+tk.Entry(
+    item_goal_line,
+    width=3,
+    textvariable=item_required_count_var,
+    font=("Tahoma", 8),
+    bg="#000",
+    fg="#fff",
+    insertbackground="#fff",
+).pack(side="left", padx=(3, 9))
+ttk.Checkbutton(item_goal_line, text="Chain", variable=chain_craft).pack(side="left")
+ttk.Label(item_goal_line, text="Count:").pack(side="left", padx=(7, 2))
+tk.Entry(
+    item_goal_line,
+    width=4,
+    textvariable=chain_count_var,
+    font=("Tahoma", 8),
+    bg="#000",
+    fg="#fff",
+    insertbackground="#fff",
+).pack(side="left")
+
+item_target_header = ttk.Frame(item_frame)
+item_target_header.grid(row=5, column=0, columnspan=4, sticky="ew")
+ttk.Label(item_target_header, text="Selected target tiers:").pack(side="left")
+
+item_target_list = tk.Listbox(
+    item_frame,
+    height=6,
+    bg="#000",
+    fg="#fff",
+    selectbackground="#444",
+    highlightbackground="#000",
+    font=("Tahoma", 8),
+)
+item_target_list.grid(row=6, column=0, columnspan=4, sticky="nsew", pady=(2, 5))
+
+def format_item_mod_label(mod):
+    tag = "P" if mod.get("type") == "prefix" else "S"
+    text = " / ".join(line.get("text", "") for line in mod.get("lines", []))
+    affix = mod.get("affix", "")
+    return f"[{tag}] i{mod.get('level', 1)} {affix} | {text}"
+
+def populate_item_target_list():
+    item_target_list.delete(0, "end")
+    mod_by_id = get_item_affix_catalog()["mod_by_id"]
+    for target_id in item_target_ids:
+        mod = mod_by_id.get(target_id)
+        item_target_list.insert(
+            "end",
+            format_item_mod_label(mod) if mod else f"[missing] {target_id}",
+        )
+
+def remove_selected_item_target(event=None):
+    selection = item_target_list.curselection()
+    if not selection:
+        return
+    del item_target_ids[selection[0]]
+    populate_item_target_list()
+
+ttk.Button(
+    item_target_header,
+    text="Remove",
+    style="Dark.TButton",
+    command=remove_selected_item_target,
+).pack(side="right")
+item_target_list.bind("<Double-Button-1>", remove_selected_item_target)
+
+item_mod_pool_frame = ttk.Frame(root)
+item_mod_pool_frame.configure(padding=(7, 6))
+item_mod_pool_frame.grid_columnconfigure(0, weight=1)
+item_mod_pool_frame.grid_rowconfigure(3, weight=1)
+
+item_pool_top = ttk.Frame(item_mod_pool_frame)
+item_pool_top.grid(row=0, column=0, sticky="ew", pady=(0, 4))
+ttk.Label(item_pool_top, text="Natural Mod Pool", font=("Segoe UI", 9, "bold")).pack(side="left")
+item_affix_filter_cb = ttk.Combobox(
+    item_pool_top,
+    textvariable=item_affix_filter_var,
+    values=["All", "Prefix", "Suffix"],
+    state="readonly",
+    width=7,
+    style="Dark.TCombobox",
+)
+item_affix_filter_cb.pack(side="right")
+
+item_mod_search_entry = tk.Entry(
+    item_mod_pool_frame,
+    textvariable=item_mod_search_var,
+    bg="#000",
+    fg="#fff",
+    insertbackground="#fff",
+)
+item_mod_search_entry.grid(row=1, column=0, sticky="ew", pady=(0, 3))
+
+item_mod_pool_status_var = tk.StringVar(value="")
+ttk.Label(
+    item_mod_pool_frame,
+    textvariable=item_mod_pool_status_var,
+).grid(row=2, column=0, sticky="w", pady=(0, 2))
+
+item_mod_pool_list = tk.Listbox(
+    item_mod_pool_frame,
+    bg="#000",
+    fg="#fff",
+    selectbackground="#444",
+    highlightbackground="#000",
+    font=("Tahoma", 8),
+)
+item_mod_pool_list.grid(row=3, column=0, sticky="nsew")
+
+item_pool_buttons = ttk.Frame(item_mod_pool_frame)
+item_pool_buttons.grid(row=4, column=0, sticky="ew", pady=(5, 0))
+
+def reload_item_mod_pool(*_):
+    query = item_mod_search_var.get().strip().casefold()
+    affix_filter = item_affix_filter_var.get().strip().casefold()
+    try:
+        item_level = int(item_level_var.get().strip())
+    except (ValueError, AttributeError):
+        item_level = 1
+    eligible = generic_item.eligible_mods(
+        get_item_affix_catalog(),
+        item_base_var.get().strip(),
+        item_influence_var.get().strip() or "None",
+        item_level,
+    )
+    visible = []
+    for mod in eligible:
+        if affix_filter in ("prefix", "suffix") and mod.get("type") != affix_filter:
+            continue
+        label = format_item_mod_label(mod)
+        if query and query not in label.casefold():
+            continue
+        visible.append((mod, label))
+    item_mod_pool_entries[:] = [mod for mod, _ in visible]
+    item_mod_pool_list.delete(0, "end")
+    for _, label in visible:
+        item_mod_pool_list.insert("end", label)
+    item_mod_pool_status_var.set(
+        f"{item_base_var.get().strip()} | {item_influence_var.get()} | "
+        f"i{item_level}: {len(visible)} mods"
+    )
+
+def add_selected_item_mod(event=None):
+    selection = item_mod_pool_list.curselection()
+    if not selection:
+        return
+    mod = item_mod_pool_entries[selection[0]]
+    if mod["id"] not in item_target_ids:
+        item_target_ids.append(mod["id"])
+        populate_item_target_list()
+
+def filter_item_base_values(event=None):
+    typed = item_base_var.get().strip().casefold()
+    names = generic_item.base_names(get_item_affix_catalog())
+    item_base_cb["values"] = (
+        [name for name in names if typed in name.casefold()]
+        if typed
+        else names
+    )
+    if event and event.keysym in ("Return", "Tab"):
+        reload_item_mod_pool()
+
+def toggle_item_mod_pool():
+    if item_mod_pool_visible[0]:
+        item_mod_pool_frame.place_forget()
+        item_mod_pool_visible[0] = False
+        item_frame.place(
+            x=PADX,
+            y=104,
+            width=WINDOW_W - 2 * PADX,
+            height=330,
+        )
+        return
+    item_frame.place_forget()
+    reload_item_mod_pool()
+    item_mod_pool_frame.place(
+        x=PADX,
+        y=104,
+        width=WINDOW_W - 2 * PADX,
+        height=330,
+    )
+    item_mod_pool_visible[0] = True
+    item_mod_search_entry.focus_set()
+
+ttk.Button(
+    item_pool_buttons,
+    text="Add",
+    style="Dark.TButton",
+    command=add_selected_item_mod,
+).pack(side="left", fill="x", expand=True, padx=(0, 2))
+ttk.Button(
+    item_pool_buttons,
+    text="Back",
+    style="Dark.TButton",
+    command=toggle_item_mod_pool,
+).pack(side="left", fill="x", expand=True, padx=(2, 0))
+item_mod_pool_list.bind("<Double-Button-1>", add_selected_item_mod)
+item_mod_search_var.trace_add("write", reload_item_mod_pool)
+item_affix_filter_cb.bind("<<ComboboxSelected>>", reload_item_mod_pool)
+item_base_cb.bind("<KeyRelease>", filter_item_base_values)
+item_base_cb.bind("<<ComboboxSelected>>", reload_item_mod_pool)
+item_base_cb.bind("<FocusOut>", reload_item_mod_pool)
+item_influence_cb.bind("<<ComboboxSelected>>", reload_item_mod_pool)
+item_level_var.trace_add("write", reload_item_mod_pool)
+
+ttk.Button(
+    item_frame,
+    text="Open Mod Pool",
+    style="Dark.TButton",
+    command=toggle_item_mod_pool,
+).grid(row=7, column=0, columnspan=4, sticky="ew")
+ttk.Label(
+    item_frame,
+    text="Single junk + compatible open slot uses Augment first.",
+    wraplength=WINDOW_W - 2 * PADX - 22,
+    justify="left",
+    font=("Segoe UI", 8, "italic"),
+).grid(row=8, column=0, columnspan=4, sticky="w", pady=(5, 0))
+reload_item_mod_pool()
 
 # craft logic + flags
 mid = ttk.Frame(root)
@@ -6875,7 +7493,16 @@ current_mode = "normal"
 def show_mode(mode: str):
     global current_mode
     current_mode = mode
-    for w in [mid, weights, settings_panel, pool, socket_frame, base_jewel_frame]:
+    for w in [
+        mid,
+        weights,
+        settings_panel,
+        pool,
+        socket_frame,
+        base_jewel_frame,
+        item_frame,
+        item_mod_pool_frame,
+    ]:
         w.place_forget()
     if mode == "normal":
         show_top_controls()
@@ -6899,7 +7526,7 @@ show_btn = ttk.Button(bottom, text="Show Affix List", style="Dark.TButton", comm
 show_btn.pack(fill="both", expand=True)
 
 def toggle_settings_panel():
-    if app_mode.get() == "base_jewel":
+    if app_mode.get() in ("base_jewel", "item"):
         OrbLocationsWindow(root)
         return
     show_mode("normal" if current_mode == "settings" else "settings")
@@ -6914,6 +7541,7 @@ def switch_to_cluster():
     btn_map.state(["!pressed"])
     btn_socket.state(["!pressed"])
     btn_base_jewel.state(["!pressed"])
+    btn_item.state(["!pressed"])
     configure_top_controls_for_socket_mode(False)
     # Map UI gizle
     map_frame.place_forget()
@@ -6921,6 +7549,9 @@ def switch_to_cluster():
     map_bottom.place_forget()
     map_pool_frame.place_forget()
     base_jewel_frame.place_forget()
+    item_frame.place_forget()
+    item_mod_pool_frame.place_forget()
+    item_mod_pool_visible[0] = False
     map_affix_visible[0] = False
     # Logic butonları cluster moduna döndür
     craft_logic.set("Rare (regal)")
@@ -6955,10 +7586,14 @@ def switch_to_map():
     btn_cluster.state(["!pressed"])
     btn_socket.state(["!pressed"])
     btn_base_jewel.state(["!pressed"])
+    btn_item.state(["!pressed"])
     configure_top_controls_for_socket_mode(False)
     # Cluster UI gizle
     socket_frame.place_forget()
     base_jewel_frame.place_forget()
+    item_frame.place_forget()
+    item_mod_pool_frame.place_forget()
+    item_mod_pool_visible[0] = False
     pool.place_forget()
     settings_panel.place_forget()
     bottom.place_forget()
@@ -7004,6 +7639,7 @@ def switch_to_socket():
     btn_cluster.state(["!pressed"])
     btn_map.state(["!pressed"])
     btn_base_jewel.state(["!pressed"])
+    btn_item.state(["!pressed"])
     configure_top_controls_for_socket_mode(True)
     map_frame.place_forget()
     map_tabs.place_forget()
@@ -7017,6 +7653,9 @@ def switch_to_socket():
     mid.place_forget()
     weights.place_forget()
     base_jewel_frame.place_forget()
+    item_frame.place_forget()
+    item_mod_pool_frame.place_forget()
+    item_mod_pool_visible[0] = False
     show_top_controls()
     socket_frame.place(x=PADX, y=104, width=WINDOW_W - 2 * PADX, height=170)
 
@@ -7029,6 +7668,7 @@ def switch_to_base_jewel():
     btn_cluster.state(["!pressed"])
     btn_map.state(["!pressed"])
     btn_socket.state(["!pressed"])
+    btn_item.state(["!pressed"])
     configure_top_controls_for_socket_mode(False)
     settings_btn.config(text="Orb Locations", command=lambda: OrbLocationsWindow(root))
 
@@ -7044,6 +7684,9 @@ def switch_to_base_jewel():
     tabs.place_forget()
     mid.place_forget()
     weights.place_forget()
+    item_frame.place_forget()
+    item_mod_pool_frame.place_forget()
+    item_mod_pool_visible[0] = False
 
     show_top_controls()
     base_jewel_frame.place(
@@ -7053,10 +7696,53 @@ def switch_to_base_jewel():
         height=330,
     )
 
+def switch_to_item():
+    global current_mode
+    app_mode.set("item")
+    current_mode = "normal"
+    refresh_templates()
+    btn_item.state(["pressed"])
+    btn_cluster.state(["!pressed"])
+    btn_map.state(["!pressed"])
+    btn_socket.state(["!pressed"])
+    btn_base_jewel.state(["!pressed"])
+    configure_top_controls_for_socket_mode(False)
+    settings_btn.config(text="Orb Locations", command=lambda: OrbLocationsWindow(root))
+
+    map_frame.place_forget()
+    map_tabs.place_forget()
+    map_bottom.place_forget()
+    map_pool_frame.place_forget()
+    map_affix_visible[0] = False
+    socket_frame.place_forget()
+    base_jewel_frame.place_forget()
+    pool.place_forget()
+    settings_panel.place_forget()
+    bottom.place_forget()
+    tabs.place_forget()
+    mid.place_forget()
+    weights.place_forget()
+    item_mod_pool_frame.place_forget()
+    item_mod_pool_visible[0] = False
+
+    show_top_controls()
+    item_frame.place(
+        x=PADX,
+        y=104,
+        width=WINDOW_W - 2 * PADX,
+        height=330,
+    )
+    if not item_target_ids:
+        preferred = "Warlord Blizzard Crown - Power Charge"
+        if preferred in list_templates_from_folder():
+            template_var.set(preferred)
+            load_template()
+
 btn_cluster.config(command=switch_to_cluster)
 btn_map.config(command=switch_to_map)
 btn_socket.config(command=switch_to_socket)
 btn_base_jewel.config(command=switch_to_base_jewel)
+btn_item.config(command=switch_to_item)
 
 # ================ SETTINGS PANEL CONTENTS ================
 settings_panel = ttk.Frame(root)
