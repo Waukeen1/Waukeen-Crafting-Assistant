@@ -1,0 +1,187 @@
+{
+  "app_mode": "cluster",
+  "craft_logic": "Rare (regal)",
+  "augment_mode": "Always use",
+  "use_exalt": true,
+  "use_annul": true,
+  "chain_craft": false,
+  "chain_count": 1,
+  "cluster_meta": {
+    "base": "Staff Attacks deal 12% increased Damage with Hits and AilmentsMace or Sceptre Attacks deal 12% increased Damage with Hits and Ailments",
+    "passive_count": 8,
+    "source": "PoEDB + official trade API"
+  },
+  "comb_craft_data": {
+    "1": [
+      "[P][1] 1 Added Passive Skill is Feed the Fury",
+      "[S][1] 1 Added Passive Skill is Martial Prowess",
+      "[P][1] 1 Added Passive Skill is Overlord"
+    ],
+    "2": [
+      "[S][1] 1 Added Passive Skill is Martial Prowess",
+      "[P][1] 1 Added Passive Skill is Overlord",
+      "[P][1] 1 Added Passive Skill is Weight Advantage"
+    ],
+    "3": [
+      "[P][1] 1 Added Passive Skill is Fuel the Fight",
+      "[S][1] 1 Added Passive Skill is Martial Prowess",
+      "[P][1] 1 Added Passive Skill is Overlord"
+    ],
+    "4": [
+      "[P][1] 1 Added Passive Skill is Fuel the Fight",
+      "[P][1] 1 Added Passive Skill is Overlord",
+      "[S][1] 1 Added Passive Skill is Smite the Weak"
+    ],
+    "5": [
+      "[S][1] 1 Added Passive Skill is Heavy Hitter",
+      "[P][1] 1 Added Passive Skill is Overlord",
+      "[P][1] 1 Added Passive Skill is Weight Advantage"
+    ],
+    "6": [
+      "[P][1] 1 Added Passive Skill is Devastator",
+      "[P][1] 1 Added Passive Skill is Overlord",
+      "[S][1] 1 Added Passive Skill is Smite the Weak"
+    ],
+    "7": [
+      "[P][1] 1 Added Passive Skill is Feed the Fury",
+      "[P][1] 1 Added Passive Skill is Overlord",
+      "[S][1] 1 Added Passive Skill is Smite the Weak"
+    ],
+    "8": [
+      "[P][1] 1 Added Passive Skill is Fuel the Fight",
+      "[S][1] 1 Added Passive Skill is Heavy Hitter",
+      "[P][1] 1 Added Passive Skill is Overlord"
+    ]
+  },
+  "combo_prices": {
+    "1": {
+      "min_chaos": 1740.0,
+      "max_chaos": 2320.0,
+      "avg_chaos": 2059.0,
+      "listings": 27,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/opo2KVgOFl",
+      "scanned_at": "2026-07-29T13:21:58.850069+00:00",
+      "min_divine": 12.1,
+      "max_divine": 16.14,
+      "discovery_hits": 3,
+      "discovery_sample_size": 20
+    },
+    "2": {
+      "min_chaos": 1015.0,
+      "max_chaos": 1305.0,
+      "avg_chaos": 1145.5,
+      "listings": 13,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/X3rMJ5JesP",
+      "scanned_at": "2026-07-29T13:22:10.529519+00:00",
+      "min_divine": 7.06,
+      "max_divine": 9.08,
+      "discovery_hits": 2,
+      "discovery_sample_size": 20
+    },
+    "3": {
+      "min_chaos": 870.0,
+      "max_chaos": 1160.0,
+      "avg_chaos": 1015.0,
+      "listings": 13,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/LgkJvJbjhn",
+      "scanned_at": "2026-07-29T13:22:20.836756+00:00",
+      "min_divine": 6.05,
+      "max_divine": 8.07,
+      "discovery_hits": 2,
+      "discovery_sample_size": 20
+    },
+    "4": {
+      "min_chaos": 290.0,
+      "max_chaos": 435.0,
+      "avg_chaos": 420.5,
+      "listings": 18,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/6zBMnLl2IG",
+      "scanned_at": "2026-07-29T13:22:31.622627+00:00",
+      "min_divine": 2.02,
+      "max_divine": 3.03,
+      "discovery_hits": 2,
+      "discovery_sample_size": 20
+    },
+    "5": {
+      "min_chaos": 290.0,
+      "max_chaos": 290.0,
+      "avg_chaos": 290.0,
+      "listings": 21,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/rPale0zrTQ",
+      "scanned_at": "2026-07-29T13:22:42.416764+00:00",
+      "min_divine": 2.02,
+      "max_divine": 2.02,
+      "discovery_hits": 2,
+      "discovery_sample_size": 20
+    },
+    "6": {
+      "min_chaos": 2175.0,
+      "max_chaos": 10150.0,
+      "avg_chaos": 3480.0,
+      "listings": 8,
+      "sample_size": 8,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/V5pneERXip",
+      "scanned_at": "2026-07-29T13:22:53.270718+00:00",
+      "min_divine": 15.13,
+      "max_divine": 70.61,
+      "discovery_hits": 1,
+      "discovery_sample_size": 20
+    },
+    "7": {
+      "min_chaos": 2030.0,
+      "max_chaos": 2175.0,
+      "avg_chaos": 2126.67,
+      "listings": 3,
+      "sample_size": 3,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/3q6vKe5JS5",
+      "scanned_at": "2026-07-29T13:23:04.102534+00:00",
+      "min_divine": 14.12,
+      "max_divine": 15.13,
+      "discovery_hits": 1,
+      "discovery_sample_size": 20
+    },
+    "8": {
+      "min_chaos": 580.0,
+      "max_chaos": 870.0,
+      "avg_chaos": 754.0,
+      "listings": 5,
+      "sample_size": 5,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/pJZoV42XS0",
+      "scanned_at": "2026-07-29T13:23:15.103552+00:00",
+      "min_divine": 4.03,
+      "max_divine": 6.05,
+      "discovery_hits": 1,
+      "discovery_sample_size": 20
+    }
+  },
+  "price_meta": {
+    "league": "Allflame",
+    "scanned_at": "2026-07-29T13:23:15.103552+00:00",
+    "currency": "chaos",
+    "range_basis": "first 10 cheapest listings",
+    "market_scan_complete": true,
+    "minimum_divine": 2.0,
+    "divine_chaos": 143.75,
+    "minimum_popularity": 3,
+    "popularity_basis": "at least 3 priced online listings; candidate discovered in the latest 20 listings priced at 2+ Divine"
+  },
+  "stop_on_two_match": [],
+  "annul_combs": [],
+  "no_annul_combs": [],
+  "solo_regal_mods": [
+    "[P][1] 1 Added Passive Skill is Feed the Fury",
+    "[S][1] 1 Added Passive Skill is Martial Prowess",
+    "[P][1] 1 Added Passive Skill is Overlord",
+    "[P][1] 1 Added Passive Skill is Weight Advantage",
+    "[P][1] 1 Added Passive Skill is Fuel the Fight",
+    "[S][1] 1 Added Passive Skill is Smite the Weak",
+    "[S][1] 1 Added Passive Skill is Heavy Hitter",
+    "[P][1] 1 Added Passive Skill is Devastator"
+  ],
+  "no_regal_mods": []
+}

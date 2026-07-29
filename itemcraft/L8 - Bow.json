@@ -1,0 +1,115 @@
+{
+  "app_mode": "cluster",
+  "craft_logic": "Rare (regal)",
+  "augment_mode": "Always use",
+  "use_exalt": true,
+  "use_annul": true,
+  "chain_craft": false,
+  "chain_count": 1,
+  "cluster_meta": {
+    "base": "12% increased Damage with Bows12% increased Damage Over Time with Bow Skills",
+    "passive_count": 8,
+    "source": "PoEDB + official trade API"
+  },
+  "comb_craft_data": {
+    "1": [
+      "[P][1] 1 Added Passive Skill is Arcing Shot",
+      "[P][1] 1 Added Passive Skill is Broadside",
+      "[S][1] 1 Added Passive Skill is Martial Prowess"
+    ],
+    "2": [
+      "[P][1] 1 Added Passive Skill is Arcing Shot",
+      "[S][1] 1 Added Passive Skill is Martial Prowess",
+      "[P][1] 1 Added Passive Skill is Tempered Arrowheads"
+    ],
+    "3": [
+      "[P][1] 1 Added Passive Skill is Arcing Shot",
+      "[P][1] 1 Added Passive Skill is Calamitous",
+      "[S][1] 1 Added Passive Skill is Heavy Hitter"
+    ],
+    "4": [
+      "[P][1] 1 Added Passive Skill is Arcing Shot",
+      "[P][1] 1 Added Passive Skill is Devastator",
+      "[S][1] 1 Added Passive Skill is Smite the Weak"
+    ]
+  },
+  "combo_prices": {
+    "1": {
+      "min_chaos": 380.0,
+      "max_chaos": 435.0,
+      "avg_chaos": 429.5,
+      "listings": 80,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/aLG9eVnRSe",
+      "scanned_at": "2026-07-29T13:26:55.817397+00:00",
+      "min_divine": 2.64,
+      "max_divine": 3.03,
+      "discovery_hits": 10,
+      "discovery_sample_size": 20
+    },
+    "2": {
+      "min_chaos": 435.0,
+      "max_chaos": 435.0,
+      "avg_chaos": 435.0,
+      "listings": 45,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/eRDlKGOrIL",
+      "scanned_at": "2026-07-29T13:27:03.638378+00:00",
+      "min_divine": 3.03,
+      "max_divine": 3.03,
+      "discovery_hits": 3,
+      "discovery_sample_size": 20
+    },
+    "3": {
+      "min_chaos": 725.0,
+      "max_chaos": 2900.0,
+      "avg_chaos": 1691.67,
+      "listings": 9,
+      "sample_size": 9,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/V5pneWM2ip",
+      "scanned_at": "2026-07-29T13:27:25.309382+00:00",
+      "min_divine": 5.04,
+      "max_divine": 20.17,
+      "discovery_hits": 1,
+      "discovery_sample_size": 20
+    },
+    "4": {
+      "min_chaos": 290.0,
+      "max_chaos": 435.0,
+      "avg_chaos": 319.0,
+      "listings": 11,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/WvKOvvYRum",
+      "scanned_at": "2026-07-29T13:27:57.992780+00:00",
+      "min_divine": 2.02,
+      "max_divine": 3.03,
+      "discovery_hits": 1,
+      "discovery_sample_size": 20
+    }
+  },
+  "price_meta": {
+    "league": "Allflame",
+    "scanned_at": "2026-07-29T13:27:57.992780+00:00",
+    "currency": "chaos",
+    "range_basis": "first 10 cheapest listings",
+    "market_scan_complete": true,
+    "minimum_divine": 2.0,
+    "divine_chaos": 143.75,
+    "minimum_popularity": 3,
+    "popularity_basis": "at least 3 priced online listings; candidate discovered in the latest 20 listings priced at 2+ Divine"
+  },
+  "stop_on_two_match": [],
+  "annul_combs": [],
+  "no_annul_combs": [],
+  "solo_regal_mods": [
+    "[P][1] 1 Added Passive Skill is Arcing Shot",
+    "[P][1] 1 Added Passive Skill is Broadside",
+    "[S][1] 1 Added Passive Skill is Martial Prowess",
+    "[P][1] 1 Added Passive Skill is Tempered Arrowheads",
+    "[P][1] 1 Added Passive Skill is Calamitous",
+    "[S][1] 1 Added Passive Skill is Heavy Hitter",
+    "[P][1] 1 Added Passive Skill is Devastator",
+    "[S][1] 1 Added Passive Skill is Smite the Weak"
+  ],
+  "no_regal_mods": []
+}

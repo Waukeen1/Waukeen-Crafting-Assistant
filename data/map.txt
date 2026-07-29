@@ -1,0 +1,155 @@
+Monsters reflect #% of Physical Damage
+Monsters reflect #% of Elemental Damage
+Players have #% reduced effect of Non-Curse Auras from Skills
+Players have -#% to all maximum Resistances
+Players cannot Regenerate Life, Mana or Energy Shield
+Players have #% less Recovery Rate of Life and Energy Shield
+Monsters cannot be Leeched from
+Monsters have #% increased Critical Strike Chance
++#% to Monster Critical Strike Multiplier
+Monsters gain #% of their Physical Damage as Extra Chaos Damage
+Monsters Inflict Withered for 2 seconds on Hit
+Monsters deal #% extra Physical Damage as Fire
+Monsters deal #% extra Physical Damage as Cold
+Monsters deal #% extra Physical Damage as Lightning
+Monsters fire 2 additional Projectiles
+Unique Boss deals #% increased Damage
+Unique Boss has #% increased Attack and Cast Speed
+#% increased Monster Movement Speed
+#% increased Monster Attack Speed
+#% increased Monster Cast Speed
+Unique Boss has #% increased Life
+Unique Boss has #% increased Area of Effect
+Monsters have #% increased Area of Effect
+Monsters have a #% chance to avoid Poison, Impale, and Bleeding
+Monsters Poison on Hit
+Monsters' skills Chain 2 additional times
+#% increased Monster Damage
+Players have -#% to amount of Suppressed Spell Damage Prevented
+Monsters have #% increased Accuracy Rating
+#% less effect of Curses on Monsters
+Players are Cursed with Enfeeble
+Players are Cursed with Vulnerability
+Players are Cursed with Temporal Chains
+Players are Cursed with Elemental Weakness
+Area has patches of Consecrated Ground
+Area has patches of desecrated ground
+Area has patches of Shocked Ground which increase Damage taken by #%
+Area has patches of Chilled Ground
+Area has patches of Burning Ground
+Players have #% reduced Chance to Block
+Players have #% less Armour
+Monsters have +#% chance to Suppress Spell Damage
+Monsters take #% reduced Extra Damage from Critical Strikes
+Monsters gain #% of Maximum Life as Extra Maximum Energy Shield
+Players gain #% reduced Flask Charges
+Monsters have #% chance to Avoid Elemental Ailments
++#% Monster Physical Damage Reduction
+Players cannot inflict Exposure
+Monsters are Hexproof
++#% Monster Chaos Resistance
++#% Monster Elemental Resistances
+#% more Monster Life
+Monsters cannot be Stunned
+#% more Monster Life
+All Monster Damage from Hits always Ignites
+Monsters' Attacks have #% chance to Impale on Hit
+Monsters have a #% chance to Ignite, Freeze and Shock on Hit
+Buffs on Players expire #% faster
+Players have #% less Cooldown Recovery Rate
+Unique Bosses are Possessed
+Area contains two Unique Bosses
+Monsters' Action Speed cannot be modified to below Base Value
+Monsters' Movement Speed cannot be modified to below Base Value
+Monsters cannot be Taunted
+Players have #% less Accuracy Rating
+Monsters steal Power, Frenzy and Endurance charges on Hit
+Monsters gain a Frenzy Charge on Hit
+Monsters gain an Endurance Charge on Hit
+Monsters gain a Power Charge on Hit
+Players have #% less Area of Effect
+Monsters Maim on Hit with Attacks
+Monsters Hinder on Hit with Spells
+Monsters Blind on Hit
+Area contains many Totems
+Area has increased monster variety
+Area is inhabited by Cultists of Kitava
+Area is inhabited by ranged monsters
+Area is inhabited by Lunaris fanatics
+Area is inhabited by Undead
+Area is inhabited by Humanoids
+Area is inhabited by Goatmen
+Area is inhabited by Skeletons
+Area is inhabited by Solaris fanatics
+Area is inhabited by Sea Witches and their Spawn
+Area is inhabited by Demons
+Area is inhabited by Abominations
+Area is inhabited by Animals
+Area is inhabited by Ghosts
+#% increased number of Rare Monsters
+#% increased Magic Monsters
+#% increased number of Rare Monsters
+Rare Monsters each have 1 additional Modifier
+Monster Damage Penetrates 15% Elemental Resistances
+#% increased Monster Movement Speed
+#% increased Monster Attack Speed
+#% increased Monster Cast Speed
+Monsters Poison on Hit
+All Damage from Monsters' Hits can Poison
+Monsters have 100% increased Poison Duration
+All Monster Damage can Ignite, Freeze and Shock
+Monsters Ignite, Freeze and Shock on Hit
++50% Monster Physical Damage Reduction
++35% Monster Chaos Resistance
++55% Monster Elemental Resistances
+Monsters gain #% of their Physical Damage as Extra Chaos Damage
+Area contains Labyrinth Hazards
+Rare monsters in area are Shaper-Touched
+Players have #% less Defences
+Monsters gain #% of Maximum Life as Extra Maximum Energy Shield
+Monsters take #% reduced Extra Damage from Critical Strikes
+Area contains Drowning Orbs
+The Maven interferes with Players
+Area contains patches of moving Marked Ground, inflicting random Marks
+Rare Monsters have Volatile Cores
+Map Boss is accompanied by a Synthesis Boss
+Monsters have +50% Chance to Block Attack Damage
+Unique Monsters have a random Shrine Buff
+Players have #% reduced Maximum total Life, Mana and Energy Shield Recovery per second from Leech
+Monsters' skills Chain 3 additional times
+Monsters' Projectiles can Chain when colliding with Terrain
+#% increased Monster Damage
+Monsters have +100% chance to Suppress Spell Damage
+Monsters cannot be Stunned
+Monsters' Action Speed cannot be modified to below Base Value
+Monsters' Movement Speed cannot be modified to below Base Value
+#% more Monster Life
+Monsters have 100% increased Area of Effect
+Monsters fire 2 additional Projectiles
+Players have -20% to all maximum Resistances
+Players are Cursed with Vulnerability
+Players are Cursed with Temporal Chains
+Players are Cursed with Elemental Weakness
+25% chance for Rare Monsters to Fracture on death
+Area contains Unstable Tentacle Fiends
+Players are assaulted by Bloodstained Sawblades
+Monsters inflict 2 Grasping Vines on Hit
+Buffs on Players expire 100% faster
+Monsters gain #% of their Physical Damage as Extra Damage of a random Element
+Monsters have +1 to Maximum Power Charges
+Monsters gain a Power Charge on Hit
+Monsters have +1 to Maximum Endurance Charges
+Monsters gain an Endurance Charge when hit
+Players have 40% less effect of Flasks applied to them
+Rare monsters in area Temporarily Revive on death
+Monsters have #% increased Critical Strike Chance
++#% to Monster Critical Strike Multiplier
+Area contains Runes of the Searing Exarch
+Players are targeted by a Meteor when they use a Flask
+Monsters reflect 20% of Physical Damage
+Monsters reflect 20% of Elemental Damage
+Monsters have +1 to Maximum Frenzy Charges
+Monsters gain a Frenzy Charge on Hit
+Auras from Player Skills which affect Allies also affect Enemies
+Players have #% less Area of Effect
+Debuffs on Monsters expire 100% faster

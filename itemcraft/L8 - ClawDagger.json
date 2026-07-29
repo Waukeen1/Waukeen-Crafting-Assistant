@@ -1,0 +1,131 @@
+{
+  "app_mode": "cluster",
+  "craft_logic": "Rare (regal)",
+  "augment_mode": "Always use",
+  "use_exalt": true,
+  "use_annul": true,
+  "chain_craft": false,
+  "chain_count": 1,
+  "cluster_meta": {
+    "base": "Claw Attacks deal 12% increased Damage with Hits and AilmentsDagger Attacks deal 12% increased Damage with Hits and Ailments",
+    "passive_count": 8,
+    "source": "PoEDB + official trade API"
+  },
+  "comb_craft_data": {
+    "1": [
+      "[P][1] 1 Added Passive Skill is Fan of Blades",
+      "[P][1] 1 Added Passive Skill is Feed the Fury",
+      "[S][1] 1 Added Passive Skill is Martial Prowess"
+    ],
+    "2": [
+      "[P][1] 1 Added Passive Skill is Fan of Blades",
+      "[P][1] 1 Added Passive Skill is Fuel the Fight",
+      "[S][1] 1 Added Passive Skill is Smite the Weak"
+    ],
+    "3": [
+      "[P][1] 1 Added Passive Skill is Fan of Blades",
+      "[P][1] 1 Added Passive Skill is Fuel the Fight",
+      "[S][1] 1 Added Passive Skill is Martial Prowess"
+    ],
+    "4": [
+      "[P][1] 1 Added Passive Skill is Feed the Fury",
+      "[P][1] 1 Added Passive Skill is Fuel the Fight",
+      "[S][1] 1 Added Passive Skill is Martial Prowess"
+    ],
+    "5": [
+      "[P][1] 1 Added Passive Skill is Disease Vector",
+      "[P][1] 1 Added Passive Skill is Fan of Blades",
+      "[S][1] 1 Added Passive Skill is Martial Prowess"
+    ]
+  },
+  "combo_prices": {
+    "1": {
+      "min_chaos": 1305.0,
+      "max_chaos": 2175.0,
+      "avg_chaos": 1921.25,
+      "listings": 4,
+      "sample_size": 4,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/8rRknZXqsV",
+      "scanned_at": "2026-07-29T13:24:01.476809+00:00",
+      "min_divine": 9.08,
+      "max_divine": 15.13,
+      "discovery_hits": 2,
+      "discovery_sample_size": 20
+    },
+    "2": {
+      "min_chaos": 725.0,
+      "max_chaos": 1450.0,
+      "avg_chaos": 890.71,
+      "listings": 7,
+      "sample_size": 7,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/8rRBO83BsV",
+      "scanned_at": "2026-07-29T13:24:09.331056+00:00",
+      "min_divine": 5.04,
+      "max_divine": 10.09,
+      "discovery_hits": 2,
+      "discovery_sample_size": 20
+    },
+    "3": {
+      "min_chaos": 580.0,
+      "max_chaos": 725.0,
+      "avg_chaos": 688.75,
+      "listings": 4,
+      "sample_size": 4,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/rPa2GbbzuQ",
+      "scanned_at": "2026-07-29T13:24:20.294078+00:00",
+      "min_divine": 4.03,
+      "max_divine": 5.04,
+      "discovery_hits": 2,
+      "discovery_sample_size": 20
+    },
+    "4": {
+      "min_chaos": 300.0,
+      "max_chaos": 1160.0,
+      "avg_chaos": 547.14,
+      "listings": 7,
+      "sample_size": 7,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Z6EDebbbTQ",
+      "scanned_at": "2026-07-29T13:24:31.168861+00:00",
+      "min_divine": 2.09,
+      "max_divine": 8.07,
+      "discovery_hits": 2,
+      "discovery_sample_size": 20
+    },
+    "5": {
+      "min_chaos": 1595.0,
+      "max_chaos": 1885.0,
+      "avg_chaos": 1740.0,
+      "listings": 3,
+      "sample_size": 3,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/6zBMnaqMFG",
+      "scanned_at": "2026-07-29T13:24:52.982139+00:00",
+      "min_divine": 11.1,
+      "max_divine": 13.11,
+      "discovery_hits": 1,
+      "discovery_sample_size": 20
+    }
+  },
+  "price_meta": {
+    "league": "Allflame",
+    "scanned_at": "2026-07-29T13:24:52.982139+00:00",
+    "currency": "chaos",
+    "range_basis": "first 10 cheapest listings",
+    "market_scan_complete": true,
+    "minimum_divine": 2.0,
+    "divine_chaos": 143.75,
+    "minimum_popularity": 3,
+    "popularity_basis": "at least 3 priced online listings; candidate discovered in the latest 20 listings priced at 2+ Divine"
+  },
+  "stop_on_two_match": [],
+  "annul_combs": [],
+  "no_annul_combs": [],
+  "solo_regal_mods": [
+    "[P][1] 1 Added Passive Skill is Fan of Blades",
+    "[P][1] 1 Added Passive Skill is Feed the Fury",
+    "[S][1] 1 Added Passive Skill is Martial Prowess",
+    "[P][1] 1 Added Passive Skill is Fuel the Fight",
+    "[S][1] 1 Added Passive Skill is Smite the Weak",
+    "[P][1] 1 Added Passive Skill is Disease Vector"
+  ],
+  "no_regal_mods": []
+}

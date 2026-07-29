@@ -1,0 +1,79 @@
+{
+  "app_mode": "cluster",
+  "craft_logic": "Rare (regal)",
+  "augment_mode": "Always use",
+  "use_exalt": true,
+  "use_annul": true,
+  "chain_craft": false,
+  "chain_count": 1,
+  "cluster_meta": {
+    "base": "Minions deal 10% increased Damage",
+    "passive_count": 12,
+    "source": "PoEDB + official trade API"
+  },
+  "comb_craft_data": {
+    "1": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[S][1] Added Small Passive Skills also grant: +# to All Attributes(4)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Energy Shield(10)",
+      "[S][1] Added Small Passive Skills also grant: Minions have #% increased Attack and Cast Speed(3)"
+    ],
+    "2": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Life(8)",
+      "[S][1] Added Small Passive Skills also grant: Minions have #% increased Attack and Cast Speed(3)",
+      "[S][1] Added Small Passive Skills also grant: +#% to all Elemental Resistances(4)"
+    ]
+  },
+  "combo_prices": {
+    "1": {
+      "min_chaos": 9425.0,
+      "max_chaos": 13050.0,
+      "avg_chaos": 10794.44,
+      "listings": 9,
+      "sample_size": 9,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/8rR56K7ViV",
+      "scanned_at": "2026-07-29T13:17:29.482025+00:00",
+      "min_divine": 65.57,
+      "max_divine": 90.78,
+      "discovery_hits": 2,
+      "discovery_sample_size": 10
+    },
+    "2": {
+      "min_chaos": 12905.0,
+      "max_chaos": 14500.0,
+      "avg_chaos": 13968.33,
+      "listings": 3,
+      "sample_size": 3,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/V5pOopolFp",
+      "scanned_at": "2026-07-29T13:17:40.335934+00:00",
+      "min_divine": 89.77,
+      "max_divine": 100.87,
+      "discovery_hits": 1,
+      "discovery_sample_size": 10
+    }
+  },
+  "price_meta": {
+    "league": "Allflame",
+    "scanned_at": "2026-07-29T13:17:40.335934+00:00",
+    "currency": "chaos",
+    "range_basis": "first 10 cheapest listings",
+    "market_scan_complete": true,
+    "minimum_divine": 2.0,
+    "divine_chaos": 143.75,
+    "minimum_popularity": 3,
+    "popularity_basis": "at least 3 priced online listings; candidate discovered in the latest 10 listings priced at 2+ Divine"
+  },
+  "stop_on_two_match": [],
+  "annul_combs": [],
+  "no_annul_combs": [],
+  "solo_regal_mods": [
+    "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+    "[S][1] Added Small Passive Skills also grant: +# to All Attributes(4)",
+    "[P][1] Added Small Passive Skills also grant: +# to Maximum Energy Shield(10)",
+    "[S][1] Added Small Passive Skills also grant: Minions have #% increased Attack and Cast Speed(3)",
+    "[P][1] Added Small Passive Skills also grant: +# to Maximum Life(8)",
+    "[S][1] Added Small Passive Skills also grant: +#% to all Elemental Resistances(4)"
+  ],
+  "no_regal_mods": []
+}

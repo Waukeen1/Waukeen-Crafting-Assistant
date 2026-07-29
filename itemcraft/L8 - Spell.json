@@ -1,0 +1,133 @@
+{
+  "app_mode": "cluster",
+  "craft_logic": "Rare (regal)",
+  "augment_mode": "Always use",
+  "use_exalt": true,
+  "use_annul": true,
+  "chain_craft": false,
+  "chain_count": 1,
+  "cluster_meta": {
+    "base": "10% increased Spell Damage",
+    "passive_count": 8,
+    "source": "PoEDB + official trade API"
+  },
+  "comb_craft_data": {
+    "1": [
+      "[P][1] 1 Added Passive Skill is Conjured Wall",
+      "[P][1] 1 Added Passive Skill is Mage Hunter",
+      "[S][1] 1 Added Passive Skill is Sap Psyche"
+    ],
+    "2": [
+      "[P][1] 1 Added Passive Skill is Arcane Heroism",
+      "[S][1] 1 Added Passive Skill is Essence Rush",
+      "[P][1] 1 Added Passive Skill is Mage Hunter"
+    ],
+    "3": [
+      "[P][1] 1 Added Passive Skill is Arcane Heroism",
+      "[P][1] 1 Added Passive Skill is Burden Projection",
+      "[S][1] 1 Added Passive Skill is Sap Psyche"
+    ],
+    "4": [
+      "[P][1] 1 Added Passive Skill is Conjured Wall",
+      "[P][1] 1 Added Passive Skill is Mage Hunter",
+      "[S][1] 1 Added Passive Skill is Thaumophage"
+    ],
+    "5": [
+      "[P][1] 1 Added Passive Skill is Arcane Adept",
+      "[P][1] 1 Added Passive Skill is Conjured Wall",
+      "[S][1] 1 Added Passive Skill is Essence Rush"
+    ]
+  },
+  "combo_prices": {
+    "1": {
+      "min_chaos": 435.0,
+      "max_chaos": 725.0,
+      "avg_chaos": 507.5,
+      "listings": 13,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/QLYdgOl3Cw",
+      "scanned_at": "2026-07-29T13:39:46.472948+00:00",
+      "min_divine": 3.03,
+      "max_divine": 5.04,
+      "discovery_hits": 4,
+      "discovery_sample_size": 20
+    },
+    "2": {
+      "min_chaos": 725.0,
+      "max_chaos": 1740.0,
+      "avg_chaos": 855.5,
+      "listings": 10,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/KldnYpwRc5",
+      "scanned_at": "2026-07-29T13:39:54.146873+00:00",
+      "min_divine": 5.04,
+      "max_divine": 12.1,
+      "discovery_hits": 3,
+      "discovery_sample_size": 20
+    },
+    "3": {
+      "min_chaos": 1160.0,
+      "max_chaos": 1450.0,
+      "avg_chaos": 1256.67,
+      "listings": 3,
+      "sample_size": 3,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/yYKwpY8WfR",
+      "scanned_at": "2026-07-29T13:40:04.983412+00:00",
+      "min_divine": 8.07,
+      "max_divine": 10.09,
+      "discovery_hits": 2,
+      "discovery_sample_size": 20
+    },
+    "4": {
+      "min_chaos": 400.0,
+      "max_chaos": 580.0,
+      "avg_chaos": 508.0,
+      "listings": 39,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/X3rRbPlKtP",
+      "scanned_at": "2026-07-29T13:40:15.963261+00:00",
+      "min_divine": 2.78,
+      "max_divine": 4.03,
+      "discovery_hits": 2,
+      "discovery_sample_size": 20
+    },
+    "5": {
+      "min_chaos": 290.0,
+      "max_chaos": 290.0,
+      "avg_chaos": 290.0,
+      "listings": 3,
+      "sample_size": 3,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/02Rpnj7OIg",
+      "scanned_at": "2026-07-29T13:40:26.868416+00:00",
+      "min_divine": 2.02,
+      "max_divine": 2.02,
+      "discovery_hits": 2,
+      "discovery_sample_size": 20
+    }
+  },
+  "price_meta": {
+    "league": "Allflame",
+    "scanned_at": "2026-07-29T13:40:26.868416+00:00",
+    "currency": "chaos",
+    "range_basis": "first 10 cheapest listings",
+    "market_scan_complete": true,
+    "minimum_divine": 2.0,
+    "divine_chaos": 143.75,
+    "minimum_popularity": 3,
+    "popularity_basis": "at least 3 priced online listings; candidate discovered in the latest 20 listings priced at 2+ Divine"
+  },
+  "stop_on_two_match": [],
+  "annul_combs": [],
+  "no_annul_combs": [],
+  "solo_regal_mods": [
+    "[P][1] 1 Added Passive Skill is Conjured Wall",
+    "[P][1] 1 Added Passive Skill is Mage Hunter",
+    "[S][1] 1 Added Passive Skill is Sap Psyche",
+    "[P][1] 1 Added Passive Skill is Arcane Heroism",
+    "[S][1] 1 Added Passive Skill is Essence Rush",
+    "[P][1] 1 Added Passive Skill is Burden Projection",
+    "[S][1] 1 Added Passive Skill is Thaumophage",
+    "[P][1] 1 Added Passive Skill is Arcane Adept"
+  ],
+  "no_regal_mods": []
+}

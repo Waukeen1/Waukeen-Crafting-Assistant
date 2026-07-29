@@ -1,0 +1,32 @@
+{
+  "app_mode": "cluster",
+  "craft_logic": "Rare (regal)",
+  "augment_mode": "Always use",
+  "use_exalt": true,
+  "use_annul": true,
+  "chain_craft": false,
+  "chain_count": 1,
+  "cluster_meta": {
+    "base": "12% increased Attack Damage while holding a Shield",
+    "passive_count": 12,
+    "source": "PoEDB + official trade API"
+  },
+  "comb_craft_data": {},
+  "combo_prices": {},
+  "price_meta": {
+    "league": "Allflame",
+    "scanned_at": "2026-07-29T13:05:01.755897+00:00",
+    "currency": "chaos",
+    "range_basis": "first 10 cheapest listings",
+    "market_scan_complete": true,
+    "minimum_divine": 2.0,
+    "divine_chaos": 143.75,
+    "minimum_popularity": 3,
+    "popularity_basis": "at least 3 priced online listings; candidate discovered in the latest 10 listings priced at 2+ Divine"
+  },
+  "stop_on_two_match": [],
+  "annul_combs": [],
+  "no_annul_combs": [],
+  "solo_regal_mods": [],
+  "no_regal_mods": []
+}

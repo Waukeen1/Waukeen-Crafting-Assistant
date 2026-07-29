@@ -1,0 +1,1783 @@
+﻿[
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Area contains many Totems"
+                 ],
+        "quantity":  10,
+        "rarity":  6,
+        "pack":  4,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "#% increased number of Rare Monsters"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Area is inhabited by Skeletons"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Area is inhabited by Goatmen"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Area is inhabited by Sea Witches and their Spawn"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Area is inhabited by Undead"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Area is inhabited by ranged monsters"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Area is inhabited by Animals"
+                 ],
+        "quantity":  16,
+        "rarity":  9,
+        "pack":  6,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Area is inhabited by Demons"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Area is inhabited by Humanoids"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Area is inhabited by Solaris fanatics"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Area is inhabited by Lunaris fanatics"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Area is inhabited by Ghosts"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Area is inhabited by Cultists of Kitava"
+                 ],
+        "quantity":  16,
+        "rarity":  9,
+        "pack":  6,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Area has increased monster variety"
+                 ],
+        "quantity":  10,
+        "rarity":  6,
+        "pack":  4,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Area is inhabited by Abominations"
+                 ],
+        "quantity":  16,
+        "rarity":  9,
+        "pack":  6,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Monsters\u0027 skills Chain 2 additional times"
+                 ],
+        "quantity":  16,
+        "rarity":  9,
+        "pack":  6,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Monsters are Hexproof"
+                 ],
+        "quantity":  16,
+        "rarity":  9,
+        "pack":  6,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "#% less effect of Curses on Monsters"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Area contains two Unique Bosses"
+                 ],
+        "quantity":  19,
+        "rarity":  11,
+        "pack":  7,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "#% more Monster Life",
+                     "Monsters cannot be Stunned"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Monsters fire 2 additional Projectiles"
+                 ],
+        "quantity":  19,
+        "rarity":  11,
+        "pack":  7,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "+40% Monster Physical Damage Reduction"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "#% more Monster Life"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "#% increased Monster Damage"
+                 ],
+        "quantity":  19,
+        "rarity":  11,
+        "pack":  7,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Monsters deal #% extra Physical Damage as Fire"
+                 ],
+        "quantity":  16,
+        "rarity":  9,
+        "pack":  6,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Monsters deal #% extra Physical Damage as Cold"
+                 ],
+        "quantity":  16,
+        "rarity":  9,
+        "pack":  6,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Monsters deal #% extra Physical Damage as Lightning"
+                 ],
+        "quantity":  16,
+        "rarity":  9,
+        "pack":  6,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Monsters gain #% of their Physical Damage as Extra Chaos Damage",
+                     "Monsters Inflict Withered for 2 seconds on Hit"
+                 ],
+        "quantity":  16,
+        "rarity":  9,
+        "pack":  6,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "#% increased Monster Movement Speed",
+                     "#% increased Monster Attack Speed",
+                     "#% increased Monster Cast Speed"
+                 ],
+        "quantity":  19,
+        "rarity":  11,
+        "pack":  7,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Monsters reflect 18% of Physical Damage"
+                 ],
+        "quantity":  10,
+        "rarity":  6,
+        "pack":  4,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Monsters reflect 18% of Elemental Damage"
+                 ],
+        "quantity":  10,
+        "rarity":  6,
+        "pack":  4,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Unique Boss deals 25% increased Damage",
+                     "Unique Boss has 30% increased Attack and Cast Speed"
+                 ],
+        "quantity":  16,
+        "rarity":  9,
+        "pack":  6,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Unique Boss has 35% increased Life",
+                     "Unique Boss has 70% increased Area of Effect"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Monsters have a 20% chance to Ignite, Freeze and Shock on Hit"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Monsters cannot be Taunted",
+                     "Monsters\u0027 Action Speed cannot be modified to below Base Value",
+                     "Monsters\u0027 Movement Speed cannot be modified to below Base Value"
+                 ],
+        "quantity":  10,
+        "rarity":  6,
+        "pack":  4,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "All Monster Damage from Hits always Ignites"
+                 ],
+        "quantity":  10,
+        "rarity":  6,
+        "pack":  4,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "+25% Monster Chaos Resistance",
+                     "+40% Monster Elemental Resistances"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Monsters have a 50% chance to avoid Poison, Impale, and Bleeding"
+                 ],
+        "quantity":  10,
+        "rarity":  6,
+        "pack":  4,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Monsters\u0027 Attacks have 60% chance to Impale on Hit"
+                 ],
+        "quantity":  16,
+        "rarity":  9,
+        "pack":  6,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Monsters have +60% chance to Suppress Spell Damage"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Monsters gain #% of Maximum Life as Extra Maximum Energy Shield"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Unique Bosses are Possessed"
+                 ],
+        "quantity":  16,
+        "rarity":  9,
+        "pack":  6,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Monsters\u0027 skills Chain 3 additional times",
+                     "Monsters\u0027 Projectiles can Chain when colliding with Terrain"
+                 ],
+        "quantity":  16,
+        "rarity":  56,
+        "pack":  6,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Monsters have 100% increased Area of Effect",
+                     "Monsters fire 2 additional Projectiles"
+                 ],
+        "quantity":  19,
+        "rarity":  56,
+        "pack":  7,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "#% increased Monster Damage"
+                 ],
+        "quantity":  19,
+        "rarity":  56,
+        "pack":  7,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Monsters gain #% of Maximum Life as Extra Maximum Energy Shield"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  35
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Unique Bosses are Possessed"
+                 ],
+        "quantity":  16,
+        "rarity":  56,
+        "pack":  6,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Monsters have +100% chance to Suppress Spell Damage"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  35
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Monsters have +50% Chance to Block Attack Damage"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  47,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Monsters reflect 20% of Physical Damage",
+                     "Monsters reflect 20% of Elemental Damage"
+                 ],
+        "quantity":  10,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  47,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "#% more Monster Life"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  47,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "#% increased number of Rare Monsters",
+                     "Rare Monsters each have 1 additional Modifier"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Monsters inflict 2 Grasping Vines on Hit"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  40
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Rare Monsters have Volatile Cores"
+                 ],
+        "quantity":  13,
+        "rarity":  11,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  53,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Monsters gain #% of their Physical Damage as Extra Damage of a random Element"
+                 ],
+        "quantity":  16,
+        "rarity":  71,
+        "pack":  6,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Monsters gain #% of their Physical Damage as Extra Chaos Damage"
+                 ],
+        "quantity":  16,
+        "rarity":  46,
+        "pack":  6,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "#% increased Monster Movement Speed",
+                     "#% increased Monster Attack Speed",
+                     "#% increased Monster Cast Speed"
+                 ],
+        "quantity":  19,
+        "rarity":  56,
+        "pack":  7,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Players are assaulted by Bloodstained Sawblades"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  47,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Area contains Drowning Orbs"
+                 ],
+        "quantity":  16,
+        "rarity":  8,
+        "pack":  20,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "+50% Monster Physical Damage Reduction",
+                     "+35% Monster Chaos Resistance",
+                     "+55% Monster Elemental Resistances"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  35
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "All Monster Damage can Ignite, Freeze and Shock",
+                     "Monsters Ignite, Freeze and Shock on Hit"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  60,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Rare monsters in area are Shaper-Touched"
+                 ],
+        "quantity":  13,
+        "rarity":  11,
+        "pack":  20,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Map Boss is accompanied by a Synthesis Boss"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  20,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Area contains Runes of the Searing Exarch"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  20,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Area contains Labyrinth Hazards"
+                 ],
+        "quantity":  19,
+        "rarity":  54,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "prefix",
+        "mods":  [
+                     "Players have 40% less effect of Flasks applied to them"
+                 ],
+        "quantity":  16,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  47,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "#% increased Magic Monsters"
+                 ],
+        "quantity":  10,
+        "rarity":  6,
+        "pack":  4,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Monsters Poison on Hit"
+                 ],
+        "quantity":  16,
+        "rarity":  9,
+        "pack":  6,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Players cannot inflict Exposure"
+                 ],
+        "quantity":  10,
+        "rarity":  6,
+        "pack":  4,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Monsters have 100% increased Area of Effect"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Monsters have #% increased Critical Strike Chance",
+                     "+#% to Monster Critical Strike Multiplier"
+                 ],
+        "quantity":  16,
+        "rarity":  9,
+        "pack":  6,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Players have #% less Recovery Rate of Life and Energy Shield"
+                 ],
+        "quantity":  16,
+        "rarity":  9,
+        "pack":  6,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Players cannot Regenerate Life, Mana or Energy Shield"
+                 ],
+        "quantity":  16,
+        "rarity":  9,
+        "pack":  6,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Area has patches of Burning Ground"
+                 ],
+        "quantity":  10,
+        "rarity":  6,
+        "pack":  4,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Area has patches of Chilled Ground"
+                 ],
+        "quantity":  10,
+        "rarity":  6,
+        "pack":  4,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Area has patches of Shocked Ground which increase Damage taken by #%"
+                 ],
+        "quantity":  10,
+        "rarity":  6,
+        "pack":  4,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Area has patches of desecrated ground"
+                 ],
+        "quantity":  10,
+        "rarity":  6,
+        "pack":  4,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Area has patches of Consecrated Ground"
+                 ],
+        "quantity":  10,
+        "rarity":  6,
+        "pack":  4,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Players are Cursed with Elemental Weakness"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Players are Cursed with Vulnerability"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Players are Cursed with Enfeeble"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Players are Cursed with Temporal Chains"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Players have -#% to all maximum Resistances"
+                 ],
+        "quantity":  19,
+        "rarity":  11,
+        "pack":  7,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Monsters cannot be Leeched from"
+                 ],
+        "quantity":  16,
+        "rarity":  9,
+        "pack":  6,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Monsters have 70% chance to Avoid Elemental Ailments"
+                 ],
+        "quantity":  10,
+        "rarity":  6,
+        "pack":  4,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Monsters take #% reduced Extra Damage from Critical Strikes"
+                 ],
+        "quantity":  10,
+        "rarity":  6,
+        "pack":  4,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Players gain 50% reduced Flask Charges"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Players have 30% less Armour",
+                     "Players have 40% reduced Chance to Block"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Monsters have 50% increased Accuracy Rating",
+                     "Players have -20% to amount of Suppressed Spell Damage Prevented"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Players have 25% less Area of Effect"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Monsters gain a Frenzy Charge on Hit"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Monsters gain an Endurance Charge on Hit"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Monsters gain a Power Charge on Hit"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Monsters Blind on Hit"
+                 ],
+        "quantity":  10,
+        "rarity":  6,
+        "pack":  4,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Monsters Maim on Hit with Attacks"
+                 ],
+        "quantity":  10,
+        "rarity":  6,
+        "pack":  4,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Monsters Hinder on Hit with Spells"
+                 ],
+        "quantity":  10,
+        "rarity":  6,
+        "pack":  4,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Monsters steal Power, Frenzy and Endurance charges on Hit"
+                 ],
+        "quantity":  10,
+        "rarity":  6,
+        "pack":  4,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Players have 40% less Cooldown Recovery Rate"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Buffs on Players expire 70% faster"
+                 ],
+        "quantity":  10,
+        "rarity":  6,
+        "pack":  4,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Players have 60% reduced effect of Non-Curse Auras from Skills"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "top",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Players have 25% less Accuracy Rating"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Monsters have +1 to Maximum Power Charges",
+                     "Monsters gain a Power Charge on Hit"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  35
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Monsters have +1 to Maximum Frenzy Charges",
+                     "Monsters gain a Frenzy Charge on Hit"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  35
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Monsters have +1 to Maximum Endurance Charges",
+                     "Monsters gain an Endurance Charge when hit"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  35
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Players have -20% to all maximum Resistances"
+                 ],
+        "quantity":  19,
+        "rarity":  11,
+        "pack":  20,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Monsters have #% increased Critical Strike Chance",
+                     "+#% to Monster Critical Strike Multiplier"
+                 ],
+        "quantity":  16,
+        "rarity":  56,
+        "pack":  6,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Monsters Poison on Hit",
+                     "All Damage from Monsters\u0027 Hits can Poison",
+                     "Monsters have 100% increased Poison Duration"
+                 ],
+        "quantity":  16,
+        "rarity":  49,
+        "pack":  6,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Players have #% reduced Maximum total Life, Mana and Energy Shield Recovery per second from Leech"
+                 ],
+        "quantity":  16,
+        "rarity":  49,
+        "pack":  6,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Players are Cursed with Vulnerability",
+                     "Players are Cursed with Temporal Chains",
+                     "Players are Cursed with Elemental Weakness"
+                 ],
+        "quantity":  13,
+        "rarity":  11,
+        "pack":  6,
+        "currency":  0,
+        "scarab":  35,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Players have #% less Area of Effect"
+                 ],
+        "quantity":  13,
+        "rarity":  69,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Monsters take #% reduced Extra Damage from Critical Strikes"
+                 ],
+        "quantity":  10,
+        "rarity":  56,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Unique Monsters have a random Shrine Buff"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  35
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Monsters cannot be Stunned",
+                     "Monsters\u0027 Action Speed cannot be modified to below Base Value",
+                     "Monsters\u0027 Movement Speed cannot be modified to below Base Value"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  47,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Players are targeted by a Meteor when they use a Flask"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  45,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Players have #% less Defences"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  35,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Buffs on Players expire 100% faster"
+                 ],
+        "quantity":  10,
+        "rarity":  6,
+        "pack":  4,
+        "currency":  0,
+        "scarab":  35,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Monster Damage Penetrates 15% Elemental Resistances"
+                 ],
+        "quantity":  19,
+        "rarity":  72,
+        "pack":  6,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Area contains Unstable Tentacle Fiends"
+                 ],
+        "quantity":  16,
+        "rarity":  11,
+        "pack":  20,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Debuffs on Monsters expire 100% faster"
+                 ],
+        "quantity":  16,
+        "rarity":  12,
+        "pack":  6,
+        "currency":  64,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "The Maven interferes with Players"
+                 ],
+        "quantity":  13,
+        "rarity":  8,
+        "pack":  20,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "25% chance for Rare Monsters to Fracture on death"
+                 ],
+        "quantity":  19,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Auras from Player Skills which affect Allies also affect Enemies"
+                 ],
+        "quantity":  16,
+        "rarity":  54,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Rare monsters in area Temporarily Revive on death"
+                 ],
+        "quantity":  16,
+        "rarity":  8,
+        "pack":  17,
+        "currency":  0,
+        "scarab":  0,
+        "divination":  0,
+        "maps":  0
+    },
+    {
+        "tier":  "uber",
+        "affix_type":  "suffix",
+        "mods":  [
+                     "Area contains patches of moving Marked Ground, inflicting random Marks"
+                 ],
+        "quantity":  16,
+        "rarity":  8,
+        "pack":  5,
+        "currency":  0,
+        "scarab":  36,
+        "divination":  0,
+        "maps":  0
+    }
+]

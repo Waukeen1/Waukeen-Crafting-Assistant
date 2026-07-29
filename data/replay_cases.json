@@ -1,0 +1,284 @@
+[
+  {
+    "name": "stop_pair_effect_allattrs",
+    "rarity": "Magic",
+    "mods": [
+      "Added Small Passive Skills have 35% increased Effect",
+      "Added Small Passive Skills also grant: +4 to All Attributes"
+    ],
+    "expected_action": "done",
+    "expected_reason": "stop_on_two_match"
+  },
+  {
+    "name": "stop_pair_mana_allattrs",
+    "rarity": "Magic",
+    "mods": [
+      "Added Small Passive Skills also grant: +10 to Maximum Mana",
+      "Added Small Passive Skills also grant: +4 to All Attributes"
+    ],
+    "expected_action": "done",
+    "expected_reason": "stop_on_two_match"
+  },
+  {
+    "name": "solo_regal_mana_open",
+    "rarity": "Magic",
+    "mods": [
+      "Added Small Passive Skills also grant: +10 to Maximum Mana"
+    ],
+    "expected_action": "augment",
+    "expected_reason": "solo_regal"
+  },
+  {
+    "name": "solo_regal_int_open",
+    "rarity": "Magic",
+    "mods": [
+      "Added Small Passive Skills also grant: +6 to Intelligence"
+    ],
+    "expected_action": "augment",
+    "expected_reason": "solo_regal"
+  },
+  {
+    "name": "solo_regal_closed_strength",
+    "rarity": "Magic",
+    "mods": [
+      "Added Small Passive Skills also grant: +10 to Maximum Mana",
+      "Added Small Passive Skills also grant: +6 to Strength"
+    ],
+    "expected_action": "regal",
+    "expected_reason": "solo_regal"
+  },
+  {
+    "name": "solo_regal_closed_dex",
+    "rarity": "Magic",
+    "mods": [
+      "Added Small Passive Skills also grant: +10 to Maximum Mana",
+      "Added Small Passive Skills also grant: +8 to Dexterity"
+    ],
+    "expected_action": "regal",
+    "expected_reason": "solo_regal"
+  },
+  {
+    "name": "non_target_es_chaos_alter",
+    "rarity": "Magic",
+    "mods": [
+      "Added Small Passive Skills also grant: +10 to Maximum Energy Shield",
+      "Added Small Passive Skills also grant: +5% to Chaos Resistance"
+    ],
+    "expected_action": "alter",
+    "expected_reason": "alteration_loop"
+  },
+  {
+    "name": "combo_ready_augment_es_open",
+    "rarity": "Magic",
+    "mods": [
+      "Added Small Passive Skills also grant: +10 to Maximum Energy Shield"
+    ],
+    "expected_action": "augment",
+    "expected_reason": "combo_ready_augment"
+  },
+  {
+    "name": "non_target_life_open_augment",
+    "rarity": "Magic",
+    "mods": [
+      "Added Small Passive Skills also grant: +8 to Maximum Life"
+    ],
+    "expected_action": "augment",
+    "expected_reason": "fill_open_slot"
+  },
+  {
+    "name": "alter_loop_closed_junk",
+    "rarity": "Magic",
+    "mods": [
+      "Added Small Passive Skills also grant: +25 to Armour",
+      "Added Small Passive Skills also grant: +7% to Lightning Resistance"
+    ],
+    "expected_action": "alter",
+    "expected_reason": "alteration_loop"
+  },
+  {
+    "name": "effect35_damage_strength_int_annul",
+    "rarity": "Rare",
+    "mods": [
+      "Added Small Passive Skills have 35% increased Effect",
+      "Added Small Passive Skills also grant: 4% increased Damage",
+      "Added Small Passive Skills also grant: +6 to Strength",
+      "Added Small Passive Skills also grant: +6 to Intelligence"
+    ],
+    "expected_action": "annul",
+    "expected_reason": "three_plus_annul"
+  },
+  {
+    "name": "effect35_es_int_chaos_annul",
+    "rarity": "Rare",
+    "mods": [
+      "Added Small Passive Skills have 35% increased Effect",
+      "Added Small Passive Skills also grant: +10 to Maximum Energy Shield",
+      "Added Small Passive Skills also grant: +6 to Intelligence",
+      "Added Small Passive Skills also grant: +4% to Chaos Resistance"
+    ],
+    "expected_action": "annul",
+    "expected_reason": "three_plus_annul"
+  },
+  {
+    "name": "effect35_two_targets_two_junk",
+    "rarity": "Rare",
+    "mods": [
+      "Added Small Passive Skills have 35% increased Effect",
+      "Added Small Passive Skills also grant: +10 to Maximum Energy Shield",
+      "Added Small Passive Skills also grant: +4 to Intelligence",
+      "Added Small Passive Skills also grant: +4% to Chaos Resistance"
+    ],
+    "expected_action": "annul",
+    "expected_reason": "suffix_annul"
+  },
+  {
+    "name": "no_valuable_subset_scour",
+    "rarity": "Rare",
+    "mods": [
+      "Added Small Passive Skills also grant: +21 to Armour",
+      "Added Small Passive Skills also grant: +7 to Strength",
+      "1 Added Passive Skill is Practiced Caster"
+    ],
+    "expected_action": "scour",
+    "expected_reason": "no_valuable_subset"
+  },
+  {
+    "name": "open_suffix_exalt",
+    "rarity": "Rare",
+    "mods": [
+      "Added Small Passive Skills have 35% increased Effect",
+      "Added Small Passive Skills also grant: +10 to Maximum Energy Shield",
+      "Added Small Passive Skills also grant: +5 to Strength"
+    ],
+    "expected_action": "exalt",
+    "expected_reason": "open_suffix_exalt"
+  },
+  {
+    "name": "effect35_es_t1_with_suffix_junk_exalt",
+    "rarity": "Rare",
+    "mods": [
+      "Added Small Passive Skills have 35% increased Effect",
+      "Added Small Passive Skills also grant: +12 to Maximum Energy Shield",
+      "Added Small Passive Skills also grant: +5 to Intelligence"
+    ],
+    "expected_action": "exalt",
+    "expected_reason": "open_suffix_exalt"
+  },
+  {
+    "name": "three_target_prefix_missing_annul",
+    "rarity": "Rare",
+    "mods": [
+      "Added Small Passive Skills have 35% increased Effect",
+      "Added Small Passive Skills also grant: +6 to Strength",
+      "Added Small Passive Skills also grant: +5% to Chaos Resistance"
+    ],
+    "expected_action": "exalt",
+    "expected_reason": "open_prefix_exalt"
+  },
+  {
+    "name": "same_family_prefix_blocking_annul",
+    "rarity": "Rare",
+    "mods": [
+      "Added Small Passive Skills have 25% increased Effect",
+      "Added Small Passive Skills also grant: +4 to All Attributes",
+      "Added Small Passive Skills also grant: +8 to Intelligence"
+    ],
+    "expected_action": "annul",
+    "expected_reason": "prefix_blocking_annul"
+  },
+  {
+    "name": "three_target_annul_with_prefix_junk",
+    "rarity": "Rare",
+    "mods": [
+      "Added Small Passive Skills have 35% increased Effect",
+      "Added Small Passive Skills also grant: +19 to Armour",
+      "Added Small Passive Skills also grant: +6 to Strength",
+      "Added Small Passive Skills also grant: +5% to Chaos Resistance"
+    ],
+    "expected_action": "annul",
+    "expected_reason": "prefix_annul"
+  },
+  {
+    "name": "three_plus_annul",
+    "rarity": "Rare",
+    "mods": [
+      "Added Small Passive Skills have 35% increased Effect",
+      "Added Small Passive Skills also grant: +10 to Maximum Energy Shield",
+      "Added Small Passive Skills also grant: +6 to Intelligence",
+      "Added Small Passive Skills also grant: +7% to Fire Resistance"
+    ],
+    "expected_action": "annul",
+    "expected_reason": "three_plus_annul"
+  },
+  {
+    "name": "stop_pair_effect_allres",
+    "rarity": "Rare",
+    "mods": [
+      "Added Small Passive Skills have 35% increased Effect",
+      "Added Small Passive Skills also grant: +4% to all Elemental Resistances"
+    ],
+    "expected_action": "done",
+    "expected_reason": "stop_on_two_match"
+  },
+  {
+    "name": "pending_solo_regal_exalt",
+    "rarity": "Rare",
+    "mods": [
+      "Added Small Passive Skills also grant: +10 to Maximum Energy Shield",
+      "Added Small Passive Skills also grant: +6 to Intelligence",
+      "Added Small Passive Skills also grant: +5% to Chaos Resistance"
+    ],
+    "runtime_state": {
+      "solo_regal_pending": true,
+      "solo_regal_exalt": true
+    },
+    "expected_action": "exalt",
+    "expected_reason": "solo_regal_exalt"
+  },
+  {
+    "name": "pending_solo_regal_exalt_disabled",
+    "rarity": "Rare",
+    "mods": [
+      "Added Small Passive Skills also grant: +10 to Maximum Energy Shield",
+      "Added Small Passive Skills also grant: +6 to Intelligence",
+      "Added Small Passive Skills also grant: +5% to Chaos Resistance"
+    ],
+    "runtime_state": {
+      "solo_regal_pending": true,
+      "solo_regal_exalt": true
+    },
+    "use_exalt": false,
+    "expected_action": "scour",
+    "expected_reason": "solo_regal_exalt_disabled"
+  },
+  {
+    "name": "pending_solo_regal_effect35_damage_strength_int_annul",
+    "rarity": "Rare",
+    "mods": [
+      "Added Small Passive Skills have 35% increased Effect",
+      "Added Small Passive Skills also grant: 4% increased Damage",
+      "Added Small Passive Skills also grant: +6 to Strength",
+      "Added Small Passive Skills also grant: +6 to Intelligence"
+    ],
+    "runtime_state": {
+      "solo_regal_pending": true,
+      "solo_regal_exalt": false
+    },
+    "expected_action": "annul",
+    "expected_reason": "three_plus_annul"
+  },
+  {
+    "name": "normal_to_magic",
+    "rarity": "Normal",
+    "mods": [],
+    "expected_action": "transmute",
+    "expected_reason": "normal_to_magic"
+  },
+  {
+    "name": "unknown_rarity_noop",
+    "rarity": "Unknown",
+    "mods": [],
+    "expected_action": "noop",
+    "expected_reason": "unknown_rarity"
+  }
+]

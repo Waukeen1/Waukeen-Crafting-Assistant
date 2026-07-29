@@ -1,0 +1,94 @@
+{
+  "app_mode": "cluster",
+  "craft_logic": "Rare (regal)",
+  "augment_mode": "Always use",
+  "use_exalt": true,
+  "use_annul": true,
+  "chain_craft": false,
+  "chain_count": 1,
+  "cluster_meta": {
+    "base": "10% increased Attack Damage",
+    "passive_count": 8,
+    "source": "PoEDB + official trade API"
+  },
+  "comb_craft_data": {
+    "1": [
+      "[P][1] 1 Added Passive Skill is Feed the Fury",
+      "[P][1] 1 Added Passive Skill is Fuel the Fight",
+      "[S][1] 1 Added Passive Skill is Heavy Hitter"
+    ],
+    "2": [
+      "[P][1] 1 Added Passive Skill is Drive the Destruction",
+      "[P][1] 1 Added Passive Skill is Feed the Fury",
+      "[S][1] 1 Added Passive Skill is Martial Prowess"
+    ],
+    "3": [
+      "[P][1] 1 Added Passive Skill is Feed the Fury",
+      "[P][1] 1 Added Passive Skill is Fuel the Fight",
+      "[S][1] 1 Added Passive Skill is Martial Prowess"
+    ]
+  },
+  "combo_prices": {
+    "1": {
+      "min_chaos": 435.0,
+      "max_chaos": 580.0,
+      "avg_chaos": 464.0,
+      "listings": 13,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/6zB8DX96UG",
+      "scanned_at": "2026-07-29T13:38:41.432522+00:00",
+      "min_divine": 3.03,
+      "max_divine": 4.03,
+      "discovery_hits": 10,
+      "discovery_sample_size": 20
+    },
+    "2": {
+      "min_chaos": 435.0,
+      "max_chaos": 725.0,
+      "avg_chaos": 493.0,
+      "listings": 5,
+      "sample_size": 5,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/d86Zk5OOiJ",
+      "scanned_at": "2026-07-29T13:39:00.039746+00:00",
+      "min_divine": 3.03,
+      "max_divine": 5.04,
+      "discovery_hits": 4,
+      "discovery_sample_size": 20
+    },
+    "3": {
+      "min_chaos": 311.0,
+      "max_chaos": 1160.0,
+      "avg_chaos": 618.88,
+      "listings": 8,
+      "sample_size": 8,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/2Kzdnyl5ck",
+      "scanned_at": "2026-07-29T13:38:49.188094+00:00",
+      "min_divine": 2.16,
+      "max_divine": 8.07,
+      "discovery_hits": 4,
+      "discovery_sample_size": 20
+    }
+  },
+  "price_meta": {
+    "league": "Allflame",
+    "scanned_at": "2026-07-29T13:39:00.039746+00:00",
+    "currency": "chaos",
+    "range_basis": "first 10 cheapest listings",
+    "market_scan_complete": true,
+    "minimum_divine": 2.0,
+    "divine_chaos": 143.75,
+    "minimum_popularity": 3,
+    "popularity_basis": "at least 3 priced online listings; candidate discovered in the latest 20 listings priced at 2+ Divine"
+  },
+  "stop_on_two_match": [],
+  "annul_combs": [],
+  "no_annul_combs": [],
+  "solo_regal_mods": [
+    "[P][1] 1 Added Passive Skill is Feed the Fury",
+    "[P][1] 1 Added Passive Skill is Fuel the Fight",
+    "[S][1] 1 Added Passive Skill is Heavy Hitter",
+    "[P][1] 1 Added Passive Skill is Drive the Destruction",
+    "[S][1] 1 Added Passive Skill is Martial Prowess"
+  ],
+  "no_regal_mods": []
+}

@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+*.spec
+build/
+dist/
+release/
+logs/
+update_error.txt
+assets/wca_icon_chroma.png
+data/proxies.json
+data/settings.json
+data/trade_rate_limit_state.json

@@ -1,0 +1,55 @@
+1 Added Passive Skill is Call to the Slaughter
+1 Added Passive Skill is Disorienting Display
+1 Added Passive Skill is Doryani's Lesson
+1 Added Passive Skill is Essence Rush
+1 Added Passive Skill is Force Multiplier
+1 Added Passive Skill is Furious Assault
+1 Added Passive Skill is Grim Oath
+1 Added Passive Skill is Heavy Hitter
+1 Added Passive Skill is Martial Prowess
+1 Added Passive Skill is Primordial Bond
+1 Added Passive Skill is Sap Psyche
+1 Added Passive Skill is Smite the Weak
+1 Added Passive Skill is Thaumophage
+1 Added Passive Skill is Unholy Grace
+1 Added Passive Skill is Unspeakable Gifts
+1 Added Passive Skill is Vicious Bite
+1 Added Passive Skill is Widespread Destruction
+Added Small Passive Skills also grant: #% increased Area of Effect
+Added Small Passive Skills also grant: #% increased Area of Effect of Aura Skills
+Added Small Passive Skills also grant: #% increased Area of Effect of Hex Skills
+Added Small Passive Skills also grant: #% increased Attack and Cast Speed while affected by a Herald
+Added Small Passive Skills also grant: #% increased Attack and Cast Speed with Chaos Skills
+Added Small Passive Skills also grant: #% increased Attack and Cast Speed with Cold Skills
+Added Small Passive Skills also grant: #% increased Attack and Cast Speed with Elemental Skills
+Added Small Passive Skills also grant: #% increased Attack and Cast Speed with Fire Skills
+Added Small Passive Skills also grant: #% increased Attack and Cast Speed with Lightning Skills
+Added Small Passive Skills also grant: #% increased Attack and Cast Speed with Physical Skills
+Added Small Passive Skills also grant: #% increased Attack Speed
+Added Small Passive Skills also grant: #% increased Brand Attachment range
+Added Small Passive Skills also grant: #% increased Cast Speed
+Added Small Passive Skills also grant: #% increased Damage over Time
+Added Small Passive Skills also grant: #% increased Duration of Elemental Ailments on Enemies
+Added Small Passive Skills also grant: #% increased Flask Charges gained
+Added Small Passive Skills also grant: #% increased Mana Regeneration Rate
+Added Small Passive Skills also grant: #% increased Projectile Speed
+Added Small Passive Skills also grant: #% increased Totem Placement speed
+Added Small Passive Skills also grant: #% increased Trap and Mine Throwing Speed
+Added Small Passive Skills also grant: #% increased Warcry Duration
+Added Small Passive Skills also grant: +# to All Attributes
+Added Small Passive Skills also grant: +# to Dexterity
+Added Small Passive Skills also grant: +# to Intelligence
+Added Small Passive Skills also grant: +# to Strength
+Added Small Passive Skills also grant: +#% to all Elemental Resistances
+Added Small Passive Skills also grant: +#% to Chaos Resistance
+Added Small Passive Skills also grant: +#% to Cold Resistance
+Added Small Passive Skills also grant: +#% to Critical Strike Multiplier
+Added Small Passive Skills also grant: +#% to Elemental Resistance
+Added Small Passive Skills also grant: +#% to Fire Resistance
+Added Small Passive Skills also grant: +#% to Lightning Resistance
+Added Small Passive Skills also grant: Channelling Skills have #% increased Attack and Cast Speed
+Added Small Passive Skills also grant: Minions have #% increased Attack and Cast Speed
+Added Small Passive Skills also grant: Minions have #% increased Attack and Cast Speed while you are affected by a Herald
+Added Small Passive Skills also grant: Minions Regenerate #% of Life per Second
+Added Small Passive Skills also grant: Regenerate #% of Life per Second
+

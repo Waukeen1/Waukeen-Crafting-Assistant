@@ -1,0 +1,5699 @@
+{
+  "L8|AxeSword|Bloodscent|Feed the Fury|Martial Prowess": {
+    "min_chaos": 6.0,
+    "max_chaos": 12.0,
+    "avg_chaos": 8.6,
+    "listings": 5,
+    "sample_size": 5,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/eRDlomowsL"
+  },
+  "L8|AxeSword|Vicious Skewering|Wound Aggravation|Martial Prowess": {
+    "min_chaos": 1.0,
+    "max_chaos": 88.0,
+    "avg_chaos": 34.0,
+    "listings": 5,
+    "sample_size": 5,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/OglbEVOKUE"
+  },
+  "L12|AxeSword|increased Damage|Attack Speed|All Attributes": {
+    "min_chaos": 0.0,
+    "max_chaos": 0.0,
+    "avg_chaos": 0.0,
+    "listings": 0,
+    "sample_size": 0,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/rPa2b86mHQ"
+  },
+  "L12|AxeSword|Maximum Life|Attack Speed|all Elemental Res": {
+    "min_chaos": 0.0,
+    "max_chaos": 0.0,
+    "avg_chaos": 0.0,
+    "listings": 0,
+    "sample_size": 0,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/D6nmJwy7C5"
+  },
+  "L8|StaffMace|Overlord|Weight Advantage|Martial Prowess": {
+    "min_chaos": 9.0,
+    "max_chaos": 12.0,
+    "avg_chaos": 10.0,
+    "listings": 5,
+    "sample_size": 5,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/WvKqa4j0Hm"
+  },
+  "L8|StaffMace|Overlord|Feed the Fury|Martial Prowess": {
+    "min_chaos": 22.0,
+    "max_chaos": 25.0,
+    "avg_chaos": 22.75,
+    "listings": 4,
+    "sample_size": 4,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/OglbE0ZzsE"
+  },
+  "L12|StaffMace|increased Damage|Attack Speed|All Attributes": {
+    "min_chaos": 0.0,
+    "max_chaos": 0.0,
+    "avg_chaos": 0.0,
+    "listings": 0,
+    "sample_size": 0,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/PPaRvVzgFL"
+  },
+  "L12|StaffMace|Maximum Life|Attack Speed|all Elemental Res": {
+    "min_chaos": 0.0,
+    "max_chaos": 0.0,
+    "avg_chaos": 0.0,
+    "listings": 0,
+    "sample_size": 0,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/WvKqaonDCm"
+  },
+  "L8|ClawDagger|Fan of Blades|Feed the Fury|Martial Prowess": {
+    "min_chaos": 15.0,
+    "max_chaos": 17.0,
+    "avg_chaos": 16.0,
+    "listings": 2,
+    "sample_size": 2,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/8rRknZXqsV"
+  },
+  "L8|ClawDagger|Fan of Blades|Fuel the Fight|Martial Prowess": {
+    "min_chaos": 4.0,
+    "max_chaos": 6.0,
+    "avg_chaos": 5.0,
+    "listings": 6,
+    "sample_size": 6,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/rPa2GbbzuQ"
+  },
+  "L8|Attack|Feed the Fury|Fuel the Fight|Martial Prowess": {
+    "min_chaos": 2.0,
+    "max_chaos": 349.0,
+    "avg_chaos": 101.2,
+    "listings": 14,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/2Kzdnyl5ck"
+  },
+  "L8|Attack|Drive the Destruction|Feed the Fury|Martial Prowess": {
+    "min_chaos": 1.0,
+    "max_chaos": 94.0,
+    "avg_chaos": 38.2,
+    "listings": 5,
+    "sample_size": 5,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/d86Zk5OOiJ"
+  },
+  "DISCOVERY3|L8|Shield|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Feed the Fury",
+          "Martial Prowess",
+          "Prodigious Defence"
+        ],
+        "discovery_hits": 10,
+        "sample_min_chaos": 508.0,
+        "sample_max_chaos": 1270.0
+      },
+      {
+        "combo": [
+          "Fuel the Fight",
+          "Prodigious Defence",
+          "Smite the Weak"
+        ],
+        "discovery_hits": 7,
+        "sample_min_chaos": 254.0,
+        "sample_max_chaos": 889.0
+      },
+      {
+        "combo": [
+          "Fuel the Fight",
+          "Martial Prowess",
+          "Prodigious Defence"
+        ],
+        "discovery_hits": 5,
+        "sample_min_chaos": 254.0,
+        "sample_max_chaos": 381.0
+      },
+      {
+        "combo": [
+          "Martial Prowess",
+          "Prodigious Defence",
+          "Strike Leader"
+        ],
+        "discovery_hits": 5,
+        "sample_min_chaos": 254.0,
+        "sample_max_chaos": 508.0
+      },
+      {
+        "combo": [
+          "Devastator",
+          "Heavy Hitter",
+          "Prodigious Defence"
+        ],
+        "discovery_hits": 4,
+        "sample_min_chaos": 635.0,
+        "sample_max_chaos": 889.0
+      },
+      {
+        "combo": [
+          "Advance Guard",
+          "Martial Prowess",
+          "Prodigious Defence"
+        ],
+        "discovery_hits": 4,
+        "sample_min_chaos": 254.0,
+        "sample_max_chaos": 508.0
+      },
+      {
+        "combo": [
+          "Calamitous",
+          "Prodigious Defence",
+          "Smite the Weak"
+        ],
+        "discovery_hits": 4,
+        "sample_min_chaos": 254.0,
+        "sample_max_chaos": 889.0
+      },
+      {
+        "combo": [
+          "Feed the Fury",
+          "Fuel the Fight",
+          "Martial Prowess"
+        ],
+        "discovery_hits": 3,
+        "sample_min_chaos": 635.0,
+        "sample_max_chaos": 45593.0
+      }
+    ],
+    "listings": 612,
+    "sample_size": 100,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/vev0PdVzsE",
+    "scanned_at": "2026-07-29T01:53:03.187214+00:00"
+  },
+  "MARKET3|L8|Shield|Feed the Fury|Martial Prowess|Prodigious Defence": {
+    "min_chaos": 420.0,
+    "max_chaos": 762.0,
+    "avg_chaos": 620.4,
+    "listings": 25,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/mkgWJ6Las6",
+    "scanned_at": "2026-07-29T01:53:04.525843+00:00"
+  },
+  "MARKET3|L8|Shield|Fuel the Fight|Prodigious Defence|Smite the Weak": {
+    "min_chaos": 135.0,
+    "max_chaos": 150.0,
+    "avg_chaos": 143.6,
+    "listings": 44,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/RJ9wyd3Oc7",
+    "scanned_at": "2026-07-29T13:38:05.961133+00:00"
+  },
+  "MARKET3|L8|Shield|Fuel the Fight|Martial Prowess|Prodigious Defence": {
+    "min_chaos": 254.0,
+    "max_chaos": 450.0,
+    "avg_chaos": 320.5,
+    "listings": 31,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/BgzBQOzXC8",
+    "scanned_at": "2026-07-29T01:53:25.854280+00:00"
+  },
+  "MARKET3|L8|Shield|Martial Prowess|Prodigious Defence|Strike Leader": {
+    "min_chaos": 64.0,
+    "max_chaos": 90.0,
+    "avg_chaos": 77.0,
+    "listings": 36,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/aLG93G3BCe",
+    "scanned_at": "2026-07-29T01:53:36.886776+00:00"
+  },
+  "MARKET3|L8|Shield|Devastator|Heavy Hitter|Prodigious Defence": {
+    "min_chaos": 580.0,
+    "max_chaos": 725.0,
+    "avg_chaos": 609.0,
+    "listings": 23,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/7nRjKEj2S5",
+    "scanned_at": "2026-07-29T13:37:55.068691+00:00"
+  },
+  "MARKET3|L8|Shield|Advance Guard|Martial Prowess|Prodigious Defence": {
+    "min_chaos": 118.0,
+    "max_chaos": 254.0,
+    "avg_chaos": 196.5,
+    "listings": 21,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/zbrao3yvI4",
+    "scanned_at": "2026-07-29T01:53:58.544152+00:00"
+  },
+  "MARKET3|L8|Shield|Calamitous|Prodigious Defence|Smite the Weak": {
+    "min_chaos": 210.0,
+    "max_chaos": 300.0,
+    "avg_chaos": 246.8,
+    "listings": 20,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/6zB8pQ6XhG",
+    "scanned_at": "2026-07-29T01:54:09.355957+00:00"
+  },
+  "MARKET3|L8|Shield|Feed the Fury|Fuel the Fight|Martial Prowess": {
+    "min_chaos": 350.0,
+    "max_chaos": 380.0,
+    "avg_chaos": 371.8,
+    "listings": 63,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/d86Z4PRqUJ",
+    "scanned_at": "2026-07-29T01:54:20.431707+00:00"
+  },
+  "DISCOVERY3|L8|AxeSword|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Feed the Fury",
+          "Fuel the Fight",
+          "Martial Prowess"
+        ],
+        "discovery_hits": 9,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 508.0,
+        "sample_max_chaos": 635.0
+      }
+    ],
+    "listings": 214,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/eRDlJ8PwFL",
+    "scanned_at": "2026-07-29T01:58:32.542118+00:00"
+  },
+  "MARKET3|L8|AxeSword|Feed the Fury|Fuel the Fight|Martial Prowess": {
+    "min_chaos": 385.0,
+    "max_chaos": 400.0,
+    "avg_chaos": 398.5,
+    "listings": 31,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/pJZrE9nXf0",
+    "scanned_at": "2026-07-29T13:19:58.861024+00:00"
+  },
+  "DISCOVERY3|L12|AxeSword|2|3|8": {
+    "candidates": [],
+    "listings": 0,
+    "sample_size": 0,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/lgDyJl8kcV",
+    "scanned_at": "2026-07-29T01:58:52.588753+00:00"
+  },
+  "DISCOVERY3|L8|StaffMace|2|3|8": {
+    "candidates": [],
+    "listings": 287,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/EBVnd8ZZH5",
+    "scanned_at": "2026-07-29T01:59:05.624837+00:00"
+  },
+  "DISCOVERY3|L12|StaffMace|2|3|8": {
+    "candidates": [],
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/opow7vZYcl",
+    "scanned_at": "2026-07-29T01:59:15.167421+00:00"
+  },
+  "DISCOVERY3|L8|ClawDagger|2|3|8": {
+    "candidates": [],
+    "listings": 103,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/MdoEbe6DiJ",
+    "scanned_at": "2026-07-29T01:59:27.633788+00:00"
+  },
+  "DISCOVERY3|L12|ClawDagger|2|3|8": {
+    "candidates": [],
+    "listings": 3,
+    "sample_size": 3,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/5nd85npDTa",
+    "scanned_at": "2026-07-29T01:59:37.381154+00:00"
+  },
+  "DISCOVERY3|L8|Bow|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Arcing Shot",
+          "Broadside",
+          "Martial Prowess"
+        ],
+        "discovery_hits": 5,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 508.0,
+        "sample_max_chaos": 889.0
+      },
+      {
+        "combo": [
+          "Arcing Shot",
+          "Martial Prowess",
+          "Tempered Arrowheads"
+        ],
+        "discovery_hits": 5,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 381.0,
+        "sample_max_chaos": 762.0
+      }
+    ],
+    "listings": 193,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/RJ9wbrrrU7",
+    "scanned_at": "2026-07-29T01:59:49.836683+00:00"
+  },
+  "MARKET3|L8|Bow|Arcing Shot|Broadside|Martial Prowess": {
+    "min_chaos": 380.0,
+    "max_chaos": 435.0,
+    "avg_chaos": 429.5,
+    "listings": 80,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/aLG9eVnRSe",
+    "scanned_at": "2026-07-29T13:26:55.817397+00:00"
+  },
+  "MARKET3|L8|Bow|Arcing Shot|Martial Prowess|Tempered Arrowheads": {
+    "min_chaos": 435.0,
+    "max_chaos": 435.0,
+    "avg_chaos": 435.0,
+    "listings": 45,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/eRDlKGOrIL",
+    "scanned_at": "2026-07-29T13:27:03.638378+00:00"
+  },
+  "DISCOVERY3|L12|Bow|2|3|8": {
+    "candidates": [],
+    "listings": 7,
+    "sample_size": 7,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/6zB8D8r0IG",
+    "scanned_at": "2026-07-29T02:00:21.242562+00:00"
+  },
+  "DISCOVERY3|L8|Wand|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Martial Prowess",
+          "Opportunistic Fusilade",
+          "Storm's Hand"
+        ],
+        "discovery_hits": 9,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 508.0,
+        "sample_max_chaos": 1016.0
+      },
+      {
+        "combo": [
+          "Devastator",
+          "Martial Prowess",
+          "Storm's Hand"
+        ],
+        "discovery_hits": 3,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 381.0,
+        "sample_max_chaos": 508.0
+      }
+    ],
+    "listings": 274,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/2Kzd5qQ0ck",
+    "scanned_at": "2026-07-29T02:00:33.635917+00:00"
+  },
+  "MARKET3|L8|Wand|Martial Prowess|Opportunistic Fusilade|Storm's Hand": {
+    "min_chaos": 390.0,
+    "max_chaos": 435.0,
+    "avg_chaos": 418.9,
+    "listings": 82,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/vev0adaZfE",
+    "scanned_at": "2026-07-29T13:30:11.068441+00:00"
+  },
+  "MARKET3|L8|Wand|Devastator|Martial Prowess|Storm's Hand": {
+    "min_chaos": 381.0,
+    "max_chaos": 508.0,
+    "avg_chaos": 458.0,
+    "listings": 8,
+    "sample_size": 8,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/6zB8DLKMsG",
+    "scanned_at": "2026-07-29T02:00:54.111101+00:00"
+  },
+  "DISCOVERY3|L12|Wand|2|3|8": {
+    "candidates": [],
+    "listings": 0,
+    "sample_size": 0,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/D6nmblQ7S5",
+    "scanned_at": "2026-07-29T02:01:04.479056+00:00"
+  },
+  "DISCOVERY3|L8|TwoHand|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Graceful Execution",
+          "Martial Mastery",
+          "Martial Prowess"
+        ],
+        "discovery_hits": 8,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 508.0,
+        "sample_max_chaos": 762.0
+      }
+    ],
+    "listings": 305,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/zbrav0k0h4",
+    "scanned_at": "2026-07-29T02:01:17.488353+00:00"
+  },
+  "MARKET3|L8|TwoHand|Graceful Execution|Martial Mastery|Martial Prowess": {
+    "min_chaos": 435.0,
+    "max_chaos": 435.0,
+    "avg_chaos": 435.0,
+    "listings": 81,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/JBnabL8Ysl",
+    "scanned_at": "2026-07-29T13:31:59.669599+00:00"
+  },
+  "DISCOVERY3|L12|TwoHand|2|3|8": {
+    "candidates": [],
+    "listings": 4,
+    "sample_size": 4,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Oglbdw9gTE",
+    "scanned_at": "2026-07-29T02:01:37.987530+00:00"
+  },
+  "DISCOVERY3|L8|DualWield|2|3|8": {
+    "candidates": [],
+    "listings": 171,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/q9lm4J7dTg",
+    "scanned_at": "2026-07-29T02:01:50.500554+00:00"
+  },
+  "DISCOVERY3|L12|DualWield|2|3|8": {
+    "candidates": [],
+    "listings": 6,
+    "sample_size": 6,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/opow44j4Ul",
+    "scanned_at": "2026-07-29T02:02:00.015420+00:00"
+  },
+  "DISCOVERY3|L12|Shield|2|3|8": {
+    "candidates": [],
+    "listings": 7,
+    "sample_size": 7,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/QLY2bQdOCw",
+    "scanned_at": "2026-07-29T02:02:11.054865+00:00"
+  },
+  "DISCOVERY3|L8|Attack|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Feed the Fury",
+          "Fuel the Fight",
+          "Heavy Hitter"
+        ],
+        "discovery_hits": 5,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 508.0,
+        "sample_max_chaos": 635.0
+      },
+      {
+        "combo": [
+          "Feed the Fury",
+          "Fuel the Fight",
+          "Martial Prowess"
+        ],
+        "discovery_hits": 3,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 381.0,
+        "sample_max_chaos": 635.0
+      }
+    ],
+    "listings": 46,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/KldebRyys5",
+    "scanned_at": "2026-07-29T02:02:23.478831+00:00"
+  },
+  "MARKET3|L8|Attack|Feed the Fury|Fuel the Fight|Heavy Hitter": {
+    "min_chaos": 435.0,
+    "max_chaos": 580.0,
+    "avg_chaos": 464.0,
+    "listings": 13,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/6zB8DX96UG",
+    "scanned_at": "2026-07-29T13:38:41.432522+00:00"
+  },
+  "MARKET3|L8|Attack|Feed the Fury|Fuel the Fight|Martial Prowess": {
+    "min_chaos": 311.0,
+    "max_chaos": 1160.0,
+    "avg_chaos": 618.88,
+    "listings": 8,
+    "sample_size": 8,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/2Kzdnyl5ck",
+    "scanned_at": "2026-07-29T13:38:49.188094+00:00"
+  },
+  "DISCOVERY3|L12|Attack|2|3|8": {
+    "candidates": [],
+    "listings": 5,
+    "sample_size": 5,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Lgk9bOwlHn",
+    "scanned_at": "2026-07-29T02:02:55.390326+00:00"
+  },
+  "DISCOVERY3|L8|Spell|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Conjured Wall",
+          "Mage Hunter",
+          "Thaumophage"
+        ],
+        "discovery_hits": 10,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 508.0,
+        "sample_max_chaos": 2540.0
+      }
+    ],
+    "listings": 157,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/D6nmbnnvt5",
+    "scanned_at": "2026-07-29T02:03:07.830819+00:00"
+  },
+  "MARKET3|L8|Spell|Conjured Wall|Mage Hunter|Thaumophage": {
+    "min_chaos": 400.0,
+    "max_chaos": 580.0,
+    "avg_chaos": 508.0,
+    "listings": 39,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/X3rRbPlKtP",
+    "scanned_at": "2026-07-29T13:40:15.963261+00:00"
+  },
+  "DISCOVERY3|L12|Spell|2|3|8": {
+    "candidates": [],
+    "listings": 41,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/V5pLa2KPUp",
+    "scanned_at": "2026-07-29T02:33:27.276941+00:00"
+  },
+  "DISCOVERY3|L8|Elemental|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Doryani's Lesson",
+          "Prismatic Heart",
+          "Sadist"
+        ],
+        "discovery_hits": 6,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 381.0,
+        "sample_max_chaos": 635.0
+      },
+      {
+        "combo": [
+          "Disorienting Display",
+          "Prismatic Heart",
+          "Sadist"
+        ],
+        "discovery_hits": 6,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 254.0,
+        "sample_max_chaos": 508.0
+      },
+      {
+        "combo": [
+          "Corrosive Elements",
+          "Sadist",
+          "Widespread Destruction"
+        ],
+        "discovery_hits": 3,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 254.0,
+        "sample_max_chaos": 635.0
+      },
+      {
+        "combo": [
+          "Prismatic Heart",
+          "Sadist",
+          "Widespread Destruction"
+        ],
+        "discovery_hits": 3,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 254.0,
+        "sample_max_chaos": 3175.0
+      }
+    ],
+    "listings": 107,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/7nRjWal2S5",
+    "scanned_at": "2026-07-29T02:33:39.866858+00:00"
+  },
+  "MARKET3|L8|Elemental|Doryani's Lesson|Prismatic Heart|Sadist": {
+    "min_chaos": 290.0,
+    "max_chaos": 435.0,
+    "avg_chaos": 344.5,
+    "listings": 19,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/RJ9wd8mOI7",
+    "scanned_at": "2026-07-29T13:43:09.991182+00:00"
+  },
+  "MARKET3|L8|Elemental|Disorienting Display|Prismatic Heart|Sadist": {
+    "min_chaos": 280.0,
+    "max_chaos": 290.0,
+    "avg_chaos": 282.0,
+    "listings": 52,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/BgzBWMlKI8",
+    "scanned_at": "2026-07-29T13:43:01.877803+00:00"
+  },
+  "MARKET3|L8|Elemental|Corrosive Elements|Sadist|Widespread Destruction": {
+    "min_chaos": 68.0,
+    "max_chaos": 110.0,
+    "avg_chaos": 82.3,
+    "listings": 17,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/rPa27QE7tQ",
+    "scanned_at": "2026-07-29T02:34:11.270913+00:00"
+  },
+  "MARKET3|L8|Elemental|Prismatic Heart|Sadist|Widespread Destruction": {
+    "min_chaos": 50.0,
+    "max_chaos": 70.0,
+    "avg_chaos": 57.0,
+    "listings": 53,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/pJZr8mDeu0",
+    "scanned_at": "2026-07-29T02:34:22.465350+00:00"
+  },
+  "DISCOVERY3|L12|Elemental|2|3|8": {
+    "candidates": [],
+    "listings": 7,
+    "sample_size": 7,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/pJZr8qRWS0",
+    "scanned_at": "2026-07-29T02:34:33.418896+00:00"
+  },
+  "DISCOVERY3|L8|Physical|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Force Multiplier",
+          "Iron Breaker",
+          "Master the Fundamentals"
+        ],
+        "discovery_hits": 9,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 381.0,
+        "sample_max_chaos": 1016.0
+      },
+      {
+        "combo": [
+          "Battle-Hardened",
+          "Force Multiplier",
+          "Iron Breaker"
+        ],
+        "discovery_hits": 3,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 254.0,
+        "sample_max_chaos": 254.0
+      }
+    ],
+    "listings": 58,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/7nRjW3YnC5",
+    "scanned_at": "2026-07-29T02:34:45.833593+00:00"
+  },
+  "MARKET3|L8|Physical|Force Multiplier|Iron Breaker|Master the Fundamentals": {
+    "min_chaos": 580.0,
+    "max_chaos": 580.0,
+    "avg_chaos": 580.0,
+    "listings": 26,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/glD29E5ahQ",
+    "scanned_at": "2026-07-29T13:44:25.883041+00:00"
+  },
+  "MARKET3|L8|Physical|Battle-Hardened|Force Multiplier|Iron Breaker": {
+    "min_chaos": 150.0,
+    "max_chaos": 160.0,
+    "avg_chaos": 158.0,
+    "listings": 24,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/KldejXmLi5",
+    "scanned_at": "2026-07-29T02:35:06.633203+00:00"
+  },
+  "DISCOVERY3|L12|Physical|2|3|8": {
+    "candidates": [],
+    "listings": 9,
+    "sample_size": 9,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/MdoEm8yLiJ",
+    "scanned_at": "2026-07-29T02:35:17.688650+00:00"
+  },
+  "DISCOVERY3|L8|Fire|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Burning Bright",
+          "Smoking Remains",
+          "Widespread Destruction"
+        ],
+        "discovery_hits": 6,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 635.0,
+        "sample_max_chaos": 1016.0
+      },
+      {
+        "combo": [
+          "Burning Bright",
+          "Cremator",
+          "Widespread Destruction"
+        ],
+        "discovery_hits": 5,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 635.0,
+        "sample_max_chaos": 762.0
+      }
+    ],
+    "listings": 314,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/3q6dEga9C5",
+    "scanned_at": "2026-07-29T02:35:30.111354+00:00"
+  },
+  "MARKET3|L8|Fire|Burning Bright|Smoking Remains|Widespread Destruction": {
+    "min_chaos": 500.0,
+    "max_chaos": 560.0,
+    "avg_chaos": 533.5,
+    "listings": 66,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Lgk970oGIn",
+    "scanned_at": "2026-07-29T13:45:41.807075+00:00"
+  },
+  "MARKET3|L8|Fire|Burning Bright|Cremator|Widespread Destruction": {
+    "min_chaos": 520.0,
+    "max_chaos": 725.0,
+    "avg_chaos": 579.5,
+    "listings": 41,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/mkgWrEoRC6",
+    "scanned_at": "2026-07-29T13:45:12.269708+00:00"
+  },
+  "DISCOVERY3|L12|Fire|2|3|8": {
+    "candidates": [],
+    "listings": 8,
+    "sample_size": 8,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/5nd8ByBeSa",
+    "scanned_at": "2026-07-29T02:36:01.983303+00:00"
+  },
+  "DISCOVERY3|L8|Lightning|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Prismatic Heart",
+          "Scintillating Idea",
+          "Widespread Destruction"
+        ],
+        "discovery_hits": 5,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 254.0,
+        "sample_max_chaos": 508.0
+      }
+    ],
+    "listings": 239,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/9zR5WokmfK",
+    "scanned_at": "2026-07-29T02:36:14.475920+00:00"
+  },
+  "MARKET3|L8|Lightning|Prismatic Heart|Scintillating Idea|Widespread Destruction": {
+    "min_chaos": 254.0,
+    "max_chaos": 508.0,
+    "avg_chaos": 355.6,
+    "listings": 12,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/kyD7pae0c5",
+    "scanned_at": "2026-07-29T02:36:24.179316+00:00"
+  },
+  "DISCOVERY3|L12|Lightning|2|3|8": {
+    "candidates": [],
+    "listings": 7,
+    "sample_size": 7,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/opowEmmgUl",
+    "scanned_at": "2026-07-29T02:36:35.128761+00:00"
+  },
+  "DISCOVERY3|L8|Cold|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Blanketed Snow",
+          "Prismatic Heart",
+          "Widespread Destruction"
+        ],
+        "discovery_hits": 13,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 1016.0,
+        "sample_max_chaos": 1651.0
+      }
+    ],
+    "listings": 684,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/jWRg3myZiX",
+    "scanned_at": "2026-07-29T02:36:47.499120+00:00"
+  },
+  "MARKET3|L8|Cold|Blanketed Snow|Prismatic Heart|Widespread Destruction": {
+    "min_chaos": 1160.0,
+    "max_chaos": 1305.0,
+    "avg_chaos": 1232.5,
+    "listings": 80,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/yYKlD02OIR",
+    "scanned_at": "2026-07-29T13:48:36.136153+00:00"
+  },
+  "DISCOVERY3|L12|Cold|2|3|8": {
+    "candidates": [],
+    "listings": 15,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/BgzBWnR4T8",
+    "scanned_at": "2026-07-29T02:37:08.150265+00:00"
+  },
+  "DISCOVERY3|L8|Chaos|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Unholy Grace",
+          "Unwaveringly Evil",
+          "Wicked Pall"
+        ],
+        "discovery_hits": 6,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 500.0,
+        "sample_max_chaos": 750.0
+      },
+      {
+        "combo": [
+          "Overwhelming Malice",
+          "Unspeakable Gifts",
+          "Unwaveringly Evil"
+        ],
+        "discovery_hits": 5,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 1750.0,
+        "sample_max_chaos": 2000.0
+      },
+      {
+        "combo": [
+          "Overwhelming Malice",
+          "Unspeakable Gifts",
+          "Wicked Pall"
+        ],
+        "discovery_hits": 3,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 1500.0,
+        "sample_max_chaos": 1875.0
+      },
+      {
+        "combo": [
+          "Overwhelming Malice",
+          "Unholy Grace",
+          "Unwaveringly Evil"
+        ],
+        "discovery_hits": 3,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 500.0,
+        "sample_max_chaos": 750.0
+      }
+    ],
+    "listings": 179,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/KldePKL6i5",
+    "scanned_at": "2026-07-29T03:07:43.911054+00:00"
+  },
+  "MARKET3|L8|Chaos|Unholy Grace|Unwaveringly Evil|Wicked Pall": {
+    "min_chaos": 435.0,
+    "max_chaos": 470.0,
+    "avg_chaos": 452.4,
+    "listings": 96,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/D6nm2Q2BC5",
+    "scanned_at": "2026-07-29T13:49:54.974273+00:00"
+  },
+  "MARKET3|L8|Chaos|Overwhelming Malice|Unspeakable Gifts|Unwaveringly Evil": {
+    "min_chaos": 1750.0,
+    "max_chaos": 2375.0,
+    "avg_chaos": 2025.0,
+    "listings": 10,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/5nd8Q42jSa",
+    "scanned_at": "2026-07-29T03:08:35.497684+00:00"
+  },
+  "MARKET3|L8|Chaos|Overwhelming Malice|Unspeakable Gifts|Wicked Pall": {
+    "min_chaos": 1500.0,
+    "max_chaos": 2000.0,
+    "avg_chaos": 1712.5,
+    "listings": 14,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/rPa2ZyWEHQ",
+    "scanned_at": "2026-07-29T03:09:12.520321+00:00"
+  },
+  "MARKET3|L8|Chaos|Overwhelming Malice|Unholy Grace|Unwaveringly Evil": {
+    "min_chaos": 435.0,
+    "max_chaos": 435.0,
+    "avg_chaos": 435.0,
+    "listings": 32,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/mkgWBGXeh6",
+    "scanned_at": "2026-07-29T13:50:02.747515+00:00"
+  },
+  "DISCOVERY3|L12|Chaos|2|3|8": {
+    "candidates": [],
+    "listings": 7,
+    "sample_size": 7,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Yp2b8ovvFY",
+    "scanned_at": "2026-07-29T03:10:26.313260+00:00"
+  },
+  "DISCOVERY3|L8|Minion|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Primordial Bond",
+          "Renewal",
+          "Rotten Claws"
+        ],
+        "discovery_hits": 7,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 375.0,
+        "sample_max_chaos": 625.0
+      },
+      {
+        "combo": [
+          "Raze and Pillage",
+          "Renewal",
+          "Vicious Bite"
+        ],
+        "discovery_hits": 4,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 500.0,
+        "sample_max_chaos": 875.0
+      },
+      {
+        "combo": [
+          "Renewal",
+          "Rotten Claws",
+          "Vicious Bite"
+        ],
+        "discovery_hits": 4,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 500.0,
+        "sample_max_chaos": 875.0
+      },
+      {
+        "combo": [
+          "Primordial Bond",
+          "Raze and Pillage",
+          "Renewal"
+        ],
+        "discovery_hits": 3,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 500.0,
+        "sample_max_chaos": 750.0
+      }
+    ],
+    "listings": 241,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/X3rREaB7HP",
+    "scanned_at": "2026-07-29T03:11:25.813406+00:00"
+  },
+  "MARKET3|L8|Minion|Primordial Bond|Renewal|Rotten Claws": {
+    "min_chaos": 435.0,
+    "max_chaos": 580.0,
+    "avg_chaos": 522.0,
+    "listings": 16,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/JBnakOYYhl",
+    "scanned_at": "2026-07-29T13:50:49.197079+00:00"
+  },
+  "MARKET3|L8|Minion|Raze and Pillage|Renewal|Vicious Bite": {
+    "min_chaos": 450.0,
+    "max_chaos": 580.0,
+    "avg_chaos": 550.0,
+    "listings": 23,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/JBnakkZail",
+    "scanned_at": "2026-07-29T13:51:40.487928+00:00"
+  },
+  "MARKET3|L8|Minion|Renewal|Rotten Claws|Vicious Bite": {
+    "min_chaos": 435.0,
+    "max_chaos": 444.0,
+    "avg_chaos": 439.4,
+    "listings": 76,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/7nRjQlmyC5",
+    "scanned_at": "2026-07-29T13:51:07.822055+00:00"
+  },
+  "MARKET3|L8|Minion|Primordial Bond|Raze and Pillage|Renewal": {
+    "min_chaos": 580.0,
+    "max_chaos": 1015.0,
+    "avg_chaos": 853.89,
+    "listings": 9,
+    "sample_size": 9,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/BgzBK8zWS8",
+    "scanned_at": "2026-07-29T13:50:57.001592+00:00"
+  },
+  "DISCOVERY3|L12|Minion|2|3|8": {
+    "candidates": [],
+    "listings": 27,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Yp2b8PyRFY",
+    "scanned_at": "2026-07-29T03:14:08.311339+00:00"
+  },
+  "DISCOVERY4|L12|Spell|2|3|8": {
+    "candidates": [],
+    "listings": 41,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/V5pLa2KPUp",
+    "scanned_at": "2026-07-29T04:10:43.879215+00:00"
+  },
+  "DISCOVERY5|L12|Spell|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "All Attributes",
+          "Intelligence",
+          "Maximum ES"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 14500.0,
+        "sample_max_chaos": 14500.0
+      },
+      {
+        "combo": [
+          "Maximum Mana",
+          "Strength",
+          "all Elemental Res"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 14355.0,
+        "sample_max_chaos": 14355.0
+      },
+      {
+        "combo": [
+          "Chaos Res",
+          "Maximum Life",
+          "all Elemental Res"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 11600.0,
+        "sample_max_chaos": 11600.0
+      },
+      {
+        "combo": [
+          "Cast Speed",
+          "Maximum Life",
+          "Strength"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 6525.0,
+        "sample_max_chaos": 6525.0
+      },
+      {
+        "combo": [
+          "Strength",
+          "all Elemental Res",
+          "increased Damage"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 6525.0,
+        "sample_max_chaos": 6525.0
+      },
+      {
+        "combo": [
+          "Cast Speed",
+          "Intelligence",
+          "Maximum Life"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 6235.0,
+        "sample_max_chaos": 6235.0
+      },
+      {
+        "combo": [
+          "All Attributes",
+          "Cold Res",
+          "Maximum ES"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 5075.0,
+        "sample_max_chaos": 5075.0
+      },
+      {
+        "combo": [
+          "Maximum Life",
+          "Strength",
+          "all Elemental Res"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 5075.0,
+        "sample_max_chaos": 5075.0
+      }
+    ],
+    "listings": 64,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/V5pLa2KPUp",
+    "scanned_at": "2026-07-29T13:41:10.322502+00:00"
+  },
+  "MARKET3|L12|Spell|All Attributes|Intelligence|Maximum ES": {
+    "min_chaos": 12180.0,
+    "max_chaos": 17400.0,
+    "avg_chaos": 14326.0,
+    "listings": 5,
+    "sample_size": 5,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/PPaR2wrqiL",
+    "scanned_at": "2026-07-29T13:41:21.169326+00:00"
+  },
+  "MARKET3|L12|Spell|Chaos Res|all Elemental Res|increased Damage": {
+    "min_chaos": 25000.0,
+    "max_chaos": 25000.0,
+    "avg_chaos": 25000.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/G6GoamroFb",
+    "scanned_at": "2026-07-29T04:13:03.486077+00:00"
+  },
+  "MARKET3|L12|Spell|All Attributes|Maximum Life|Strength": {
+    "min_chaos": 17375.0,
+    "max_chaos": 25000.0,
+    "avg_chaos": 19200.0,
+    "listings": 5,
+    "sample_size": 5,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/D6nmoRbBt5",
+    "scanned_at": "2026-07-29T04:13:40.345505+00:00"
+  },
+  "MARKET3|L12|Spell|Intelligence|Maximum ES|Strength": {
+    "min_chaos": 14750.0,
+    "max_chaos": 14750.0,
+    "avg_chaos": 14750.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/D6nmoOzdH5",
+    "scanned_at": "2026-07-29T04:14:17.208141+00:00"
+  },
+  "MARKET3|L12|Spell|Chaos Res|Maximum Life|all Elemental Res": {
+    "min_chaos": 11600.0,
+    "max_chaos": 11600.0,
+    "avg_chaos": 11600.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/zbraYppvc4",
+    "scanned_at": "2026-07-29T13:41:42.835413+00:00"
+  },
+  "MARKET3|L12|Spell|All Attributes|Maximum Mana|Strength": {
+    "min_chaos": 3750.0,
+    "max_chaos": 12250.0,
+    "avg_chaos": 8666.67,
+    "listings": 3,
+    "sample_size": 3,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/9zR58BzRSK",
+    "scanned_at": "2026-07-29T04:15:31.178728+00:00"
+  },
+  "MARKET3|L12|Spell|Chaos Res|Intelligence|Maximum ES": {
+    "min_chaos": 11250.0,
+    "max_chaos": 11250.0,
+    "avg_chaos": 11250.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/lgDyd330UV",
+    "scanned_at": "2026-07-29T04:16:08.182897+00:00"
+  },
+  "MARKET3|L12|Spell|Maximum ES|Strength|all Elemental Res": {
+    "min_chaos": 4750.0,
+    "max_chaos": 4750.0,
+    "avg_chaos": 4750.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/aLG9djg8He",
+    "scanned_at": "2026-07-29T04:16:45.007552+00:00"
+  },
+  "DISCOVERY5|L12|AxeSword|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Attack Speed",
+          "Maximum ES",
+          "all Elemental Res"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 1,
+        "sample_min_chaos": 21750.0,
+        "sample_max_chaos": 21750.0
+      }
+    ],
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/lgDyJl8kcV",
+    "scanned_at": "2026-07-29T13:21:23.061222+00:00"
+  },
+  "DISCOVERY5|L12|StaffMace|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "All Attributes",
+          "Intelligence",
+          "increased Damage"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 1,
+        "sample_min_chaos": 725.0,
+        "sample_max_chaos": 725.0
+      }
+    ],
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/opow7vZYcl",
+    "scanned_at": "2026-07-29T13:23:25.949921+00:00"
+  },
+  "MARKET3|L12|StaffMace|All Attributes|Intelligence|increased Damage": {
+    "min_chaos": 725.0,
+    "max_chaos": 725.0,
+    "avg_chaos": 725.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/PPaR2E6qFL",
+    "scanned_at": "2026-07-29T13:23:36.799624+00:00"
+  },
+  "DISCOVERY5|L12|ClawDagger|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "All Attributes",
+          "Dexterity",
+          "Maximum Life"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 6,
+        "sample_min_chaos": 17400.0,
+        "sample_max_chaos": 17400.0
+      },
+      {
+        "combo": [
+          "All Attributes",
+          "all Elemental Res",
+          "increased Damage"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 6,
+        "sample_min_chaos": 8700.0,
+        "sample_max_chaos": 8700.0
+      },
+      {
+        "combo": [
+          "Attack Speed",
+          "Chaos Res",
+          "increased Damage"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 6,
+        "sample_min_chaos": 8700.0,
+        "sample_max_chaos": 8700.0
+      },
+      {
+        "combo": [
+          "Dexterity",
+          "Maximum ES",
+          "all Elemental Res"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 6,
+        "sample_min_chaos": 5075.0,
+        "sample_max_chaos": 5075.0
+      },
+      {
+        "combo": [
+          "Dexterity",
+          "Fire Res",
+          "increased Damage"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 6,
+        "sample_min_chaos": 3625.0,
+        "sample_max_chaos": 3625.0
+      },
+      {
+        "combo": [
+          "Attack Speed",
+          "Fire Res",
+          "increased Damage"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 6,
+        "sample_min_chaos": 1450.0,
+        "sample_max_chaos": 1450.0
+      }
+    ],
+    "listings": 6,
+    "sample_size": 6,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/5nd85npDTa",
+    "scanned_at": "2026-07-29T13:25:25.678008+00:00"
+  },
+  "MARKET3|L12|ClawDagger|All Attributes|all Elemental Res|increased Damage": {
+    "min_chaos": 8700.0,
+    "max_chaos": 8700.0,
+    "avg_chaos": 8700.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/G6GoaeVWIb",
+    "scanned_at": "2026-07-29T13:25:47.628917+00:00"
+  },
+  "MARKET3|L12|ClawDagger|Dexterity|Maximum ES|all Elemental Res": {
+    "min_chaos": 5075.0,
+    "max_chaos": 5075.0,
+    "avg_chaos": 5075.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/eRDlqYrWUL",
+    "scanned_at": "2026-07-29T13:26:09.379156+00:00"
+  },
+  "MARKET3|L12|ClawDagger|Intelligence|all Elemental Res|increased Damage": {
+    "min_chaos": 3750.0,
+    "max_chaos": 3750.0,
+    "avg_chaos": 3750.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/9zR58GZyfK",
+    "scanned_at": "2026-07-29T04:20:39.828470+00:00"
+  },
+  "MARKET3|L12|ClawDagger|Dexterity|Fire Res|increased Damage": {
+    "min_chaos": 3625.0,
+    "max_chaos": 3625.0,
+    "avg_chaos": 3625.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/3q6dOKkGf5",
+    "scanned_at": "2026-07-29T13:26:20.186181+00:00"
+  },
+  "DISCOVERY5|L12|Bow|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Attack Speed",
+          "Lightning Res",
+          "increased Damage"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 43355.0,
+        "sample_max_chaos": 43355.0
+      },
+      {
+        "combo": [
+          "Attack Speed",
+          "all Elemental Res",
+          "increased Damage"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 13050.0,
+        "sample_max_chaos": 13050.0
+      },
+      {
+        "combo": [
+          "Attack Speed",
+          "Maximum Life",
+          "all Elemental Res"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 11600.0,
+        "sample_max_chaos": 11600.0
+      },
+      {
+        "combo": [
+          "Chaos Res",
+          "Dexterity",
+          "Maximum Life"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 7250.0,
+        "sample_max_chaos": 7250.0
+      },
+      {
+        "combo": [
+          "Attack Speed",
+          "Chaos Res",
+          "Maximum Life"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 5075.0,
+        "sample_max_chaos": 5075.0
+      },
+      {
+        "combo": [
+          "All Attributes",
+          "Attack Speed",
+          "Maximum Life"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 4205.0,
+        "sample_max_chaos": 4205.0
+      },
+      {
+        "combo": [
+          "Chaos Res",
+          "Lightning Res",
+          "increased Damage"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 3625.0,
+        "sample_max_chaos": 3625.0
+      },
+      {
+        "combo": [
+          "Cold Res",
+          "all Elemental Res",
+          "increased Damage"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 3625.0,
+        "sample_max_chaos": 3625.0
+      }
+    ],
+    "listings": 12,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/6zB8D8r0IG",
+    "scanned_at": "2026-07-29T13:28:19.684948+00:00"
+  },
+  "MARKET3|L12|Bow|Attack Speed|Chaos Res|Maximum Life": {
+    "min_chaos": 5075.0,
+    "max_chaos": 5800.0,
+    "avg_chaos": 5437.5,
+    "listings": 2,
+    "sample_size": 2,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Yp2b3p4OFY",
+    "scanned_at": "2026-07-29T13:29:13.828603+00:00"
+  },
+  "MARKET3|L12|Bow|Attack Speed|Lightning Res|increased Damage": {
+    "min_chaos": 43355.0,
+    "max_chaos": 43355.0,
+    "avg_chaos": 43355.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/8rRkMnaMsV",
+    "scanned_at": "2026-07-29T13:28:30.449207+00:00"
+  },
+  "MARKET3|L12|Bow|Attack Speed|all Elemental Res|increased Damage": {
+    "min_chaos": 13050.0,
+    "max_chaos": 13050.0,
+    "avg_chaos": 13050.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/PPaRMrwkIL",
+    "scanned_at": "2026-07-29T13:28:41.283333+00:00"
+  },
+  "MARKET3|L12|Bow|Attack Speed|Chaos Res|increased Damage": {
+    "min_chaos": 9375.0,
+    "max_chaos": 9375.0,
+    "avg_chaos": 9375.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/yYKlQp4WtR",
+    "scanned_at": "2026-07-29T04:21:45.871469+00:00"
+  },
+  "MARKET3|L12|Bow|All Attributes|Attack Speed|increased Damage": {
+    "min_chaos": 5000.0,
+    "max_chaos": 5000.0,
+    "avg_chaos": 5000.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/jWRg7g2ZSX",
+    "scanned_at": "2026-07-29T04:21:56.880765+00:00"
+  },
+  "MARKET3|L12|Bow|Attack Speed|Fire Res|Maximum Life": {
+    "min_chaos": 3750.0,
+    "max_chaos": 3750.0,
+    "avg_chaos": 3750.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/mkgWQKBzI6",
+    "scanned_at": "2026-07-29T04:22:07.881904+00:00"
+  },
+  "MARKET3|L12|Bow|Attack Speed|Intelligence|Maximum Life": {
+    "min_chaos": 3750.0,
+    "max_chaos": 3750.0,
+    "avg_chaos": 3750.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/2KzdOLppIk",
+    "scanned_at": "2026-07-29T04:22:18.885514+00:00"
+  },
+  "MARKET3|L12|Bow|Chaos Res|Maximum ES|Strength": {
+    "min_chaos": 2500.0,
+    "max_chaos": 2500.0,
+    "avg_chaos": 2500.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/nrDkQ3avt0",
+    "scanned_at": "2026-07-29T04:22:29.827389+00:00"
+  },
+  "DISCOVERY5|L12|Wand|2|3|8": {
+    "candidates": [],
+    "listings": 0,
+    "sample_size": 0,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/D6nmblQ7S5",
+    "scanned_at": "2026-07-29T13:31:34.614861+00:00"
+  },
+  "DISCOVERY5|L12|TwoHand|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "All Attributes",
+          "Dexterity",
+          "Maximum ES"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 4,
+        "sample_min_chaos": 2900.0,
+        "sample_max_chaos": 2900.0
+      },
+      {
+        "combo": [
+          "Chaos Res",
+          "Intelligence",
+          "Maximum Life"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 4,
+        "sample_min_chaos": 1595.0,
+        "sample_max_chaos": 1595.0
+      },
+      {
+        "combo": [
+          "Chaos Res",
+          "Intelligence",
+          "Maximum ES"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 4,
+        "sample_min_chaos": 725.0,
+        "sample_max_chaos": 725.0
+      },
+      {
+        "combo": [
+          "Cold Res",
+          "Intelligence",
+          "Maximum Life"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 4,
+        "sample_min_chaos": 290.0,
+        "sample_max_chaos": 290.0
+      }
+    ],
+    "listings": 4,
+    "sample_size": 4,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Oglbdw9gTE",
+    "scanned_at": "2026-07-29T13:33:23.514817+00:00"
+  },
+  "MARKET3|L12|TwoHand|All Attributes|Dexterity|Maximum ES": {
+    "min_chaos": 2900.0,
+    "max_chaos": 2900.0,
+    "avg_chaos": 2900.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/7nRjMgZ6H5",
+    "scanned_at": "2026-07-29T13:33:34.429675+00:00"
+  },
+  "MARKET3|L12|TwoHand|Chaos Res|Intelligence|Maximum Life": {
+    "min_chaos": 1595.0,
+    "max_chaos": 1595.0,
+    "avg_chaos": 1595.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/yYKlQdGgsR",
+    "scanned_at": "2026-07-29T13:33:45.213227+00:00"
+  },
+  "MARKET3|L12|TwoHand|Chaos Res|Intelligence|Maximum ES": {
+    "min_chaos": 725.0,
+    "max_chaos": 725.0,
+    "avg_chaos": 725.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/QLY2onEmSw",
+    "scanned_at": "2026-07-29T13:33:56.040195+00:00"
+  },
+  "MARKET3|L12|TwoHand|Cold Res|Intelligence|Maximum Life": {
+    "min_chaos": 290.0,
+    "max_chaos": 290.0,
+    "avg_chaos": 290.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/KldeMBdPc5",
+    "scanned_at": "2026-07-29T13:34:06.866953+00:00"
+  },
+  "DISCOVERY5|L12|DualWield|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "All Attributes",
+          "Maximum ES",
+          "Strength"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 7,
+        "sample_min_chaos": 1015.0,
+        "sample_max_chaos": 5075.0
+      },
+      {
+        "combo": [
+          "Intelligence",
+          "Strength",
+          "increased Damage"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 7,
+        "sample_min_chaos": 5800.0,
+        "sample_max_chaos": 5800.0
+      },
+      {
+        "combo": [
+          "All Attributes",
+          "Dexterity",
+          "increased Damage"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 7,
+        "sample_min_chaos": 4350.0,
+        "sample_max_chaos": 4350.0
+      },
+      {
+        "combo": [
+          "Maximum Life",
+          "Strength",
+          "all Elemental Res"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 7,
+        "sample_min_chaos": 1450.0,
+        "sample_max_chaos": 1450.0
+      },
+      {
+        "combo": [
+          "Chaos Res",
+          "Intelligence",
+          "Maximum ES"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 7,
+        "sample_min_chaos": 1160.0,
+        "sample_max_chaos": 1160.0
+      },
+      {
+        "combo": [
+          "Cold Res",
+          "Strength",
+          "increased Damage"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 7,
+        "sample_min_chaos": 290.0,
+        "sample_max_chaos": 290.0
+      }
+    ],
+    "listings": 7,
+    "sample_size": 7,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/opow44j4Ul",
+    "scanned_at": "2026-07-29T13:35:55.617833+00:00"
+  },
+  "MARKET3|L12|DualWield|All Attributes|Maximum ES|Strength": {
+    "min_chaos": 1015.0,
+    "max_chaos": 5075.0,
+    "avg_chaos": 3045.0,
+    "listings": 2,
+    "sample_size": 2,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/8rRkMP38hV",
+    "scanned_at": "2026-07-29T13:36:06.427382+00:00"
+  },
+  "MARKET3|L12|DualWield|Intelligence|Strength|increased Damage": {
+    "min_chaos": 5800.0,
+    "max_chaos": 5800.0,
+    "avg_chaos": 5800.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/pJZrQWmwu0",
+    "scanned_at": "2026-07-29T13:36:17.392823+00:00"
+  },
+  "MARKET3|L12|DualWield|All Attributes|Dexterity|increased Damage": {
+    "min_chaos": 4350.0,
+    "max_chaos": 4350.0,
+    "avg_chaos": 4350.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/aLG9yQB8Te",
+    "scanned_at": "2026-07-29T13:36:28.250708+00:00"
+  },
+  "MARKET3|L12|DualWield|All Attributes|Maximum ES|all Elemental Res": {
+    "min_chaos": 0.0,
+    "max_chaos": 0.0,
+    "avg_chaos": 0.0,
+    "listings": 0,
+    "sample_size": 0,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/opoP9EvZsl",
+    "scanned_at": "2026-07-29T13:04:28.244337+00:00"
+  },
+  "MARKET3|L12|DualWield|Chaos Res|Intelligence|Maximum ES": {
+    "min_chaos": 1144.0,
+    "max_chaos": 1144.0,
+    "avg_chaos": 1144.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/vevK2vjXUE",
+    "scanned_at": "2026-07-29T13:04:39.717032+00:00"
+  },
+  "MARKET3|L12|DualWield|Cold Res|Strength|increased Damage": {
+    "min_chaos": 286.0,
+    "max_chaos": 286.0,
+    "avg_chaos": 286.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/eRDydbXYFL",
+    "scanned_at": "2026-07-29T13:04:50.815417+00:00"
+  },
+  "DISCOVERY5|L12|Shield|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "All Attributes",
+          "Intelligence",
+          "Maximum ES"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 9152.0,
+        "sample_max_chaos": 12012.0
+      },
+      {
+        "combo": [
+          "Intelligence",
+          "Maximum ES",
+          "Strength"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 429.0,
+        "sample_max_chaos": 5577.0
+      },
+      {
+        "combo": [
+          "Attack Speed",
+          "Intelligence",
+          "Maximum Life"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 8580.0,
+        "sample_max_chaos": 8580.0
+      },
+      {
+        "combo": [
+          "Dexterity",
+          "Maximum ES",
+          "all Elemental Res"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 4290.0,
+        "sample_max_chaos": 4290.0
+      },
+      {
+        "combo": [
+          "Chaos Res",
+          "Dexterity",
+          "increased Damage"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 2860.0,
+        "sample_max_chaos": 2860.0
+      },
+      {
+        "combo": [
+          "All Attributes",
+          "Cold Res",
+          "increased Damage"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 1859.0,
+        "sample_max_chaos": 1859.0
+      },
+      {
+        "combo": [
+          "Fire Res",
+          "Intelligence",
+          "Maximum ES"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 1716.0,
+        "sample_max_chaos": 1716.0
+      },
+      {
+        "combo": [
+          "Chaos Res",
+          "Lightning Res",
+          "Maximum Life"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 715.0,
+        "sample_max_chaos": 715.0
+      }
+    ],
+    "listings": 11,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/QLY2bQdOCw",
+    "scanned_at": "2026-07-29T13:05:01.755897+00:00"
+  },
+  "MARKET3|L12|Shield|All Attributes|Intelligence|Maximum ES": {
+    "min_chaos": 9152.0,
+    "max_chaos": 12012.0,
+    "avg_chaos": 10582.0,
+    "listings": 2,
+    "sample_size": 2,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/EBV4YG8YS5",
+    "scanned_at": "2026-07-29T13:05:12.795609+00:00"
+  },
+  "MARKET3|L12|Shield|Intelligence|Maximum ES|Strength": {
+    "min_chaos": 429.0,
+    "max_chaos": 5577.0,
+    "avg_chaos": 3003.0,
+    "listings": 2,
+    "sample_size": 2,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/pJZweabZH0",
+    "scanned_at": "2026-07-29T13:05:23.780177+00:00"
+  },
+  "MARKET3|L12|Shield|Attack Speed|Intelligence|Maximum Life": {
+    "min_chaos": 8580.0,
+    "max_chaos": 8580.0,
+    "avg_chaos": 8580.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/rPay3MYmfQ",
+    "scanned_at": "2026-07-29T13:05:34.894444+00:00"
+  },
+  "MARKET3|L12|Shield|Dexterity|Maximum ES|all Elemental Res": {
+    "min_chaos": 4290.0,
+    "max_chaos": 4290.0,
+    "avg_chaos": 4290.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/3q6240RKF5",
+    "scanned_at": "2026-07-29T13:05:45.850143+00:00"
+  },
+  "MARKET3|L12|Shield|Chaos Res|Dexterity|increased Damage": {
+    "min_chaos": 2860.0,
+    "max_chaos": 2860.0,
+    "avg_chaos": 2860.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/7nRrBMdBT5",
+    "scanned_at": "2026-07-29T13:05:56.614022+00:00"
+  },
+  "MARKET3|L12|Shield|All Attributes|Cold Res|increased Damage": {
+    "min_chaos": 1859.0,
+    "max_chaos": 1859.0,
+    "avg_chaos": 1859.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/bGD2Oj7GtL",
+    "scanned_at": "2026-07-29T13:06:07.942259+00:00"
+  },
+  "MARKET3|L12|Shield|Fire Res|Intelligence|Maximum ES": {
+    "min_chaos": 1716.0,
+    "max_chaos": 1716.0,
+    "avg_chaos": 1716.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/G6GKeWgOcb",
+    "scanned_at": "2026-07-29T13:06:18.605807+00:00"
+  },
+  "MARKET3|L12|Shield|Chaos Res|Lightning Res|Maximum Life": {
+    "min_chaos": 715.0,
+    "max_chaos": 715.0,
+    "avg_chaos": 715.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/LgkKroE7sn",
+    "scanned_at": "2026-07-29T13:06:29.486564+00:00"
+  },
+  "DISCOVERY5|L12|Attack|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Attack Speed",
+          "Maximum Life",
+          "all Elemental Res"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 5,
+        "sample_min_chaos": 6149.0,
+        "sample_max_chaos": 6149.0
+      },
+      {
+        "combo": [
+          "All Attributes",
+          "Chaos Res",
+          "Maximum ES"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 5,
+        "sample_min_chaos": 4290.0,
+        "sample_max_chaos": 4290.0
+      },
+      {
+        "combo": [
+          "All Attributes",
+          "Chaos Res",
+          "increased Damage"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 5,
+        "sample_min_chaos": 2860.0,
+        "sample_max_chaos": 2860.0
+      },
+      {
+        "combo": [
+          "Attack Speed",
+          "Lightning Res",
+          "Maximum ES"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 5,
+        "sample_min_chaos": 2574.0,
+        "sample_max_chaos": 2574.0
+      },
+      {
+        "combo": [
+          "Intelligence",
+          "Strength",
+          "increased Damage"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 5,
+        "sample_min_chaos": 715.0,
+        "sample_max_chaos": 715.0
+      }
+    ],
+    "listings": 5,
+    "sample_size": 5,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Lgk9bOwlHn",
+    "scanned_at": "2026-07-29T13:06:40.345224+00:00"
+  },
+  "MARKET3|L12|Attack|Attack Speed|Maximum Life|all Elemental Res": {
+    "min_chaos": 6149.0,
+    "max_chaos": 6149.0,
+    "avg_chaos": 6149.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/8rR5X7BBIV",
+    "scanned_at": "2026-07-29T13:06:51.187087+00:00"
+  },
+  "MARKET3|L12|Attack|All Attributes|Chaos Res|Maximum ES": {
+    "min_chaos": 4290.0,
+    "max_chaos": 4290.0,
+    "avg_chaos": 4290.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Mdor20o6FJ",
+    "scanned_at": "2026-07-29T13:07:02.055601+00:00"
+  },
+  "MARKET3|L12|Attack|All Attributes|Chaos Res|increased Damage": {
+    "min_chaos": 2860.0,
+    "max_chaos": 2860.0,
+    "avg_chaos": 2860.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/PPaoLkMZhL",
+    "scanned_at": "2026-07-29T13:07:12.884995+00:00"
+  },
+  "MARKET3|L12|Attack|Attack Speed|Lightning Res|Maximum ES": {
+    "min_chaos": 2610.0,
+    "max_chaos": 2610.0,
+    "avg_chaos": 2610.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/6zBEPOadhG",
+    "scanned_at": "2026-07-29T13:07:30.260782+00:00"
+  },
+  "MARKET3|L12|Attack|Intelligence|Strength|increased Damage": {
+    "min_chaos": 725.0,
+    "max_chaos": 725.0,
+    "avg_chaos": 725.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/3q624WRGf5",
+    "scanned_at": "2026-07-29T13:07:41.153989+00:00"
+  },
+  "DISCOVERY5|L12|Elemental|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "A&C Speed Elemental",
+          "All Attributes",
+          "Maximum ES"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 6,
+        "sample_min_chaos": 5075.0,
+        "sample_max_chaos": 5075.0
+      },
+      {
+        "combo": [
+          "A&C Speed Elemental",
+          "Maximum ES",
+          "all Elemental Res"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 6,
+        "sample_min_chaos": 5075.0,
+        "sample_max_chaos": 5075.0
+      },
+      {
+        "combo": [
+          "A&C Speed Elemental",
+          "All Attributes",
+          "increased Damage"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 6,
+        "sample_min_chaos": 1450.0,
+        "sample_max_chaos": 1450.0
+      },
+      {
+        "combo": [
+          "Dexterity",
+          "Maximum Life",
+          "all Elemental Res"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 6,
+        "sample_min_chaos": 1160.0,
+        "sample_max_chaos": 1160.0
+      },
+      {
+        "combo": [
+          "Chaos Res",
+          "Fire Res",
+          "Maximum ES"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 6,
+        "sample_min_chaos": 435.0,
+        "sample_max_chaos": 435.0
+      },
+      {
+        "combo": [
+          "Strength",
+          "all Elemental Res",
+          "increased Damage"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 6,
+        "sample_min_chaos": 435.0,
+        "sample_max_chaos": 435.0
+      }
+    ],
+    "listings": 6,
+    "sample_size": 6,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/pJZr8qRWS0",
+    "scanned_at": "2026-07-29T13:07:52.042015+00:00"
+  },
+  "MARKET3|L12|Elemental|A&C Speed Elemental|All Attributes|Maximum ES": {
+    "min_chaos": 5075.0,
+    "max_chaos": 5075.0,
+    "avg_chaos": 5075.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/LgkKrp5Zcn",
+    "scanned_at": "2026-07-29T13:08:03.067115+00:00"
+  },
+  "MARKET3|L12|Elemental|A&C Speed Elemental|Maximum ES|all Elemental Res": {
+    "min_chaos": 5075.0,
+    "max_chaos": 5075.0,
+    "avg_chaos": 5075.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/nrD7YYBzT0",
+    "scanned_at": "2026-07-29T13:08:13.852798+00:00"
+  },
+  "MARKET3|L12|Elemental|A&C Speed Elemental|All Attributes|increased Damage": {
+    "min_chaos": 1450.0,
+    "max_chaos": 1450.0,
+    "avg_chaos": 1450.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/vevK2mEDSE",
+    "scanned_at": "2026-07-29T13:08:24.865399+00:00"
+  },
+  "MARKET3|L12|Elemental|Dexterity|Maximum Life|all Elemental Res": {
+    "min_chaos": 1160.0,
+    "max_chaos": 1160.0,
+    "avg_chaos": 1160.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/vevK2WrXtE",
+    "scanned_at": "2026-07-29T13:08:35.648289+00:00"
+  },
+  "MARKET3|L12|Elemental|Chaos Res|Fire Res|Maximum ES": {
+    "min_chaos": 435.0,
+    "max_chaos": 435.0,
+    "avg_chaos": 435.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Bgz2rg4QU8",
+    "scanned_at": "2026-07-29T13:08:46.496638+00:00"
+  },
+  "MARKET3|L12|Elemental|Strength|all Elemental Res|increased Damage": {
+    "min_chaos": 435.0,
+    "max_chaos": 435.0,
+    "avg_chaos": 435.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/pJZwLKZWf0",
+    "scanned_at": "2026-07-29T13:08:57.359036+00:00"
+  },
+  "DISCOVERY5|L12|Physical|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "A&C Speed Physical",
+          "Chaos Res",
+          "Maximum Life"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 6380.0,
+        "sample_max_chaos": 6960.0
+      },
+      {
+        "combo": [
+          "All Attributes",
+          "Chaos Res",
+          "Maximum Life"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 8990.0,
+        "sample_max_chaos": 8990.0
+      },
+      {
+        "combo": [
+          "All Attributes",
+          "Maximum Life",
+          "Strength"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 8700.0,
+        "sample_max_chaos": 8700.0
+      },
+      {
+        "combo": [
+          "A&C Speed Physical",
+          "All Attributes",
+          "Maximum Life"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 7250.0,
+        "sample_max_chaos": 7250.0
+      },
+      {
+        "combo": [
+          "A&C Speed Physical",
+          "Fire Res",
+          "Maximum Life"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 4060.0,
+        "sample_max_chaos": 4060.0
+      },
+      {
+        "combo": [
+          "A&C Speed Physical",
+          "Dexterity",
+          "Maximum Life"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 3625.0,
+        "sample_max_chaos": 3625.0
+      },
+      {
+        "combo": [
+          "A&C Speed Physical",
+          "All Attributes",
+          "Maximum ES"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 2610.0,
+        "sample_max_chaos": 2610.0
+      },
+      {
+        "combo": [
+          "A&C Speed Physical",
+          "All Attributes",
+          "increased Damage"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 2175.0,
+        "sample_max_chaos": 2175.0
+      }
+    ],
+    "listings": 12,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/MdoEm8yLiJ",
+    "scanned_at": "2026-07-29T13:09:08.458115+00:00"
+  },
+  "MARKET3|L12|Physical|A&C Speed Physical|Chaos Res|Maximum Life": {
+    "min_chaos": 6380.0,
+    "max_chaos": 6960.0,
+    "avg_chaos": 6670.0,
+    "listings": 2,
+    "sample_size": 2,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/JBnKmarvil",
+    "scanned_at": "2026-07-29T13:09:19.043754+00:00"
+  },
+  "MARKET3|L12|Physical|All Attributes|Chaos Res|Maximum Life": {
+    "min_chaos": 8990.0,
+    "max_chaos": 8990.0,
+    "avg_chaos": 8990.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/PPao7oEZcL",
+    "scanned_at": "2026-07-29T13:09:29.874402+00:00"
+  },
+  "MARKET3|L12|Physical|All Attributes|Maximum Life|Strength": {
+    "min_chaos": 8700.0,
+    "max_chaos": 8700.0,
+    "avg_chaos": 8700.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/2KzqbmLpck",
+    "scanned_at": "2026-07-29T13:09:40.751038+00:00"
+  },
+  "MARKET3|L12|Physical|A&C Speed Physical|All Attributes|Maximum Life": {
+    "min_chaos": 7250.0,
+    "max_chaos": 7250.0,
+    "avg_chaos": 7250.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Bgz2rozKh8",
+    "scanned_at": "2026-07-29T13:09:51.603464+00:00"
+  },
+  "MARKET3|L12|Physical|A&C Speed Physical|Fire Res|Maximum Life": {
+    "min_chaos": 4060.0,
+    "max_chaos": 4060.0,
+    "avg_chaos": 4060.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/eRDyY2q6hL",
+    "scanned_at": "2026-07-29T13:10:02.466035+00:00"
+  },
+  "MARKET3|L12|Physical|A&C Speed Physical|Dexterity|Maximum Life": {
+    "min_chaos": 3625.0,
+    "max_chaos": 3625.0,
+    "avg_chaos": 3625.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Z6EmQ5ORfQ",
+    "scanned_at": "2026-07-29T13:10:13.315490+00:00"
+  },
+  "MARKET3|L12|Physical|A&C Speed Physical|All Attributes|Maximum ES": {
+    "min_chaos": 2610.0,
+    "max_chaos": 2610.0,
+    "avg_chaos": 2610.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/vevKmayjcE",
+    "scanned_at": "2026-07-29T13:10:24.164868+00:00"
+  },
+  "MARKET3|L12|Physical|A&C Speed Physical|All Attributes|increased Damage": {
+    "min_chaos": 2175.0,
+    "max_chaos": 2175.0,
+    "avg_chaos": 2175.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/D6nKEp4Bu5",
+    "scanned_at": "2026-07-29T13:10:35.014474+00:00"
+  },
+  "DISCOVERY5|L12|Fire|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "All Attributes",
+          "Maximum Life",
+          "Strength"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 9,
+        "sample_min_chaos": 18125.0,
+        "sample_max_chaos": 18125.0
+      },
+      {
+        "combo": [
+          "All Attributes",
+          "Cold Res",
+          "Maximum ES"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 9,
+        "sample_min_chaos": 3625.0,
+        "sample_max_chaos": 3625.0
+      },
+      {
+        "combo": [
+          "All Attributes",
+          "Fire Res",
+          "Maximum Life"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 9,
+        "sample_min_chaos": 3625.0,
+        "sample_max_chaos": 3625.0
+      },
+      {
+        "combo": [
+          "Fire Res",
+          "Maximum ES",
+          "Strength"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 9,
+        "sample_min_chaos": 3190.0,
+        "sample_max_chaos": 3190.0
+      },
+      {
+        "combo": [
+          "A&C Speed Fire",
+          "Cold Res",
+          "Maximum Mana"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 9,
+        "sample_min_chaos": 1450.0,
+        "sample_max_chaos": 1450.0
+      },
+      {
+        "combo": [
+          "A&C Speed Fire",
+          "Maximum ES",
+          "Strength"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 9,
+        "sample_min_chaos": 1450.0,
+        "sample_max_chaos": 1450.0
+      },
+      {
+        "combo": [
+          "A&C Speed Fire",
+          "Maximum Mana",
+          "Strength"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 9,
+        "sample_min_chaos": 1450.0,
+        "sample_max_chaos": 1450.0
+      },
+      {
+        "combo": [
+          "Dexterity",
+          "Intelligence",
+          "Maximum ES"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 9,
+        "sample_min_chaos": 870.0,
+        "sample_max_chaos": 870.0
+      }
+    ],
+    "listings": 9,
+    "sample_size": 9,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/5nd8ByBeSa",
+    "scanned_at": "2026-07-29T13:10:45.885783+00:00"
+  },
+  "MARKET3|L12|Fire|All Attributes|Maximum Life|Strength": {
+    "min_chaos": 18125.0,
+    "max_chaos": 18125.0,
+    "avg_chaos": 18125.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Bgz2rWeku8",
+    "scanned_at": "2026-07-29T13:10:56.701748+00:00"
+  },
+  "MARKET3|L12|Fire|All Attributes|Cold Res|Maximum ES": {
+    "min_chaos": 3625.0,
+    "max_chaos": 3625.0,
+    "avg_chaos": 3625.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/wv30RgRnFb",
+    "scanned_at": "2026-07-29T13:11:07.542183+00:00"
+  },
+  "MARKET3|L12|Fire|All Attributes|Fire Res|Maximum Life": {
+    "min_chaos": 3625.0,
+    "max_chaos": 3625.0,
+    "avg_chaos": 3625.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/yYKVJvd8IR",
+    "scanned_at": "2026-07-29T13:11:18.531242+00:00"
+  },
+  "MARKET3|L12|Fire|Fire Res|Maximum ES|Strength": {
+    "min_chaos": 3190.0,
+    "max_chaos": 3190.0,
+    "avg_chaos": 3190.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Kld8goJRF5",
+    "scanned_at": "2026-07-29T13:11:29.423799+00:00"
+  },
+  "MARKET3|L12|Fire|A&C Speed Fire|Cold Res|Maximum Mana": {
+    "min_chaos": 1450.0,
+    "max_chaos": 1450.0,
+    "avg_chaos": 1450.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/RJ9l42XWs7",
+    "scanned_at": "2026-07-29T13:11:40.235820+00:00"
+  },
+  "MARKET3|L12|Fire|A&C Speed Fire|Maximum ES|Strength": {
+    "min_chaos": 1450.0,
+    "max_chaos": 1450.0,
+    "avg_chaos": 1450.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/aLGroqo3te",
+    "scanned_at": "2026-07-29T13:11:51.108582+00:00"
+  },
+  "MARKET3|L12|Fire|A&C Speed Fire|Maximum Mana|Strength": {
+    "min_chaos": 1450.0,
+    "max_chaos": 1450.0,
+    "avg_chaos": 1450.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Kld8gZngU5",
+    "scanned_at": "2026-07-29T13:12:01.922377+00:00"
+  },
+  "MARKET3|L12|Fire|Dexterity|Intelligence|Maximum ES": {
+    "min_chaos": 870.0,
+    "max_chaos": 870.0,
+    "avg_chaos": 870.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/02RLQ0lgFg",
+    "scanned_at": "2026-07-29T13:12:12.748327+00:00"
+  },
+  "DISCOVERY5|L12|Lightning|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "A&C Speed Lightning",
+          "Chaos Res",
+          "Maximum ES"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 2175.0,
+        "sample_max_chaos": 2465.0
+      },
+      {
+        "combo": [
+          "All Attributes",
+          "Maximum ES",
+          "all Elemental Res"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 2900.0,
+        "sample_max_chaos": 2900.0
+      },
+      {
+        "combo": [
+          "A&C Speed Lightning",
+          "Maximum ES",
+          "all Elemental Res"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 2610.0,
+        "sample_max_chaos": 2610.0
+      },
+      {
+        "combo": [
+          "Dexterity",
+          "Intelligence",
+          "Maximum ES"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 2465.0,
+        "sample_max_chaos": 2465.0
+      },
+      {
+        "combo": [
+          "Dexterity",
+          "all Elemental Res",
+          "increased Damage"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 2175.0,
+        "sample_max_chaos": 2175.0
+      },
+      {
+        "combo": [
+          "Intelligence",
+          "Maximum Life",
+          "Strength"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 2175.0,
+        "sample_max_chaos": 2175.0
+      },
+      {
+        "combo": [
+          "All Attributes",
+          "Chaos Res",
+          "Maximum ES"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 1885.0,
+        "sample_max_chaos": 1885.0
+      },
+      {
+        "combo": [
+          "A&C Speed Lightning",
+          "Chaos Res",
+          "Maximum Life"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 1160.0,
+        "sample_max_chaos": 1160.0
+      }
+    ],
+    "listings": 15,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/opowEmmgUl",
+    "scanned_at": "2026-07-29T13:12:23.636028+00:00"
+  },
+  "MARKET3|L12|Lightning|A&C Speed Lightning|Chaos Res|Maximum ES": {
+    "min_chaos": 2175.0,
+    "max_chaos": 2465.0,
+    "avg_chaos": 2320.0,
+    "listings": 2,
+    "sample_size": 2,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/JBnKmM5Jhl",
+    "scanned_at": "2026-07-29T13:12:34.572637+00:00"
+  },
+  "MARKET3|L12|Lightning|All Attributes|Maximum ES|all Elemental Res": {
+    "min_chaos": 2900.0,
+    "max_chaos": 2900.0,
+    "avg_chaos": 2900.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/JBnKmJBvsl",
+    "scanned_at": "2026-07-29T13:12:45.418104+00:00"
+  },
+  "MARKET3|L12|Lightning|A&C Speed Lightning|Maximum ES|all Elemental Res": {
+    "min_chaos": 2610.0,
+    "max_chaos": 2610.0,
+    "avg_chaos": 2610.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/vevKmE5DTE",
+    "scanned_at": "2026-07-29T13:12:56.310241+00:00"
+  },
+  "MARKET3|L12|Lightning|Dexterity|Intelligence|Maximum ES": {
+    "min_chaos": 2465.0,
+    "max_chaos": 2465.0,
+    "avg_chaos": 2465.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/3q62wbOkU5",
+    "scanned_at": "2026-07-29T13:13:07.123797+00:00"
+  },
+  "MARKET3|L12|Lightning|Dexterity|all Elemental Res|increased Damage": {
+    "min_chaos": 2175.0,
+    "max_chaos": 2175.0,
+    "avg_chaos": 2175.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/9zR0l74KtK",
+    "scanned_at": "2026-07-29T13:13:17.972820+00:00"
+  },
+  "MARKET3|L12|Lightning|Intelligence|Maximum Life|Strength": {
+    "min_chaos": 2175.0,
+    "max_chaos": 2175.0,
+    "avg_chaos": 2175.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/vevKmVZjTE",
+    "scanned_at": "2026-07-29T13:13:29.006841+00:00"
+  },
+  "MARKET3|L12|Lightning|All Attributes|Chaos Res|Maximum ES": {
+    "min_chaos": 1885.0,
+    "max_chaos": 1885.0,
+    "avg_chaos": 1885.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/glDVev8asQ",
+    "scanned_at": "2026-07-29T13:13:39.714406+00:00"
+  },
+  "MARKET3|L12|Lightning|A&C Speed Lightning|Chaos Res|Maximum Life": {
+    "min_chaos": 1160.0,
+    "max_chaos": 2900.0,
+    "avg_chaos": 2030.0,
+    "listings": 2,
+    "sample_size": 2,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/X3r5Oy4WhP",
+    "scanned_at": "2026-07-29T13:13:51.912972+00:00"
+  },
+  "DISCOVERY5|L12|Cold|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "A&C Speed Cold",
+          "Chaos Res",
+          "Maximum ES"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 10150.0,
+        "sample_max_chaos": 10150.0
+      },
+      {
+        "combo": [
+          "A&C Speed Cold",
+          "Chaos Res",
+          "Maximum Mana"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 4205.0,
+        "sample_max_chaos": 4205.0
+      },
+      {
+        "combo": [
+          "A&C Speed Cold",
+          "All Attributes",
+          "Maximum Life"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 3770.0,
+        "sample_max_chaos": 3770.0
+      },
+      {
+        "combo": [
+          "A&C Speed Cold",
+          "Maximum Life",
+          "all Elemental Res"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 3625.0,
+        "sample_max_chaos": 3625.0
+      },
+      {
+        "combo": [
+          "Chaos Res",
+          "Maximum Life",
+          "Strength"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 3625.0,
+        "sample_max_chaos": 3625.0
+      },
+      {
+        "combo": [
+          "Chaos Res",
+          "Intelligence",
+          "Maximum Life"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 3190.0,
+        "sample_max_chaos": 3190.0
+      },
+      {
+        "combo": [
+          "Dexterity",
+          "Maximum ES",
+          "all Elemental Res"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 2610.0,
+        "sample_max_chaos": 2610.0
+      },
+      {
+        "combo": [
+          "A&C Speed Cold",
+          "Cold Res",
+          "increased Damage"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 2030.0,
+        "sample_max_chaos": 2030.0
+      }
+    ],
+    "listings": 19,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/BgzBWnR4T8",
+    "scanned_at": "2026-07-29T13:14:02.820119+00:00"
+  },
+  "MARKET3|L12|Cold|A&C Speed Cold|Chaos Res|Maximum ES": {
+    "min_chaos": 10150.0,
+    "max_chaos": 10150.0,
+    "avg_chaos": 10150.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/5nd2zY4jSa",
+    "scanned_at": "2026-07-29T13:14:13.708568+00:00"
+  },
+  "MARKET3|L12|Cold|A&C Speed Cold|Chaos Res|Maximum Mana": {
+    "min_chaos": 4205.0,
+    "max_chaos": 4205.0,
+    "avg_chaos": 4205.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Bgz2rkvLT8",
+    "scanned_at": "2026-07-29T13:14:24.575217+00:00"
+  },
+  "MARKET3|L12|Cold|A&C Speed Cold|All Attributes|Maximum Life": {
+    "min_chaos": 3625.0,
+    "max_chaos": 3770.0,
+    "avg_chaos": 3697.5,
+    "listings": 2,
+    "sample_size": 2,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/02RLQW0pFg",
+    "scanned_at": "2026-07-29T13:14:35.436615+00:00"
+  },
+  "MARKET3|L12|Cold|A&C Speed Cold|Maximum Life|all Elemental Res": {
+    "min_chaos": 3625.0,
+    "max_chaos": 5510.0,
+    "avg_chaos": 4567.5,
+    "listings": 2,
+    "sample_size": 2,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/aLGroXlRue",
+    "scanned_at": "2026-07-29T13:14:46.281616+00:00"
+  },
+  "MARKET3|L12|Cold|Chaos Res|Maximum Life|Strength": {
+    "min_chaos": 3625.0,
+    "max_chaos": 3625.0,
+    "avg_chaos": 3625.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/mkgK2akBT6",
+    "scanned_at": "2026-07-29T13:14:57.137970+00:00"
+  },
+  "MARKET3|L12|Cold|Chaos Res|Intelligence|Maximum Life": {
+    "min_chaos": 3190.0,
+    "max_chaos": 3190.0,
+    "avg_chaos": 3190.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Kld8WpQqs5",
+    "scanned_at": "2026-07-29T13:15:08.041588+00:00"
+  },
+  "MARKET3|L12|Cold|Dexterity|Maximum ES|all Elemental Res": {
+    "min_chaos": 2610.0,
+    "max_chaos": 2610.0,
+    "avg_chaos": 2610.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/EBV4pBqzt5",
+    "scanned_at": "2026-07-29T13:15:18.967649+00:00"
+  },
+  "MARKET3|L12|Cold|A&C Speed Cold|Cold Res|increased Damage": {
+    "min_chaos": 2030.0,
+    "max_chaos": 2030.0,
+    "avg_chaos": 2030.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/vevKWyRMFE",
+    "scanned_at": "2026-07-29T13:15:29.854769+00:00"
+  },
+  "DISCOVERY5|L12|Chaos|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "All Attributes",
+          "Dexterity",
+          "Maximum ES"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 8,
+        "sample_min_chaos": 7250.0,
+        "sample_max_chaos": 7250.0
+      },
+      {
+        "combo": [
+          "Intelligence",
+          "Maximum ES",
+          "all Elemental Res"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 8,
+        "sample_min_chaos": 5800.0,
+        "sample_max_chaos": 5800.0
+      },
+      {
+        "combo": [
+          "Chaos Res",
+          "Maximum Life",
+          "all Elemental Res"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 8,
+        "sample_min_chaos": 5075.0,
+        "sample_max_chaos": 5075.0
+      },
+      {
+        "combo": [
+          "All Attributes",
+          "Chaos Res",
+          "Maximum ES"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 8,
+        "sample_min_chaos": 4350.0,
+        "sample_max_chaos": 4350.0
+      },
+      {
+        "combo": [
+          "A&C Speed Chaos",
+          "All Attributes",
+          "Maximum ES"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 8,
+        "sample_min_chaos": 2900.0,
+        "sample_max_chaos": 2900.0
+      },
+      {
+        "combo": [
+          "A&C Speed Chaos",
+          "Lightning Res",
+          "increased Damage"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 8,
+        "sample_min_chaos": 2175.0,
+        "sample_max_chaos": 2175.0
+      },
+      {
+        "combo": [
+          "Fire Res",
+          "Intelligence",
+          "Maximum Life"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 8,
+        "sample_min_chaos": 2175.0,
+        "sample_max_chaos": 2175.0
+      },
+      {
+        "combo": [
+          "Chaos Res",
+          "Intelligence",
+          "Maximum Life"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 8,
+        "sample_min_chaos": 725.0,
+        "sample_max_chaos": 725.0
+      }
+    ],
+    "listings": 8,
+    "sample_size": 8,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Yp2b8ovvFY",
+    "scanned_at": "2026-07-29T13:15:40.863869+00:00"
+  },
+  "MARKET3|L12|Chaos|All Attributes|Dexterity|Maximum ES": {
+    "min_chaos": 7250.0,
+    "max_chaos": 7250.0,
+    "avg_chaos": 7250.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/3q62y25Ju5",
+    "scanned_at": "2026-07-29T13:15:51.703064+00:00"
+  },
+  "MARKET3|L12|Chaos|Intelligence|Maximum ES|all Elemental Res": {
+    "min_chaos": 5800.0,
+    "max_chaos": 5800.0,
+    "avg_chaos": 5800.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/9zR0GJeRTK",
+    "scanned_at": "2026-07-29T13:16:02.549536+00:00"
+  },
+  "MARKET3|L12|Chaos|Chaos Res|Maximum Life|all Elemental Res": {
+    "min_chaos": 5075.0,
+    "max_chaos": 5075.0,
+    "avg_chaos": 5075.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/RJ9lQ67Zi7",
+    "scanned_at": "2026-07-29T13:16:13.391969+00:00"
+  },
+  "MARKET3|L12|Chaos|All Attributes|Chaos Res|Maximum ES": {
+    "min_chaos": 4350.0,
+    "max_chaos": 4350.0,
+    "avg_chaos": 4350.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Z6Em3Yq8SQ",
+    "scanned_at": "2026-07-29T13:16:24.340191+00:00"
+  },
+  "MARKET3|L12|Chaos|A&C Speed Chaos|All Attributes|Maximum ES": {
+    "min_chaos": 0.0,
+    "max_chaos": 0.0,
+    "avg_chaos": 0.0,
+    "listings": 0,
+    "sample_size": 0,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/yYKV4RvlFR",
+    "scanned_at": "2026-07-29T13:16:34.694026+00:00"
+  },
+  "MARKET3|L12|Chaos|A&C Speed Chaos|Lightning Res|increased Damage": {
+    "min_chaos": 2175.0,
+    "max_chaos": 2175.0,
+    "avg_chaos": 2175.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/5nd2g3aeCa",
+    "scanned_at": "2026-07-29T13:16:46.018480+00:00"
+  },
+  "MARKET3|L12|Chaos|Fire Res|Intelligence|Maximum Life": {
+    "min_chaos": 2175.0,
+    "max_chaos": 2175.0,
+    "avg_chaos": 2175.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/eRDyPK8YFL",
+    "scanned_at": "2026-07-29T13:16:56.859165+00:00"
+  },
+  "MARKET3|L12|Chaos|Chaos Res|Intelligence|Maximum Life": {
+    "min_chaos": 725.0,
+    "max_chaos": 725.0,
+    "avg_chaos": 725.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/bGD2J7mKiL",
+    "scanned_at": "2026-07-29T13:17:07.713359+00:00"
+  },
+  "DISCOVERY5|L12|Minion|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "All Attributes",
+          "Maximum ES",
+          "Minions A&C Speed"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 10005.0,
+        "sample_max_chaos": 10295.0
+      },
+      {
+        "combo": [
+          "Maximum Life",
+          "Minions A&C Speed",
+          "all Elemental Res"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 12905.0,
+        "sample_max_chaos": 12905.0
+      },
+      {
+        "combo": [
+          "All Attributes",
+          "Maximum Life",
+          "Minions A&C Speed"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 10005.0,
+        "sample_max_chaos": 10005.0
+      },
+      {
+        "combo": [
+          "Maximum ES",
+          "Minions A&C Speed",
+          "all Elemental Res"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 7975.0,
+        "sample_max_chaos": 7975.0
+      },
+      {
+        "combo": [
+          "Chaos Res",
+          "Maximum ES",
+          "Minions A&C Speed"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 7830.0,
+        "sample_max_chaos": 7830.0
+      },
+      {
+        "combo": [
+          "Dexterity",
+          "Maximum Life",
+          "Minions A&C Speed"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 7105.0,
+        "sample_max_chaos": 7105.0
+      },
+      {
+        "combo": [
+          "Fire Res",
+          "Maximum ES",
+          "Minions A&C Speed"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 7105.0,
+        "sample_max_chaos": 7105.0
+      },
+      {
+        "combo": [
+          "Intelligence",
+          "Maximum ES",
+          "all Elemental Res"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 10,
+        "sample_min_chaos": 6525.0,
+        "sample_max_chaos": 6525.0
+      }
+    ],
+    "listings": 37,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Yp2b8PyRFY",
+    "scanned_at": "2026-07-29T13:17:18.623997+00:00"
+  },
+  "MARKET3|L12|Minion|All Attributes|Maximum ES|Minions A&C Speed": {
+    "min_chaos": 9425.0,
+    "max_chaos": 13050.0,
+    "avg_chaos": 10794.44,
+    "listings": 9,
+    "sample_size": 9,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/8rR56K7ViV",
+    "scanned_at": "2026-07-29T13:17:29.482025+00:00"
+  },
+  "MARKET3|L12|Minion|Maximum Life|Minions A&C Speed|all Elemental Res": {
+    "min_chaos": 12905.0,
+    "max_chaos": 14500.0,
+    "avg_chaos": 13968.33,
+    "listings": 3,
+    "sample_size": 3,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/V5pOopolFp",
+    "scanned_at": "2026-07-29T13:17:40.335934+00:00"
+  },
+  "MARKET3|L12|Minion|All Attributes|Maximum Life|Minions A&C Speed": {
+    "min_chaos": 10005.0,
+    "max_chaos": 10730.0,
+    "avg_chaos": 10367.5,
+    "listings": 2,
+    "sample_size": 2,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/RJ9lQvyOI7",
+    "scanned_at": "2026-07-29T13:17:51.194259+00:00"
+  },
+  "MARKET3|L12|Minion|Maximum ES|Minions A&C Speed|all Elemental Res": {
+    "min_chaos": 7250.0,
+    "max_chaos": 7975.0,
+    "avg_chaos": 7612.5,
+    "listings": 2,
+    "sample_size": 2,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/pJZwplMwu0",
+    "scanned_at": "2026-07-29T13:18:02.075351+00:00"
+  },
+  "MARKET3|L12|Minion|Chaos Res|Maximum ES|Minions A&C Speed": {
+    "min_chaos": 7830.0,
+    "max_chaos": 7830.0,
+    "avg_chaos": 7830.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/bGD2JXaLTL",
+    "scanned_at": "2026-07-29T13:18:12.977551+00:00"
+  },
+  "MARKET3|L12|Minion|Dexterity|Maximum Life|Minions A&C Speed": {
+    "min_chaos": 7105.0,
+    "max_chaos": 7105.0,
+    "avg_chaos": 7105.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/JBnKDqpbhl",
+    "scanned_at": "2026-07-29T13:18:23.885679+00:00"
+  },
+  "MARKET3|L12|Minion|Fire Res|Maximum ES|Minions A&C Speed": {
+    "min_chaos": 7105.0,
+    "max_chaos": 7105.0,
+    "avg_chaos": 7105.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/eRDyPZpbFL",
+    "scanned_at": "2026-07-29T13:18:34.875564+00:00"
+  },
+  "MARKET3|L12|Minion|Intelligence|Maximum ES|all Elemental Res": {
+    "min_chaos": 6525.0,
+    "max_chaos": 6525.0,
+    "avg_chaos": 6525.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/8rR56EWviV",
+    "scanned_at": "2026-07-29T13:18:45.748839+00:00"
+  },
+  "DISCOVERY4|L8|AxeSword|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Feed the Fury",
+          "Fuel the Fight",
+          "Martial Prowess"
+        ],
+        "discovery_hits": 5,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 580.0,
+        "sample_max_chaos": 7250.0
+      },
+      {
+        "combo": [
+          "Bloodscent",
+          "Martial Prowess",
+          "Run Through"
+        ],
+        "discovery_hits": 3,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 870.0,
+        "sample_max_chaos": 870.0
+      },
+      {
+        "combo": [
+          "Bloodscent",
+          "Drive the Destruction",
+          "Martial Prowess"
+        ],
+        "discovery_hits": 3,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 725.0,
+        "sample_max_chaos": 725.0
+      },
+      {
+        "combo": [
+          "Bloodscent",
+          "Fuel the Fight",
+          "Martial Prowess"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 1740.0,
+        "sample_max_chaos": 2030.0
+      },
+      {
+        "combo": [
+          "Fuel the Fight",
+          "Martial Prowess",
+          "Run Through"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 1160.0,
+        "sample_max_chaos": 1160.0
+      },
+      {
+        "combo": [
+          "Calamitous",
+          "Devastator",
+          "Martial Prowess"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 1015.0,
+        "sample_max_chaos": 1015.0
+      },
+      {
+        "combo": [
+          "Aggressive Defence",
+          "Bloodscent",
+          "Martial Prowess"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 290.0,
+        "sample_max_chaos": 290.0
+      },
+      {
+        "combo": [
+          "Bloodscent",
+          "Calamitous",
+          "Smite the Weak"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 290.0,
+        "sample_max_chaos": 290.0
+      }
+    ],
+    "listings": 212,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/eRDlJ8PwFL",
+    "scanned_at": "2026-07-29T13:19:51.972794+00:00"
+  },
+  "MARKET3|L8|AxeSword|Bloodscent|Martial Prowess|Run Through": {
+    "min_chaos": 725.0,
+    "max_chaos": 870.0,
+    "avg_chaos": 797.5,
+    "listings": 6,
+    "sample_size": 6,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/7nRrJ47yC5",
+    "scanned_at": "2026-07-29T13:20:06.958782+00:00"
+  },
+  "MARKET3|L8|AxeSword|Bloodscent|Drive the Destruction|Martial Prowess": {
+    "min_chaos": 725.0,
+    "max_chaos": 2175.0,
+    "avg_chaos": 1047.22,
+    "listings": 9,
+    "sample_size": 9,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/5nd2gX4eCa",
+    "scanned_at": "2026-07-29T13:20:17.839824+00:00"
+  },
+  "MARKET3|L8|AxeSword|Bloodscent|Fuel the Fight|Martial Prowess": {
+    "min_chaos": 1740.0,
+    "max_chaos": 2030.0,
+    "avg_chaos": 1885.0,
+    "listings": 2,
+    "sample_size": 2,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/5nd2gVvoTa",
+    "scanned_at": "2026-07-29T13:20:28.684015+00:00"
+  },
+  "MARKET3|L8|AxeSword|Fuel the Fight|Martial Prowess|Run Through": {
+    "min_chaos": 1160.0,
+    "max_chaos": 1885.0,
+    "avg_chaos": 1474.17,
+    "listings": 6,
+    "sample_size": 6,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/EBV4pgDYS5",
+    "scanned_at": "2026-07-29T13:20:39.596094+00:00"
+  },
+  "MARKET3|L8|AxeSword|Calamitous|Devastator|Martial Prowess": {
+    "min_chaos": 1015.0,
+    "max_chaos": 2030.0,
+    "avg_chaos": 1341.25,
+    "listings": 4,
+    "sample_size": 4,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/vevKWB2LhE",
+    "scanned_at": "2026-07-29T13:20:50.449805+00:00"
+  },
+  "MARKET3|L8|AxeSword|Aggressive Defence|Bloodscent|Martial Prowess": {
+    "min_chaos": 290.0,
+    "max_chaos": 580.0,
+    "avg_chaos": 377.0,
+    "listings": 5,
+    "sample_size": 5,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/eRDyPdE6cL",
+    "scanned_at": "2026-07-29T13:21:01.345704+00:00"
+  },
+  "MARKET3|L8|AxeSword|Bloodscent|Calamitous|Smite the Weak": {
+    "min_chaos": 290.0,
+    "max_chaos": 1450.0,
+    "avg_chaos": 957.0,
+    "listings": 5,
+    "sample_size": 5,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/eRDyPYbYiL",
+    "scanned_at": "2026-07-29T13:21:12.177233+00:00"
+  },
+  "MARKET3|L12|AxeSword|Attack Speed|Maximum ES|all Elemental Res": {
+    "min_chaos": 21750.0,
+    "max_chaos": 21750.0,
+    "avg_chaos": 21750.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Kldnpp46s5",
+    "scanned_at": "2026-07-29T13:21:33.948890+00:00"
+  },
+  "DISCOVERY4|L8|StaffMace|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Feed the Fury",
+          "Martial Prowess",
+          "Overlord"
+        ],
+        "discovery_hits": 3,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 1740.0,
+        "sample_max_chaos": 1885.0
+      },
+      {
+        "combo": [
+          "Martial Prowess",
+          "Overlord",
+          "Weight Advantage"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 1015.0,
+        "sample_max_chaos": 2030.0
+      },
+      {
+        "combo": [
+          "Fuel the Fight",
+          "Martial Prowess",
+          "Overlord"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 870.0,
+        "sample_max_chaos": 1015.0
+      },
+      {
+        "combo": [
+          "Fuel the Fight",
+          "Overlord",
+          "Smite the Weak"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 290.0,
+        "sample_max_chaos": 435.0
+      },
+      {
+        "combo": [
+          "Heavy Hitter",
+          "Overlord",
+          "Weight Advantage"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 290.0,
+        "sample_max_chaos": 290.0
+      },
+      {
+        "combo": [
+          "Devastator",
+          "Overlord",
+          "Smite the Weak"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 2610.0,
+        "sample_max_chaos": 2610.0
+      },
+      {
+        "combo": [
+          "Feed the Fury",
+          "Overlord",
+          "Smite the Weak"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 2030.0,
+        "sample_max_chaos": 2030.0
+      },
+      {
+        "combo": [
+          "Fuel the Fight",
+          "Heavy Hitter",
+          "Overlord"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 870.0,
+        "sample_max_chaos": 870.0
+      }
+    ],
+    "listings": 347,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/EBVnd8ZZH5",
+    "scanned_at": "2026-07-29T13:21:51.904018+00:00"
+  },
+  "MARKET3|L8|StaffMace|Feed the Fury|Martial Prowess|Overlord": {
+    "min_chaos": 1740.0,
+    "max_chaos": 2320.0,
+    "avg_chaos": 2059.0,
+    "listings": 27,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/opo2KVgOFl",
+    "scanned_at": "2026-07-29T13:21:58.850069+00:00"
+  },
+  "MARKET3|L8|StaffMace|Martial Prowess|Overlord|Weight Advantage": {
+    "min_chaos": 1015.0,
+    "max_chaos": 1305.0,
+    "avg_chaos": 1145.5,
+    "listings": 13,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/X3rMJ5JesP",
+    "scanned_at": "2026-07-29T13:22:10.529519+00:00"
+  },
+  "MARKET3|L8|StaffMace|Fuel the Fight|Martial Prowess|Overlord": {
+    "min_chaos": 870.0,
+    "max_chaos": 1160.0,
+    "avg_chaos": 1015.0,
+    "listings": 13,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/LgkJvJbjhn",
+    "scanned_at": "2026-07-29T13:22:20.836756+00:00"
+  },
+  "MARKET3|L8|StaffMace|Fuel the Fight|Overlord|Smite the Weak": {
+    "min_chaos": 290.0,
+    "max_chaos": 435.0,
+    "avg_chaos": 420.5,
+    "listings": 18,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/6zBMnLl2IG",
+    "scanned_at": "2026-07-29T13:22:31.622627+00:00"
+  },
+  "MARKET3|L8|StaffMace|Heavy Hitter|Overlord|Weight Advantage": {
+    "min_chaos": 290.0,
+    "max_chaos": 290.0,
+    "avg_chaos": 290.0,
+    "listings": 21,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/rPale0zrTQ",
+    "scanned_at": "2026-07-29T13:22:42.416764+00:00"
+  },
+  "MARKET3|L8|StaffMace|Devastator|Overlord|Smite the Weak": {
+    "min_chaos": 2175.0,
+    "max_chaos": 10150.0,
+    "avg_chaos": 3480.0,
+    "listings": 8,
+    "sample_size": 8,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/V5pneERXip",
+    "scanned_at": "2026-07-29T13:22:53.270718+00:00"
+  },
+  "MARKET3|L8|StaffMace|Feed the Fury|Overlord|Smite the Weak": {
+    "min_chaos": 2030.0,
+    "max_chaos": 2175.0,
+    "avg_chaos": 2126.67,
+    "listings": 3,
+    "sample_size": 3,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/3q6vKe5JS5",
+    "scanned_at": "2026-07-29T13:23:04.102534+00:00"
+  },
+  "MARKET3|L8|StaffMace|Fuel the Fight|Heavy Hitter|Overlord": {
+    "min_chaos": 580.0,
+    "max_chaos": 870.0,
+    "avg_chaos": 754.0,
+    "listings": 5,
+    "sample_size": 5,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/pJZoV42XS0",
+    "scanned_at": "2026-07-29T13:23:15.103552+00:00"
+  },
+  "DISCOVERY4|L8|ClawDagger|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Fan of Blades",
+          "Feed the Fury",
+          "Martial Prowess"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 1305.0,
+        "sample_max_chaos": 2175.0
+      },
+      {
+        "combo": [
+          "Fan of Blades",
+          "Fuel the Fight",
+          "Smite the Weak"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 725.0,
+        "sample_max_chaos": 870.0
+      },
+      {
+        "combo": [
+          "Fan of Blades",
+          "Fuel the Fight",
+          "Martial Prowess"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 580.0,
+        "sample_max_chaos": 725.0
+      },
+      {
+        "combo": [
+          "Feed the Fury",
+          "Fuel the Fight",
+          "Martial Prowess"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 435.0,
+        "sample_max_chaos": 1160.0
+      },
+      {
+        "combo": [
+          "Fan of Blades",
+          "Feed the Fury",
+          "Smite the Weak"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 2030.0,
+        "sample_max_chaos": 2030.0
+      },
+      {
+        "combo": [
+          "Disease Vector",
+          "Fan of Blades",
+          "Martial Prowess"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 1740.0,
+        "sample_max_chaos": 1740.0
+      },
+      {
+        "combo": [
+          "Fan of Blades",
+          "Smite the Weak",
+          "Wind-up"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 1305.0,
+        "sample_max_chaos": 1305.0
+      },
+      {
+        "combo": [
+          "Fan of Blades",
+          "Feed the Fury",
+          "Heavy Hitter"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 870.0,
+        "sample_max_chaos": 870.0
+      }
+    ],
+    "listings": 109,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/MdoEbe6DiJ",
+    "scanned_at": "2026-07-29T13:23:54.651473+00:00"
+  },
+  "MARKET3|L8|ClawDagger|Fan of Blades|Feed the Fury|Martial Prowess": {
+    "min_chaos": 1305.0,
+    "max_chaos": 2175.0,
+    "avg_chaos": 1921.25,
+    "listings": 4,
+    "sample_size": 4,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/8rRknZXqsV",
+    "scanned_at": "2026-07-29T13:24:01.476809+00:00"
+  },
+  "MARKET3|L8|ClawDagger|Fan of Blades|Fuel the Fight|Smite the Weak": {
+    "min_chaos": 725.0,
+    "max_chaos": 1450.0,
+    "avg_chaos": 890.71,
+    "listings": 7,
+    "sample_size": 7,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/8rRBO83BsV",
+    "scanned_at": "2026-07-29T13:24:09.331056+00:00"
+  },
+  "MARKET3|L8|ClawDagger|Fan of Blades|Fuel the Fight|Martial Prowess": {
+    "min_chaos": 580.0,
+    "max_chaos": 725.0,
+    "avg_chaos": 688.75,
+    "listings": 4,
+    "sample_size": 4,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/rPa2GbbzuQ",
+    "scanned_at": "2026-07-29T13:24:20.294078+00:00"
+  },
+  "MARKET3|L8|ClawDagger|Feed the Fury|Fuel the Fight|Martial Prowess": {
+    "min_chaos": 300.0,
+    "max_chaos": 1160.0,
+    "avg_chaos": 547.14,
+    "listings": 7,
+    "sample_size": 7,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Z6EDebbbTQ",
+    "scanned_at": "2026-07-29T13:24:31.168861+00:00"
+  },
+  "MARKET3|L8|ClawDagger|Fan of Blades|Feed the Fury|Smite the Weak": {
+    "min_chaos": 2030.0,
+    "max_chaos": 2030.0,
+    "avg_chaos": 2030.0,
+    "listings": 2,
+    "sample_size": 2,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/vevdbpJXfE",
+    "scanned_at": "2026-07-29T13:24:41.975026+00:00"
+  },
+  "MARKET3|L8|ClawDagger|Disease Vector|Fan of Blades|Martial Prowess": {
+    "min_chaos": 1595.0,
+    "max_chaos": 1885.0,
+    "avg_chaos": 1740.0,
+    "listings": 3,
+    "sample_size": 3,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/6zBMnaqMFG",
+    "scanned_at": "2026-07-29T13:24:52.982139+00:00"
+  },
+  "MARKET3|L8|ClawDagger|Fan of Blades|Smite the Weak|Wind-up": {
+    "min_chaos": 1305.0,
+    "max_chaos": 1450.0,
+    "avg_chaos": 1377.5,
+    "listings": 2,
+    "sample_size": 2,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/zbrMKYovi4",
+    "scanned_at": "2026-07-29T13:25:03.856803+00:00"
+  },
+  "MARKET3|L8|ClawDagger|Fan of Blades|Feed the Fury|Heavy Hitter": {
+    "min_chaos": 1305.0,
+    "max_chaos": 1305.0,
+    "avg_chaos": 1305.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/yYKwjQ2eCR",
+    "scanned_at": "2026-07-29T13:25:14.828217+00:00"
+  },
+  "MARKET3|L12|ClawDagger|All Attributes|Dexterity|Maximum Life": {
+    "min_chaos": 17400.0,
+    "max_chaos": 17400.0,
+    "avg_chaos": 17400.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/kyD3ele5I5",
+    "scanned_at": "2026-07-29T13:25:36.689962+00:00"
+  },
+  "MARKET3|L12|ClawDagger|Attack Speed|Chaos Res|increased Damage": {
+    "min_chaos": 8700.0,
+    "max_chaos": 8700.0,
+    "avg_chaos": 8700.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/02Rp3y7pIg",
+    "scanned_at": "2026-07-29T13:25:58.496223+00:00"
+  },
+  "MARKET3|L12|ClawDagger|Attack Speed|Fire Res|increased Damage": {
+    "min_chaos": 1450.0,
+    "max_chaos": 1450.0,
+    "avg_chaos": 1450.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/RJ9WpK6Bh7",
+    "scanned_at": "2026-07-29T13:26:31.067889+00:00"
+  },
+  "DISCOVERY4|L8|Bow|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Arcing Shot",
+          "Broadside",
+          "Martial Prowess"
+        ],
+        "discovery_hits": 10,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 435.0,
+        "sample_max_chaos": 2175.0
+      },
+      {
+        "combo": [
+          "Arcing Shot",
+          "Martial Prowess",
+          "Tempered Arrowheads"
+        ],
+        "discovery_hits": 3,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 435.0,
+        "sample_max_chaos": 580.0
+      },
+      {
+        "combo": [
+          "Feed the Fury",
+          "Fuel the Fight",
+          "Martial Prowess"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 580.0,
+        "sample_max_chaos": 1015.0
+      },
+      {
+        "combo": [
+          "Arcing Shot",
+          "Calamitous",
+          "Heavy Hitter"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 2320.0,
+        "sample_max_chaos": 2320.0
+      },
+      {
+        "combo": [
+          "Devastator",
+          "Fuel the Fight",
+          "Martial Prowess"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 1305.0,
+        "sample_max_chaos": 1305.0
+      },
+      {
+        "combo": [
+          "Arcing Shot",
+          "Martial Prowess",
+          "Vicious Skewering"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 580.0,
+        "sample_max_chaos": 580.0
+      },
+      {
+        "combo": [
+          "Arcing Shot",
+          "Devastator",
+          "Smite the Weak"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 435.0,
+        "sample_max_chaos": 435.0
+      },
+      {
+        "combo": [
+          "Arcing Shot",
+          "Feed the Fury",
+          "Martial Prowess"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 435.0,
+        "sample_max_chaos": 435.0
+      }
+    ],
+    "listings": 279,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/RJ9wbrrrU7",
+    "scanned_at": "2026-07-29T13:26:48.956123+00:00"
+  },
+  "MARKET3|L8|Bow|Feed the Fury|Fuel the Fight|Martial Prowess": {
+    "min_chaos": 275.0,
+    "max_chaos": 360.0,
+    "avg_chaos": 328.5,
+    "listings": 28,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/5ndMq6mVua",
+    "scanned_at": "2026-07-29T13:27:14.493292+00:00"
+  },
+  "MARKET3|L8|Bow|Arcing Shot|Calamitous|Heavy Hitter": {
+    "min_chaos": 725.0,
+    "max_chaos": 2900.0,
+    "avg_chaos": 1691.67,
+    "listings": 9,
+    "sample_size": 9,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/V5pneWM2ip",
+    "scanned_at": "2026-07-29T13:27:25.309382+00:00"
+  },
+  "MARKET3|L8|Bow|Devastator|Fuel the Fight|Martial Prowess": {
+    "min_chaos": 200.0,
+    "max_chaos": 1305.0,
+    "avg_chaos": 415.0,
+    "listings": 9,
+    "sample_size": 9,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/mkg3V28zs6",
+    "scanned_at": "2026-07-29T13:27:36.203025+00:00"
+  },
+  "MARKET3|L8|Bow|Arcing Shot|Martial Prowess|Vicious Skewering": {
+    "min_chaos": 33.0,
+    "max_chaos": 725.0,
+    "avg_chaos": 235.33,
+    "listings": 9,
+    "sample_size": 9,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/EBV9BJBYf5",
+    "scanned_at": "2026-07-29T13:27:47.008219+00:00"
+  },
+  "MARKET3|L8|Bow|Arcing Shot|Devastator|Smite the Weak": {
+    "min_chaos": 290.0,
+    "max_chaos": 435.0,
+    "avg_chaos": 319.0,
+    "listings": 11,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/WvKOvvYRum",
+    "scanned_at": "2026-07-29T13:27:57.992780+00:00"
+  },
+  "MARKET3|L8|Bow|Arcing Shot|Feed the Fury|Martial Prowess": {
+    "min_chaos": 190.0,
+    "max_chaos": 290.0,
+    "avg_chaos": 227.7,
+    "listings": 24,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/mkg3kvQaI6",
+    "scanned_at": "2026-07-29T13:28:08.821282+00:00"
+  },
+  "MARKET3|L12|Bow|Attack Speed|Maximum Life|all Elemental Res": {
+    "min_chaos": 11600.0,
+    "max_chaos": 11600.0,
+    "avg_chaos": 11600.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/opo2pbyYhl",
+    "scanned_at": "2026-07-29T13:28:52.141716+00:00"
+  },
+  "MARKET3|L12|Bow|Chaos Res|Dexterity|Maximum Life": {
+    "min_chaos": 7250.0,
+    "max_chaos": 7250.0,
+    "avg_chaos": 7250.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/jWR8W4EZFX",
+    "scanned_at": "2026-07-29T13:29:02.974442+00:00"
+  },
+  "MARKET3|L12|Bow|All Attributes|Attack Speed|Maximum Life": {
+    "min_chaos": 4205.0,
+    "max_chaos": 4205.0,
+    "avg_chaos": 4205.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/WvKOvY5Kum",
+    "scanned_at": "2026-07-29T13:29:24.727351+00:00"
+  },
+  "MARKET3|L12|Bow|Chaos Res|Lightning Res|increased Damage": {
+    "min_chaos": 3625.0,
+    "max_chaos": 3625.0,
+    "avg_chaos": 3625.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/q9lZ97Dltg",
+    "scanned_at": "2026-07-29T13:29:35.632137+00:00"
+  },
+  "MARKET3|L12|Bow|Cold Res|all Elemental Res|increased Damage": {
+    "min_chaos": 3625.0,
+    "max_chaos": 3625.0,
+    "avg_chaos": 3625.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/q9lZ9lvvhg",
+    "scanned_at": "2026-07-29T13:29:46.473112+00:00"
+  },
+  "DISCOVERY4|L8|Wand|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Martial Prowess",
+          "Opportunistic Fusilade",
+          "Storm's Hand"
+        ],
+        "discovery_hits": 8,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 435.0,
+        "sample_max_chaos": 580.0
+      },
+      {
+        "combo": [
+          "Fuel the Fight",
+          "Martial Prowess",
+          "Vicious Skewering"
+        ],
+        "discovery_hits": 3,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 725.0,
+        "sample_max_chaos": 870.0
+      },
+      {
+        "combo": [
+          "Calamitous",
+          "Devastator",
+          "Martial Prowess"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 1015.0,
+        "sample_max_chaos": 1450.0
+      },
+      {
+        "combo": [
+          "Devastator",
+          "Feed the Fury",
+          "Martial Prowess"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 580.0,
+        "sample_max_chaos": 725.0
+      },
+      {
+        "combo": [
+          "Devastator",
+          "Explosive Force",
+          "Martial Prowess"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 2030.0,
+        "sample_max_chaos": 2030.0
+      },
+      {
+        "combo": [
+          "Devastator",
+          "Explosive Force",
+          "Smite the Weak"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 1740.0,
+        "sample_max_chaos": 1740.0
+      },
+      {
+        "combo": [
+          "Explosive Force",
+          "Feed the Fury",
+          "Martial Prowess"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 725.0,
+        "sample_max_chaos": 725.0
+      },
+      {
+        "combo": [
+          "Devastator",
+          "Drive the Destruction",
+          "Martial Prowess"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 580.0,
+        "sample_max_chaos": 580.0
+      }
+    ],
+    "listings": 220,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/2Kzd5qQ0ck",
+    "scanned_at": "2026-07-29T13:30:04.203395+00:00"
+  },
+  "MARKET3|L8|Wand|Fuel the Fight|Martial Prowess|Vicious Skewering": {
+    "min_chaos": 725.0,
+    "max_chaos": 1160.0,
+    "avg_chaos": 966.67,
+    "listings": 9,
+    "sample_size": 9,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/nrD3rXQJT0",
+    "scanned_at": "2026-07-29T13:30:18.966758+00:00"
+  },
+  "MARKET3|L8|Wand|Calamitous|Devastator|Martial Prowess": {
+    "min_chaos": 1015.0,
+    "max_chaos": 1450.0,
+    "avg_chaos": 1196.25,
+    "listings": 4,
+    "sample_size": 4,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/d86r8wvbUJ",
+    "scanned_at": "2026-07-29T13:30:29.868826+00:00"
+  },
+  "MARKET3|L8|Wand|Devastator|Feed the Fury|Martial Prowess": {
+    "min_chaos": 580.0,
+    "max_chaos": 1450.0,
+    "avg_chaos": 1232.5,
+    "listings": 13,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/D6nY6y6wS5",
+    "scanned_at": "2026-07-29T13:30:40.728638+00:00"
+  },
+  "MARKET3|L8|Wand|Devastator|Explosive Force|Martial Prowess": {
+    "min_chaos": 2030.0,
+    "max_chaos": 2030.0,
+    "avg_chaos": 2030.0,
+    "listings": 2,
+    "sample_size": 2,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/4mP0mp58U9",
+    "scanned_at": "2026-07-29T13:30:51.652333+00:00"
+  },
+  "MARKET3|L8|Wand|Devastator|Explosive Force|Smite the Weak": {
+    "min_chaos": 1740.0,
+    "max_chaos": 3480.0,
+    "avg_chaos": 2368.33,
+    "listings": 6,
+    "sample_size": 6,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/V5pn59q8cp",
+    "scanned_at": "2026-07-29T13:31:02.500334+00:00"
+  },
+  "MARKET3|L8|Wand|Explosive Force|Feed the Fury|Martial Prowess": {
+    "min_chaos": 725.0,
+    "max_chaos": 870.0,
+    "avg_chaos": 855.5,
+    "listings": 16,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/jWR8WarXiX",
+    "scanned_at": "2026-07-29T13:31:13.392823+00:00"
+  },
+  "MARKET3|L8|Wand|Devastator|Drive the Destruction|Martial Prowess": {
+    "min_chaos": 290.0,
+    "max_chaos": 725.0,
+    "avg_chaos": 476.43,
+    "listings": 7,
+    "sample_size": 7,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/9zRJzKdzfK",
+    "scanned_at": "2026-07-29T13:31:24.232441+00:00"
+  },
+  "DISCOVERY4|L8|TwoHand|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Graceful Execution",
+          "Martial Mastery",
+          "Martial Prowess"
+        ],
+        "discovery_hits": 11,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 435.0,
+        "sample_max_chaos": 435.0
+      },
+      {
+        "combo": [
+          "Martial Mastery",
+          "Martial Prowess",
+          "Surefooted Striker"
+        ],
+        "discovery_hits": 3,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 435.0,
+        "sample_max_chaos": 435.0
+      },
+      {
+        "combo": [
+          "Devastator",
+          "Feed the Fury",
+          "Smite the Weak"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 2900.0,
+        "sample_max_chaos": 2900.0
+      },
+      {
+        "combo": [
+          "Brutal Infamy",
+          "Feed the Fury",
+          "Smite the Weak"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 725.0,
+        "sample_max_chaos": 725.0
+      },
+      {
+        "combo": [
+          "Devastator",
+          "Martial Prowess",
+          "Titanic Swings"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 725.0,
+        "sample_max_chaos": 725.0
+      },
+      {
+        "combo": [
+          "Devastator",
+          "Feed the Fury",
+          "Heavy Hitter"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 435.0,
+        "sample_max_chaos": 435.0
+      },
+      {
+        "combo": [
+          "Feed the Fury",
+          "Graceful Execution",
+          "Martial Prowess"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 290.0,
+        "sample_max_chaos": 290.0
+      },
+      {
+        "combo": [
+          "Feed the Fury",
+          "Martial Mastery",
+          "Martial Prowess"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 290.0,
+        "sample_max_chaos": 290.0
+      }
+    ],
+    "listings": 341,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/zbrav0k0h4",
+    "scanned_at": "2026-07-29T13:31:52.797460+00:00"
+  },
+  "MARKET3|L8|TwoHand|Martial Mastery|Martial Prowess|Surefooted Striker": {
+    "min_chaos": 400.0,
+    "max_chaos": 500.0,
+    "avg_chaos": 435.5,
+    "listings": 19,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/aLG6LZrBte",
+    "scanned_at": "2026-07-29T13:32:07.582378+00:00"
+  },
+  "MARKET3|L8|TwoHand|Devastator|Feed the Fury|Smite the Weak": {
+    "min_chaos": 2900.0,
+    "max_chaos": 2900.0,
+    "avg_chaos": 2900.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/wv3Bvzwmsb",
+    "scanned_at": "2026-07-29T13:32:18.397304+00:00"
+  },
+  "MARKET3|L8|TwoHand|Brutal Infamy|Feed the Fury|Smite the Weak": {
+    "min_chaos": 435.0,
+    "max_chaos": 1305.0,
+    "avg_chaos": 821.67,
+    "listings": 3,
+    "sample_size": 3,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/q9lZ9gQlug",
+    "scanned_at": "2026-07-29T13:32:29.215650+00:00"
+  },
+  "MARKET3|L8|TwoHand|Devastator|Martial Prowess|Titanic Swings": {
+    "min_chaos": 725.0,
+    "max_chaos": 1160.0,
+    "avg_chaos": 899.0,
+    "listings": 5,
+    "sample_size": 5,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/opo2pmmKFl",
+    "scanned_at": "2026-07-29T13:32:40.097539+00:00"
+  },
+  "MARKET3|L8|TwoHand|Devastator|Feed the Fury|Heavy Hitter": {
+    "min_chaos": 435.0,
+    "max_chaos": 435.0,
+    "avg_chaos": 435.0,
+    "listings": 2,
+    "sample_size": 2,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Yp2BplyrcY",
+    "scanned_at": "2026-07-29T13:32:50.952215+00:00"
+  },
+  "MARKET3|L8|TwoHand|Feed the Fury|Graceful Execution|Martial Prowess": {
+    "min_chaos": 145.0,
+    "max_chaos": 435.0,
+    "avg_chaos": 257.22,
+    "listings": 9,
+    "sample_size": 9,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/zbrMbLoOI4",
+    "scanned_at": "2026-07-29T13:33:01.817894+00:00"
+  },
+  "MARKET3|L8|TwoHand|Feed the Fury|Martial Mastery|Martial Prowess": {
+    "min_chaos": 90.0,
+    "max_chaos": 150.0,
+    "avg_chaos": 113.0,
+    "listings": 15,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/rPalP394uQ",
+    "scanned_at": "2026-07-29T13:33:12.674360+00:00"
+  },
+  "DISCOVERY4|L8|DualWield|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Feed the Fury",
+          "Fuel the Fight",
+          "Martial Prowess"
+        ],
+        "discovery_hits": 3,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 435.0,
+        "sample_max_chaos": 580.0
+      },
+      {
+        "combo": [
+          "Deadly Repartee",
+          "Insatiable Killer",
+          "Smite the Weak"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 725.0,
+        "sample_max_chaos": 725.0
+      },
+      {
+        "combo": [
+          "Deadly Repartee",
+          "Martial Prowess",
+          "Quick and Deadly"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 1450.0,
+        "sample_max_chaos": 1450.0
+      },
+      {
+        "combo": [
+          "Feed the Fury",
+          "Martial Prowess",
+          "Quick and Deadly"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 1305.0,
+        "sample_max_chaos": 1305.0
+      },
+      {
+        "combo": [
+          "Mage Bane",
+          "Martial Prowess",
+          "Quick and Deadly"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 1160.0,
+        "sample_max_chaos": 1160.0
+      },
+      {
+        "combo": [
+          "Feed the Fury",
+          "Quick and Deadly",
+          "Smite the Weak"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 1015.0,
+        "sample_max_chaos": 1015.0
+      },
+      {
+        "combo": [
+          "Calamitous",
+          "Quick and Deadly",
+          "Smite the Weak"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 870.0,
+        "sample_max_chaos": 870.0
+      },
+      {
+        "combo": [
+          "Fuel the Fight",
+          "Martial Prowess",
+          "Quick and Deadly"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 870.0,
+        "sample_max_chaos": 870.0
+      }
+    ],
+    "listings": 164,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/q9lm4J7dTg",
+    "scanned_at": "2026-07-29T13:34:24.651934+00:00"
+  },
+  "MARKET3|L8|DualWield|Feed the Fury|Fuel the Fight|Martial Prowess": {
+    "min_chaos": 435.0,
+    "max_chaos": 580.0,
+    "avg_chaos": 555.83,
+    "listings": 6,
+    "sample_size": 6,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/V5pnRnmosp",
+    "scanned_at": "2026-07-29T13:34:31.473038+00:00"
+  },
+  "MARKET3|L8|DualWield|Deadly Repartee|Insatiable Killer|Smite the Weak": {
+    "min_chaos": 20.0,
+    "max_chaos": 725.0,
+    "avg_chaos": 316.0,
+    "listings": 5,
+    "sample_size": 5,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/bGDyVmPzuL",
+    "scanned_at": "2026-07-29T13:34:39.319855+00:00"
+  },
+  "MARKET3|L8|DualWield|Deadly Repartee|Martial Prowess|Quick and Deadly": {
+    "min_chaos": 1450.0,
+    "max_chaos": 1450.0,
+    "avg_chaos": 1450.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/pJZoKGOJT0",
+    "scanned_at": "2026-07-29T13:34:50.159083+00:00"
+  },
+  "MARKET3|L8|DualWield|Feed the Fury|Martial Prowess|Quick and Deadly": {
+    "min_chaos": 870.0,
+    "max_chaos": 2900.0,
+    "avg_chaos": 1657.14,
+    "listings": 7,
+    "sample_size": 7,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/jWR8vbzWIX",
+    "scanned_at": "2026-07-29T13:35:01.083456+00:00"
+  },
+  "MARKET3|L8|DualWield|Mage Bane|Martial Prowess|Quick and Deadly": {
+    "min_chaos": 1015.0,
+    "max_chaos": 1885.0,
+    "avg_chaos": 1353.33,
+    "listings": 3,
+    "sample_size": 3,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Yp2ByooghY",
+    "scanned_at": "2026-07-29T13:35:11.959335+00:00"
+  },
+  "MARKET3|L8|DualWield|Feed the Fury|Quick and Deadly|Smite the Weak": {
+    "min_chaos": 1015.0,
+    "max_chaos": 1160.0,
+    "avg_chaos": 1118.57,
+    "listings": 7,
+    "sample_size": 7,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Yp2BygLXFY",
+    "scanned_at": "2026-07-29T13:35:22.971888+00:00"
+  },
+  "MARKET3|L8|DualWield|Calamitous|Quick and Deadly|Smite the Weak": {
+    "min_chaos": 725.0,
+    "max_chaos": 870.0,
+    "avg_chaos": 797.5,
+    "listings": 2,
+    "sample_size": 2,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/rPalbVzzTQ",
+    "scanned_at": "2026-07-29T13:35:33.780104+00:00"
+  },
+  "MARKET3|L8|DualWield|Fuel the Fight|Martial Prowess|Quick and Deadly": {
+    "min_chaos": 870.0,
+    "max_chaos": 1160.0,
+    "avg_chaos": 1077.14,
+    "listings": 7,
+    "sample_size": 7,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/D6nYJ7mBT5",
+    "scanned_at": "2026-07-29T13:35:44.775008+00:00"
+  },
+  "MARKET3|L12|DualWield|Maximum Life|Strength|all Elemental Res": {
+    "min_chaos": 1450.0,
+    "max_chaos": 1450.0,
+    "avg_chaos": 1450.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/8rRBnaqqcV",
+    "scanned_at": "2026-07-29T13:36:39.097435+00:00"
+  },
+  "DISCOVERY4|L8|Shield|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Martial Prowess",
+          "Veteran Defender",
+          "Vicious Skewering"
+        ],
+        "discovery_hits": 6,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 290.0,
+        "sample_max_chaos": 1015.0
+      },
+      {
+        "combo": [
+          "Martial Prowess",
+          "Prodigious Defence",
+          "Vicious Skewering"
+        ],
+        "discovery_hits": 4,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 290.0,
+        "sample_max_chaos": 290.0
+      },
+      {
+        "combo": [
+          "Martial Prowess",
+          "Prodigious Defence",
+          "Riot Queller"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 1305.0,
+        "sample_max_chaos": 1305.0
+      },
+      {
+        "combo": [
+          "Martial Prowess",
+          "Riot Queller",
+          "Strike Leader"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 1305.0,
+        "sample_max_chaos": 1305.0
+      },
+      {
+        "combo": [
+          "Calamitous",
+          "Devastator",
+          "Martial Prowess"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 1160.0,
+        "sample_max_chaos": 1160.0
+      },
+      {
+        "combo": [
+          "Devastator",
+          "Heavy Hitter",
+          "Prodigious Defence"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 580.0,
+        "sample_max_chaos": 580.0
+      },
+      {
+        "combo": [
+          "Fuel the Fight",
+          "Prodigious Defence",
+          "Smite the Weak"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 435.0,
+        "sample_max_chaos": 435.0
+      },
+      {
+        "combo": [
+          "Advance Guard",
+          "Prodigious Defence",
+          "Smite the Weak"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 290.0,
+        "sample_max_chaos": 290.0
+      }
+    ],
+    "listings": 695,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/vev0PdVzsE",
+    "scanned_at": "2026-07-29T13:36:56.953716+00:00"
+  },
+  "MARKET3|L8|Shield|Martial Prowess|Veteran Defender|Vicious Skewering": {
+    "min_chaos": 290.0,
+    "max_chaos": 580.0,
+    "avg_chaos": 522.0,
+    "listings": 32,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/JBngZRZail",
+    "scanned_at": "2026-07-29T13:37:03.792489+00:00"
+  },
+  "MARKET3|L8|Shield|Martial Prowess|Prodigious Defence|Vicious Skewering": {
+    "min_chaos": 250.0,
+    "max_chaos": 435.0,
+    "avg_chaos": 300.5,
+    "listings": 10,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/eRD6oqa9cL",
+    "scanned_at": "2026-07-29T13:37:11.675723+00:00"
+  },
+  "MARKET3|L8|Shield|Martial Prowess|Prodigious Defence|Riot Queller": {
+    "min_chaos": 1305.0,
+    "max_chaos": 3625.0,
+    "avg_chaos": 2207.22,
+    "listings": 9,
+    "sample_size": 9,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/pJZoKQRvt0",
+    "scanned_at": "2026-07-29T13:37:22.513382+00:00"
+  },
+  "MARKET3|L8|Shield|Martial Prowess|Riot Queller|Strike Leader": {
+    "min_chaos": 1305.0,
+    "max_chaos": 1450.0,
+    "avg_chaos": 1431.88,
+    "listings": 8,
+    "sample_size": 8,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/d86rVjOvsJ",
+    "scanned_at": "2026-07-29T13:37:33.385030+00:00"
+  },
+  "MARKET3|L8|Shield|Calamitous|Devastator|Martial Prowess": {
+    "min_chaos": 1160.0,
+    "max_chaos": 1305.0,
+    "avg_chaos": 1261.5,
+    "listings": 15,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/QLYdg9Pjuw",
+    "scanned_at": "2026-07-29T13:37:44.207581+00:00"
+  },
+  "MARKET3|L8|Shield|Advance Guard|Prodigious Defence|Smite the Weak": {
+    "min_chaos": 220.0,
+    "max_chaos": 300.0,
+    "avg_chaos": 268.3,
+    "listings": 29,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/wv3BrJvnUb",
+    "scanned_at": "2026-07-29T13:38:16.731645+00:00"
+  },
+  "DISCOVERY4|L8|Attack|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Feed the Fury",
+          "Fuel the Fight",
+          "Heavy Hitter"
+        ],
+        "discovery_hits": 10,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 435.0,
+        "sample_max_chaos": 580.0
+      },
+      {
+        "combo": [
+          "Feed the Fury",
+          "Fuel the Fight",
+          "Martial Prowess"
+        ],
+        "discovery_hits": 4,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 580.0,
+        "sample_max_chaos": 1160.0
+      },
+      {
+        "combo": [
+          "Drive the Destruction",
+          "Feed the Fury",
+          "Martial Prowess"
+        ],
+        "discovery_hits": 4,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 435.0,
+        "sample_max_chaos": 435.0
+      },
+      {
+        "combo": [
+          "Calamitous",
+          "Fuel the Fight",
+          "Martial Prowess"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 290.0,
+        "sample_max_chaos": 290.0
+      },
+      {
+        "combo": [
+          "Devastator",
+          "Fuel the Fight",
+          "Smite the Weak"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 290.0,
+        "sample_max_chaos": 290.0
+      }
+    ],
+    "listings": 53,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/KldebRyys5",
+    "scanned_at": "2026-07-29T13:38:34.463659+00:00"
+  },
+  "MARKET3|L8|Attack|Drive the Destruction|Feed the Fury|Martial Prowess": {
+    "min_chaos": 435.0,
+    "max_chaos": 725.0,
+    "avg_chaos": 493.0,
+    "listings": 5,
+    "sample_size": 5,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/d86Zk5OOiJ",
+    "scanned_at": "2026-07-29T13:39:00.039746+00:00"
+  },
+  "MARKET3|L8|Attack|Calamitous|Fuel the Fight|Martial Prowess": {
+    "min_chaos": 130.0,
+    "max_chaos": 135.0,
+    "avg_chaos": 130.5,
+    "listings": 29,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/RJ9Wr02Zc7",
+    "scanned_at": "2026-07-29T13:39:10.862610+00:00"
+  },
+  "MARKET3|L8|Attack|Devastator|Fuel the Fight|Smite the Weak": {
+    "min_chaos": 90.0,
+    "max_chaos": 290.0,
+    "avg_chaos": 221.0,
+    "listings": 5,
+    "sample_size": 5,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/rPalbvkRCQ",
+    "scanned_at": "2026-07-29T13:39:21.720673+00:00"
+  },
+  "DISCOVERY4|L8|Spell|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Conjured Wall",
+          "Mage Hunter",
+          "Sap Psyche"
+        ],
+        "discovery_hits": 4,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 435.0,
+        "sample_max_chaos": 580.0
+      },
+      {
+        "combo": [
+          "Arcane Heroism",
+          "Essence Rush",
+          "Mage Hunter"
+        ],
+        "discovery_hits": 3,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 725.0,
+        "sample_max_chaos": 725.0
+      },
+      {
+        "combo": [
+          "Arcane Heroism",
+          "Burden Projection",
+          "Sap Psyche"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 1160.0,
+        "sample_max_chaos": 1160.0
+      },
+      {
+        "combo": [
+          "Conjured Wall",
+          "Mage Hunter",
+          "Thaumophage"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 580.0,
+        "sample_max_chaos": 725.0
+      },
+      {
+        "combo": [
+          "Arcane Adept",
+          "Conjured Wall",
+          "Essence Rush"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 290.0,
+        "sample_max_chaos": 290.0
+      },
+      {
+        "combo": [
+          "Arcane Heroism",
+          "Essence Rush",
+          "Practiced Caster"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 4350.0,
+        "sample_max_chaos": 4350.0
+      },
+      {
+        "combo": [
+          "Mage Hunter",
+          "Practiced Caster",
+          "Thaumophage"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 2900.0,
+        "sample_max_chaos": 2900.0
+      },
+      {
+        "combo": [
+          "Conjured Wall",
+          "Practiced Caster",
+          "Sap Psyche"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 1740.0,
+        "sample_max_chaos": 1740.0
+      }
+    ],
+    "listings": 161,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/D6nmbnnvt5",
+    "scanned_at": "2026-07-29T13:39:39.638525+00:00"
+  },
+  "MARKET3|L8|Spell|Conjured Wall|Mage Hunter|Sap Psyche": {
+    "min_chaos": 435.0,
+    "max_chaos": 725.0,
+    "avg_chaos": 507.5,
+    "listings": 13,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/QLYdgOl3Cw",
+    "scanned_at": "2026-07-29T13:39:46.472948+00:00"
+  },
+  "MARKET3|L8|Spell|Arcane Heroism|Essence Rush|Mage Hunter": {
+    "min_chaos": 725.0,
+    "max_chaos": 1740.0,
+    "avg_chaos": 855.5,
+    "listings": 10,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/KldnYpwRc5",
+    "scanned_at": "2026-07-29T13:39:54.146873+00:00"
+  },
+  "MARKET3|L8|Spell|Arcane Heroism|Burden Projection|Sap Psyche": {
+    "min_chaos": 1160.0,
+    "max_chaos": 1450.0,
+    "avg_chaos": 1256.67,
+    "listings": 3,
+    "sample_size": 3,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/yYKwpY8WfR",
+    "scanned_at": "2026-07-29T13:40:04.983412+00:00"
+  },
+  "MARKET3|L8|Spell|Arcane Adept|Conjured Wall|Essence Rush": {
+    "min_chaos": 290.0,
+    "max_chaos": 290.0,
+    "avg_chaos": 290.0,
+    "listings": 3,
+    "sample_size": 3,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/02Rpnj7OIg",
+    "scanned_at": "2026-07-29T13:40:26.868416+00:00"
+  },
+  "MARKET3|L8|Spell|Arcane Heroism|Essence Rush|Practiced Caster": {
+    "min_chaos": 29.0,
+    "max_chaos": 89.0,
+    "avg_chaos": 54.9,
+    "listings": 25,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/kyD3kVzWs5",
+    "scanned_at": "2026-07-29T13:40:37.751340+00:00"
+  },
+  "MARKET3|L8|Spell|Mage Hunter|Practiced Caster|Thaumophage": {
+    "min_chaos": 13.0,
+    "max_chaos": 29.0,
+    "avg_chaos": 21.2,
+    "listings": 22,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/RJ9WE6rRi7",
+    "scanned_at": "2026-07-29T13:40:48.586290+00:00"
+  },
+  "MARKET3|L8|Spell|Conjured Wall|Practiced Caster|Sap Psyche": {
+    "min_chaos": 12.0,
+    "max_chaos": 30.0,
+    "avg_chaos": 20.6,
+    "listings": 20,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/q9lZ2GwvUg",
+    "scanned_at": "2026-07-29T13:40:59.475883+00:00"
+  },
+  "MARKET3|L12|Spell|Maximum Mana|Strength|all Elemental Res": {
+    "min_chaos": 14355.0,
+    "max_chaos": 14355.0,
+    "avg_chaos": 14355.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/4mP0M50LU9",
+    "scanned_at": "2026-07-29T13:41:31.985077+00:00"
+  },
+  "MARKET3|L12|Spell|Cast Speed|Maximum Life|Strength": {
+    "min_chaos": 5365.0,
+    "max_chaos": 6525.0,
+    "avg_chaos": 5945.0,
+    "listings": 2,
+    "sample_size": 2,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/X3rMmpGbuP",
+    "scanned_at": "2026-07-29T13:41:53.680356+00:00"
+  },
+  "MARKET3|L12|Spell|Strength|all Elemental Res|increased Damage": {
+    "min_chaos": 6525.0,
+    "max_chaos": 6525.0,
+    "avg_chaos": 6525.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/KldnYjWMc5",
+    "scanned_at": "2026-07-29T13:42:04.537316+00:00"
+  },
+  "MARKET3|L12|Spell|Cast Speed|Intelligence|Maximum Life": {
+    "min_chaos": 6235.0,
+    "max_chaos": 6235.0,
+    "avg_chaos": 6235.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/LgkJBk22fn",
+    "scanned_at": "2026-07-29T13:42:15.371453+00:00"
+  },
+  "MARKET3|L12|Spell|All Attributes|Cold Res|Maximum ES": {
+    "min_chaos": 5075.0,
+    "max_chaos": 5075.0,
+    "avg_chaos": 5075.0,
+    "listings": 1,
+    "sample_size": 1,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/5ndM4r02ta",
+    "scanned_at": "2026-07-29T13:42:26.234820+00:00"
+  },
+  "MARKET3|L12|Spell|Maximum Life|Strength|all Elemental Res": {
+    "min_chaos": 5075.0,
+    "max_chaos": 7250.0,
+    "avg_chaos": 6162.5,
+    "listings": 2,
+    "sample_size": 2,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/MdoJYl0DFJ",
+    "scanned_at": "2026-07-29T13:42:37.106269+00:00"
+  },
+  "DISCOVERY4|L8|Elemental|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Disorienting Display",
+          "Prismatic Heart",
+          "Sadist"
+        ],
+        "discovery_hits": 8,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 290.0,
+        "sample_max_chaos": 580.0
+      },
+      {
+        "combo": [
+          "Doryani's Lesson",
+          "Prismatic Heart",
+          "Sadist"
+        ],
+        "discovery_hits": 6,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 435.0,
+        "sample_max_chaos": 725.0
+      },
+      {
+        "combo": [
+          "Corrosive Elements",
+          "Doryani's Lesson",
+          "Sadist"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 580.0,
+        "sample_max_chaos": 725.0
+      },
+      {
+        "combo": [
+          "Corrosive Elements",
+          "Doryani's Lesson",
+          "Prismatic Heart"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 290.0,
+        "sample_max_chaos": 435.0
+      },
+      {
+        "combo": [
+          "Corrosive Elements",
+          "Inspired Oppression",
+          "Widespread Destruction"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 435.0,
+        "sample_max_chaos": 435.0
+      },
+      {
+        "combo": [
+          "Doryani's Lesson",
+          "Inspired Oppression",
+          "Sadist"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 290.0,
+        "sample_max_chaos": 290.0
+      }
+    ],
+    "listings": 107,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/7nRjWal2S5",
+    "scanned_at": "2026-07-29T13:42:54.994230+00:00"
+  },
+  "MARKET3|L8|Elemental|Corrosive Elements|Doryani's Lesson|Sadist": {
+    "min_chaos": 580.0,
+    "max_chaos": 725.0,
+    "avg_chaos": 688.75,
+    "listings": 4,
+    "sample_size": 4,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/3q6vj0agh5",
+    "scanned_at": "2026-07-29T13:43:20.812192+00:00"
+  },
+  "MARKET3|L8|Elemental|Corrosive Elements|Doryani's Lesson|Prismatic Heart": {
+    "min_chaos": 290.0,
+    "max_chaos": 725.0,
+    "avg_chaos": 398.75,
+    "listings": 8,
+    "sample_size": 8,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/7nRXZMX3t5",
+    "scanned_at": "2026-07-29T13:43:31.686078+00:00"
+  },
+  "MARKET3|L8|Elemental|Corrosive Elements|Inspired Oppression|Widespread Destruction": {
+    "min_chaos": 200.0,
+    "max_chaos": 435.0,
+    "avg_chaos": 335.5,
+    "listings": 11,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/2KzLnwzVFk",
+    "scanned_at": "2026-07-29T13:43:42.546032+00:00"
+  },
+  "MARKET3|L8|Elemental|Doryani's Lesson|Inspired Oppression|Sadist": {
+    "min_chaos": 200.0,
+    "max_chaos": 290.0,
+    "avg_chaos": 281.0,
+    "listings": 19,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/bGDykgYLFL",
+    "scanned_at": "2026-07-29T13:43:53.456302+00:00"
+  },
+  "DISCOVERY4|L8|Physical|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Battle-Hardened",
+          "Furious Assault",
+          "Master the Fundamentals"
+        ],
+        "discovery_hits": 12,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 435.0,
+        "sample_max_chaos": 580.0
+      },
+      {
+        "combo": [
+          "Force Multiplier",
+          "Iron Breaker",
+          "Master the Fundamentals"
+        ],
+        "discovery_hits": 5,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 580.0,
+        "sample_max_chaos": 580.0
+      },
+      {
+        "combo": [
+          "Battle-Hardened",
+          "Force Multiplier",
+          "Master the Fundamentals"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 725.0,
+        "sample_max_chaos": 1015.0
+      },
+      {
+        "combo": [
+          "Battle-Hardened",
+          "Grim Oath",
+          "Master the Fundamentals"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 435.0,
+        "sample_max_chaos": 435.0
+      }
+    ],
+    "listings": 78,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/7nRjW3YnC5",
+    "scanned_at": "2026-07-29T13:44:11.264934+00:00"
+  },
+  "MARKET3|L8|Physical|Battle-Hardened|Furious Assault|Master the Fundamentals": {
+    "min_chaos": 435.0,
+    "max_chaos": 435.0,
+    "avg_chaos": 435.0,
+    "listings": 23,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Bgzl3X7LU8",
+    "scanned_at": "2026-07-29T13:44:18.137984+00:00"
+  },
+  "MARKET3|L8|Physical|Battle-Hardened|Force Multiplier|Master the Fundamentals": {
+    "min_chaos": 725.0,
+    "max_chaos": 1015.0,
+    "avg_chaos": 942.5,
+    "listings": 4,
+    "sample_size": 4,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/LgkJB0Eltn",
+    "scanned_at": "2026-07-29T13:44:36.746036+00:00"
+  },
+  "MARKET3|L8|Physical|Battle-Hardened|Grim Oath|Master the Fundamentals": {
+    "min_chaos": 435.0,
+    "max_chaos": 435.0,
+    "avg_chaos": 435.0,
+    "listings": 5,
+    "sample_size": 5,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Yp2B95ybUY",
+    "scanned_at": "2026-07-29T13:44:47.581699+00:00"
+  },
+  "DISCOVERY4|L8|Fire|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Burning Bright",
+          "Cremator",
+          "Widespread Destruction"
+        ],
+        "discovery_hits": 4,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 580.0,
+        "sample_max_chaos": 870.0
+      },
+      {
+        "combo": [
+          "Burning Bright",
+          "Doryani's Lesson",
+          "Smoking Remains"
+        ],
+        "discovery_hits": 4,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 435.0,
+        "sample_max_chaos": 580.0
+      },
+      {
+        "combo": [
+          "Disorienting Display",
+          "Prismatic Heart",
+          "Smoking Remains"
+        ],
+        "discovery_hits": 3,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 435.0,
+        "sample_max_chaos": 580.0
+      },
+      {
+        "combo": [
+          "Burning Bright",
+          "Smoking Remains",
+          "Widespread Destruction"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 725.0,
+        "sample_max_chaos": 1160.0
+      },
+      {
+        "combo": [
+          "Disorienting Display",
+          "Prismatic Heart",
+          "Sadist"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 870.0,
+        "sample_max_chaos": 870.0
+      },
+      {
+        "combo": [
+          "Doryani's Lesson",
+          "Prismatic Heart",
+          "Smoking Remains"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 725.0,
+        "sample_max_chaos": 725.0
+      },
+      {
+        "combo": [
+          "Burning Bright",
+          "Master of Fire",
+          "Widespread Destruction"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 580.0,
+        "sample_max_chaos": 580.0
+      },
+      {
+        "combo": [
+          "Corrosive Elements",
+          "Sadist",
+          "Widespread Destruction"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 580.0,
+        "sample_max_chaos": 580.0
+      }
+    ],
+    "listings": 335,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/3q6dEga9C5",
+    "scanned_at": "2026-07-29T13:45:05.320895+00:00"
+  },
+  "MARKET3|L8|Fire|Burning Bright|Doryani's Lesson|Smoking Remains": {
+    "min_chaos": 435.0,
+    "max_chaos": 435.0,
+    "avg_chaos": 435.0,
+    "listings": 42,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/4mP0MaBZh9",
+    "scanned_at": "2026-07-29T13:45:20.131204+00:00"
+  },
+  "MARKET3|L8|Fire|Disorienting Display|Prismatic Heart|Smoking Remains": {
+    "min_chaos": 420.0,
+    "max_chaos": 580.0,
+    "avg_chaos": 501.9,
+    "listings": 38,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/LgkJBpKBSn",
+    "scanned_at": "2026-07-29T13:45:30.964881+00:00"
+  },
+  "MARKET3|L8|Fire|Disorienting Display|Prismatic Heart|Sadist": {
+    "min_chaos": 870.0,
+    "max_chaos": 1160.0,
+    "avg_chaos": 1015.0,
+    "listings": 3,
+    "sample_size": 3,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Yp2B90rvUY",
+    "scanned_at": "2026-07-29T13:45:52.704392+00:00"
+  },
+  "MARKET3|L8|Fire|Doryani's Lesson|Prismatic Heart|Smoking Remains": {
+    "min_chaos": 415.0,
+    "max_chaos": 580.0,
+    "avg_chaos": 501.4,
+    "listings": 25,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/3q6vjyaPS5",
+    "scanned_at": "2026-07-29T13:46:03.576639+00:00"
+  },
+  "MARKET3|L8|Fire|Burning Bright|Master of Fire|Widespread Destruction": {
+    "min_chaos": 580.0,
+    "max_chaos": 725.0,
+    "avg_chaos": 686.5,
+    "listings": 14,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/eRD6lREgcL",
+    "scanned_at": "2026-07-29T13:46:14.437324+00:00"
+  },
+  "MARKET3|L8|Fire|Corrosive Elements|Sadist|Widespread Destruction": {
+    "min_chaos": 145.0,
+    "max_chaos": 580.0,
+    "avg_chaos": 435.0,
+    "listings": 3,
+    "sample_size": 3,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Yp2Bby8bIY",
+    "scanned_at": "2026-07-29T13:46:25.225929+00:00"
+  },
+  "DISCOVERY4|L8|Lightning|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Doryani's Lesson",
+          "Prismatic Heart",
+          "Scintillating Idea"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 725.0,
+        "sample_max_chaos": 870.0
+      },
+      {
+        "combo": [
+          "Doryani's Lesson",
+          "Prismatic Heart",
+          "Sadist"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 435.0,
+        "sample_max_chaos": 435.0
+      },
+      {
+        "combo": [
+          "Sadist",
+          "Thunderstruck",
+          "Widespread Destruction"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 10150.0,
+        "sample_max_chaos": 10150.0
+      },
+      {
+        "combo": [
+          "Doryani's Lesson",
+          "Scintillating Idea",
+          "Storm Drinker"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 1595.0,
+        "sample_max_chaos": 1595.0
+      },
+      {
+        "combo": [
+          "Doryani's Lesson",
+          "Prismatic Heart",
+          "Stormrider"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 1160.0,
+        "sample_max_chaos": 1160.0
+      },
+      {
+        "combo": [
+          "Prismatic Heart",
+          "Stormrider",
+          "Widespread Destruction"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 1160.0,
+        "sample_max_chaos": 1160.0
+      },
+      {
+        "combo": [
+          "Disorienting Display",
+          "Sadist",
+          "Snowstorm"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 870.0,
+        "sample_max_chaos": 870.0
+      },
+      {
+        "combo": [
+          "Doryani's Lesson",
+          "Snowstorm",
+          "Stormrider"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 725.0,
+        "sample_max_chaos": 725.0
+      }
+    ],
+    "listings": 242,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/9zR5WokmfK",
+    "scanned_at": "2026-07-29T13:46:42.965610+00:00"
+  },
+  "MARKET3|L8|Lightning|Doryani's Lesson|Prismatic Heart|Scintillating Idea": {
+    "min_chaos": 725.0,
+    "max_chaos": 870.0,
+    "avg_chaos": 841.0,
+    "listings": 5,
+    "sample_size": 5,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/rPal225rSQ",
+    "scanned_at": "2026-07-29T13:46:49.856662+00:00"
+  },
+  "MARKET3|L8|Lightning|Doryani's Lesson|Prismatic Heart|Sadist": {
+    "min_chaos": 435.0,
+    "max_chaos": 435.0,
+    "avg_chaos": 435.0,
+    "listings": 3,
+    "sample_size": 3,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/KldnenBPi5",
+    "scanned_at": "2026-07-29T13:46:58.130478+00:00"
+  },
+  "MARKET3|L8|Lightning|Sadist|Thunderstruck|Widespread Destruction": {
+    "min_chaos": 70.0,
+    "max_chaos": 10150.0,
+    "avg_chaos": 3433.0,
+    "listings": 3,
+    "sample_size": 3,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/glDr2ZMPUQ",
+    "scanned_at": "2026-07-29T13:47:09.224599+00:00"
+  },
+  "MARKET3|L8|Lightning|Doryani's Lesson|Scintillating Idea|Storm Drinker": {
+    "min_chaos": 1595.0,
+    "max_chaos": 2175.0,
+    "avg_chaos": 1877.5,
+    "listings": 4,
+    "sample_size": 4,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/mkg3WGyzt6",
+    "scanned_at": "2026-07-29T13:47:20.279955+00:00"
+  },
+  "MARKET3|L8|Lightning|Doryani's Lesson|Prismatic Heart|Stormrider": {
+    "min_chaos": 1160.0,
+    "max_chaos": 1450.0,
+    "avg_chaos": 1305.0,
+    "listings": 2,
+    "sample_size": 2,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/yYKwlRYOTR",
+    "scanned_at": "2026-07-29T13:47:30.984170+00:00"
+  },
+  "MARKET3|L8|Lightning|Prismatic Heart|Stormrider|Widespread Destruction": {
+    "min_chaos": 50.0,
+    "max_chaos": 1160.0,
+    "avg_chaos": 236.71,
+    "listings": 7,
+    "sample_size": 7,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/rPal2mm4uQ",
+    "scanned_at": "2026-07-29T13:47:41.827331+00:00"
+  },
+  "MARKET3|L8|Lightning|Disorienting Display|Sadist|Snowstorm": {
+    "min_chaos": 400.0,
+    "max_chaos": 870.0,
+    "avg_chaos": 537.5,
+    "listings": 4,
+    "sample_size": 4,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/EBV9nbMBC5",
+    "scanned_at": "2026-07-29T13:47:52.650209+00:00"
+  },
+  "MARKET3|L8|Lightning|Doryani's Lesson|Snowstorm|Stormrider": {
+    "min_chaos": 435.0,
+    "max_chaos": 1305.0,
+    "avg_chaos": 845.83,
+    "listings": 6,
+    "sample_size": 6,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/X3rMRaW4hP",
+    "scanned_at": "2026-07-29T13:48:03.590507+00:00"
+  },
+  "DISCOVERY4|L8|Cold|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Blast-Freeze",
+          "Prismatic Heart",
+          "Widespread Destruction"
+        ],
+        "discovery_hits": 10,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 1305.0,
+        "sample_max_chaos": 1450.0
+      },
+      {
+        "combo": [
+          "Blanketed Snow",
+          "Prismatic Heart",
+          "Widespread Destruction"
+        ],
+        "discovery_hits": 3,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 1305.0,
+        "sample_max_chaos": 1305.0
+      },
+      {
+        "combo": [
+          "Blanketed Snow",
+          "Doryani's Lesson",
+          "Prismatic Heart"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 1015.0,
+        "sample_max_chaos": 1015.0
+      },
+      {
+        "combo": [
+          "Blanketed Snow",
+          "Sadist",
+          "Widespread Destruction"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 290.0,
+        "sample_max_chaos": 290.0
+      },
+      {
+        "combo": [
+          "Doryani's Lesson",
+          "Snowstorm",
+          "Stormrider"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 725.0,
+        "sample_max_chaos": 725.0
+      },
+      {
+        "combo": [
+          "Blast-Freeze",
+          "Doryani's Lesson",
+          "Stormrider"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 580.0,
+        "sample_max_chaos": 580.0
+      },
+      {
+        "combo": [
+          "Doryani's Lesson",
+          "Prismatic Heart",
+          "Sadist"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 435.0,
+        "sample_max_chaos": 435.0
+      }
+    ],
+    "listings": 767,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/jWRg3myZiX",
+    "scanned_at": "2026-07-29T13:48:21.344169+00:00"
+  },
+  "MARKET3|L8|Cold|Blast-Freeze|Prismatic Heart|Widespread Destruction": {
+    "min_chaos": 1305.0,
+    "max_chaos": 1450.0,
+    "avg_chaos": 1377.5,
+    "listings": 76,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/opo2wgZGUl",
+    "scanned_at": "2026-07-29T13:48:28.287510+00:00"
+  },
+  "MARKET3|L8|Cold|Blanketed Snow|Doryani's Lesson|Prismatic Heart": {
+    "min_chaos": 725.0,
+    "max_chaos": 1015.0,
+    "avg_chaos": 942.5,
+    "listings": 21,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/D6nYmPZXC5",
+    "scanned_at": "2026-07-29T13:48:46.957955+00:00"
+  },
+  "MARKET3|L8|Cold|Blanketed Snow|Sadist|Widespread Destruction": {
+    "min_chaos": 290.0,
+    "max_chaos": 290.0,
+    "avg_chaos": 290.0,
+    "listings": 29,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/nrD3koGyS0",
+    "scanned_at": "2026-07-29T13:48:57.781481+00:00"
+  },
+  "MARKET3|L8|Cold|Doryani's Lesson|Snowstorm|Stormrider": {
+    "min_chaos": 580.0,
+    "max_chaos": 725.0,
+    "avg_chaos": 710.5,
+    "listings": 15,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Yp2BbV86UY",
+    "scanned_at": "2026-07-29T13:49:08.603711+00:00"
+  },
+  "MARKET3|L8|Cold|Blast-Freeze|Doryani's Lesson|Stormrider": {
+    "min_chaos": 580.0,
+    "max_chaos": 870.0,
+    "avg_chaos": 739.5,
+    "listings": 12,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/yYKwl2mWtR",
+    "scanned_at": "2026-07-29T13:49:19.450215+00:00"
+  },
+  "MARKET3|L8|Cold|Doryani's Lesson|Prismatic Heart|Sadist": {
+    "min_chaos": 435.0,
+    "max_chaos": 580.0,
+    "avg_chaos": 514.0,
+    "listings": 12,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/8rRBkYrVIV",
+    "scanned_at": "2026-07-29T13:49:30.307202+00:00"
+  },
+  "DISCOVERY4|L8|Chaos|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Unholy Grace",
+          "Unwaveringly Evil",
+          "Wicked Pall"
+        ],
+        "discovery_hits": 10,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 580.0,
+        "sample_max_chaos": 580.0
+      },
+      {
+        "combo": [
+          "Overwhelming Malice",
+          "Unholy Grace",
+          "Unwaveringly Evil"
+        ],
+        "discovery_hits": 8,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 435.0,
+        "sample_max_chaos": 435.0
+      },
+      {
+        "combo": [
+          "Unspeakable Gifts",
+          "Unwaveringly Evil",
+          "Wicked Pall"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 870.0,
+        "sample_max_chaos": 870.0
+      },
+      {
+        "combo": [
+          "Overwhelming Malice",
+          "Unholy Grace",
+          "Wicked Pall"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 435.0,
+        "sample_max_chaos": 435.0
+      }
+    ],
+    "listings": 261,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/KldePKL6i5",
+    "scanned_at": "2026-07-29T13:49:48.102753+00:00"
+  },
+  "MARKET3|L8|Chaos|Unspeakable Gifts|Unwaveringly Evil|Wicked Pall": {
+    "min_chaos": 580.0,
+    "max_chaos": 1450.0,
+    "avg_chaos": 833.75,
+    "listings": 8,
+    "sample_size": 8,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/6zBM8v8dIG",
+    "scanned_at": "2026-07-29T13:50:13.547400+00:00"
+  },
+  "MARKET3|L8|Chaos|Overwhelming Malice|Unholy Grace|Wicked Pall": {
+    "min_chaos": 435.0,
+    "max_chaos": 435.0,
+    "avg_chaos": 435.0,
+    "listings": 22,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/8rRBkbRBIV",
+    "scanned_at": "2026-07-29T13:50:24.468794+00:00"
+  },
+  "DISCOVERY4|L8|Minion|2|3|8": {
+    "candidates": [
+      {
+        "combo": [
+          "Primordial Bond",
+          "Renewal",
+          "Rotten Claws"
+        ],
+        "discovery_hits": 6,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 435.0,
+        "sample_max_chaos": 725.0
+      },
+      {
+        "combo": [
+          "Primordial Bond",
+          "Raze and Pillage",
+          "Renewal"
+        ],
+        "discovery_hits": 3,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 580.0,
+        "sample_max_chaos": 870.0
+      },
+      {
+        "combo": [
+          "Renewal",
+          "Rotten Claws",
+          "Vicious Bite"
+        ],
+        "discovery_hits": 3,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 435.0,
+        "sample_max_chaos": 580.0
+      },
+      {
+        "combo": [
+          "Call to the Slaughter",
+          "Feasting Fiends",
+          "Renewal"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 435.0,
+        "sample_max_chaos": 725.0
+      },
+      {
+        "combo": [
+          "Feasting Fiends",
+          "Renewal",
+          "Vicious Bite"
+        ],
+        "discovery_hits": 2,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 290.0,
+        "sample_max_chaos": 21025.0
+      },
+      {
+        "combo": [
+          "Raze and Pillage",
+          "Renewal",
+          "Vicious Bite"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 870.0,
+        "sample_max_chaos": 870.0
+      },
+      {
+        "combo": [
+          "Primordial Bond",
+          "Raze and Pillage",
+          "Rotten Claws"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 725.0,
+        "sample_max_chaos": 725.0
+      },
+      {
+        "combo": [
+          "Feasting Fiends",
+          "Primordial Bond",
+          "Renewal"
+        ],
+        "discovery_hits": 1,
+        "discovery_sample_size": 20,
+        "sample_min_chaos": 290.0,
+        "sample_max_chaos": 290.0
+      }
+    ],
+    "listings": 225,
+    "sample_size": 20,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/X3rREaB7HP",
+    "scanned_at": "2026-07-29T13:50:42.363722+00:00"
+  },
+  "MARKET3|L8|Minion|Call to the Slaughter|Feasting Fiends|Renewal": {
+    "min_chaos": 70.0,
+    "max_chaos": 100.0,
+    "avg_chaos": 87.5,
+    "listings": 60,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/pJZorDkWT0",
+    "scanned_at": "2026-07-29T13:51:18.661667+00:00"
+  },
+  "MARKET3|L8|Minion|Feasting Fiends|Renewal|Vicious Bite": {
+    "min_chaos": 95.0,
+    "max_chaos": 105.0,
+    "avg_chaos": 102.0,
+    "listings": 57,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/6zBM8JR0hG",
+    "scanned_at": "2026-07-29T13:51:29.542495+00:00"
+  },
+  "MARKET3|L8|Minion|Primordial Bond|Raze and Pillage|Rotten Claws": {
+    "min_chaos": 199.0,
+    "max_chaos": 290.0,
+    "avg_chaos": 221.9,
+    "listings": 18,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/pJZor9vJt0",
+    "scanned_at": "2026-07-29T13:51:51.323147+00:00"
+  },
+  "MARKET3|L8|Minion|Feasting Fiends|Primordial Bond|Renewal": {
+    "min_chaos": 140.0,
+    "max_chaos": 150.0,
+    "avg_chaos": 147.4,
+    "listings": 38,
+    "sample_size": 10,
+    "trade_url": "https://www.pathofexile.com/trade/search/Allflame/PPaJRL7MFL",
+    "scanned_at": "2026-07-29T13:52:02.187324+00:00"
+  }
+}

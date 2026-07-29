@@ -1,0 +1,134 @@
+{
+  "app_mode": "cluster",
+  "craft_logic": "Rare (regal)",
+  "augment_mode": "Always use",
+  "use_exalt": true,
+  "use_annul": true,
+  "chain_craft": false,
+  "chain_count": 1,
+  "cluster_meta": {
+    "base": "12% increased Attack Damage while holding a Shield",
+    "passive_count": 8,
+    "source": "PoEDB + official trade API"
+  },
+  "comb_craft_data": {
+    "1": [
+      "[S][1] 1 Added Passive Skill is Martial Prowess",
+      "[P][1] 1 Added Passive Skill is Veteran Defender",
+      "[P][1] 1 Added Passive Skill is Vicious Skewering"
+    ],
+    "2": [
+      "[S][1] 1 Added Passive Skill is Martial Prowess",
+      "[P][1] 1 Added Passive Skill is Prodigious Defence",
+      "[P][1] 1 Added Passive Skill is Riot Queller"
+    ],
+    "3": [
+      "[S][1] 1 Added Passive Skill is Martial Prowess",
+      "[P][1] 1 Added Passive Skill is Riot Queller",
+      "[P][1] 1 Added Passive Skill is Strike Leader"
+    ],
+    "4": [
+      "[P][1] 1 Added Passive Skill is Calamitous",
+      "[P][1] 1 Added Passive Skill is Devastator",
+      "[S][1] 1 Added Passive Skill is Martial Prowess"
+    ],
+    "5": [
+      "[P][1] 1 Added Passive Skill is Devastator",
+      "[S][1] 1 Added Passive Skill is Heavy Hitter",
+      "[P][1] 1 Added Passive Skill is Prodigious Defence"
+    ]
+  },
+  "combo_prices": {
+    "1": {
+      "min_chaos": 290.0,
+      "max_chaos": 580.0,
+      "avg_chaos": 522.0,
+      "listings": 32,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/JBngZRZail",
+      "scanned_at": "2026-07-29T13:37:03.792489+00:00",
+      "min_divine": 2.02,
+      "max_divine": 4.03,
+      "discovery_hits": 6,
+      "discovery_sample_size": 20
+    },
+    "2": {
+      "min_chaos": 1305.0,
+      "max_chaos": 3625.0,
+      "avg_chaos": 2207.22,
+      "listings": 9,
+      "sample_size": 9,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/pJZoKQRvt0",
+      "scanned_at": "2026-07-29T13:37:22.513382+00:00",
+      "min_divine": 9.08,
+      "max_divine": 25.22,
+      "discovery_hits": 1,
+      "discovery_sample_size": 20
+    },
+    "3": {
+      "min_chaos": 1305.0,
+      "max_chaos": 1450.0,
+      "avg_chaos": 1431.88,
+      "listings": 8,
+      "sample_size": 8,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/d86rVjOvsJ",
+      "scanned_at": "2026-07-29T13:37:33.385030+00:00",
+      "min_divine": 9.08,
+      "max_divine": 10.09,
+      "discovery_hits": 1,
+      "discovery_sample_size": 20
+    },
+    "4": {
+      "min_chaos": 1160.0,
+      "max_chaos": 1305.0,
+      "avg_chaos": 1261.5,
+      "listings": 15,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/QLYdg9Pjuw",
+      "scanned_at": "2026-07-29T13:37:44.207581+00:00",
+      "min_divine": 8.07,
+      "max_divine": 9.08,
+      "discovery_hits": 1,
+      "discovery_sample_size": 20
+    },
+    "5": {
+      "min_chaos": 580.0,
+      "max_chaos": 725.0,
+      "avg_chaos": 609.0,
+      "listings": 23,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/7nRjKEj2S5",
+      "scanned_at": "2026-07-29T13:37:55.068691+00:00",
+      "min_divine": 4.03,
+      "max_divine": 5.04,
+      "discovery_hits": 1,
+      "discovery_sample_size": 20
+    }
+  },
+  "price_meta": {
+    "league": "Allflame",
+    "scanned_at": "2026-07-29T13:37:55.068691+00:00",
+    "currency": "chaos",
+    "range_basis": "first 10 cheapest listings",
+    "market_scan_complete": true,
+    "minimum_divine": 2.0,
+    "divine_chaos": 143.75,
+    "minimum_popularity": 3,
+    "popularity_basis": "at least 3 priced online listings; candidate discovered in the latest 20 listings priced at 2+ Divine"
+  },
+  "stop_on_two_match": [],
+  "annul_combs": [],
+  "no_annul_combs": [],
+  "solo_regal_mods": [
+    "[S][1] 1 Added Passive Skill is Martial Prowess",
+    "[P][1] 1 Added Passive Skill is Veteran Defender",
+    "[P][1] 1 Added Passive Skill is Vicious Skewering",
+    "[P][1] 1 Added Passive Skill is Prodigious Defence",
+    "[P][1] 1 Added Passive Skill is Riot Queller",
+    "[P][1] 1 Added Passive Skill is Strike Leader",
+    "[P][1] 1 Added Passive Skill is Calamitous",
+    "[P][1] 1 Added Passive Skill is Devastator",
+    "[S][1] 1 Added Passive Skill is Heavy Hitter"
+  ],
+  "no_regal_mods": []
+}

@@ -1,0 +1,93 @@
+{
+  "app_mode": "cluster",
+  "craft_logic": "Rare (regal)",
+  "augment_mode": "Always use",
+  "use_exalt": true,
+  "use_annul": true,
+  "chain_craft": false,
+  "chain_count": 1,
+  "cluster_meta": {
+    "base": "10% increased Elemental Damage",
+    "passive_count": 8,
+    "source": "PoEDB + official trade API"
+  },
+  "comb_craft_data": {
+    "1": [
+      "[S][1] 1 Added Passive Skill is Doryani's Lesson",
+      "[P][1] 1 Added Passive Skill is Prismatic Heart",
+      "[P][1] 1 Added Passive Skill is Sadist"
+    ],
+    "2": [
+      "[P][1] 1 Added Passive Skill is Corrosive Elements",
+      "[S][1] 1 Added Passive Skill is Doryani's Lesson",
+      "[P][1] 1 Added Passive Skill is Sadist"
+    ],
+    "3": [
+      "[P][1] 1 Added Passive Skill is Corrosive Elements",
+      "[S][1] 1 Added Passive Skill is Doryani's Lesson",
+      "[P][1] 1 Added Passive Skill is Prismatic Heart"
+    ]
+  },
+  "combo_prices": {
+    "1": {
+      "min_chaos": 290.0,
+      "max_chaos": 435.0,
+      "avg_chaos": 344.5,
+      "listings": 19,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/RJ9wd8mOI7",
+      "scanned_at": "2026-07-29T13:43:09.991182+00:00",
+      "min_divine": 2.02,
+      "max_divine": 3.03,
+      "discovery_hits": 6,
+      "discovery_sample_size": 20
+    },
+    "2": {
+      "min_chaos": 580.0,
+      "max_chaos": 725.0,
+      "avg_chaos": 688.75,
+      "listings": 4,
+      "sample_size": 4,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/3q6vj0agh5",
+      "scanned_at": "2026-07-29T13:43:20.812192+00:00",
+      "min_divine": 4.03,
+      "max_divine": 5.04,
+      "discovery_hits": 2,
+      "discovery_sample_size": 20
+    },
+    "3": {
+      "min_chaos": 290.0,
+      "max_chaos": 725.0,
+      "avg_chaos": 398.75,
+      "listings": 8,
+      "sample_size": 8,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/7nRXZMX3t5",
+      "scanned_at": "2026-07-29T13:43:31.686078+00:00",
+      "min_divine": 2.02,
+      "max_divine": 5.04,
+      "discovery_hits": 2,
+      "discovery_sample_size": 20
+    }
+  },
+  "price_meta": {
+    "league": "Allflame",
+    "scanned_at": "2026-07-29T13:43:31.686078+00:00",
+    "currency": "chaos",
+    "range_basis": "first 10 cheapest listings",
+    "market_scan_complete": true,
+    "minimum_divine": 2.0,
+    "divine_chaos": 143.75,
+    "minimum_popularity": 3,
+    "popularity_basis": "at least 3 priced online listings; candidate discovered in the latest 20 listings priced at 2+ Divine"
+  },
+  "stop_on_two_match": [],
+  "annul_combs": [],
+  "no_annul_combs": [],
+  "solo_regal_mods": [
+    "[S][1] 1 Added Passive Skill is Doryani's Lesson",
+    "[P][1] 1 Added Passive Skill is Prismatic Heart",
+    "[P][1] 1 Added Passive Skill is Sadist",
+    "[P][1] 1 Added Passive Skill is Corrosive Elements"
+  ],
+  "no_regal_mods": []
+}

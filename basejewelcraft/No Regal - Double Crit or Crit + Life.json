@@ -1,0 +1,23 @@
+{
+  "app_mode": "base_jewel",
+  "craft_logic": "base_jewel",
+  "chain_craft": false,
+  "chain_count": 1,
+  "base_jewel_crit_count": 2,
+  "base_jewel_life_count": 1,
+  "base_jewel_regal_min": 2,
+  "base_jewel_no_regal": true,
+  "base_jewel_use_augment": true,
+  "base_jewel_use_exalt": false,
+  "base_jewel_use_annul": false,
+  "base_jewel_crit_mods": [
+    "+#% to Global Critical Strike Multiplier",
+    "+#% to Critical Strike Multiplier with Fire Skills",
+    "+#% to Critical Strike Multiplier with Cold Skills",
+    "+#% to Critical Strike Multiplier with Lightning Skills",
+    "+#% to Critical Strike Multiplier with Elemental Skills"
+  ],
+  "base_jewel_life_mods": [
+    "#% increased maximum Life"
+  ]
+}

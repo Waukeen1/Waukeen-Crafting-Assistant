@@ -1,0 +1,58 @@
+{
+  "app_mode": "cluster",
+  "craft_logic": "Rare (regal)",
+  "augment_mode": "Always use",
+  "use_exalt": true,
+  "use_annul": true,
+  "chain_craft": false,
+  "chain_count": 1,
+  "cluster_meta": {
+    "base": "10% increased Spell Damage",
+    "passive_count": 12,
+    "source": "PoEDB + official trade API"
+  },
+  "comb_craft_data": {
+    "1": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[S][1] Added Small Passive Skills also grant: +# to All Attributes(4)",
+      "[S][1] Added Small Passive Skills also grant: +# to Intelligence(6)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Energy Shield(10)"
+    ]
+  },
+  "combo_prices": {
+    "1": {
+      "min_chaos": 12180.0,
+      "max_chaos": 17400.0,
+      "avg_chaos": 14326.0,
+      "listings": 5,
+      "sample_size": 5,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/PPaR2wrqiL",
+      "scanned_at": "2026-07-29T13:41:21.169326+00:00",
+      "min_divine": 84.73,
+      "max_divine": 121.04,
+      "discovery_hits": 1,
+      "discovery_sample_size": 10
+    }
+  },
+  "price_meta": {
+    "league": "Allflame",
+    "scanned_at": "2026-07-29T13:41:21.169326+00:00",
+    "currency": "chaos",
+    "range_basis": "first 10 cheapest listings",
+    "market_scan_complete": true,
+    "minimum_divine": 2.0,
+    "divine_chaos": 143.75,
+    "minimum_popularity": 3,
+    "popularity_basis": "at least 3 priced online listings; candidate discovered in the latest 10 listings priced at 2+ Divine"
+  },
+  "stop_on_two_match": [],
+  "annul_combs": [],
+  "no_annul_combs": [],
+  "solo_regal_mods": [
+    "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+    "[S][1] Added Small Passive Skills also grant: +# to All Attributes(4)",
+    "[S][1] Added Small Passive Skills also grant: +# to Intelligence(6)",
+    "[P][1] Added Small Passive Skills also grant: +# to Maximum Energy Shield(10)"
+  ],
+  "no_regal_mods": []
+}

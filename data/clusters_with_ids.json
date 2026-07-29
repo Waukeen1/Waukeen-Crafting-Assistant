@@ -1,0 +1,1473 @@
+[
+  {
+    "clusterName": "Axe Attacks deal 12% increased Damage with Hits and AilmentsSword Attacks deal 12% increased Damage with Hits and Ailments",
+    "notables": [
+      {
+        "notableName": "Vicious Skewering",
+        "weight": 141,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_567971948"
+      },
+      {
+        "notableName": "Bloodscent",
+        "weight": 47,
+        "level": 75,
+        "side": "prefix",
+        "notableId": "explicit.stat_3967765261"
+      },
+      {
+        "notableName": "Run Through",
+        "weight": 141,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_1488030420"
+      },
+      {
+        "notableName": "Wound Aggravation",
+        "weight": 750,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_69078820"
+      },
+      {
+        "notableName": "Smite the Weak",
+        "weight": 750,
+        "level": 1,
+        "side": "suffix",
+        "notableId": "explicit.stat_540300548"
+      },
+      {
+        "notableName": "Heavy Hitter",
+        "weight": 375,
+        "level": 50,
+        "side": "suffix",
+        "notableId": "explicit.stat_3640252904"
+      },
+      {
+        "notableName": "Martial Prowess",
+        "weight": 750,
+        "level": 1,
+        "side": "suffix",
+        "notableId": "explicit.stat_1152182658"
+      },
+      {
+        "notableName": "Calamitous",
+        "weight": 375,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_3359207393"
+      },
+      {
+        "notableName": "Devastator",
+        "weight": 47,
+        "level": 75,
+        "side": "prefix",
+        "notableId": "explicit.stat_3711553948"
+      },
+      {
+        "notableName": "Fuel the Fight",
+        "weight": 750,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_3599340381"
+      },
+      {
+        "notableName": "Drive the Destruction",
+        "weight": 750,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_1911162866"
+      },
+      {
+        "notableName": "Feed the Fury",
+        "weight": 375,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_3944525413"
+      },
+      {
+        "notableName": "Aggressive Defence",
+        "weight": 750,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_4154008618"
+      }
+    ]
+  },
+  {
+    "clusterName": "Staff Attacks deal 12% increased Damage with Hits and AilmentsMace or Sceptre Attacks deal 12% increased Damage with Hits and Ailments",
+    "notables": [
+      {
+        "notableName": "Vicious Skewering",
+        "weight": 141,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_567971948"
+      },
+      {
+        "notableName": "Overlord",
+        "weight": 47,
+        "level": 75,
+        "side": "prefix",
+        "notableId": "explicit.stat_2250169390"
+      },
+      {
+        "notableName": "Expansive Might",
+        "weight": 141,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_394918362"
+      },
+      {
+        "notableName": "Weight Advantage",
+        "weight": 750,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_2244243943"
+      },
+      {
+        "notableName": "Smite the Weak",
+        "weight": 750,
+        "level": 1,
+        "side": "suffix",
+        "notableId": "explicit.stat_540300548"
+      },
+      {
+        "notableName": "Heavy Hitter",
+        "weight": 375,
+        "level": 50,
+        "side": "suffix",
+        "notableId": "explicit.stat_3640252904"
+      },
+      {
+        "notableName": "Martial Prowess",
+        "weight": 750,
+        "level": 1,
+        "side": "suffix",
+        "notableId": "explicit.stat_1152182658"
+      },
+      {
+        "notableName": "Calamitous",
+        "weight": 375,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_3359207393"
+      },
+      {
+        "notableName": "Devastator",
+        "weight": 47,
+        "level": 75,
+        "side": "prefix",
+        "notableId": "explicit.stat_3711553948"
+      },
+      {
+        "notableName": "Fuel the Fight",
+        "weight": 750,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_3599340381"
+      },
+      {
+        "notableName": "Drive the Destruction",
+        "weight": 750,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_1911162866"
+      },
+      {
+        "notableName": "Feed the Fury",
+        "weight": 375,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_3944525413"
+      },
+      {
+        "notableName": "Aggressive Defence",
+        "weight": 750,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_4154008618"
+      }
+    ]
+  },
+  {
+    "clusterName": "Claw Attacks deal 12% increased Damage with Hits and AilmentsDagger Attacks deal 12% increased Damage with Hits and Ailments",
+    "notables": [
+      {
+        "notableName": "Vicious Skewering",
+        "weight": 151,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_567971948"
+      },
+      {
+        "notableName": "Wind-up",
+        "weight": 151,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_1938661964"
+      },
+      {
+        "notableName": "Fan of Blades",
+        "weight": 51,
+        "level": 75,
+        "side": "prefix",
+        "notableId": "explicit.stat_2484082827"
+      },
+      {
+        "notableName": "Disease Vector",
+        "weight": 404,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_183591019"
+      },
+      {
+        "notableName": "Smite the Weak",
+        "weight": 808,
+        "level": 1,
+        "side": "suffix",
+        "notableId": "explicit.stat_540300548"
+      },
+      {
+        "notableName": "Heavy Hitter",
+        "weight": 404,
+        "level": 50,
+        "side": "suffix",
+        "notableId": "explicit.stat_3640252904"
+      },
+      {
+        "notableName": "Martial Prowess",
+        "weight": 808,
+        "level": 1,
+        "side": "suffix",
+        "notableId": "explicit.stat_1152182658"
+      },
+      {
+        "notableName": "Calamitous",
+        "weight": 404,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_3359207393"
+      },
+      {
+        "notableName": "Devastator",
+        "weight": 51,
+        "level": 75,
+        "side": "prefix",
+        "notableId": "explicit.stat_3711553948"
+      },
+      {
+        "notableName": "Fuel the Fight",
+        "weight": 808,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_3599340381"
+      },
+      {
+        "notableName": "Drive the Destruction",
+        "weight": 808,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_1911162866"
+      },
+      {
+        "notableName": "Feed the Fury",
+        "weight": 404,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_3944525413"
+      },
+      {
+        "notableName": "Aggressive Defence",
+        "weight": 750,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_4154008618"
+      }
+    ]
+  },
+  {
+    "clusterName": "12% increased Damage with Bows12% increased Damage Over Time with Bow Skills",
+    "notables": [
+      {
+        "notableName": "Vicious Skewering",
+        "weight": 145,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_567971948"
+      },
+      {
+        "notableName": "Arcing Shot",
+        "weight": 387,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_3212859169"
+      },
+      {
+        "notableName": "Tempered Arrowheads",
+        "weight": 387,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_2631806437"
+      },
+      {
+        "notableName": "Broadside",
+        "weight": 774,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_2205982416"
+      },
+      {
+        "notableName": "Smite the Weak",
+        "weight": 774,
+        "level": 1,
+        "side": "suffix",
+        "notableId": "explicit.stat_540300548"
+      },
+      {
+        "notableName": "Heavy Hitter",
+        "weight": 387,
+        "level": 50,
+        "side": "suffix",
+        "notableId": "explicit.stat_3640252904"
+      },
+      {
+        "notableName": "Martial Prowess",
+        "weight": 774,
+        "level": 1,
+        "side": "suffix",
+        "notableId": "explicit.stat_1152182658"
+      },
+      {
+        "notableName": "Calamitous",
+        "weight": 387,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_3359207393"
+      },
+      {
+        "notableName": "Devastator",
+        "weight": 48,
+        "level": 75,
+        "side": "prefix",
+        "notableId": "explicit.stat_3711553948"
+      },
+      {
+        "notableName": "Fuel the Fight",
+        "weight": 774,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_3599340381"
+      },
+      {
+        "notableName": "Drive the Destruction",
+        "weight": 774,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_1911162866"
+      },
+      {
+        "notableName": "Feed the Fury",
+        "weight": 387,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_3944525413"
+      }
+    ]
+  },
+  {
+    "clusterName": "Wand Attacks deal 12% increased Damage with Hits and Ailments",
+    "notables": [
+      {
+        "notableName": "Vicious Skewering",
+        "weight": 151,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_567971948"
+      },
+      {
+        "notableName": "Explosive Force",
+        "weight": 151,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_2017927451"
+      },
+      {
+        "notableName": "Opportunistic Fusilade",
+        "weight": 807,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_4281625943"
+      },
+      {
+        "notableName": "Storm's Hand",
+        "weight": 403,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_1122051203"
+      },
+      {
+        "notableName": "Smite the Weak",
+        "weight": 807,
+        "level": 1,
+        "side": "suffix",
+        "notableId": "explicit.stat_540300548"
+      },
+      {
+        "notableName": "Heavy Hitter",
+        "weight": 403,
+        "level": 50,
+        "side": "suffix",
+        "notableId": "explicit.stat_3640252904"
+      },
+      {
+        "notableName": "Martial Prowess",
+        "weight": 807,
+        "level": 1,
+        "side": "suffix",
+        "notableId": "explicit.stat_1152182658"
+      },
+      {
+        "notableName": "Calamitous",
+        "weight": 403,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_3359207393"
+      },
+      {
+        "notableName": "Devastator",
+        "weight": 50,
+        "level": 75,
+        "side": "prefix",
+        "notableId": "explicit.stat_3711553948"
+      },
+      {
+        "notableName": "Fuel the Fight",
+        "weight": 807,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_3599340381"
+      },
+      {
+        "notableName": "Drive the Destruction",
+        "weight": 807,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_1911162866"
+      },
+      {
+        "notableName": "Feed the Fury",
+        "weight": 403,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_3944525413"
+      }
+    ]
+  },
+  {
+    "clusterName": "12% increased Damage with Two Handed Weapons",
+    "notables": [
+      {
+        "notableName": "Vicious Skewering",
+        "weight": 113,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_567971948"
+      },
+      {
+        "notableName": "Titanic Swings",
+        "weight": 302,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_2930275641"
+      },
+      {
+        "notableName": "Battlefield Dominator",
+        "weight": 604,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_1499057234"
+      },
+      {
+        "notableName": "Martial Mastery",
+        "weight": 302,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_1015189426"
+      },
+      {
+        "notableName": "Surefooted Striker",
+        "weight": 302,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_3410752193"
+      },
+      {
+        "notableName": "Graceful Execution",
+        "weight": 604,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_1903496649"
+      },
+      {
+        "notableName": "Brutal Infamy",
+        "weight": 302,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_2068574831"
+      },
+      {
+        "notableName": "Fearsome Warrior",
+        "weight": 113,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_3134222965"
+      },
+      {
+        "notableName": "Smite the Weak",
+        "weight": 604,
+        "level": 1,
+        "side": "suffix",
+        "notableId": "explicit.stat_540300548"
+      },
+      {
+        "notableName": "Heavy Hitter",
+        "weight": 302,
+        "level": 50,
+        "side": "suffix",
+        "notableId": "explicit.stat_3640252904"
+      },
+      {
+        "notableName": "Martial Prowess",
+        "weight": 604,
+        "level": 1,
+        "side": "suffix",
+        "notableId": "explicit.stat_1152182658"
+      },
+      {
+        "notableName": "Calamitous",
+        "weight": 302,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_3359207393"
+      },
+      {
+        "notableName": "Devastator",
+        "weight": 38,
+        "level": 75,
+        "side": "prefix",
+        "notableId": "explicit.stat_3711553948"
+      },
+      {
+        "notableName": "Fuel the Fight",
+        "weight": 604,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_3599340381"
+      },
+      {
+        "notableName": "Drive the Destruction",
+        "weight": 604,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_1911162866"
+      },
+      {
+        "notableName": "Feed the Fury",
+        "weight": 302,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_3944525413"
+      }
+    ]
+  },
+  {
+    "clusterName": "12% increased Attack Damage while Dual Wielding",
+    "notables": [
+      {
+        "notableName": "Vicious Skewering",
+        "weight": 117,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_567971948"
+      },
+      {
+        "notableName": "Combat Rhythm",
+        "weight": 312,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_3122505794"
+      },
+      {
+        "notableName": "Hit and Run",
+        "weight": 623,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_2665170385"
+      },
+      {
+        "notableName": "Insatiable Killer",
+        "weight": 312,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_3904970959"
+      },
+      {
+        "notableName": "Mage Bane",
+        "weight": 117,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_684155617"
+      },
+      {
+        "notableName": "Martial Momentum",
+        "weight": 312,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_2978494217"
+      },
+      {
+        "notableName": "Deadly Repartee",
+        "weight": 623,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_1013470938"
+      },
+      {
+        "notableName": "Quick and Deadly",
+        "weight": 117,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_2169345147"
+      },
+      {
+        "notableName": "Smite the Weak",
+        "weight": 623,
+        "level": 1,
+        "side": "suffix",
+        "notableId": "explicit.stat_540300548"
+      },
+      {
+        "notableName": "Heavy Hitter",
+        "weight": 312,
+        "level": 50,
+        "side": "suffix",
+        "notableId": "explicit.stat_3640252904"
+      },
+      {
+        "notableName": "Martial Prowess",
+        "weight": 623,
+        "level": 1,
+        "side": "suffix",
+        "notableId": "explicit.stat_1152182658"
+      },
+      {
+        "notableName": "Calamitous",
+        "weight": 312,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_3359207393"
+      },
+      {
+        "notableName": "Devastator",
+        "weight": 39,
+        "level": 75,
+        "side": "prefix",
+        "notableId": "explicit.stat_3711553948"
+      },
+      {
+        "notableName": "Fuel the Fight",
+        "weight": 623,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_3599340381"
+      },
+      {
+        "notableName": "Drive the Destruction",
+        "weight": 623,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_1911162866"
+      },
+      {
+        "notableName": "Feed the Fury",
+        "weight": 312,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_3944525413"
+      }
+    ]
+  },
+  {
+    "clusterName": "12% increased Attack Damage while holding a Shield",
+    "notables": [
+      {
+        "notableName": "Prodigious Defence",
+        "weight": 600,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_1705633890"
+      },
+      {
+        "notableName": "Advance Guard",
+        "weight": 300,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_1625939562"
+      },
+      {
+        "notableName": "Strike Leader",
+        "weight": 600,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_282062371"
+      },
+      {
+        "notableName": "Gladiator's Fortitude",
+        "weight": 113,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_1591995797"
+      },
+      {
+        "notableName": "Precise Retaliation",
+        "weight": 300,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_2335364359"
+      },
+      {
+        "notableName": "Veteran Defender",
+        "weight": 600,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_664010431"
+      },
+      {
+        "notableName": "Vicious Skewering",
+        "weight": 113,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_567971948"
+      },
+      {
+        "notableName": "Smite the Weak",
+        "weight": 600,
+        "level": 1,
+        "side": "suffix",
+        "notableId": "explicit.stat_540300548"
+      },
+      {
+        "notableName": "Heavy Hitter",
+        "weight": 300,
+        "level": 50,
+        "side": "suffix",
+        "notableId": "explicit.stat_3640252904"
+      },
+      {
+        "notableName": "Martial Prowess",
+        "weight": 600,
+        "level": 1,
+        "side": "suffix",
+        "notableId": "explicit.stat_1152182658"
+      },
+      {
+        "notableName": "Calamitous",
+        "weight": 300,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_3359207393"
+      },
+      {
+        "notableName": "Devastator",
+        "weight": 38,
+        "level": 75,
+        "side": "prefix",
+        "notableId": "explicit.stat_3711553948"
+      },
+      {
+        "notableName": "Fuel the Fight",
+        "weight": 600,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_3599340381"
+      },
+      {
+        "notableName": "Drive the Destruction",
+        "weight": 600,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_1911162866"
+      },
+      {
+        "notableName": "Feed the Fury",
+        "weight": 300,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_3944525413"
+      },
+      {
+        "notableName": "Riot Queller",
+        "weight": 38,
+        "level": 75,
+        "side": "prefix",
+        "notableId": "explicit.stat_254194892"
+      }
+    ]
+  },
+  {
+    "clusterName": "10% increased Attack Damage",
+    "notables": [
+      {
+        "notableName": "Vicious Skewering",
+        "weight": 81,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_567971948"
+      },
+      {
+        "notableName": "Smite the Weak",
+        "weight": 432,
+        "level": 1,
+        "side": "suffix",
+        "notableId": "explicit.stat_540300548"
+      },
+      {
+        "notableName": "Heavy Hitter",
+        "weight": 216,
+        "level": 50,
+        "side": "suffix",
+        "notableId": "explicit.stat_3640252904"
+      },
+      {
+        "notableName": "Martial Prowess",
+        "weight": 432,
+        "level": 1,
+        "side": "suffix",
+        "notableId": "explicit.stat_1152182658"
+      },
+      {
+        "notableName": "Calamitous",
+        "weight": 216,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_3359207393"
+      },
+      {
+        "notableName": "Devastator",
+        "weight": 27,
+        "level": 75,
+        "side": "prefix",
+        "notableId": "explicit.stat_3711553948"
+      },
+      {
+        "notableName": "Fuel the Fight",
+        "weight": 432,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_3599340381"
+      },
+      {
+        "notableName": "Drive the Destruction",
+        "weight": 432,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_1911162866"
+      },
+      {
+        "notableName": "Feed the Fury",
+        "weight": 216,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_3944525413"
+      }
+    ]
+  },
+  {
+    "clusterName": "10% increased Spell Damage",
+    "notables": [
+      {
+        "notableName": "Ancestral Inspiration",
+        "weight": 281,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_77045106"
+      },
+      {
+        "notableName": "Arcane Adept",
+        "weight": 281,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_393565679"
+      },
+      {
+        "notableName": "Seal Mender",
+        "weight": 94,
+        "level": 75,
+        "side": "prefix",
+        "notableId": "explicit.stat_876846990"
+      },
+      {
+        "notableName": "Conjured Wall",
+        "weight": 750,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_4105031548"
+      },
+      {
+        "notableName": "Arcane Heroism",
+        "weight": 281,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_3901992019"
+      },
+      {
+        "notableName": "Practiced Caster",
+        "weight": 1500,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_3435403756"
+      },
+      {
+        "notableName": "Burden Projection",
+        "weight": 750,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_2008682345"
+      },
+      {
+        "notableName": "Thaumophage",
+        "weight": 750,
+        "level": 50,
+        "side": "suffix",
+        "notableId": "explicit.stat_177215332"
+      },
+      {
+        "notableName": "Essence Rush",
+        "weight": 750,
+        "level": 50,
+        "side": "suffix",
+        "notableId": "explicit.stat_1096136223"
+      },
+      {
+        "notableName": "Sap Psyche",
+        "weight": 281,
+        "level": 68,
+        "side": "suffix",
+        "notableId": "explicit.stat_715786975"
+      },
+      {
+        "notableName": "Mage Hunter",
+        "weight": 281,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_2118664144"
+      }
+    ]
+  },
+  {
+    "clusterName": "10% increased Elemental Damage",
+    "notables": [
+      {
+        "notableName": "Sadist",
+        "weight": 281,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_3638731729"
+      },
+      {
+        "notableName": "Corrosive Elements",
+        "weight": 94,
+        "level": 75,
+        "side": "prefix",
+        "notableId": "explicit.stat_1777139212"
+      },
+      {
+        "notableName": "Doryani's Lesson",
+        "weight": 281,
+        "level": 68,
+        "side": "suffix",
+        "notableId": "explicit.stat_228455793"
+      },
+      {
+        "notableName": "Disorienting Display",
+        "weight": 750,
+        "level": 50,
+        "side": "suffix",
+        "notableId": "explicit.stat_3206911230"
+      },
+      {
+        "notableName": "Prismatic Heart",
+        "weight": 1500,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_2342448236"
+      },
+      {
+        "notableName": "Widespread Destruction",
+        "weight": 1500,
+        "level": 1,
+        "side": "suffix",
+        "notableId": "explicit.stat_1678643716"
+      },
+      {
+        "notableName": "Inspired Oppression",
+        "weight": 94,
+        "level": 75,
+        "side": "prefix",
+        "notableId": "explicit.stat_3872380586"
+      }
+    ]
+  },
+  {
+    "clusterName": "12% increased Physical Damage",
+    "notables": [
+      {
+        "notableName": "Iron Breaker",
+        "weight": 464,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_3258653591"
+      },
+      {
+        "notableName": "Master the Fundamentals",
+        "weight": 232,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_3585232432"
+      },
+      {
+        "notableName": "Force Multiplier",
+        "weight": 232,
+        "level": 50,
+        "side": "suffix",
+        "notableId": "explicit.stat_1904581068"
+      },
+      {
+        "notableName": "Furious Assault",
+        "weight": 464,
+        "level": 1,
+        "side": "suffix",
+        "notableId": "explicit.stat_3415827027"
+      },
+      {
+        "notableName": "Grim Oath",
+        "weight": 87,
+        "level": 68,
+        "side": "suffix",
+        "notableId": "explicit.stat_2194205899"
+      },
+      {
+        "notableName": "Battle-Hardened",
+        "weight": 232,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_4188581520"
+      }
+    ]
+  },
+  {
+    "clusterName": "12% increased Fire Damage",
+    "notables": [
+      {
+        "notableName": "Sadist",
+        "weight": 89,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_3638731729"
+      },
+      {
+        "notableName": "Corrosive Elements",
+        "weight": 30,
+        "level": 75,
+        "side": "prefix",
+        "notableId": "explicit.stat_1777139212"
+      },
+      {
+        "notableName": "Doryani's Lesson",
+        "weight": 89,
+        "level": 68,
+        "side": "suffix",
+        "notableId": "explicit.stat_228455793"
+      },
+      {
+        "notableName": "Disorienting Display",
+        "weight": 238,
+        "level": 50,
+        "side": "suffix",
+        "notableId": "explicit.stat_3206911230"
+      },
+      {
+        "notableName": "Prismatic Heart",
+        "weight": 475,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_2342448236"
+      },
+      {
+        "notableName": "Widespread Destruction",
+        "weight": 475,
+        "level": 1,
+        "side": "suffix",
+        "notableId": "explicit.stat_1678643716"
+      },
+      {
+        "notableName": "Master of Fire",
+        "weight": 30,
+        "level": 75,
+        "side": "prefix",
+        "notableId": "explicit.stat_1462135249"
+      },
+      {
+        "notableName": "Smoking Remains",
+        "weight": 238,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_2322980282"
+      },
+      {
+        "notableName": "Cremator",
+        "weight": 238,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_1153801980"
+      },
+      {
+        "notableName": "Burning Bright",
+        "weight": 238,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_4199056048"
+      }
+    ]
+  },
+  {
+    "clusterName": "12% increased Lightning Damage",
+    "notables": [
+      {
+        "notableName": "Sadist",
+        "weight": 136,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_3638731729"
+      },
+      {
+        "notableName": "Corrosive Elements",
+        "weight": 45,
+        "level": 75,
+        "side": "prefix",
+        "notableId": "explicit.stat_1777139212"
+      },
+      {
+        "notableName": "Doryani's Lesson",
+        "weight": 136,
+        "level": 68,
+        "side": "suffix",
+        "notableId": "explicit.stat_228455793"
+      },
+      {
+        "notableName": "Disorienting Display",
+        "weight": 364,
+        "level": 50,
+        "side": "suffix",
+        "notableId": "explicit.stat_3206911230"
+      },
+      {
+        "notableName": "Prismatic Heart",
+        "weight": 727,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_2342448236"
+      },
+      {
+        "notableName": "Widespread Destruction",
+        "weight": 727,
+        "level": 1,
+        "side": "suffix",
+        "notableId": "explicit.stat_1678643716"
+      },
+      {
+        "notableName": "Snowstorm",
+        "weight": 364,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_1595367309"
+      },
+      {
+        "notableName": "Storm Drinker",
+        "weight": 727,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_2087561637"
+      },
+      {
+        "notableName": "Paralysis",
+        "weight": 364,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_4272503233"
+      },
+      {
+        "notableName": "Inspired Oppression",
+        "weight": 45,
+        "level": 75,
+        "side": "prefix",
+        "notableId": "explicit.stat_3872380586"
+      },
+      {
+        "notableName": "Thunderstruck",
+        "weight": 364,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_1741700339"
+      },
+      {
+        "notableName": "Stormrider",
+        "weight": 136,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_889728548"
+      },
+      {
+        "notableName": "Overshock",
+        "weight": 364,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_3777170562"
+      },
+      {
+        "notableName": "Scintillating Idea",
+        "weight": 364,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_2589589781"
+      }
+    ]
+  },
+  {
+    "clusterName": "12% increased Cold Damage",
+    "notables": [
+      {
+        "notableName": "Sadist",
+        "weight": 95,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_3638731729"
+      },
+      {
+        "notableName": "Corrosive Elements",
+        "weight": 32,
+        "level": 75,
+        "side": "prefix",
+        "notableId": "explicit.stat_1777139212"
+      },
+      {
+        "notableName": "Doryani's Lesson",
+        "weight": 95,
+        "level": 68,
+        "side": "suffix",
+        "notableId": "explicit.stat_228455793"
+      },
+      {
+        "notableName": "Disorienting Display",
+        "weight": 253,
+        "level": 50,
+        "side": "suffix",
+        "notableId": "explicit.stat_3206911230"
+      },
+      {
+        "notableName": "Prismatic Heart",
+        "weight": 505,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_2342448236"
+      },
+      {
+        "notableName": "Widespread Destruction",
+        "weight": 505,
+        "level": 1,
+        "side": "suffix",
+        "notableId": "explicit.stat_1678643716"
+      },
+      {
+        "notableName": "Snowstorm",
+        "weight": 253,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_1595367309"
+      },
+      {
+        "notableName": "Blanketed Snow",
+        "weight": 95,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_1085167979"
+      },
+      {
+        "notableName": "Cold to the Core",
+        "weight": 95,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_744783843"
+      },
+      {
+        "notableName": "Cold-Blooded Killer",
+        "weight": 253,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_836566759"
+      },
+      {
+        "notableName": "Inspired Oppression",
+        "weight": 32,
+        "level": 75,
+        "side": "prefix",
+        "notableId": "explicit.stat_3872380586"
+      },
+      {
+        "notableName": "Deep Chill",
+        "weight": 505,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_1703766309"
+      },
+      {
+        "notableName": "Blast-Freeze",
+        "weight": 95,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_693808153"
+      },
+      {
+        "notableName": "Stormrider",
+        "weight": 95,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_889728548"
+      }
+    ]
+  },
+  {
+    "clusterName": "12% increased Chaos Damage",
+    "notables": [
+      {
+        "notableName": "Grim Oath",
+        "weight": 97,
+        "level": 68,
+        "side": "suffix",
+        "notableId": "explicit.stat_2194205899"
+      },
+      {
+        "notableName": "Overwhelming Malice",
+        "weight": 97,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_770408103"
+      },
+      {
+        "notableName": "Touch of Cruelty",
+        "weight": 519,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_2780712583"
+      },
+      {
+        "notableName": "Unwaveringly Evil",
+        "weight": 519,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_2788982914"
+      },
+      {
+        "notableName": "Unspeakable Gifts",
+        "weight": 32,
+        "level": 75,
+        "side": "suffix",
+        "notableId": "explicit.stat_729163974"
+      },
+      {
+        "notableName": "Dark Ideation",
+        "weight": 97,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_1603621602"
+      },
+      {
+        "notableName": "Unholy Grace",
+        "weight": 519,
+        "level": 1,
+        "side": "suffix",
+        "notableId": "explicit.stat_4186213466"
+      },
+      {
+        "notableName": "Wicked Pall",
+        "weight": 259,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_1616734644"
+      }
+    ]
+  },
+  {
+    "clusterName": "Minions deal 10% increased Damage",
+    "notables": [
+      {
+        "notableName": "Renewal",
+        "weight": 500,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_3607300552"
+      },
+      {
+        "notableName": "Raze and Pillage",
+        "weight": 188,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_1038897629"
+      },
+      {
+        "notableName": "Rotten Claws",
+        "weight": 500,
+        "level": 50,
+        "side": "prefix",
+        "notableId": "explicit.stat_2289610642"
+      },
+      {
+        "notableName": "Call to the Slaughter",
+        "weight": 1000,
+        "level": 1,
+        "side": "suffix",
+        "notableId": "explicit.stat_3317068522"
+      },
+      {
+        "notableName": "Vicious Bite",
+        "weight": 63,
+        "level": 75,
+        "side": "suffix",
+        "notableId": "explicit.stat_882876854"
+      },
+      {
+        "notableName": "Primordial Bond",
+        "weight": 188,
+        "level": 68,
+        "side": "suffix",
+        "notableId": "explicit.stat_622362787"
+      },
+      {
+        "notableName": "Feasting Fiends",
+        "weight": 1000,
+        "level": 1,
+        "side": "prefix",
+        "notableId": "explicit.stat_383245807"
+      },
+      {
+        "notableName": "Skeletal Atrophy",
+        "weight": 188,
+        "level": 68,
+        "side": "prefix",
+        "notableId": "explicit.stat_1290215329"
+      }
+    ]
+  }
+]

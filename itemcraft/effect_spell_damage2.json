@@ -1,0 +1,407 @@
+{
+  "craft_logic": "Rare (regal)",
+  "augment_mode": "Always use",
+  "use_exalt": true,
+  "use_annul": true,
+  "chain_craft": false,
+  "chain_count": 1,
+  "comb_craft_data": {
+    "1": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Energy Shield(10)",
+      "[S][1] Added Small Passive Skills also grant: +# to all Attributes(4)",
+      "[S][1] Added Small Passive Skills also grant: +# to Intelligence(6)"
+    ],
+    "2": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Mana(9)",
+      "[S][1] Added Small Passive Skills also grant: +# to all Attributes(4)",
+      "[S][1] Added Small Passive Skills also grant: +#% to all Elemental Resistances(4)"
+    ],
+    "3": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Mana(9)",
+      "[S][1] Added Small Passive Skills also grant: +# to all Attributes(4)",
+      "[S][1] Added Small Passive Skills also grant: +# to Strength(6)"
+    ],
+    "4": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Life(8)",
+      "[S][1] Added Small Passive Skills also grant: +# to all Attributes(4)",
+      "[S][1] Added Small Passive Skills also grant: +# to Strength(6)"
+    ],
+    "5": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Life(8)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Cast Speed(3)",
+      "[S][1] Added Small Passive Skills also grant: +# to all Attributes(4)"
+    ],
+    "6": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Mana(9)",
+      "[S][1] Added Small Passive Skills also grant: +# to all Attributes(4)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Lightning Resistance(6)"
+    ],
+    "7": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Mana(9)",
+      "[S][1] Added Small Passive Skills also grant: +# to Strength(6)",
+      "[S][1] Added Small Passive Skills also grant: +# to Intelligence(6)"
+    ],
+    "8": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Mana(9)",
+      "[S][1] Added Small Passive Skills also grant: +# to all Attributes(4)",
+      "[S][1] Added Small Passive Skills also grant: +# to Intelligence(6)"
+    ],
+    "9": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Life(8)",
+      "[S][1] Added Small Passive Skills also grant: +# to Intelligence(6)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Chaos Resistance(5)"
+    ],
+    "10": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Life(8)",
+      "[S][1] Added Small Passive Skills also grant: +# to Intelligence(6)",
+      "[S][1] Added Small Passive Skills also grant: +#% to all Elemental Resistances(4)"
+    ],
+    "11": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Life(8)",
+      "[S][1] Added Small Passive Skills also grant: +# to all Attributes(4)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Lightning Resistance(6)"
+    ],
+    "12": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Energy Shield(10)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Cast Speed(3)",
+      "[S][1] Added Small Passive Skills also grant: +# to Intelligence(6)"
+    ],
+    "13": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Life(8)",
+      "[S][1] Added Small Passive Skills also grant: +# to Strength(6)",
+      "[S][1] Added Small Passive Skills also grant: +#% to all Elemental Resistances(4)"
+    ],
+    "14": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Life(8)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Cast Speed(3)",
+      "[S][1] Added Small Passive Skills also grant: +#% to all Elemental Resistances(4)"
+    ],
+    "15": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Life(8)",
+      "[S][1] Added Small Passive Skills also grant: +#% to all Elemental Resistances(4)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Chaos Resistance(5)"
+    ],
+    "16": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Mana(9)",
+      "[S][1] Added Small Passive Skills also grant: +# to Strength(6)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Chaos Resistance(5)"
+    ],
+    "17": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Life(8)",
+      "[S][1] Added Small Passive Skills also grant: +# to Strength(6)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Chaos Resistance(5)"
+    ],
+    "18": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Energy Shield(10)",
+      "[S][1] Added Small Passive Skills also grant: +# to Strength(6)",
+      "[S][1] Added Small Passive Skills also grant: +#% to all Elemental Resistances(4)"
+    ],
+    "19": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Energy Shield(10)",
+      "[S][1] Added Small Passive Skills also grant: +# to all Attributes(4)",
+      "[S][1] Added Small Passive Skills also grant: +#% to all Elemental Resistances(4)"
+    ],
+    "20": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Energy Shield(10)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Cast Speed(3)",
+      "[S][1] Added Small Passive Skills also grant: +#% to all Elemental Resistances(4)"
+    ],
+    "21": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Life(8)",
+      "[S][1] Added Small Passive Skills also grant: +# to all Attributes(4)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Chaos Resistance(5)"
+    ],
+    "22": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Mana(9)",
+      "[S][1] Added Small Passive Skills also grant: +# to Strength(6)",
+      "[S][1] Added Small Passive Skills also grant: +#% to all Elemental Resistances(4)"
+    ],
+    "23": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Mana(9)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Cast Speed(3)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Chaos Resistance(5)"
+    ],
+    "24": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Life(8)",
+      "[S][1] Added Small Passive Skills also grant: +# to Intelligence(6)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Lightning Resistance(6)"
+    ],
+    "25": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Energy Shield(10)",
+      "[S][1] Added Small Passive Skills also grant: +# to Intelligence(6)",
+      "[S][1] Added Small Passive Skills also grant: +#% to all Elemental Resistances(4)"
+    ],
+    "26": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Energy Shield(10)",
+      "[S][1] Added Small Passive Skills also grant: +# to Strength(6)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Chaos Resistance(5)"
+    ],
+    "27": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Energy Shield(10)",
+      "[S][1] Added Small Passive Skills also grant: +# to all Attributes(4)",
+      "[S][1] Added Small Passive Skills also grant: +# to Strength(6)"
+    ],
+    "28": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Life(8)",
+      "[S][1] Added Small Passive Skills also grant: +# to all Attributes(4)",
+      "[S][1] Added Small Passive Skills also grant: +#% to all Elemental Resistances(4)"
+    ],
+    "29": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Life(8)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Chaos Resistance(5)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Lightning Resistance(6)"
+    ],
+    "30": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Life(8)",
+      "[S][1] Added Small Passive Skills also grant: +# to Strength(6)",
+      "[S][1] Added Small Passive Skills also grant: +# to Intelligence(6)"
+    ],
+    "31": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Life(8)",
+      "[S][1] Added Small Passive Skills also grant: +# to all Attributes(4)",
+      "[S][1] Added Small Passive Skills also grant: +# to Intelligence(6)"
+    ],
+    "32": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Energy Shield(10)",
+      "[S][1] Added Small Passive Skills also grant: +# to all Attributes(4)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Lightning Resistance(6)"
+    ],
+    "33": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Life(8)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Cast Speed(3)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Chaos Resistance(5)"
+    ],
+    "34": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Mana(9)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Cast Speed(3)",
+      "[S][1] Added Small Passive Skills also grant: +#% to all Elemental Resistances(4)"
+    ],
+    "35": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Energy Shield(10)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Cast Speed(3)",
+      "[S][1] Added Small Passive Skills also grant: +# to all Attributes(4)"
+    ],
+    "36": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Mana(9)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Chaos Resistance(5)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Lightning Resistance(6)"
+    ],
+    "37": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Mana(9)",
+      "[S][1] Added Small Passive Skills also grant: +# to Intelligence(6)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Chaos Resistance(5)"
+    ],
+    "38": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Mana(9)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Cast Speed(3)",
+      "[S][1] Added Small Passive Skills also grant: +# to all Attributes(4)"
+    ],
+    "39": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Life(8)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Cast Speed(3)",
+      "[S][1] Added Small Passive Skills also grant: +# to Strength(6)"
+    ],
+    "40": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Energy Shield(10)",
+      "[S][1] Added Small Passive Skills also grant: +# to Intelligence(6)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Lightning Resistance(6)"
+    ],
+    "41": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Energy Shield(10)",
+      "[S][1] Added Small Passive Skills also grant: +# to all Attributes(4)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Chaos Resistance(5)"
+    ],
+    "42": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Energy Shield(10)",
+      "[S][1] Added Small Passive Skills also grant: +# to Intelligence(6)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Chaos Resistance(5)"
+    ],
+    "43": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Energy Shield(10)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Cast Speed(3)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Chaos Resistance(5)"
+    ],
+    "44": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Mana(9)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Cast Speed(3)",
+      "[S][1] Added Small Passive Skills also grant: +# to Intelligence(6)"
+    ],
+    "45": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Energy Shield(10)",
+      "[S][1] Added Small Passive Skills also grant: +# to Strength(6)",
+      "[S][1] Added Small Passive Skills also grant: +# to Intelligence(6)"
+    ],
+    "46": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Mana(9)",
+      "[S][1] Added Small Passive Skills also grant: +#% to all Elemental Resistances(4)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Chaos Resistance(5)"
+    ],
+    "47": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Mana(9)",
+      "[S][1] Added Small Passive Skills also grant: +# to Intelligence(6)",
+      "[S][1] Added Small Passive Skills also grant: +#% to all Elemental Resistances(4)"
+    ],
+    "48": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Mana(9)",
+      "[S][1] Added Small Passive Skills also grant: +# to Intelligence(6)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Lightning Resistance(6)"
+    ],
+    "49": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Energy Shield(10)",
+      "[S][1] Added Small Passive Skills also grant: +#% to all Elemental Resistances(4)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Chaos Resistance(5)"
+    ],
+    "50": [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Mana(9)",
+      "[S][1] Added Small Passive Skills also grant: +# to all Attributes(4)",
+      "[S][1] Added Small Passive Skills also grant: +#% to Chaos Resistance(5)"
+    ]
+  },
+  "stop_on_two_match": [
+    [
+      "[S][1] Added Small Passive Skills also grant: +# to Strength(8)",
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)"
+    ],
+    [
+      "[S][1] Added Small Passive Skills also grant: +# to Strength(8)",
+      "[S][1] Added Small Passive Skills also grant: +# to all Attributes(4)"
+    ],
+    [
+      "[S][1] Added Small Passive Skills also grant: +# to Strength(8)",
+      "[S][1] Added Small Passive Skills also grant: +# to Intelligence(8)"
+    ],
+    [
+      "[S][1] Added Small Passive Skills also grant: +# to Strength(8)",
+      "[S][1] Added Small Passive Skills also grant: #% increased Cast Speed(3)"
+    ],
+    [
+      "[S][1] Added Small Passive Skills also grant: +# to Strength(8)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Mana(10)"
+    ],
+    [
+      "[S][1] Added Small Passive Skills also grant: +# to Strength(8)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Energy Shield(12)"
+    ],
+    [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[S][1] Added Small Passive Skills also grant: +# to all Attributes(4)"
+    ],
+    [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[S][1] Added Small Passive Skills also grant: +# to Intelligence(8)"
+    ],
+    [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[S][1] Added Small Passive Skills also grant: #% increased Cast Speed(3)"
+    ],
+    [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Mana(10)"
+    ],
+    [
+      "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Energy Shield(12)"
+    ],
+    [
+      "[S][1] Added Small Passive Skills also grant: +# to all Attributes(4)",
+      "[S][1] Added Small Passive Skills also grant: +# to Intelligence(8)"
+    ],
+    [
+      "[S][1] Added Small Passive Skills also grant: +# to all Attributes(4)",
+      "[S][1] Added Small Passive Skills also grant: #% increased Cast Speed(3)"
+    ],
+    [
+      "[S][1] Added Small Passive Skills also grant: +# to all Attributes(4)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Mana(10)"
+    ],
+    [
+      "[S][1] Added Small Passive Skills also grant: +# to all Attributes(4)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Energy Shield(12)"
+    ],
+    [
+      "[S][1] Added Small Passive Skills also grant: +# to Intelligence(8)",
+      "[S][1] Added Small Passive Skills also grant: #% increased Cast Speed(3)"
+    ],
+    [
+      "[S][1] Added Small Passive Skills also grant: +# to Intelligence(8)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Mana(10)"
+    ],
+    [
+      "[S][1] Added Small Passive Skills also grant: +# to Intelligence(8)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Energy Shield(12)"
+    ],
+    [
+      "[S][1] Added Small Passive Skills also grant: #% increased Cast Speed(3)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Mana(10)"
+    ],
+    [
+      "[S][1] Added Small Passive Skills also grant: #% increased Cast Speed(3)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Energy Shield(12)"
+    ],
+    [
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Mana(10)",
+      "[P][1] Added Small Passive Skills also grant: +# to Maximum Energy Shield(12)"
+    ]
+  ],
+  "annul_combs": [],
+  "solo_regal_mods": [
+    "[S][1] Added Small Passive Skills also grant: +# to Strength(6)",
+    "[P][1] Added Small Passive Skills have #% increased Effect(35)",
+    "[S][1] Added Small Passive Skills also grant: +# to all Attributes(4)",
+    "[S][1] Added Small Passive Skills also grant: +# to Intelligence(6)",
+    "[S][1] Added Small Passive Skills also grant: #% increased Cast Speed(3)",
+    "[P][1] Added Small Passive Skills also grant: +# to Maximum Mana(9)",
+    "[P][1] Added Small Passive Skills also grant: +# to Maximum Energy Shield(10)"
+  ],
+  "no_regal_mods": []
+}

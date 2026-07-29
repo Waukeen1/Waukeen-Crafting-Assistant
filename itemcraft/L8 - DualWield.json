@@ -1,0 +1,131 @@
+{
+  "app_mode": "cluster",
+  "craft_logic": "Rare (regal)",
+  "augment_mode": "Always use",
+  "use_exalt": true,
+  "use_annul": true,
+  "chain_craft": false,
+  "chain_count": 1,
+  "cluster_meta": {
+    "base": "12% increased Attack Damage while Dual Wielding",
+    "passive_count": 8,
+    "source": "PoEDB + official trade API"
+  },
+  "comb_craft_data": {
+    "1": [
+      "[P][1] 1 Added Passive Skill is Feed the Fury",
+      "[P][1] 1 Added Passive Skill is Fuel the Fight",
+      "[S][1] 1 Added Passive Skill is Martial Prowess"
+    ],
+    "2": [
+      "[P][1] 1 Added Passive Skill is Feed the Fury",
+      "[P][1] 1 Added Passive Skill is Quick and Deadly",
+      "[S][1] 1 Added Passive Skill is Smite the Weak"
+    ],
+    "3": [
+      "[P][1] 1 Added Passive Skill is Mage Bane",
+      "[S][1] 1 Added Passive Skill is Martial Prowess",
+      "[P][1] 1 Added Passive Skill is Quick and Deadly"
+    ],
+    "4": [
+      "[P][1] 1 Added Passive Skill is Feed the Fury",
+      "[S][1] 1 Added Passive Skill is Martial Prowess",
+      "[P][1] 1 Added Passive Skill is Quick and Deadly"
+    ],
+    "5": [
+      "[P][1] 1 Added Passive Skill is Fuel the Fight",
+      "[S][1] 1 Added Passive Skill is Martial Prowess",
+      "[P][1] 1 Added Passive Skill is Quick and Deadly"
+    ]
+  },
+  "combo_prices": {
+    "1": {
+      "min_chaos": 435.0,
+      "max_chaos": 580.0,
+      "avg_chaos": 555.83,
+      "listings": 6,
+      "sample_size": 6,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/V5pnRnmosp",
+      "scanned_at": "2026-07-29T13:34:31.473038+00:00",
+      "min_divine": 3.03,
+      "max_divine": 4.03,
+      "discovery_hits": 3,
+      "discovery_sample_size": 20
+    },
+    "2": {
+      "min_chaos": 1015.0,
+      "max_chaos": 1160.0,
+      "avg_chaos": 1118.57,
+      "listings": 7,
+      "sample_size": 7,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Yp2BygLXFY",
+      "scanned_at": "2026-07-29T13:35:22.971888+00:00",
+      "min_divine": 7.06,
+      "max_divine": 8.07,
+      "discovery_hits": 1,
+      "discovery_sample_size": 20
+    },
+    "3": {
+      "min_chaos": 1015.0,
+      "max_chaos": 1885.0,
+      "avg_chaos": 1353.33,
+      "listings": 3,
+      "sample_size": 3,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Yp2ByooghY",
+      "scanned_at": "2026-07-29T13:35:11.959335+00:00",
+      "min_divine": 7.06,
+      "max_divine": 13.11,
+      "discovery_hits": 1,
+      "discovery_sample_size": 20
+    },
+    "4": {
+      "min_chaos": 870.0,
+      "max_chaos": 2900.0,
+      "avg_chaos": 1657.14,
+      "listings": 7,
+      "sample_size": 7,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/jWR8vbzWIX",
+      "scanned_at": "2026-07-29T13:35:01.083456+00:00",
+      "min_divine": 6.05,
+      "max_divine": 20.17,
+      "discovery_hits": 1,
+      "discovery_sample_size": 20
+    },
+    "5": {
+      "min_chaos": 870.0,
+      "max_chaos": 1160.0,
+      "avg_chaos": 1077.14,
+      "listings": 7,
+      "sample_size": 7,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/D6nYJ7mBT5",
+      "scanned_at": "2026-07-29T13:35:44.775008+00:00",
+      "min_divine": 6.05,
+      "max_divine": 8.07,
+      "discovery_hits": 1,
+      "discovery_sample_size": 20
+    }
+  },
+  "price_meta": {
+    "league": "Allflame",
+    "scanned_at": "2026-07-29T13:35:44.775008+00:00",
+    "currency": "chaos",
+    "range_basis": "first 10 cheapest listings",
+    "market_scan_complete": true,
+    "minimum_divine": 2.0,
+    "divine_chaos": 143.75,
+    "minimum_popularity": 3,
+    "popularity_basis": "at least 3 priced online listings; candidate discovered in the latest 20 listings priced at 2+ Divine"
+  },
+  "stop_on_two_match": [],
+  "annul_combs": [],
+  "no_annul_combs": [],
+  "solo_regal_mods": [
+    "[P][1] 1 Added Passive Skill is Feed the Fury",
+    "[P][1] 1 Added Passive Skill is Fuel the Fight",
+    "[S][1] 1 Added Passive Skill is Martial Prowess",
+    "[P][1] 1 Added Passive Skill is Quick and Deadly",
+    "[S][1] 1 Added Passive Skill is Smite the Weak",
+    "[P][1] 1 Added Passive Skill is Mage Bane"
+  ],
+  "no_regal_mods": []
+}

@@ -1,0 +1,11 @@
+beautifulsoup4==4.14.3
+dxcam[winrt]==0.3.0
+keyboard==0.13.5
+numpy==2.4.4
+opencv-python-headless==5.0.0.93
+pillow==12.2.0
+PyAutoGUI==0.9.54
+pyperclip==1.11.0
+pystray==0.19.5
+pywin32==312
+requests==2.32.5

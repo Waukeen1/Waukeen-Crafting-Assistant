@@ -1,0 +1,55 @@
+name: Build and Release WCA
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: wca-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: windows-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Install build dependencies
+        shell: pwsh
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install pyinstaller==6.17.0
+
+      - name: Build release package
+        shell: pwsh
+        run: |
+          $version = "1.0.${{ github.run_number }}"
+          ./tools/build_release.ps1 -Version $version
+          "WCA_VERSION=$version" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+
+      - name: Publish GitHub release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "v$env:WCA_VERSION" `
+            "release/Waukeen-Crafting-Assistant-Windows.zip" `
+            "release/Waukeen-Crafting-Assistant-Windows.zip.sha256" `
+            --title "Waukeen Crafting Assistant v$env:WCA_VERSION" `
+            --generate-notes `
+            --latest
