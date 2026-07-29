@@ -17,6 +17,21 @@ INFLUENCE_ITEM_LINES = {
     "Redeemer": "redeemer item",
 }
 ITEM_LEVEL_RE = re.compile(r"^item level:\s*(\d+)\s*$", re.I)
+RARITY_RE = re.compile(r"^rarity:\s*(.+?)\s*$", re.I)
+ADVANCED_ROLL_RANGE_RE = re.compile(
+    r"(?<=\d)\([+-]?\d+(?:\.\d+)?(?:-[+-]?\d+(?:\.\d+)?)?\)"
+)
+DISPLAY_ANNOTATION_RE = re.compile(r"\s+\((?:crafted|fractured)\)\s*$", re.I)
+NON_EXPLICIT_BLOCK_MARKERS = (
+    "(enchant)",
+    "enchantment modifier",
+    "(implicit)",
+    "implicit modifier",
+    "requirements:",
+    "item level:",
+    "sockets:",
+    "place into",
+)
 
 
 def load_catalog(path: str | Path) -> dict:
@@ -81,7 +96,8 @@ def _compiled(pattern: str):
 
 
 def _line_matches(line_spec: dict, actual: str) -> bool:
-    match = _compiled(line_spec["pattern"]).fullmatch((actual or "").strip())
+    actual = DISPLAY_ANNOTATION_RE.sub("", (actual or "").strip())
+    match = _compiled(line_spec["pattern"]).fullmatch(actual)
     if not match:
         return False
     values = [float(value) for value in match.groups()]
@@ -126,16 +142,20 @@ def item_identity(item_text: str) -> dict:
                 break
             header_lines.append(line)
     item_level = None
+    rarity = "Unknown"
     for line in lines:
+        rarity_match = RARITY_RE.match(line)
+        if rarity_match:
+            rarity = rarity_match.group(1).strip().capitalize()
         match = ITEM_LEVEL_RE.match(line)
         if match:
             item_level = int(match.group(1))
-            break
     return {
         "lines": lines,
         "line_set": {line.casefold() for line in lines},
         "header_lines": header_lines,
         "item_level": item_level,
+        "rarity": rarity,
         "corrupted": any(line.casefold() == "corrupted" for line in lines),
         "mirrored": any(line.casefold() == "mirrored" for line in lines),
     }
@@ -204,6 +224,99 @@ def _catalog_records(eligible: list[dict], actual_mods: list[str]) -> list[dict]
     return records
 
 
+def _separator_blocks(item_text: str) -> list[list[str]]:
+    blocks = []
+    current = []
+    after_separator = False
+    for raw in (item_text or "").splitlines():
+        line = raw.strip()
+        if line == "--------":
+            if after_separator and current:
+                blocks.append(current)
+            current = []
+            after_separator = True
+            continue
+        if after_separator and line:
+            current.append(line)
+    if after_separator and current:
+        blocks.append(current)
+    return blocks
+
+
+def _clean_explicit_candidate(block: list[str]) -> list[str]:
+    cleaned = []
+    for raw in block:
+        line = raw.strip()
+        if not line or line.startswith("{"):
+            continue
+        if line.startswith("(") and line.endswith(")"):
+            continue
+        line = ADVANCED_ROLL_RANGE_RE.sub("", line)
+        if line:
+            cleaned.append(line)
+    return cleaned
+
+
+def extract_explicit_mods(
+    catalog: dict,
+    base_name: str,
+    influence: str,
+    item_level: int,
+    item_text: str,
+) -> list[str]:
+    """Select the explicit affix block by matching it against the real mod pool."""
+    eligible = eligible_mods(catalog, base_name, influence, item_level)
+    best_block = []
+    best_score = (0, 0)
+
+    for raw_block in _separator_blocks(item_text):
+        lowered = [line.casefold() for line in raw_block]
+        if any(
+            marker in line
+            for line in lowered
+            for marker in NON_EXPLICIT_BLOCK_MARKERS
+        ):
+            continue
+
+        block = _clean_explicit_candidate(raw_block)
+        if not block:
+            continue
+        records = _catalog_records(eligible, block)
+        known_records = [
+            record for record in records if record["type"] in {"prefix", "suffix"}
+        ]
+        known_lines = sum(len(record["indices"]) for record in known_records)
+        score = (len(known_records), known_lines)
+        if score > best_score:
+            best_score = score
+            best_block = block
+
+    return best_block
+
+
+def parse_item_for_craft(
+    catalog: dict,
+    base_name: str,
+    influence: str,
+    item_text: str,
+) -> tuple[str, list[str], int | None]:
+    identity = item_identity(item_text)
+    item_level = identity["item_level"]
+    if item_level is None:
+        return identity["rarity"], [], None
+    return (
+        identity["rarity"],
+        extract_explicit_mods(
+            catalog,
+            base_name,
+            influence,
+            item_level,
+            item_text,
+        ),
+        item_level,
+    )
+
+
 def analyze(catalog: dict, base_name: str, influence: str, item_level: int, actual_mods: list[str], target_ids: list[str], required_count: int) -> dict:
     eligible = eligible_mods(catalog, base_name, influence, item_level)
     eligible_by_id = {mod["id"]: mod for mod in eligible}
@@ -251,6 +364,13 @@ def _missing_type_has_space(summary: dict, rarity: str) -> bool:
 
 def choose_action(rarity: str, summary: dict, settings: dict) -> tuple[str, str]:
     rarity_low = (rarity or "").casefold()
+    affix_limit = 2 if rarity_low == "magic" else (6 if rarity_low == "rare" else None)
+    if affix_limit is not None and summary["affix_count"] > affix_limit:
+        return (
+            "stop",
+            f"Parser guvenlik hatasi: {rarity} itemde "
+            f"{summary['affix_count']} affix okundu; tiklama yapilmadi.",
+        )
     if summary["goal_met"]:
         return "done", "Hedef tamamlandi."
     if rarity_low == "normal":

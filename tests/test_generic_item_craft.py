@@ -185,6 +185,172 @@ class GenericItemCraftTests(unittest.TestCase):
             ["CriticalStrikeMultiplierInfluence3"],
         )
 
+    def test_spine_bow_parser_finds_additional_arrows_not_weapon_stats(self):
+        item_text = "\n".join(
+            [
+                "Item Class: Bows",
+                "Rarity: Magic",
+                "Glaciated Spine Bow of Many",
+                "--------",
+                "Quality: +25% (augmented)",
+                "Physical Damage: 48-144 (augmented)",
+                "Elemental Damage: 94-160 (augmented)",
+                "Critical Strike Chance: 6.50%",
+                "Attacks per Second: 1.40",
+                "--------",
+                "Requirements:",
+                "Level: 68",
+                "Dex: 212",
+                "--------",
+                "Sockets: G-G-G-G-G-G",
+                "--------",
+                "Item Level: 87",
+                "--------",
+                "Adds 94 to 160 Cold Damage",
+                "Bow Attacks fire 2 additional Arrows",
+                "--------",
+            ]
+        )
+        rarity, mods, item_level = item_craft.parse_item_for_craft(
+            self.catalog,
+            "Spine Bow",
+            "None",
+            item_text,
+        )
+        self.assertEqual(rarity, "Magic")
+        self.assertEqual(item_level, 87)
+        self.assertEqual(
+            mods,
+            [
+                "Adds 94 to 160 Cold Damage",
+                "Bow Attacks fire 2 additional Arrows",
+            ],
+        )
+
+        summary = item_craft.analyze(
+            self.catalog,
+            "Spine Bow",
+            "None",
+            item_level,
+            mods,
+            ["AdditionalArrowBow2_"],
+            1,
+        )
+        action, _ = item_craft.choose_action(
+            rarity,
+            summary,
+            {"item_use_augment": True},
+        )
+        self.assertEqual(summary["affix_count"], 2)
+        self.assertEqual(summary["suffix_count"], 1)
+        self.assertEqual(action, "done")
+
+    def test_full_item_text_uses_augment_for_missing_prefix_after_suffix(self):
+        item_text = "\n".join(
+            [
+                "Item Class: Helmets",
+                "Rarity: Magic",
+                "Blizzard Crown of the Drake",
+                "--------",
+                "Quality: +20% (augmented)",
+                "Evasion Rating: 253 (augmented)",
+                "Energy Shield: 52 (augmented)",
+                "--------",
+                "Requirements:",
+                "Level: 75",
+                "--------",
+                "Item Level: 85",
+                "--------",
+                "+30% to Fire Resistance",
+                "--------",
+                "Warlord Item",
+            ]
+        )
+        rarity, mods, item_level = item_craft.parse_item_for_craft(
+            self.catalog,
+            "Blizzard Crown",
+            "Warlord",
+            item_text,
+        )
+        summary = item_craft.analyze(
+            self.catalog,
+            "Blizzard Crown",
+            "Warlord",
+            item_level,
+            mods,
+            ["MaximumPowerChargeInfluence1"],
+            1,
+        )
+        action, _ = item_craft.choose_action(
+            rarity,
+            summary,
+            {"item_use_augment": True},
+        )
+        self.assertEqual(mods, ["+30% to Fire Resistance"])
+        self.assertEqual(action, "augment")
+
+    def test_full_item_text_uses_alter_for_missing_prefix_after_prefix(self):
+        item_text = "\n".join(
+            [
+                "Item Class: Helmets",
+                "Rarity: Magic",
+                "Healthy Blizzard Crown",
+                "--------",
+                "Quality: +20% (augmented)",
+                "Evasion Rating: 253 (augmented)",
+                "Energy Shield: 52 (augmented)",
+                "--------",
+                "Requirements:",
+                "Level: 75",
+                "--------",
+                "Item Level: 85",
+                "--------",
+                "+60 to maximum Life",
+                "--------",
+                "Warlord Item",
+            ]
+        )
+        rarity, mods, item_level = item_craft.parse_item_for_craft(
+            self.catalog,
+            "Blizzard Crown",
+            "Warlord",
+            item_text,
+        )
+        summary = item_craft.analyze(
+            self.catalog,
+            "Blizzard Crown",
+            "Warlord",
+            item_level,
+            mods,
+            ["MaximumPowerChargeInfluence1"],
+            1,
+        )
+        action, _ = item_craft.choose_action(
+            rarity,
+            summary,
+            {"item_use_augment": True},
+        )
+        self.assertEqual(mods, ["+60 to maximum Life"])
+        self.assertEqual(action, "alter")
+
+    def test_magic_affix_overflow_fails_closed(self):
+        summary = self.analyze_power_charge(
+            [
+                "Bow",
+                "Quality: +25%",
+                "Physical Damage: 48-144",
+                "Critical Strike Chance: 6.50%",
+                "Attacks per Second: 1.40",
+            ]
+        )
+        action, reason = item_craft.choose_action(
+            "Magic",
+            summary,
+            {"item_use_augment": True},
+        )
+        self.assertEqual(action, "stop")
+        self.assertIn("Parser guvenlik hatasi", reason)
+
 
 if __name__ == "__main__":
     unittest.main()

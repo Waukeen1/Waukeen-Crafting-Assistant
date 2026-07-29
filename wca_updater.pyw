@@ -139,6 +139,46 @@ def _validate_target(target):
     return target
 
 
+def _clear_directory(directory):
+    for child in directory.iterdir():
+        if child.is_dir() and not child.is_symlink():
+            shutil.rmtree(child)
+        else:
+            child.unlink()
+
+
+def _copy_release(release_root, target):
+    shutil.copytree(release_root, target, dirs_exist_ok=True)
+
+
+def _install_in_place(release_root, target):
+    """Fallback for OneDrive folders that cannot be renamed while synchronized."""
+    backup_parent = Path(tempfile.mkdtemp(prefix="wca-install-backup-"))
+    backup = backup_parent / "installation"
+    shutil.copytree(target, backup)
+    keep_backup = False
+    try:
+        _clear_directory(target)
+        _copy_release(release_root, target)
+        if not (target / APP_EXE).is_file():
+            raise RuntimeError("Yeni uygulama dosyasi kopyalanamadi.")
+        _preserve_user_data(backup, target)
+    except Exception:
+        try:
+            _clear_directory(target)
+            _copy_release(backup, target)
+        except Exception as rollback_error:
+            keep_backup = True
+            raise RuntimeError(
+                "Guncelleme ve otomatik geri yukleme basarisiz oldu. "
+                f"Yedek klasoru: {backup}"
+            ) from rollback_error
+        raise
+    finally:
+        if not keep_backup:
+            shutil.rmtree(backup_parent, ignore_errors=True)
+
+
 def _install(release_root, target):
     backup = target.with_name(
         f"{target.name}.backup-{int(time.time())}-{os.getpid()}"
@@ -146,7 +186,16 @@ def _install(release_root, target):
     if backup.exists():
         raise RuntimeError("Guncelleme yedek klasoru zaten mevcut.")
 
-    target.rename(backup)
+    try:
+        target.rename(backup)
+    except OSError as exc:
+        _log(
+            "Atomic directory swap unavailable; using in-place rollback mode: "
+            f"{exc}"
+        )
+        _install_in_place(release_root, target)
+        return
+
     try:
         shutil.copytree(release_root, target)
         if not (target / APP_EXE).is_file():

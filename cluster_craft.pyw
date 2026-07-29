@@ -4522,6 +4522,12 @@ def craft_thread_loop(settings):
             rarity, mods = parse_item_text(item_text)
 
             if settings.get("craft_logic") == "generic_item":
+                rarity, mods, _ = generic_item.parse_item_for_craft(
+                    get_item_affix_catalog(),
+                    settings["item_base"],
+                    settings.get("item_influence", "None"),
+                    item_text,
+                )
                 current_state = generic_item_state_key(rarity, mods)
                 if current_state == last_generic_item_state:
                     unchanged_generic_item_reads += 1
@@ -4944,6 +4950,12 @@ def craft_thread_loop_safe(settings):
                 rarity, mods = parse_item_text(item_text)
 
                 if settings.get("craft_logic") == "generic_item":
+                    rarity, mods, _ = generic_item.parse_item_for_craft(
+                        get_item_affix_catalog(),
+                        settings["item_base"],
+                        settings.get("item_influence", "None"),
+                        item_text,
+                    )
                     current_state = generic_item_state_key(rarity, mods)
                     if current_state == last_generic_item_state:
                         unchanged_generic_item_reads += 1
