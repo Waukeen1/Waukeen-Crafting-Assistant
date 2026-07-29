@@ -113,7 +113,20 @@ BOOTSTRAP_PACKAGE_ALIASES = {
     "google.cloud.aiplatform": ("google-cloud-aiplatform", ["google.cloud.aiplatform"]),
     "dxcam": ("dxcam[winrt]", ["dxcam"]),
     "winrt": ("dxcam[winrt]", ["winrt.windows.graphics.capture"]),
+    "winrt.system": ("winrt-runtime", ["winrt.system"]),
     "winrt.windows.graphics.capture": ("dxcam[winrt]", ["winrt.windows.graphics.capture"]),
+    "winrt.windows.graphics.capture.interop": (
+        "winrt-Windows.Graphics.Capture",
+        ["winrt.windows.graphics.capture.interop"],
+    ),
+    "winrt.windows.graphics.directx": (
+        "winrt-Windows.Graphics.DirectX",
+        ["winrt.windows.graphics.directx"],
+    ),
+    "winrt.windows.graphics.directx.direct3d11.interop": (
+        "winrt-Windows.Graphics.DirectX.Direct3D11",
+        ["winrt.windows.graphics.directx.direct3d11.interop"],
+    ),
 }
 
 OPTIONAL_RUNTIME_IMPORTS = {
@@ -764,7 +777,11 @@ FAST_CURSOR_MONITOR = {
 }
 FAST_CURSOR_MONITOR_LOCK = threading.Lock()
 FAST_CURSOR_CAPTURE_LOCK = threading.Lock()
-FAST_CURSOR_CAPTURE_STATE = {"dxcam_cameras": {}}
+FAST_CURSOR_CAPTURE_STATE = {
+    "dxcam_cameras": {},
+    "dxcam_backends": {},
+    "fallback_logged": False,
+}
 
 def critical_orb_right_click_safe(x: int, y: int):
     _instant_move(x, y)
@@ -1222,8 +1239,25 @@ def _get_dxcam_monitor_camera():
     with FAST_CURSOR_CAPTURE_LOCK:
         cam = FAST_CURSOR_CAPTURE_STATE["dxcam_cameras"].get(tid)
         if cam is None:
-            cam = dxcam.create(backend="winrt", output_color="BGRA")
+            try:
+                cam = dxcam.create(backend="winrt", output_color="BGRA")
+                backend = "winrt"
+            except Exception as winrt_error:
+                try:
+                    cam = dxcam.create(backend="dxgi", output_color="BGRA")
+                    backend = "dxgi"
+                except Exception as dxgi_error:
+                    raise RuntimeError(
+                        f"WinRT ve DXGI capture baslatilamadi: "
+                        f"WinRT={winrt_error}; DXGI={dxgi_error}"
+                    ) from dxgi_error
+                if not FAST_CURSOR_CAPTURE_STATE["fallback_logged"]:
+                    FAST_CURSOR_CAPTURE_STATE["fallback_logged"] = True
+                    log_message(
+                        "[FAST-CURSOR] WinRT kullanilamadi; DXGI yedek backend aktif."
+                    )
             FAST_CURSOR_CAPTURE_STATE["dxcam_cameras"][tid] = cam
+            FAST_CURSOR_CAPTURE_STATE["dxcam_backends"][tid] = backend
         return cam
 
 def _release_dxcam_monitor_camera(thread_id=None, release_all=False):
@@ -1231,9 +1265,11 @@ def _release_dxcam_monitor_camera(thread_id=None, release_all=False):
         if release_all:
             items = list(FAST_CURSOR_CAPTURE_STATE["dxcam_cameras"].items())
             FAST_CURSOR_CAPTURE_STATE["dxcam_cameras"] = {}
+            FAST_CURSOR_CAPTURE_STATE["dxcam_backends"] = {}
         else:
             tid = threading.get_ident() if thread_id is None else int(thread_id)
             cam = FAST_CURSOR_CAPTURE_STATE["dxcam_cameras"].pop(tid, None)
+            FAST_CURSOR_CAPTURE_STATE["dxcam_backends"].pop(tid, None)
             items = [] if cam is None else [(tid, cam)]
     for _, cam in items:
         try:
