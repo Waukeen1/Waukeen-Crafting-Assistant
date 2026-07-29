@@ -1,3 +1,4 @@
+import json
 import unittest
 from pathlib import Path
 
@@ -126,6 +127,63 @@ class GenericItemCraftTests(unittest.TestCase):
             "Hunter",
         )
         self.assertFalse(valid)
+
+    def test_item_identity_accepts_superior_and_magic_base_names(self):
+        for displayed_name in (
+            "Superior Blizzard Crown",
+            "Warlord's Blizzard Crown of the Conquest",
+        ):
+            with self.subTest(displayed_name=displayed_name):
+                item_text = "\n".join(
+                    [
+                        "Item Class: Helmets",
+                        "Rarity: Magic",
+                        displayed_name,
+                        "--------",
+                        "Quality: +20%",
+                        "Item Level: 85",
+                        "Shaper Item",
+                    ]
+                )
+                valid, reason, item_level = item_craft.validate_item(
+                    item_text,
+                    "Blizzard Crown",
+                    "Shaper",
+                )
+                self.assertTrue(valid, reason)
+                self.assertEqual(item_level, 85)
+
+    def test_item_identity_does_not_match_base_name_outside_header(self):
+        item_text = "\n".join(
+            [
+                "Item Class: Helmets",
+                "Rarity: Normal",
+                "Superior Hubris Circlet",
+                "--------",
+                "Note: Blizzard Crown",
+                "Item Level: 85",
+                "Shaper Item",
+            ]
+        )
+        valid, _, _ = item_craft.validate_item(
+            item_text,
+            "Blizzard Crown",
+            "Shaper",
+        )
+        self.assertFalse(valid)
+
+    def test_warlord_blizzard_crown_preset_targets_t1_crit_multi(self):
+        preset_path = (
+            ROOT
+            / "genericitemcraft"
+            / "Warlord Blizzard Crown - Crit Multi.json"
+        )
+        preset = json.loads(preset_path.read_text(encoding="utf-8"))
+        self.assertEqual(preset["item_level"], 85)
+        self.assertEqual(
+            preset["item_target_ids"],
+            ["CriticalStrikeMultiplierInfluence3"],
+        )
 
 
 if __name__ == "__main__":

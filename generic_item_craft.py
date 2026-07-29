@@ -115,6 +115,16 @@ def mod_matches(mod: dict, actual_mods: list[str]) -> bool:
 
 def item_identity(item_text: str) -> dict:
     lines = [line.strip() for line in (item_text or "").splitlines() if line.strip()]
+    header_lines = []
+    rarity_index = next(
+        (index for index, line in enumerate(lines) if line.casefold().startswith("rarity:")),
+        None,
+    )
+    if rarity_index is not None:
+        for line in lines[rarity_index + 1 :]:
+            if line == "--------":
+                break
+            header_lines.append(line)
     item_level = None
     for line in lines:
         match = ITEM_LEVEL_RE.match(line)
@@ -124,15 +134,24 @@ def item_identity(item_text: str) -> dict:
     return {
         "lines": lines,
         "line_set": {line.casefold() for line in lines},
+        "header_lines": header_lines,
         "item_level": item_level,
         "corrupted": any(line.casefold() == "corrupted" for line in lines),
         "mirrored": any(line.casefold() == "mirrored" for line in lines),
     }
 
 
+def _header_contains_base(header_lines: list[str], base_name: str) -> bool:
+    base_pattern = re.compile(
+        rf"(?<!\w){re.escape((base_name or '').strip())}(?!\w)",
+        re.I,
+    )
+    return any(base_pattern.search(line) for line in header_lines)
+
+
 def validate_item(item_text: str, base_name: str, influence: str) -> tuple[bool, str, int | None]:
     identity = item_identity(item_text)
-    if base_name.casefold() not in identity["line_set"]:
+    if not _header_contains_base(identity["header_lines"], base_name):
         return False, f"Cursor altindaki base '{base_name}' degil.", identity["item_level"]
     if influence and influence != "None":
         required_line = INFLUENCE_ITEM_LINES.get(influence)

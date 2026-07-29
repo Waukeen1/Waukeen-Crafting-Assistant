@@ -7733,7 +7733,7 @@ def switch_to_item():
         height=330,
     )
     if not item_target_ids:
-        preferred = "Warlord Blizzard Crown - Power Charge"
+        preferred = "Warlord Blizzard Crown - Crit Multi"
         if preferred in list_templates_from_folder():
             template_var.set(preferred)
             load_template()
