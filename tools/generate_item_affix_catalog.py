@@ -75,7 +75,7 @@ def _pattern_and_ranges(text: str) -> tuple[str, list[list[float]]]:
     return "^" + "".join(parts) + "$", ranges
 
 
-def parse_mods(path: Path) -> list[dict]:
+def parse_mods(path: Path, domain: str = "") -> list[dict]:
     entries: list[dict] = []
     for raw_line in path.read_text(encoding="utf-8-sig").splitlines():
         match = MOD_ENTRY_RE.match(raw_line)
@@ -106,18 +106,19 @@ def parse_mods(path: Path) -> list[dict]:
 
         level_match = LEVEL_RE.search(body)
         group_match = GROUP_RE.search(body)
-        entries.append(
-            {
-                "id": _lua_string(match.group("id")),
-                "type": type_match.group(1).lower(),
-                "affix": _lua_string(affix_match.group(1)),
-                "group": _lua_string(group_match.group(1)) if group_match else "",
-                "level": int(level_match.group(1)) if level_match else 1,
-                "lines": line_patterns,
-                "weights": weights,
-                "tags": _list_field(body, "modTags"),
-            }
-        )
+        entry = {
+            "id": _lua_string(match.group("id")),
+            "type": type_match.group(1).lower(),
+            "affix": _lua_string(affix_match.group(1)),
+            "group": _lua_string(group_match.group(1)) if group_match else "",
+            "level": int(level_match.group(1)) if level_match else 1,
+            "lines": line_patterns,
+            "weights": weights,
+            "tags": _list_field(body, "modTags"),
+        }
+        if domain:
+            entry["domain"] = domain
+        entries.append(entry)
     return entries
 
 
@@ -186,10 +187,17 @@ def main() -> None:
     args = parser.parse_args()
 
     mod_path = args.pob_dir / "Data" / "ModExplicit.lua"
+    flask_mod_path = args.pob_dir / "Data" / "ModFlask.lua"
     bases_dir = args.pob_dir / "Data" / "Bases"
-    if not mod_path.is_file() or not bases_dir.is_dir():
+    if (
+        not mod_path.is_file()
+        or not flask_mod_path.is_file()
+        or not bases_dir.is_dir()
+    ):
         raise SystemExit("Path of Building Data directory is incomplete.")
 
+    mods = parse_mods(mod_path)
+    mods.extend(parse_mods(flask_mod_path, domain="flask"))
     payload = {
         "schema": 1,
         "source": {
@@ -198,7 +206,7 @@ def main() -> None:
             "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         },
         "bases": parse_bases(bases_dir),
-        "mods": parse_mods(mod_path),
+        "mods": mods,
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(

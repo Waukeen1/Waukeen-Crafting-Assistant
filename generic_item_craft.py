@@ -69,9 +69,13 @@ def eligible_mods(catalog: dict, base_name: str, influence: str, item_level: int
         if not influence_tag:
             return []
         effective_tags.add(influence_tag)
+    flask_base = "flask" in effective_tags
 
     result = []
     for mod in catalog["mods"]:
+        flask_mod = mod.get("domain") == "flask"
+        if flask_base != flask_mod:
+            continue
         if int(mod.get("level", 1)) > int(item_level):
             continue
         weight = spawn_weight(mod, effective_tags)

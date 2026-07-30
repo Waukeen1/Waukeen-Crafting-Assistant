@@ -351,6 +351,109 @@ class GenericItemCraftTests(unittest.TestCase):
         self.assertEqual(action, "stop")
         self.assertIn("Parser guvenlik hatasi", reason)
 
+    def test_flask_pool_contains_only_flask_domain_mods(self):
+        flask_mods = item_craft.eligible_mods(
+            self.catalog,
+            "Granite Flask",
+            "None",
+            85,
+        )
+        self.assertTrue(flask_mods)
+        self.assertTrue(
+            all(mod.get("domain") == "flask" for mod in flask_mods)
+        )
+        self.assertIn(
+            "FlaskBuffMovementSpeedWhileHealing3",
+            {mod["id"] for mod in flask_mods},
+        )
+
+        helmet_mods = item_craft.eligible_mods(
+            self.catalog,
+            "Blizzard Crown",
+            "None",
+            85,
+        )
+        self.assertFalse(
+            any(mod.get("domain") == "flask" for mod in helmet_mods)
+        )
+
+    def test_flask_tooltip_parses_affixes_and_stops_on_target(self):
+        item_text = "\n".join(
+            [
+                "Item Class: Utility Flasks",
+                "Rarity: Magic",
+                "Alchemist's Granite Flask of the Cheetah",
+                "--------",
+                "Lasts 4.20 Seconds",
+                "Consumes 30 of 60 Charges on use",
+                "Currently has 0 Charges",
+                "+1500 to Armour",
+                "--------",
+                "Requirements:",
+                "Level: 27",
+                "--------",
+                "Item Level: 85",
+                "--------",
+                "27% reduced Duration",
+                "25% increased effect",
+                "14% increased Movement Speed during Effect",
+                "--------",
+                "Right click to drink.",
+            ]
+        )
+        rarity, mods, item_level = item_craft.parse_item_for_craft(
+            self.catalog,
+            "Granite Flask",
+            "None",
+            item_text,
+        )
+        self.assertEqual(rarity, "Magic")
+        self.assertEqual(item_level, 85)
+        self.assertEqual(
+            mods,
+            [
+                "27% reduced Duration",
+                "25% increased effect",
+                "14% increased Movement Speed during Effect",
+            ],
+        )
+
+        summary = item_craft.analyze(
+            self.catalog,
+            "Granite Flask",
+            "None",
+            item_level,
+            mods,
+            ["FlaskBuffMovementSpeedWhileHealing3"],
+            1,
+        )
+        action, _ = item_craft.choose_action(
+            rarity,
+            summary,
+            {"item_use_augment": True},
+        )
+        self.assertEqual(summary["affix_count"], 2)
+        self.assertEqual(action, "done")
+
+    def test_flask_prefix_uses_augment_for_suffix_target(self):
+        summary = item_craft.analyze(
+            self.catalog,
+            "Granite Flask",
+            "None",
+            85,
+            ["27% reduced Duration", "25% increased effect"],
+            ["FlaskBuffMovementSpeedWhileHealing3"],
+            1,
+        )
+        action, _ = item_craft.choose_action(
+            "Magic",
+            summary,
+            {"item_use_augment": True},
+        )
+        self.assertEqual(summary["prefix_count"], 1)
+        self.assertEqual(summary["suffix_count"], 0)
+        self.assertEqual(action, "augment")
+
 
 if __name__ == "__main__":
     unittest.main()
