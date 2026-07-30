@@ -268,6 +268,7 @@ except ModuleNotFoundError as exc:
     import pyautogui, keyboard, pyperclip, requests
 import generic_item_craft as generic_item
 import flask_craft_guide as flask_guide
+import map_craft_rules as map_rules
 try:
     import dxcam
 except ModuleNotFoundError as exc:
@@ -508,7 +509,13 @@ class CraftFatalError(CraftRecoveryNeeded):
 
 RUNTIME_SAFE_MODE = False
 SAFE_STACK_TRACKED_ORBS = {"Orb of Alteration", "Orb of Augmentation"}
-SAFE_CRITICAL_ORBS = {"Regal Orb", "Orb of Scouring", "Orb of Annulment", "Exalted Orb"}
+SAFE_CRITICAL_ORBS = {
+    "Regal Orb",
+    "Orb of Scouring",
+    "Orb of Annulment",
+    "Exalted Orb",
+    "Vaal Orb",
+}
 SAFE_ALTER_VERIFY_EVERY = 20
 SAFE_AUG_VERIFY_EVERY = 1
 FAST_STACK_TRACKED_ORBS = {"Orb of Alteration", "Orb of Augmentation"}
@@ -647,6 +654,7 @@ def get_currency_rates_chaos_craft(league_id: str):
         "annul": ["annul", "annulment orb", "orb of annulment"],
         "transmute": ["transmute", "transmutation", "transmutation orb", "orb of transmutation"],
         "chaos-orb": ["chaos-orb", "chaos orb"],
+        "vaal": ["vaal", "vaal orb"],
     }
     try:
         resp = requests.get(
@@ -687,6 +695,7 @@ def _orb_name_to_rate_alias(orb_name: str):
         "Exalted Orb": "exalted orb",
         "Orb of Transmutation": "orb of transmutation",
         "Orb of Alchemy": "orb of alchemy",
+        "Vaal Orb": "vaal orb",
         "Chaos Orb": "chaos orb",
         "Divine Orb": "divine orb",
     }
@@ -1144,6 +1153,22 @@ def item_left_click(x: int, y: int):
     pyautogui.mouseUp(button="left")
     time.sleep(0.025)
     return not _craft_stop_requested()
+
+def ctrl_left_click_item(x: int, y: int):
+    """Move an item to the open stash while guaranteeing Ctrl is released."""
+    if _craft_stop_requested():
+        return False
+    try:
+        keyboard.press("ctrl")
+        time.sleep(0.015)
+        if _craft_stop_requested():
+            return False
+        return item_left_click(x, y)
+    finally:
+        try:
+            keyboard.release("ctrl")
+        except Exception:
+            pass
 
 def _mean_rgb_on_box(img, box):
     x0, y0, x1, y1 = [int(v) for v in box]
@@ -2258,9 +2283,6 @@ def parse_map_summary_stats(text: str):
         "quantity": None,
         "rarity": None,
         "pack_size": None,
-        "currency": None,
-        "scarab": None,
-        "divination": None,
     }
     if not text:
         return stats
@@ -2279,34 +2301,14 @@ def parse_map_summary_stats(text: str):
             stats["rarity"] = value
         elif low.startswith("monster pack size:") and value is not None:
             stats["pack_size"] = value
-        elif low.startswith("more currency:") and value is not None:
-            stats["currency"] = value
-        elif low.startswith("more scarabs:") and value is not None:
-            stats["scarab"] = value
-        elif (low.startswith("more divination cards:") or low.startswith("more divination:")) and value is not None:
-            stats["divination"] = value
 
     return stats
 
 def _map_threshold_checks(summary_stats, settings):
-    return [
-        ("Quantity", settings.get("map_quantity_thresh"), summary_stats.get("quantity")),
-        ("Rarity", settings.get("map_rarity_thresh"), summary_stats.get("rarity")),
-        ("Pack size", settings.get("map_pack_size_thresh"), summary_stats.get("pack_size")),
-        ("Currency", settings.get("map_currency_thresh"), summary_stats.get("currency")),
-        ("Scarab", settings.get("map_scarab_thresh"), summary_stats.get("scarab")),
-        ("Divination", settings.get("map_divination_thresh"), summary_stats.get("divination")),
-    ]
+    return map_rules.threshold_checks(summary_stats, settings)
 
 def _map_numeric_threshold_failures(summary_stats, settings):
-    failures = []
-    for label, threshold, actual in _map_threshold_checks(summary_stats, settings):
-        if threshold is None:
-            continue
-        actual_val = 0 if actual is None else actual
-        if actual_val < threshold:
-            failures.append(f"{label}={actual_val}/{threshold}")
-    return failures
+    return map_rules.threshold_failures(summary_stats, settings)
 
 def _find_matching_map_mod_index(template_entry, available_mods):
     for idx, mod in enumerate(available_mods):
@@ -2627,52 +2629,8 @@ def apply_alteration_with_failover(chain_craft=False):
             log_message("[HATA] Orb of Alteration icin sonraki dolu slot bulunamadi!")
 
 def handle_map_craft_state(mods, settings, item_text=""):
-    """Map craft mantığı: Forbidden varsa roll, mod/sayı eşikleri sağlanınca dur."""
-    forbidden = settings.get("map_forbidden", [])
-    good      = settings.get("map_good", [])
-    bad       = settings.get("map_bad", [])
-    good_thresh = settings.get("map_good_thresh", 1)
-    bad_thresh  = settings.get("map_bad_thresh", None)
-    summary_stats = parse_map_summary_stats(item_text)
-    orb_mode    = settings.get(
-        "map_orb_mode",
-        "alchemy" if settings.get("craft_logic") == "Rare (alchemy)" else "chaos"
-    )
-
-    # Forbidden kontrolü
-    if _count_template_matches(forbidden, mods) > 0:
-        _map_reset_exalt_fail_state(settings)
-        _map_reset_exalt_fail_state(settings)
-        if orb_mode == "chaos":
-                log_message(f"[MAP] Forbidden mod bulundu → Chaos.")
-                apply_orb("Chaos Orb", ITEM_POS)
-        else:
-                log_message(f"[MAP] Forbidden mod bulundu → Scour → Alchemy.")
-                apply_orb("Orb of Scouring", ITEM_POS)
-                safe_wait(0.05)
-                apply_orb("Orb of Alchemy", ITEM_POS)
-        return "continue"
-
-    # Good sayısı
-    good_count = _count_template_matches(good, mods)
-    # Bad sayısı
-    bad_count = _count_template_matches(bad, mods)
-
-    good_ok = good_count >= good_thresh
-    bad_ok  = (bad_thresh is None) or (bad_count <= bad_thresh)
-    extra_failures = _map_numeric_threshold_failures(summary_stats, settings)
-    extra_ok = not extra_failures
-
-    if good_ok and bad_ok and extra_ok:
-        log_message(f"[MAP] ✅ Koşullar sağlandı (Good={good_count}/{good_thresh}, Bad={bad_count}) → Dur.")
-        return "done"
-    if good_ok and bad_ok and not extra_ok:
-        log_message(f"[MAP] Sayısal eşikler yetmedi: {', '.join(extra_failures)}")
-
-    # Koşullar sağlanmadı → yeniden roll
-    _map_reset_exalt_fail_state(settings)
-    _map_apply_reroll_orb(orb_mode)
-    return "continue"
+    """Compatibility entry point for the current profile-based map rules."""
+    return handle_map_craft_state_v2(mods, settings, item_text)
 
 def load_map_affix_groups():
     path = os.path.join(DATA_DIR, "map_mods.json")
@@ -2750,6 +2708,7 @@ def find_map_exalt_candidate(mods, summary_stats, settings):
     open_types, matched_groups = get_map_open_affix_types(mods)
     if not open_types:
         return None
+    forbidden = map_rules.active_forbidden(settings)
     matched_keys = {
         (g.get("affix_type", ""), tuple(g.get("mods", [])))
         for g in matched_groups
@@ -2760,13 +2719,12 @@ def find_map_exalt_candidate(mods, summary_stats, settings):
         key = (group.get("affix_type", ""), tuple(group.get("mods", [])))
         if key in matched_keys:
             continue
+        if _count_template_matches(forbidden, group.get("mods", [])) > 0:
+            continue
         projected = {
             "quantity": (summary_stats.get("quantity") or 0) + int(group.get("quantity", 0) or 0),
             "rarity": (summary_stats.get("rarity") or 0) + int(group.get("rarity", 0) or 0),
             "pack_size": (summary_stats.get("pack_size") or 0) + int(group.get("pack", 0) or 0),
-            "currency": (summary_stats.get("currency") or 0) + int(group.get("currency", 0) or 0),
-            "scarab": (summary_stats.get("scarab") or 0) + int(group.get("scarab", 0) or 0),
-            "divination": (summary_stats.get("divination") or 0) + int(group.get("divination", 0) or 0),
         }
         if not _map_numeric_threshold_failures(projected, settings):
             return group
@@ -2803,11 +2761,7 @@ def _map_apply_reroll_orb(orb_mode):
         apply_orb("Orb of Alchemy", ITEM_POS)
 
 def handle_map_craft_state_v2(mods, settings, item_text=""):
-    forbidden = settings.get("map_forbidden", [])
-    good = settings.get("map_good", [])
-    bad = settings.get("map_bad", [])
-    good_thresh = settings.get("map_good_thresh", 1)
-    bad_thresh = settings.get("map_bad_thresh", None)
+    forbidden = map_rules.active_forbidden(settings)
     summary_stats = parse_map_summary_stats(item_text)
     orb_mode = settings.get(
         "map_orb_mode",
@@ -2821,43 +2775,128 @@ def handle_map_craft_state_v2(mods, settings, item_text=""):
         _map_apply_reroll_orb(orb_mode)
         return "continue"
 
-    if _count_template_matches(forbidden, mods) > 0:
+    forbidden_count = _count_template_matches(forbidden, mods)
+    evaluation = map_rules.evaluate(forbidden_count, summary_stats, settings)
+    profile_label = evaluation["profile_label"]
+
+    if forbidden_count > 0:
         _map_reset_exalt_fail_state(settings)
-        if orb_mode == "chaos":
-            log_message("[MAP] Forbidden mod bulundu → Chaos.")
-            apply_orb("Chaos Orb", ITEM_POS)
-        else:
-            log_message("[MAP] Forbidden mod bulundu → Scour → Alchemy.")
-            apply_orb("Orb of Scouring", ITEM_POS)
-            safe_wait(0.05)
-            apply_orb("Orb of Alchemy", ITEM_POS)
+        log_message(
+            f"[MAP:{profile_label}] {forbidden_count} istenmeyen mod bulundu → reroll."
+        )
+        _map_apply_reroll_orb(orb_mode)
         return "continue"
 
-    good_count = _count_template_matches(good, mods)
-    bad_count = _count_template_matches(bad, mods)
-    good_ok = good_count >= good_thresh
-    bad_ok = (bad_thresh is None) or (bad_count <= bad_thresh)
-    extra_failures = _map_numeric_threshold_failures(summary_stats, settings)
-
-    if good_ok and bad_ok and not extra_failures:
+    if evaluation["accepted"]:
         _map_reset_exalt_fail_state(settings)
-        log_message(f"[MAP] Koşullar sağlandı (Good={good_count}/{good_thresh}, Bad={bad_count}) → Dur.")
+        log_message(
+            f"[MAP:{profile_label}] İstenmeyen mod yok; "
+            "Quantity/Rarity/Pack şartları sağlandı → Dur."
+        )
         return "done"
 
-    if good_ok and bad_ok and extra_failures:
-        log_message(f"[MAP] Sayısal eşikler yetmedi: {', '.join(extra_failures)}")
-        if settings.get("map_use_exalt"):
-            candidate = find_map_exalt_candidate(mods, summary_stats, settings)
-            if candidate:
-                joined = " + ".join(candidate.get("mods", []))
-                log_message(f"[MAP] Use Exalted aktif → tek exalt ile threshold yakalanabilir: {joined}")
-                _map_note_exalt_attempt(settings, item_text)
-                apply_orb("Exalted Orb", ITEM_POS)
-                return "continue"
+    failures = evaluation["threshold_failures"]
+    log_message(
+        f"[MAP:{profile_label}] Sayısal eşikler yetmedi: {', '.join(failures)}"
+    )
+    if settings.get("map_use_exalt"):
+        candidate = find_map_exalt_candidate(mods, summary_stats, settings)
+        if candidate:
+            joined = " + ".join(candidate.get("mods", []))
+            log_message(
+                "[MAP] Use Exalted aktif → blacklist temiz ve tek Exalt ile "
+                f"eşikler yakalanabilir: {joined}"
+            )
+            _map_note_exalt_attempt(settings, item_text)
+            apply_orb("Exalted Orb", ITEM_POS)
+            return "continue"
 
     _map_reset_exalt_fail_state(settings)
     _map_apply_reroll_orb(orb_mode)
     return "continue"
+
+def _wait_for_map_item_change(before_text, predicate, operation, attempts=5):
+    for attempt in range(1, attempts + 1):
+        if stop_event.is_set():
+            return ""
+        safe_wait(0.08 if attempt == 1 else 0.12)
+        current_text = capture_item_text_once()
+        if (
+            current_text
+            and current_text != (before_text or "")
+            and predicate(current_text)
+        ):
+            return current_text
+    stop_event.set()
+    raise CraftFatalError(f"[MAP BATCH] {operation} sonucu doğrulanamadı.")
+
+def handle_map_alchemy_vaal_batch_item(item_text, settings):
+    start_failures = map_rules.alchemy_vaal_start_failures(item_text, required_tier=16)
+    if start_failures:
+        log_message(f"[MAP BATCH] Slot atlandı: {', '.join(start_failures)}.")
+        return "done"
+
+    starting_rarity, _starting_mods = parse_item_text(item_text)
+    if starting_rarity.casefold() == "normal":
+        log_message("[MAP BATCH] Normal T16 doğrulandı → Orb of Alchemy.")
+        apply_orb("Orb of Alchemy", ITEM_POS)
+        if stop_event.is_set():
+            return "stopped"
+        alched_text = _wait_for_map_item_change(
+            item_text,
+            lambda text: parse_item_text(text)[0].casefold() == "rare",
+            "Orb of Alchemy",
+        )
+    else:
+        alched_text = item_text
+        log_message("[MAP BATCH] Rare T16 doğrulandı → Alchemy atlandı.")
+
+    log_message("[MAP BATCH] Rare map doğrulandı → Vaal Orb.")
+    apply_orb("Vaal Orb", ITEM_POS)
+    if stop_event.is_set():
+        return "stopped"
+    final_text = _wait_for_map_item_change(
+        alched_text,
+        map_rules.is_corrupted,
+        "Vaal Orb",
+    )
+
+    _rarity, final_mods = parse_item_text(final_text)
+    forbidden = map_rules.active_forbidden(settings)
+    forbidden_count = _count_template_matches(forbidden, final_mods)
+    summary_stats = parse_map_summary_stats(final_text)
+    failures = map_rules.alchemy_vaal_final_failures(
+        final_text,
+        forbidden_count,
+        summary_stats,
+        settings,
+    )
+    if not failures:
+        log_message(
+            "[MAP BATCH] Corrupted map kabul edildi; blacklist temiz ve "
+            "Quantity/Rarity/Pack şartları sağlandı."
+        )
+        return "done"
+
+    log_message(
+        f"[MAP BATCH] Map reddedildi: {', '.join(failures)} → stashe gönderiliyor."
+    )
+    if stop_event.is_set():
+        return "stopped"
+    if not ctrl_left_click_item(ITEM_POS[0], ITEM_POS[1]):
+        if stop_event.is_set():
+            return "stopped"
+        stop_event.set()
+        raise CraftFatalError("[MAP BATCH] Ctrl+sol tık uygulanamadı.")
+    safe_wait(0.12)
+    after_stash_text = capture_item_text_once()
+    if after_stash_text == final_text:
+        stop_event.set()
+        raise CraftFatalError(
+            "[MAP BATCH] Item stashe taşınmadı; stash dolu veya açık olmayabilir."
+        )
+    log_message("[MAP BATCH] Reddedilen map stashe taşındı.")
+    return "done"
 
 def _socket_craft_stop(message):
     log_message(message)
@@ -4093,6 +4132,10 @@ def stop_craft_hotkey():
         return
     stop_event.set()
     stop_shift_spam()
+    try:
+        keyboard.release("ctrl")
+    except Exception:
+        pass
     log_message("[CRAFT] STOP komutu alındı.")
 
 def start_hotkey_listener():
@@ -4137,38 +4180,49 @@ def start_craft():
 
             if is_map:
                 try:
-                    gthresh = int(map_good_thresh.get().strip())
-                except (ValueError, AttributeError):
-                    gui_error("Good threshold zorunlu ve sayı olmalı.")
-                    return
-                try:
-                    bthresh_raw = map_bad_thresh.get().strip()
-                    bthresh = int(bthresh_raw) if bthresh_raw else None
                     qthresh = int(map_quantity_thresh.get().strip()) if map_quantity_thresh.get().strip() else None
                     rthresh = int(map_rarity_thresh.get().strip()) if map_rarity_thresh.get().strip() else None
                     psthresh = int(map_pack_size_thresh.get().strip()) if map_pack_size_thresh.get().strip() else None
-                    cthresh = int(map_currency_thresh.get().strip()) if map_currency_thresh.get().strip() else None
-                    sthresh = int(map_scarab_thresh.get().strip()) if map_scarab_thresh.get().strip() else None
-                    dthresh = int(map_divination_thresh.get().strip()) if map_divination_thresh.get().strip() else None
+                    if any(
+                        value is not None and value < 0
+                        for value in (qthresh, rthresh, psthresh)
+                    ):
+                        raise ValueError
                 except ValueError:
-                    gui_error("Map threshold alanları boş veya sayı olmalı.")
+                    gui_error("Quant, Rarity ve Pack alanları boş veya negatif olmayan sayı olmalı.")
                     return
-                map_mode = "alchemy" if craft_logic.get() == "Rare (alchemy)" else "chaos"
+                map_mode = {
+                    "Rare (alchemy)": "alchemy",
+                    "Alchemy + Vaal": "alchemy_vaal",
+                }.get(craft_logic.get(), "chaos")
+                if map_mode == "alchemy_vaal":
+                    missing_orbs = [
+                        orb_name
+                        for orb_name in ("Orb of Alchemy", "Vaal Orb")
+                        if not get_orb_location(orb_name)
+                    ]
+                    if missing_orbs:
+                        gui_error(
+                            "Alchemy + Vaal icin Orb Locations ayarla: "
+                            + ", ".join(missing_orbs)
+                        )
+                        return
                 snapshot = {
                     "craft_logic": "map",
                     "map_orb_mode": map_mode,
-                    "map_forbidden": list(map_forbidden),
-                    "map_good": list(map_good),
-                    "map_bad": list(map_bad),
-                    "map_good_thresh": gthresh,
-                    "map_bad_thresh": bthresh,
+                    "map_profile": (
+                        map_rules.PROFILE_NORMAL
+                        if map_mode == "alchemy_vaal"
+                        else map_rules.normalize_profile(map_profile_var.get())
+                    ),
+                    "map_normal_forbidden": list(map_normal_forbidden),
+                    "map_memory_forbidden": list(map_memory_forbidden),
                     "map_quantity_thresh": qthresh,
                     "map_rarity_thresh": rthresh,
                     "map_pack_size_thresh": psthresh,
-                    "map_currency_thresh": cthresh,
-                    "map_scarab_thresh": sthresh,
-                    "map_divination_thresh": dthresh,
-                    "map_use_exalt": map_use_exalt.get(),
+                    "map_use_exalt": (
+                        False if map_mode == "alchemy_vaal" else map_use_exalt.get()
+                    ),
                     "comb_craft": False,
                     "safe_mode": False,
                 }
@@ -4328,6 +4382,12 @@ def start_craft():
                     snapshot["inventory_slots"] = slots
                 else:
                     ITEM_POS = pyautogui.position()
+                if map_mode == "alchemy_vaal":
+                    log_message(
+                        "[MAP BATCH] Alchemy + Vaal modu: Normal T16 maplere önce "
+                        "Alchemy, Rare T16 maplere direkt Vaal uygulanır; reddedilenler "
+                        "açık stashe Ctrl+sol tık ile gönderilir."
+                    )
             elif is_base_jewel:
                 try:
                     crit_count = int(base_jewel_crit_count_var.get().strip())
@@ -4512,6 +4572,12 @@ def craft_thread_loop(settings):
             # Adamın isCrafted() → GetItemInfo() — önce oku
             item_text = get_item_info()
             if not item_text:
+                if (
+                    settings.get("craft_logic") == "map"
+                    and settings.get("map_orb_mode") == "alchemy_vaal"
+                ):
+                    log_message("[MAP BATCH] Boş veya okunamayan slot atlandı.")
+                    return "completed"
                 safe_wait(get_delay_s())
                 continue
 
@@ -4521,6 +4587,13 @@ def craft_thread_loop(settings):
                     single_done = True
                 safe_wait(get_delay_s())
                 continue
+
+            if (
+                settings.get("craft_logic") == "map"
+                and settings.get("map_orb_mode") == "alchemy_vaal"
+            ):
+                result = handle_map_alchemy_vaal_batch_item(item_text, settings)
+                return "stopped" if result == "stopped" else "completed"
 
             rarity, mods = parse_item_text(item_text)
 
@@ -4663,6 +4736,10 @@ def craft_thread_loop(settings):
         log_message(f"[HATA] Ana döngü: {e}\n{traceback.format_exc()}")
     finally:
         stop_shift_spam()
+        try:
+            keyboard.release("ctrl")
+        except Exception:
+            pass
         log_message("[CRAFT] Döngü durduruldu.")
         stop_session_log()
 
@@ -4940,6 +5017,12 @@ def craft_thread_loop_safe(settings):
             try:
                 item_text = get_item_info_safe()
                 if not item_text:
+                    if (
+                        settings.get("craft_logic") == "map"
+                        and settings.get("map_orb_mode") == "alchemy_vaal"
+                    ):
+                        log_message("[MAP BATCH] Boş veya okunamayan slot atlandı.")
+                        return "completed"
                     raise CraftRecoveryNeeded("Esya metni kopyalanamadi.")
 
                 if settings.get("craft_logic") == "socket":
@@ -4949,6 +5032,14 @@ def craft_thread_loop_safe(settings):
                     safe_wait(get_delay_s())
                     consecutive_errors = 0
                     continue
+
+                if (
+                    settings.get("craft_logic") == "map"
+                    and settings.get("map_orb_mode") == "alchemy_vaal"
+                ):
+                    result = handle_map_alchemy_vaal_batch_item(item_text, settings)
+                    consecutive_errors = 0
+                    return "stopped" if result == "stopped" else "completed"
 
                 rarity, mods = parse_item_text(item_text)
 
@@ -5111,6 +5202,10 @@ def craft_thread_loop_safe(settings):
         log_message(f"[HATA] Safe dongu: {e}\n{traceback.format_exc()}")
     finally:
         stop_shift_spam()
+        try:
+            keyboard.release("ctrl")
+        except Exception:
+            pass
         release_cursor_item_if_any()
         log_message("[CRAFT] Dongu durduruldu.")
         stop_session_log()
@@ -5427,7 +5522,16 @@ def load_template():
             logic_val = "Rare (regal)"
         is_map_template = bool(
             data.get("app_mode") == "map"
-            or any(key in data for key in ("map_forbidden", "map_good", "map_bad"))
+            or any(
+                key in data
+                for key in (
+                    "map_normal_forbidden",
+                    "map_memory_forbidden",
+                    "map_forbidden",
+                    "map_good",
+                    "map_bad",
+                )
+            )
         )
         is_base_jewel_template = bool(
             data.get("app_mode") == "base_jewel"
@@ -5437,7 +5541,11 @@ def load_template():
             data.get("app_mode") == "item"
             or data.get("craft_logic") == "generic_item"
         )
-        if is_map_template and logic_val not in ("Rare (alchemy)", "Rare (chaos)"):
+        if is_map_template and logic_val not in (
+            "Rare (alchemy)",
+            "Rare (chaos)",
+            "Alchemy + Vaal",
+        ):
             logic_val = "Rare (chaos)"
         if not is_base_jewel_template and not is_item_template:
             craft_logic.set(logic_val)
@@ -5485,21 +5593,21 @@ def load_template():
             ]
             populate_item_target_list()
             reload_item_mod_pool()
-        map_orb_mode.set("alchemy" if logic_val == "Rare (alchemy)" else "chaos")
+        map_orb_mode.set({
+            "Rare (alchemy)": "alchemy",
+            "Alchemy + Vaal": "alchemy_vaal",
+        }.get(logic_val, "chaos"))
         map_use_exalt.set(bool(data.get("map_use_exalt", False)))
-        map_forbidden[:] = data.get("map_forbidden", [])
-        map_good[:] = data.get("map_good", [])
-        map_bad[:] = data.get("map_bad", [])
-        map_good_thresh.set(str(data.get("map_good_thresh", 1)))
-        map_bad_val = data.get("map_bad_thresh", "")
-        map_bad_thresh.set("" if map_bad_val is None else str(map_bad_val))
+        map_profile_var.set(map_rules.normalize_profile(data.get("map_profile")))
+        map_normal_forbidden[:] = data.get(
+            "map_normal_forbidden",
+            data.get("map_forbidden", []),
+        )
+        map_memory_forbidden[:] = data.get("map_memory_forbidden", [])
         for var, key in [
             (map_quantity_thresh, "map_quantity_thresh"),
             (map_rarity_thresh, "map_rarity_thresh"),
             (map_pack_size_thresh, "map_pack_size_thresh"),
-            (map_currency_thresh, "map_currency_thresh"),
-            (map_scarab_thresh, "map_scarab_thresh"),
-            (map_divination_thresh, "map_divination_thresh"),
         ]:
             val = data.get(key, "")
             var.set("" if val is None else str(val))
@@ -5559,9 +5667,10 @@ def load_template():
         populate_annul_combs_list()
         populate_solo_regal_list()
         populate_no_regal_list()
-        populate_map_forbidden_list()
-        populate_map_good_list()
-        populate_map_bad_list()
+        populate_map_normal_list()
+        populate_map_memory_list()
+        select_map_profile_tab()
+        sync_map_mode_controls()
         log_message(f"[TEMPLATE] '{name}' yüklendi.")
         if template_price_meta:
             log_message(
@@ -5619,17 +5728,12 @@ def save_template():
                 raw = var.get().strip()
                 return int(raw) if raw else None
             data.update({
-                "map_forbidden": list(map_forbidden),
-                "map_good": list(map_good),
-                "map_bad": list(map_bad),
-                "map_good_thresh": int(map_good_thresh.get() or 1),
-                "map_bad_thresh": int(map_bad_thresh.get()) if map_bad_thresh.get().strip() else None,
+                "map_profile": map_rules.normalize_profile(map_profile_var.get()),
+                "map_normal_forbidden": list(map_normal_forbidden),
+                "map_memory_forbidden": list(map_memory_forbidden),
                 "map_quantity_thresh": _optional_int(map_quantity_thresh),
                 "map_rarity_thresh": _optional_int(map_rarity_thresh),
                 "map_pack_size_thresh": _optional_int(map_pack_size_thresh),
-                "map_currency_thresh": _optional_int(map_currency_thresh),
-                "map_scarab_thresh": _optional_int(map_scarab_thresh),
-                "map_divination_thresh": _optional_int(map_divination_thresh),
                 "map_use_exalt": map_use_exalt.get(),
             })
         elif is_item:
@@ -5877,6 +5981,7 @@ class OrbLocationsWindow(tk.Toplevel):
             "Orb of Scouring",
             "Orb of Annulment",
             "Orb of Alchemy",
+            "Vaal Orb",
             "Regal Orb",
             "Chaos Orb",
             "Exalted Orb",
@@ -6337,18 +6442,13 @@ if _saved_cluster_price_filter not in CLUSTER_PRICE_FILTERS:
     _saved_cluster_price_filter = "2d+"
 cluster_price_filter_var = tk.StringVar(value=_saved_cluster_price_filter)
 cluster_price_filter_status_var = tk.StringVar(value="No saved market data")
-map_orb_mode = tk.StringVar(value="chaos")   # "chaos" | "alchemy"
-map_forbidden = []
-map_good = []
-map_bad = []
-map_good_thresh = tk.StringVar(value="1")
-map_bad_thresh = tk.StringVar(value="")
+map_orb_mode = tk.StringVar(value="chaos")   # "chaos" | "alchemy" | "alchemy_vaal"
+map_profile_var = tk.StringVar(value=map_rules.PROFILE_NORMAL)
+map_normal_forbidden = []
+map_memory_forbidden = []
 map_quantity_thresh = tk.StringVar(value="")
 map_rarity_thresh = tk.StringVar(value="")
 map_pack_size_thresh = tk.StringVar(value="")
-map_currency_thresh = tk.StringVar(value="")
-map_scarab_thresh = tk.StringVar(value="")
-map_divination_thresh = tk.StringVar(value="")
 map_use_exalt = tk.BooleanVar(value=False)
 socket_use_jeweller_var = tk.BooleanVar(value=True)
 socket_use_fusing_var = tk.BooleanVar(value=True)
@@ -7305,6 +7405,13 @@ rb_chaos = ttk.Radiobutton(
     logic_frame, text="Rare (chaos)", variable=craft_logic, value="Rare (chaos)"
 )
 rb_chaos.pack(anchor="w")
+rb_alch_vaal = ttk.Radiobutton(
+    logic_frame,
+    text="Alchemy + Vaal",
+    variable=craft_logic,
+    value="Alchemy + Vaal",
+)
+rb_alch_vaal.pack(anchor="w")
 map_use_exalt_cb = ttk.Checkbutton(logic_frame, text="Use Exalted", variable=map_use_exalt)
 
 augment_label = ttk.Label(mid, text="Augment Usage", font=("Segoe UI", 9, "bold"))
@@ -7323,31 +7430,21 @@ use_annul_cb.grid(row=1, column=0, sticky="w", pady=(0, 3))
 
 map_summary_thresholds_frame = ttk.Frame(mid)
 _map_summary_specs = [
-    ("Qty. >=", map_quantity_thresh, "Curr >=", map_currency_thresh),
-    ("Rarity >=", map_rarity_thresh, "Scrb >=", map_scarab_thresh),
-    ("Pack >=", map_pack_size_thresh, "Divn >=", map_divination_thresh),
+    ("Quant >=", map_quantity_thresh),
+    ("Rarity >=", map_rarity_thresh),
+    ("Pack >=", map_pack_size_thresh),
 ]
-for row_idx, (left_label, left_var, right_label, right_var) in enumerate(_map_summary_specs):
-    ttk.Label(map_summary_thresholds_frame, text=left_label).grid(row=row_idx, column=0, sticky="e")
+for row_idx, (label, var) in enumerate(_map_summary_specs):
+    ttk.Label(map_summary_thresholds_frame, text=label).grid(row=row_idx, column=0, sticky="e")
     tk.Entry(
         map_summary_thresholds_frame,
-        textvariable=left_var,
+        textvariable=var,
         width=4,
         font=("Tahoma", 8),
         bg="#000",
         fg="#fff",
         insertbackground="#fff",
-    ).grid(row=row_idx, column=1, padx=(3, 6), pady=(0, 1), sticky="w")
-    ttk.Label(map_summary_thresholds_frame, text=right_label).grid(row=row_idx, column=2, sticky="e")
-    tk.Entry(
-        map_summary_thresholds_frame,
-        textvariable=right_var,
-        width=4,
-        font=("Tahoma", 8),
-        bg="#000",
-        fg="#fff",
-        insertbackground="#fff",
-    ).grid(row=row_idx, column=3, padx=(4, 0), pady=(0, 1), sticky="w")
+    ).grid(row=row_idx, column=1, padx=(3, 0), pady=(0, 1), sticky="w")
 
 # chain
 weights = ttk.Frame(root)
@@ -7377,31 +7474,6 @@ chain_count_entry = tk.Entry(
     disabledforeground="#fff",
 )
 chain_count_entry.pack(side="left")
-map_thresholds_frame = ttk.Frame(chain_line_frame)
-_map_threshold_specs = [
-    ("Good >=", map_good_thresh, "Bad <=", map_bad_thresh),
-]
-for row_idx, (left_label, left_var, right_label, right_var) in enumerate(_map_threshold_specs):
-    ttk.Label(map_thresholds_frame, text=left_label).grid(row=row_idx, column=0, sticky="e")
-    tk.Entry(
-        map_thresholds_frame,
-        textvariable=left_var,
-        width=4,
-        font=("Tahoma", 8),
-        bg="#000",
-        fg="#fff",
-        insertbackground="#fff",
-    ).grid(row=row_idx, column=1, padx=(3, 10), pady=(0, 1), sticky="w")
-    ttk.Label(map_thresholds_frame, text=right_label).grid(row=row_idx, column=2, sticky="e")
-    tk.Entry(
-        map_thresholds_frame,
-        textvariable=right_var,
-        width=4,
-        font=("Tahoma", 8),
-        bg="#000",
-        fg="#fff",
-        insertbackground="#fff",
-    ).grid(row=row_idx, column=3, padx=(3, 0), pady=(0, 1), sticky="w")
 
 # affix pool (view/search + add)
 pool = ttk.Frame(root)
@@ -7648,17 +7720,12 @@ no_regal_list.bind("<Double-Button-1>", delete_from_no_regal_list)
 
 # ── MAP CRAFT CONFIG ────────────────────────────────────────────────────────
 map_orb_mode.set("chaos")
-map_forbidden.clear()   # bu modlardan biri varsa → yeni roll
-map_good.clear()        # weight toplamı >= threshold → iyi
-map_bad.clear()         # weight toplamı <= threshold → kabul
-map_good_thresh.set("1")
-map_bad_thresh.set("")
+map_profile_var.set(map_rules.PROFILE_NORMAL)
+map_normal_forbidden.clear()
+map_memory_forbidden.clear()
 map_quantity_thresh.set("")
 map_rarity_thresh.set("")
 map_pack_size_thresh.set("")
-map_currency_thresh.set("")
-map_scarab_thresh.set("")
-map_divination_thresh.set("")
 map_use_exalt.set(False)
 
 def read_map_affixes():
@@ -7680,66 +7747,92 @@ orb_row.pack(fill="x", pady=(2, 2))
 ttk.Label(orb_row, text="Orb:").pack(side="left")
 btn_chaos_orb = ttk.Button(orb_row, text="Chaos", width=10, style="Dark.TButton")
 btn_alch_orb  = ttk.Button(orb_row, text="Alchemy + Scour", width=16, style="Dark.TButton")
+btn_alch_vaal = ttk.Button(orb_row, text="Alchemy + Vaal", width=16, style="Dark.TButton")
 btn_chaos_orb.pack(side="left", padx=(4, 2))
 btn_alch_orb.pack(side="left")
+btn_alch_vaal.pack(side="left", padx=(2, 0))
 
 def _set_orb_mode(mode):
     map_orb_mode.set(mode)
-    if mode == "chaos":
-        btn_chaos_orb.state(["pressed"])
-        btn_alch_orb.state(["!pressed"])
-    else:
-        btn_chaos_orb.state(["!pressed"])
-        btn_alch_orb.state(["pressed"])
+    button_modes = (
+        (btn_chaos_orb, "chaos"),
+        (btn_alch_orb, "alchemy"),
+        (btn_alch_vaal, "alchemy_vaal"),
+    )
+    for button, button_mode in button_modes:
+        button.state(["pressed"] if mode == button_mode else ["!pressed"])
 
 btn_chaos_orb.config(command=lambda: _set_orb_mode("chaos"))
 btn_alch_orb.config(command=lambda: _set_orb_mode("alchemy"))
+btn_alch_vaal.config(command=lambda: _set_orb_mode("alchemy_vaal"))
 _set_orb_mode("chaos")
 
-# Threshold row
-thresh_row = ttk.Frame(map_frame)
-thresh_row.pack(fill="x", pady=(0, 2))
-ttk.Label(thresh_row, text="Good ≥").pack(side="left")
-tk.Entry(thresh_row, textvariable=map_good_thresh, width=4,
-         bg="#000", fg="#fff", insertbackground="#fff").pack(side="left", padx=(2, 8))
-ttk.Label(thresh_row, text="Bad ≤").pack(side="left")
-tk.Entry(thresh_row, textvariable=map_bad_thresh, width=4,
-         bg="#000", fg="#fff", insertbackground="#fff").pack(side="left", padx=(2, 0))
-
-# Map tabs: Forbidden / Good / Bad — root'a direkt, cluster tabs ile tam aynı konumda
+# Map tabs: each profile keeps its own unwanted-mod list.
 map_tabs = ttk.Notebook(root)
-tab_map_forbidden = ttk.Frame(map_tabs)
-tab_map_good      = ttk.Frame(map_tabs)
-tab_map_bad       = ttk.Frame(map_tabs)
-tab_width3 = (WINDOW_W - 2 * PADX) // 3
-map_tabs.add(tab_map_forbidden, text="Forbidden\n")
-map_tabs.add(tab_map_good,      text="Good\n")
-map_tabs.add(tab_map_bad,       text="Bad\n")
+tab_map_normal = ttk.Frame(map_tabs)
+tab_map_memory = ttk.Frame(map_tabs)
+map_tabs.add(tab_map_normal, text="Normal Map\nBlacklist")
+map_tabs.add(tab_map_memory, text="Memory / Nightmare\nBlacklist")
 
-map_forbidden_list = tk.Listbox(tab_map_forbidden, bg="#000", fg="#fff",
-                                 selectbackground="#444", borderwidth=0)
-map_forbidden_list.pack(fill="both", expand=True, padx=3, pady=3)
-map_good_list = tk.Listbox(tab_map_good, bg="#000", fg="#fff",
-                             selectbackground="#444", borderwidth=0)
-map_good_list.pack(fill="both", expand=True, padx=3, pady=3)
-map_bad_list = tk.Listbox(tab_map_bad, bg="#000", fg="#fff",
-                           selectbackground="#444", borderwidth=0)
-map_bad_list.pack(fill="both", expand=True, padx=3, pady=3)
+map_normal_list = tk.Listbox(
+    tab_map_normal,
+    bg="#000",
+    fg="#fff",
+    selectbackground="#444",
+    borderwidth=0,
+)
+map_normal_list.pack(fill="both", expand=True, padx=3, pady=3)
+map_memory_list = tk.Listbox(
+    tab_map_memory,
+    bg="#000",
+    fg="#fff",
+    selectbackground="#444",
+    borderwidth=0,
+)
+map_memory_list.pack(fill="both", expand=True, padx=3, pady=3)
 
-def populate_map_forbidden_list():
-    map_forbidden_list.delete(0, "end")
-    for m in map_forbidden:
-        map_forbidden_list.insert("end", m)
+def populate_map_normal_list():
+    map_normal_list.delete(0, "end")
+    for mod in map_normal_forbidden:
+        map_normal_list.insert("end", mod)
 
-def populate_map_good_list():
-    map_good_list.delete(0, "end")
-    for m in map_good:
-        map_good_list.insert("end", m)
+def populate_map_memory_list():
+    map_memory_list.delete(0, "end")
+    for mod in map_memory_forbidden:
+        map_memory_list.insert("end", mod)
 
-def populate_map_bad_list():
-    map_bad_list.delete(0, "end")
-    for m in map_bad:
-        map_bad_list.insert("end", m)
+def on_map_profile_tab_changed(_event=None):
+    selected_index = map_tabs.index(map_tabs.select())
+    profile = (
+        map_rules.PROFILE_NORMAL
+        if selected_index == 0
+        else map_rules.PROFILE_MEMORY_NIGHTMARE
+    )
+    map_profile_var.set(profile)
+
+def select_map_profile_tab():
+    target_index = (
+        1
+        if map_rules.normalize_profile(map_profile_var.get())
+        == map_rules.PROFILE_MEMORY_NIGHTMARE
+        else 0
+    )
+    map_tabs.select(target_index)
+    on_map_profile_tab_changed()
+
+def sync_map_mode_controls():
+    is_batch = craft_logic.get() == "Alchemy + Vaal"
+    if is_batch:
+        map_profile_var.set(map_rules.PROFILE_NORMAL)
+        select_map_profile_tab()
+        map_use_exalt.set(False)
+        map_use_exalt_cb.state(["disabled"])
+    else:
+        map_use_exalt_cb.state(["!disabled"])
+
+rb_alch.config(command=sync_map_mode_controls)
+rb_chaos.config(command=sync_map_mode_controls)
+rb_alch_vaal.config(command=sync_map_mode_controls)
 
 def delete_from_map_list(event, lst, config_list, populate_fn):
     if sel := event.widget.curselection():
@@ -7748,12 +7841,25 @@ def delete_from_map_list(event, lst, config_list, populate_fn):
             del config_list[idx]
         populate_fn()
 
-map_forbidden_list.bind("<Double-Button-1>",
-    lambda e: delete_from_map_list(e, map_forbidden_list, map_forbidden, populate_map_forbidden_list))
-map_good_list.bind("<Double-Button-1>",
-    lambda e: delete_from_map_list(e, map_good_list, map_good, populate_map_good_list))
-map_bad_list.bind("<Double-Button-1>",
-    lambda e: delete_from_map_list(e, map_bad_list, map_bad, populate_map_bad_list))
+map_normal_list.bind(
+    "<Double-Button-1>",
+    lambda e: delete_from_map_list(
+        e,
+        map_normal_list,
+        map_normal_forbidden,
+        populate_map_normal_list,
+    ),
+)
+map_memory_list.bind(
+    "<Double-Button-1>",
+    lambda e: delete_from_map_list(
+        e,
+        map_memory_list,
+        map_memory_forbidden,
+        populate_map_memory_list,
+    ),
+)
+map_tabs.bind("<<NotebookTabChanged>>", on_map_profile_tab_changed)
 
 # Map affix pool
 map_pool_frame = ttk.Frame(root)
@@ -7799,17 +7905,13 @@ def on_map_affix_double(_event):
     entry_text = f"{text}({roll_text})" if roll_text else text
     idx = map_tabs.index(map_tabs.select())
     if idx == 0:
-        if entry_text not in map_forbidden:
-            map_forbidden.append(entry_text)
-        populate_map_forbidden_list()
-    elif idx == 1:
-        if entry_text not in map_good:
-            map_good.append(entry_text)
-        populate_map_good_list()
-    elif idx == 2:
-        if entry_text not in map_bad:
-            map_bad.append(entry_text)
-        populate_map_bad_list()
+        if entry_text not in map_normal_forbidden:
+            map_normal_forbidden.append(entry_text)
+        populate_map_normal_list()
+    else:
+        if entry_text not in map_memory_forbidden:
+            map_memory_forbidden.append(entry_text)
+        populate_map_memory_list()
     map_roll_var.set("")
 
 map_pool_list.bind("<Double-Button-1>", on_map_affix_double)
@@ -7917,7 +8019,6 @@ def switch_to_cluster():
         padx=(0, 4),
         before=chain_toggle,
     )
-    map_thresholds_frame.pack_forget()
     # Chain disabled (cluster'da)
     try: chain_toggle.config(state="normal")
     except Exception: pass
@@ -7948,23 +8049,26 @@ def switch_to_map():
     settings_panel.place_forget()
     bottom.place_forget()
     tabs.place_forget()
-    # Logic butonları map moduna ayarla: sadece alchemy ve chaos aktif
+    # Logic butonlarını map moduna ayarla.
     logic_label.grid(row=0, column=0, sticky="w")
     logic_frame.grid(row=1, column=0, sticky="nw")
     rb_regal.pack_forget()
-    for rb in [rb_alch, rb_chaos]:
+    for rb in [rb_alch, rb_chaos, rb_alch_vaal]:
         rb.state(["!disabled"])
-    if craft_logic.get() not in ("Rare (alchemy)", "Rare (chaos)"):
+    if craft_logic.get() not in ("Rare (alchemy)", "Rare (chaos)", "Alchemy + Vaal"):
         craft_logic.set("Rare (chaos)")
-    map_orb_mode.set("alchemy" if craft_logic.get() == "Rare (alchemy)" else "chaos")
+    map_orb_mode.set({
+        "Rare (alchemy)": "alchemy",
+        "Alchemy + Vaal": "alchemy_vaal",
+    }.get(craft_logic.get(), "chaos"))
     map_use_exalt_cb.pack(anchor="w", pady=(2, 0))
+    sync_map_mode_controls()
     # Augment kısmını gizle
     augment_frame.grid_remove()
     augment_label.grid_remove()
     use_exalt_cb.grid_remove()
     use_annul_cb.grid_remove()
     cluster_no_regal_two_cb.pack_forget()
-    map_thresholds_frame.pack(side="left", padx=(8, 0))
     map_summary_thresholds_frame.grid(row=1, column=1, columnspan=2, sticky="nw", padx=(25, 0), pady=(0, 0))
     # Chain aktif
     try: chain_toggle.config(state="normal")
@@ -7977,7 +8081,7 @@ def switch_to_map():
     mid.place(x=PADX, y=95, width=WINDOW_W - 2 * PADX)
     weights.place(x=PADX, y=170, width=WINDOW_W - 2 * PADX)
     # Map tabs ve bottom
-    style.configure("TNotebook.Tab", width=(WINDOW_W - 2 * PADX) // 3, padding=[0, 4])
+    style.configure("TNotebook.Tab", width=(WINDOW_W - 2 * PADX) // 2, padding=[0, 4])
     map_tabs.place(x=PADX, y=204, width=WINDOW_W - 2 * PADX, height=220)
     map_bottom.place(x=PADX, y=439, width=WINDOW_W - 2 * PADX, height=26)
 

@@ -3,6 +3,13 @@
 Waukeen Crafting Assistant (WCA), Path of Exile icin cluster, map, socket/color
 ve base jewel craft akislari sunan Windows masaustu uygulamasidir.
 
+Map Craft ekraninda Normal Map ve Memory/Nightmare icin ayri istenmeyen mod
+listeleri bulunur. Quant, Rarity ve Pack esikleri birlikte kontrol edilir.
+`Alchemy + Vaal` modu, Chain ile envanterdeki T16 mapleri sirayla isler. Normal
+rarity maplere once Alchemy, Rare maplere dogrudan Vaal uygular; kabul edilmeyen
+sonuclari acik stashe Ctrl+sol tikla gonderir. Bu moddan once Orb Locations
+ekraninda Vaal Orb konumu ayarlanmalidir.
+
 ## Kurulum
 
 1. En son GitHub Release icindeki `Waukeen-Crafting-Assistant-Windows.zip`
