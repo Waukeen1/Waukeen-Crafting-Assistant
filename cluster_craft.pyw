@@ -6359,8 +6359,8 @@ base_jewel_no_regal_var = tk.BooleanVar(value=False)
 base_jewel_use_augment_var = tk.BooleanVar(value=True)
 base_jewel_use_exalt_var = tk.BooleanVar(value=True)
 base_jewel_use_annul_var = tk.BooleanVar(value=True)
-item_base_var = tk.StringVar(value="Blizzard Crown")
-item_influence_var = tk.StringVar(value="Warlord")
+item_base_var = tk.StringVar(value="")
+item_influence_var = tk.StringVar(value="")
 item_level_var = tk.StringVar(value="75")
 item_required_count_var = tk.StringVar(value="1")
 item_use_augment_var = tk.BooleanVar(value=True)
@@ -6690,7 +6690,7 @@ ttk.Label(item_frame, text="Base:").grid(row=1, column=0, sticky="w")
 item_base_cb = ttk.Combobox(
     item_frame,
     textvariable=item_base_var,
-    values=generic_item.base_names(get_item_affix_catalog()),
+    values=[],
     state="normal",
     style="Dark.TCombobox",
 )
@@ -6879,16 +6879,43 @@ def add_selected_item_mod(event=None):
         item_target_ids.append(mod["id"])
         populate_item_target_list()
 
+def post_item_base_dropdown():
+    try:
+        if item_base_cb.focus_get() == item_base_cb:
+            item_base_cb.tk.call(
+                "ttk::combobox::Post",
+                str(item_base_cb),
+            )
+    except tk.TclError:
+        pass
+
 def filter_item_base_values(event=None):
-    typed = item_base_var.get().strip().casefold()
-    names = generic_item.base_names(get_item_affix_catalog())
-    item_base_cb["values"] = (
-        [name for name in names if typed in name.casefold()]
-        if typed
-        else names
+    matches = generic_item.matching_base_names(
+        get_item_affix_catalog(),
+        item_base_var.get(),
     )
+    item_base_cb["values"] = matches
     if event and event.keysym in ("Return", "Tab"):
         reload_item_mod_pool()
+        return
+    if not event or event.keysym in (
+        "Down",
+        "Up",
+        "Left",
+        "Right",
+        "Escape",
+    ):
+        return
+    try:
+        if matches:
+            root.after_idle(post_item_base_dropdown)
+        else:
+            item_base_cb.tk.call(
+                "ttk::combobox::Unpost",
+                str(item_base_cb),
+            )
+    except tk.TclError:
+        pass
 
 def toggle_item_mod_pool():
     if item_mod_pool_visible[0]:
@@ -7744,11 +7771,6 @@ def switch_to_item():
         width=WINDOW_W - 2 * PADX,
         height=330,
     )
-    if not item_target_ids:
-        preferred = "Warlord Blizzard Crown - Crit Multi"
-        if preferred in list_templates_from_folder():
-            template_var.set(preferred)
-            load_template()
 
 btn_cluster.config(command=switch_to_cluster)
 btn_map.config(command=switch_to_map)

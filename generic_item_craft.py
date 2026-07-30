@@ -48,6 +48,21 @@ def base_names(catalog: dict) -> list[str]:
     return sorted((base["name"] for base in catalog["bases"]), key=str.casefold)
 
 
+def matching_base_names(
+    catalog: dict,
+    query: str,
+    minimum_chars: int = 3,
+) -> list[str]:
+    normalized = (query or "").strip().casefold()
+    if len(normalized) < minimum_chars:
+        return []
+    return [
+        name
+        for name in base_names(catalog)
+        if normalized in name.casefold()
+    ]
+
+
 def find_base(catalog: dict, name: str) -> dict | None:
     return catalog["base_by_name"].get((name or "").strip().casefold())
 

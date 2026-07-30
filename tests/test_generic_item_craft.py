@@ -377,6 +377,19 @@ class GenericItemCraftTests(unittest.TestCase):
             any(mod.get("domain") == "flask" for mod in helmet_mods)
         )
 
+    def test_base_suggestions_start_after_three_characters(self):
+        self.assertEqual(
+            item_craft.matching_base_names(self.catalog, "gr"),
+            [],
+        )
+        matches = item_craft.matching_base_names(self.catalog, "gra")
+        self.assertIn("Granite Flask", matches)
+        self.assertNotIn("Quicksilver Flask", matches)
+        self.assertEqual(
+            item_craft.matching_base_names(self.catalog, "CRO"),
+            item_craft.matching_base_names(self.catalog, "cro"),
+        )
+
     def test_flask_tooltip_parses_affixes_and_stops_on_target(self):
         item_text = "\n".join(
             [
