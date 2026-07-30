@@ -6882,6 +6882,23 @@ def add_selected_item_mod(event=None):
 def post_item_base_dropdown():
     try:
         if item_base_cb.focus_get() == item_base_cb:
+            popdown = item_base_cb.tk.call(
+                "ttk::combobox::PopdownWindow",
+                str(item_base_cb),
+            )
+            listbox = f"{popdown}.f.l"
+            # Native ttk moves focus to the popup on <Map>. Suppress that once
+            # for autocomplete so the user can keep typing without clicking back.
+            item_base_cb.tk.call(
+                "bind",
+                listbox,
+                "<Map>",
+                (
+                    f"focus -force {item_base_cb}; "
+                    f"bind {listbox} <Map> {{}}; "
+                    "break"
+                ),
+            )
             item_base_cb.tk.call(
                 "ttk::combobox::Post",
                 str(item_base_cb),
