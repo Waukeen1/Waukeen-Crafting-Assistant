@@ -267,6 +267,7 @@ except ModuleNotFoundError as exc:
     ensure_runtime_dependencies(APP_NAME, extra_modules=[exc.name])
     import pyautogui, keyboard, pyperclip, requests
 import generic_item_craft as generic_item
+import flask_craft_guide as flask_guide
 try:
     import dxcam
 except ModuleNotFoundError as exc:
@@ -342,6 +343,8 @@ except Exception:
 # cluster paths korunuyor — classify_mod_type() combcraft prefix/suffix tespiti için kullanıyor
 
 WINDOW_W, WINDOW_H = 360, 470
+FLASK_GUIDE_W, FLASK_GUIDE_H = 344, WINDOW_H
+FLASK_GUIDE_GAP = 4
 PADX, PADY = 5, 5
 shift_spam_active = False
 socket_shift_spam_orb = None
@@ -6174,6 +6177,9 @@ def _do_drag(event):
     x = event.x_root - _drag_state["x"]
     y = event.y_root - _drag_state["y"]
     root.geometry(f"{WINDOW_W}x{WINDOW_H}+{x}+{y}")
+    positioner = globals().get("position_flask_guide_panel")
+    if positioner:
+        positioner()
 
 def _apply_rounded_corners():
     try:
@@ -6372,6 +6378,7 @@ item_affix_filter_var = tk.StringVar(value="All")
 item_target_ids = []
 item_mod_pool_entries = []
 item_mod_pool_visible = [False]
+flask_guide_visible = [False]
 
 # ── top bar: Cluster Craft / Map Craft toggle + gear ──────────────────────
 settings_bar = ttk.Frame(root)
@@ -6683,7 +6690,7 @@ item_frame.grid_columnconfigure(1, weight=1)
 item_frame.grid_columnconfigure(3, weight=1)
 
 ttk.Label(item_frame, text="Item Craft", font=("Segoe UI", 9, "bold")).grid(
-    row=0, column=0, columnspan=4, sticky="w", pady=(0, 5)
+    row=0, column=0, columnspan=4, sticky="w", padx=(17, 0), pady=(0, 5)
 )
 
 ttk.Label(item_frame, text="Base:").grid(row=1, column=0, sticky="w")
@@ -6801,7 +6808,11 @@ item_mod_pool_frame.grid_rowconfigure(3, weight=1)
 
 item_pool_top = ttk.Frame(item_mod_pool_frame)
 item_pool_top.grid(row=0, column=0, sticky="ew", pady=(0, 4))
-ttk.Label(item_pool_top, text="Natural Mod Pool", font=("Segoe UI", 9, "bold")).pack(side="left")
+ttk.Label(
+    item_pool_top,
+    text="Natural Mod Pool",
+    font=("Segoe UI", 9, "bold"),
+).pack(side="left", padx=(17, 0))
 item_affix_filter_cb = ttk.Combobox(
     item_pool_top,
     textvariable=item_affix_filter_var,
@@ -6991,6 +7002,287 @@ ttk.Label(
     font=("Segoe UI", 8, "italic"),
 ).grid(row=8, column=0, columnspan=4, sticky="w", pady=(5, 0))
 reload_item_mod_pool()
+
+# Offline flask recommendation drawer for Item Craft.
+flask_guide_panel = tk.Toplevel(root)
+flask_guide_panel.withdraw()
+flask_guide_panel.overrideredirect(True)
+flask_guide_panel.resizable(False, False)
+flask_guide_panel.configure(bg="#2b2b2b")
+flask_guide_panel.attributes("-topmost", True)
+try:
+    flask_guide_panel.transient(root)
+except tk.TclError:
+    pass
+
+flask_guide_title_bar = tk.Frame(
+    flask_guide_panel,
+    bg="#2b2b2b",
+    height=21,
+    highlightthickness=0,
+    bd=0,
+)
+flask_guide_title_bar.place(x=0, y=0, width=FLASK_GUIDE_W, height=21)
+flask_guide_title_bar.bind("<ButtonPress-1>", _start_drag)
+flask_guide_title_bar.bind("<B1-Motion>", _do_drag)
+flask_guide_title_label = tk.Label(
+    flask_guide_title_bar,
+    text="Pot Craft Rehberi",
+    bg="#2b2b2b",
+    fg="#d6ad63",
+    font=("Tahoma", 8, "bold"),
+)
+flask_guide_title_label.place(x=7, y=1, height=18)
+flask_guide_title_label.bind("<ButtonPress-1>", _start_drag)
+flask_guide_title_label.bind("<B1-Motion>", _do_drag)
+
+flask_guide_body = ttk.Frame(flask_guide_panel, padding=(8, 6))
+flask_guide_body.place(
+    x=0,
+    y=21,
+    width=FLASK_GUIDE_W,
+    height=FLASK_GUIDE_H - 21,
+)
+flask_guide_body.grid_columnconfigure(0, weight=1)
+flask_guide_body.grid_rowconfigure(5, weight=1)
+
+flask_guide_type_var = tk.StringVar(value=flask_guide.flask_types()[0])
+flask_guide_overview_var = tk.StringVar(value="")
+flask_guide_current_combos = []
+
+ttk.Label(
+    flask_guide_body,
+    text="Pot turu:",
+    font=("Segoe UI", 9, "bold"),
+).grid(row=0, column=0, sticky="w")
+flask_guide_type_cb = ttk.Combobox(
+    flask_guide_body,
+    textvariable=flask_guide_type_var,
+    values=flask_guide.flask_types(),
+    state="readonly",
+    style="Dark.TCombobox",
+)
+flask_guide_type_cb.grid(row=1, column=0, sticky="ew", pady=(2, 5))
+ttk.Label(
+    flask_guide_body,
+    textvariable=flask_guide_overview_var,
+    wraplength=FLASK_GUIDE_W - 24,
+    justify="left",
+).grid(row=2, column=0, sticky="ew", pady=(0, 6))
+ttk.Label(
+    flask_guide_body,
+    text="En iyi kombinasyonlar:",
+    font=("Segoe UI", 9, "bold"),
+).grid(row=3, column=0, sticky="w")
+
+flask_guide_combo_list = tk.Listbox(
+    flask_guide_body,
+    height=6,
+    exportselection=False,
+    bg="#090909",
+    fg="#f2f2f2",
+    selectbackground="#5a4a2b",
+    selectforeground="#ffffff",
+    highlightbackground="#111111",
+    font=("Tahoma", 8),
+)
+flask_guide_combo_list.grid(row=4, column=0, sticky="ew", pady=(2, 6))
+
+flask_guide_detail_wrap = ttk.Frame(flask_guide_body)
+flask_guide_detail_wrap.grid(row=5, column=0, sticky="nsew")
+flask_guide_detail = tk.Text(
+    flask_guide_detail_wrap,
+    height=12,
+    wrap="word",
+    bg="#111111",
+    fg="#e7e0d2",
+    insertbackground="#ffffff",
+    selectbackground="#5a4a2b",
+    relief="sunken",
+    bd=1,
+    font=("Tahoma", 8),
+    padx=6,
+    pady=5,
+)
+flask_guide_detail_scroll = ttk.Scrollbar(
+    flask_guide_detail_wrap,
+    orient="vertical",
+    command=flask_guide_detail.yview,
+)
+flask_guide_detail.configure(yscrollcommand=flask_guide_detail_scroll.set)
+flask_guide_detail.pack(side="left", fill="both", expand=True)
+flask_guide_detail_scroll.pack(side="right", fill="y")
+flask_guide_detail.configure(state="disabled")
+
+flask_guide_buttons = ttk.Frame(flask_guide_body)
+flask_guide_buttons.grid(row=6, column=0, sticky="ew", pady=(6, 0))
+
+
+def position_flask_guide_panel(_event=None):
+    if not flask_guide_visible[0]:
+        return
+    try:
+        root.update_idletasks()
+        x = root.winfo_x() - FLASK_GUIDE_W - FLASK_GUIDE_GAP
+        y = root.winfo_y()
+        flask_guide_panel.geometry(
+            f"{FLASK_GUIDE_W}x{FLASK_GUIDE_H}{x:+d}{y:+d}"
+        )
+    except tk.TclError:
+        pass
+
+
+def show_selected_flask_guide(_event=None):
+    selection = flask_guide_combo_list.curselection()
+    if not selection or not flask_guide_current_combos:
+        return
+    combo = flask_guide_current_combos[selection[0]]
+    detail = (
+        f"Base: {flask_guide_type_var.get()}\n"
+        f"Minimum iLvl: {combo['min_item_level']}\n\n"
+        f"Prefix\n{combo['prefix']}\n\n"
+        f"Suffix\n{combo['suffix']}\n\n"
+        f"Neden\n{combo['why']}\n\n"
+        f"Bitiris\n{combo['finish']}"
+    )
+    flask_guide_detail.configure(state="normal")
+    flask_guide_detail.delete("1.0", "end")
+    flask_guide_detail.insert("1.0", detail)
+    flask_guide_detail.configure(state="disabled")
+
+
+def refresh_flask_guide(_event=None):
+    guide = flask_guide.guide_for(flask_guide_type_var.get())
+    flask_guide_overview_var.set(guide["overview"])
+    flask_guide_current_combos[:] = guide["combinations"]
+    flask_guide_combo_list.delete(0, "end")
+    for combo in flask_guide_current_combos:
+        flask_guide_combo_list.insert(
+            "end",
+            f"i{combo['min_item_level']} | {combo['title']}",
+        )
+    if flask_guide_current_combos:
+        flask_guide_combo_list.selection_set(0)
+        flask_guide_combo_list.activate(0)
+        show_selected_flask_guide()
+
+
+def use_flask_guide_base(_event=None):
+    base_name = flask_guide_type_var.get()
+    item_base_var.set(base_name)
+    item_influence_var.set("None")
+    item_base_cb["values"] = (base_name,)
+    reload_item_mod_pool()
+
+
+def hide_flask_guide_panel(hide_arrow=False):
+    flask_guide_visible[0] = False
+    try:
+        flask_guide_panel.withdraw()
+        flask_guide_arrow.config(text="<")
+        if hide_arrow:
+            flask_guide_arrow.place_forget()
+    except tk.TclError:
+        pass
+
+
+def show_flask_guide_panel():
+    if app_mode.get() != "item":
+        return
+    flask_guide_visible[0] = True
+    refresh_flask_guide()
+    position_flask_guide_panel()
+    try:
+        flask_guide_panel.deiconify()
+        flask_guide_panel.lift()
+        flask_guide_panel.attributes("-topmost", True)
+        flask_guide_arrow.config(text=">")
+        flask_guide_panel.after(
+            20,
+            lambda: _apply_window_rounding(
+                flask_guide_panel,
+                FLASK_GUIDE_W,
+                FLASK_GUIDE_H,
+                radius=18,
+            ),
+        )
+    except tk.TclError:
+        flask_guide_visible[0] = False
+
+
+def toggle_flask_guide_panel():
+    if flask_guide_visible[0]:
+        hide_flask_guide_panel()
+    else:
+        show_flask_guide_panel()
+
+
+def show_flask_guide_arrow():
+    flask_guide_arrow.config(text=">" if flask_guide_visible[0] else "<")
+    flask_guide_arrow.place(x=0, y=107, width=19, height=27)
+
+
+def sync_flask_guide_position(event=None):
+    if event is not None and event.widget is not root:
+        return
+    if flask_guide_visible[0]:
+        position_flask_guide_panel()
+
+
+ttk.Button(
+    flask_guide_buttons,
+    text="Base'i Item Craft'a aktar",
+    style="Dark.TButton",
+    command=use_flask_guide_base,
+).pack(side="left", fill="x", expand=True, padx=(0, 2))
+ttk.Button(
+    flask_guide_buttons,
+    text="Kapat",
+    style="Dark.TButton",
+    command=hide_flask_guide_panel,
+).pack(side="left", padx=(2, 0))
+ttk.Label(
+    flask_guide_body,
+    text="Yerel rehberdir; API veya fiyat taramasi kullanmaz.",
+    font=("Segoe UI", 8, "italic"),
+).grid(row=7, column=0, sticky="w", pady=(5, 0))
+
+flask_guide_arrow = tk.Button(
+    root,
+    text="<",
+    command=toggle_flask_guide_panel,
+    bg="#3a3a3a",
+    fg="#d6ad63",
+    activebackground="#4a4a4a",
+    activeforeground="#ffffff",
+    relief="raised",
+    bd=1,
+    font=("Tahoma", 9, "bold"),
+    padx=0,
+    pady=0,
+    highlightthickness=0,
+)
+flask_guide_close = tk.Button(
+    flask_guide_panel,
+    text=">",
+    command=hide_flask_guide_panel,
+    bg="#2b2b2b",
+    fg="#e6e6e6",
+    activebackground="#3a3a3a",
+    activeforeground="#ffffff",
+    relief="flat",
+    bd=0,
+    font=("Tahoma", 9, "bold"),
+    padx=0,
+    pady=0,
+    highlightthickness=0,
+)
+flask_guide_close.place(x=FLASK_GUIDE_W - 22, y=0, width=22, height=18)
+flask_guide_panel.protocol("WM_DELETE_WINDOW", hide_flask_guide_panel)
+flask_guide_type_cb.bind("<<ComboboxSelected>>", refresh_flask_guide)
+flask_guide_combo_list.bind("<<ListboxSelect>>", show_selected_flask_guide)
+flask_guide_combo_list.bind("<Double-Button-1>", use_flask_guide_base)
+refresh_flask_guide()
 
 # craft logic + flags
 mid = ttk.Frame(root)
@@ -7592,6 +7884,7 @@ settings_btn.config(command=toggle_settings_panel)
 # ── APP MODE SWITCHING: Cluster ↔ Map ───────────────────────────────────────
 def switch_to_cluster():
     app_mode.set("cluster")
+    hide_flask_guide_panel(hide_arrow=True)
     refresh_templates()
     btn_cluster.state(["pressed"])
     btn_map.state(["!pressed"])
@@ -7637,6 +7930,7 @@ def switch_to_cluster():
 
 def switch_to_map():
     app_mode.set("map")
+    hide_flask_guide_panel(hide_arrow=True)
     refresh_templates()
     btn_map.state(["pressed"])
     btn_cluster.state(["!pressed"])
@@ -7690,6 +7984,7 @@ def switch_to_map():
 def switch_to_socket():
     global current_mode
     app_mode.set("socket")
+    hide_flask_guide_panel(hide_arrow=True)
     current_mode = "normal"
     btn_socket.state(["pressed"])
     btn_cluster.state(["!pressed"])
@@ -7718,6 +8013,7 @@ def switch_to_socket():
 def switch_to_base_jewel():
     global current_mode
     app_mode.set("base_jewel")
+    hide_flask_guide_panel(hide_arrow=True)
     current_mode = "normal"
     refresh_templates()
     btn_base_jewel.state(["pressed"])
@@ -7788,6 +8084,7 @@ def switch_to_item():
         width=WINDOW_W - 2 * PADX,
         height=330,
     )
+    show_flask_guide_arrow()
 
 btn_cluster.config(command=switch_to_cluster)
 btn_map.config(command=switch_to_map)
@@ -8174,6 +8471,7 @@ def process_log_queue():
 
 # ================ WINDOW EVENTS & MAIN ================
 def on_main_minimize(event=None):
+    hide_flask_guide_panel()
     if log_window and log_window.winfo_exists():
         log_window.withdraw()
 
@@ -8210,6 +8508,7 @@ root.after(200, process_gui_queue)
 create_log_window()
 root.bind("<Configure>", _schedule_root_rounding, add="+")
 root.bind("<Configure>", update_log_window_position)
+root.bind("<Configure>", sync_flask_guide_position, add="+")
 root.bind("<Unmap>", on_main_minimize)
 root.bind("<Map>", on_main_restore)
 root.protocol("WM_DELETE_WINDOW", on_main_close)
