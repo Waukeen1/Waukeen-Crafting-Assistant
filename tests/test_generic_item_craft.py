@@ -79,6 +79,24 @@ class GenericItemCraftTests(unittest.TestCase):
         )
         self.assertEqual(action, "scour")
 
+    def test_chance_loop_uses_chance_on_normal_item(self):
+        action, _ = item_craft.choose_chance_to_unique_action("Normal")
+        self.assertEqual(action, "chance")
+
+    def test_chance_loop_scours_magic_and_rare_results(self):
+        for rarity in ("Magic", "Rare"):
+            with self.subTest(rarity=rarity):
+                action, _ = item_craft.choose_chance_to_unique_action(rarity)
+                self.assertEqual(action, "scour")
+
+    def test_chance_loop_stops_immediately_on_unique(self):
+        action, _ = item_craft.choose_chance_to_unique_action("Unique")
+        self.assertEqual(action, "done")
+
+    def test_chance_loop_stops_on_unknown_rarity(self):
+        action, _ = item_craft.choose_chance_to_unique_action("Unknown")
+        self.assertEqual(action, "stop")
+
     def test_movement_speed_tiers_can_be_or_alternatives(self):
         summary = item_craft.analyze(
             self.catalog,

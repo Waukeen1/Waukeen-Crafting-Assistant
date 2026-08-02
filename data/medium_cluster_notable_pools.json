@@ -1,0 +1,1365 @@
+{
+  "source": "https://poedb.tw/us/Cluster_Jewel",
+  "scanned_at": "2026-07-31T19:50:23.876287+00:00",
+  "pools": {
+    "12increasedburningdamage": {
+      "clusterName": "12 % increased Burning Damage",
+      "notables": [
+        {
+          "notableName": "Eye of the Storm",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_3818661553"
+        },
+        {
+          "notableName": "Master of Fire",
+          "level": 75,
+          "side": "prefix",
+          "notableId": "explicit.stat_1462135249"
+        },
+        {
+          "notableName": "Smoking Remains",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_2322980282"
+        },
+        {
+          "notableName": "Cremator",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_1153801980"
+        },
+        {
+          "notableName": "Blowback",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_1612414696"
+        },
+        {
+          "notableName": "Fan the Flames",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_2918755450"
+        },
+        {
+          "notableName": "Cooked Alive",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_2938895712"
+        },
+        {
+          "notableName": "Burning Bright",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_4199056048"
+        },
+        {
+          "notableName": "Wrapped in Flame",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_241783558"
+        },
+        {
+          "notableName": "Wasting Affliction",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_2066820199"
+        },
+        {
+          "notableName": "Haemorrhage",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_72129119"
+        },
+        {
+          "notableName": "Flow of Life",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_2350430215"
+        },
+        {
+          "notableName": "Exposure Therapy",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_131358113"
+        },
+        {
+          "notableName": "Brush with Death",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_2900833792"
+        },
+        {
+          "notableName": "Vile Reinvigoration",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_647201233"
+        },
+        {
+          "notableName": "Circling Oblivion",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_2129392647"
+        },
+        {
+          "notableName": "Brewed for Potency",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_3250272113"
+        },
+        {
+          "notableName": "Student of Decay",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_3202667190"
+        }
+      ]
+    },
+    "12increasedchaosdamageovertime": {
+      "clusterName": "12 % increased Chaos Damage over Time",
+      "notables": [
+        {
+          "notableName": "Unwaveringly Evil",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_2788982914"
+        },
+        {
+          "notableName": "Dark Ideation",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_1603621602"
+        },
+        {
+          "notableName": "Wicked Pall",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_1616734644"
+        },
+        {
+          "notableName": "Septic Spells",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_4290522695"
+        },
+        {
+          "notableName": "Low Tolerance",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_3989400244"
+        },
+        {
+          "notableName": "Steady Torment",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_3500334379"
+        },
+        {
+          "notableName": "Eternal Suffering",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_2144634814"
+        },
+        {
+          "notableName": "Eldritch Inspiration",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_3737604164"
+        },
+        {
+          "notableName": "Wasting Affliction",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_2066820199"
+        },
+        {
+          "notableName": "Haemorrhage",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_72129119"
+        },
+        {
+          "notableName": "Flow of Life",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_2350430215"
+        },
+        {
+          "notableName": "Exposure Therapy",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_131358113"
+        },
+        {
+          "notableName": "Brush with Death",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_2900833792"
+        },
+        {
+          "notableName": "Vile Reinvigoration",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_647201233"
+        },
+        {
+          "notableName": "Circling Oblivion",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_2129392647"
+        },
+        {
+          "notableName": "Brewed for Potency",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_3250272113"
+        },
+        {
+          "notableName": "Student of Decay",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_3202667190"
+        }
+      ]
+    },
+    "12increasedphysicaldamageovertime": {
+      "clusterName": "12 % increased Physical Damage over Time",
+      "notables": [
+        {
+          "notableName": "Wound Aggravation",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_69078820"
+        },
+        {
+          "notableName": "Vivid Hues",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_3957006524"
+        },
+        {
+          "notableName": "Rend",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_4263287206"
+        },
+        {
+          "notableName": "Disorienting Wounds",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_3351136461"
+        },
+        {
+          "notableName": "Compound Injury",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_4018305528"
+        },
+        {
+          "notableName": "Steady Torment",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_3500334379"
+        },
+        {
+          "notableName": "Wasting Affliction",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_2066820199"
+        },
+        {
+          "notableName": "Haemorrhage",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_72129119"
+        },
+        {
+          "notableName": "Flow of Life",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_2350430215"
+        },
+        {
+          "notableName": "Exposure Therapy",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_131358113"
+        },
+        {
+          "notableName": "Brush with Death",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_2900833792"
+        },
+        {
+          "notableName": "Vile Reinvigoration",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_647201233"
+        },
+        {
+          "notableName": "Circling Oblivion",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_2129392647"
+        },
+        {
+          "notableName": "Brewed for Potency",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_3250272113"
+        },
+        {
+          "notableName": "Student of Decay",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_3202667190"
+        },
+        {
+          "notableName": "Blood Artist",
+          "level": 75,
+          "side": "prefix",
+          "notableId": "explicit.stat_2284771334"
+        },
+        {
+          "notableName": "Phlebotomist",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_3057154383"
+        }
+      ]
+    },
+    "12increasedcolddamageovertime": {
+      "clusterName": "12 % increased Cold Damage over Time",
+      "notables": [
+        {
+          "notableName": "Cold-Blooded Killer",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_836566759"
+        },
+        {
+          "notableName": "Wasting Affliction",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_2066820199"
+        },
+        {
+          "notableName": "Haemorrhage",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_72129119"
+        },
+        {
+          "notableName": "Flow of Life",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_2350430215"
+        },
+        {
+          "notableName": "Exposure Therapy",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_131358113"
+        },
+        {
+          "notableName": "Brush with Death",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_2900833792"
+        },
+        {
+          "notableName": "Vile Reinvigoration",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_647201233"
+        },
+        {
+          "notableName": "Circling Oblivion",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_2129392647"
+        },
+        {
+          "notableName": "Brewed for Potency",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_3250272113"
+        },
+        {
+          "notableName": "Chilling Presence",
+          "level": 75,
+          "side": "prefix",
+          "notableId": "explicit.stat_2834490860"
+        },
+        {
+          "notableName": "Deep Chill",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_1703766309"
+        },
+        {
+          "notableName": "Blast-Freeze",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_693808153"
+        }
+      ]
+    },
+    "10increaseddamageovertime": {
+      "clusterName": "10 % increased Damage over Time",
+      "notables": [
+        {
+          "notableName": "Wasting Affliction",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_2066820199"
+        },
+        {
+          "notableName": "Haemorrhage",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_72129119"
+        },
+        {
+          "notableName": "Flow of Life",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_2350430215"
+        },
+        {
+          "notableName": "Exposure Therapy",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_131358113"
+        },
+        {
+          "notableName": "Brush with Death",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_2900833792"
+        },
+        {
+          "notableName": "Vile Reinvigoration",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_647201233"
+        },
+        {
+          "notableName": "Circling Oblivion",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_2129392647"
+        },
+        {
+          "notableName": "Brewed for Potency",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_3250272113"
+        },
+        {
+          "notableName": "Student of Decay",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_3202667190"
+        }
+      ]
+    },
+    "10increasedeffectofnondamagingailmentsailmentsthatdonotdealdamagearescorchedchilledfrozenbrittleshockedandsapped": {
+      "clusterName": "10 % increased Effect of Non-Damaging Ailments(Ailments that do not deal Damage are Scorched, Chilled, Frozen, Brittle, Shocked, and Sapped)",
+      "notables": [
+        {
+          "notableName": "Eye of the Storm",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_3818661553"
+        },
+        {
+          "notableName": "Astonishing Affliction",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_2428334013"
+        },
+        {
+          "notableName": "Cold Conduction",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_1274505521"
+        },
+        {
+          "notableName": "Inspired Oppression",
+          "level": 75,
+          "side": "prefix",
+          "notableId": "explicit.stat_3872380586"
+        },
+        {
+          "notableName": "Chilling Presence",
+          "level": 75,
+          "side": "prefix",
+          "notableId": "explicit.stat_2834490860"
+        },
+        {
+          "notableName": "Deep Chill",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_1703766309"
+        },
+        {
+          "notableName": "Blast-Freeze",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_693808153"
+        },
+        {
+          "notableName": "Stormrider",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_889728548"
+        },
+        {
+          "notableName": "Overshock",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_3777170562"
+        }
+      ]
+    },
+    "3increasedeffectofnoncurseaurasfromyourskills": {
+      "clusterName": "3 % increased effect of Non-Curse Auras from your Skills",
+      "notables": [
+        {
+          "notableName": "Replenishing Presence",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_1496043857"
+        },
+        {
+          "notableName": "Master of Command",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_3257074218"
+        },
+        {
+          "notableName": "Spiteful Presence",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_1134501245"
+        },
+        {
+          "notableName": "Purposeful Harbinger",
+          "level": 75,
+          "side": "prefix",
+          "notableId": "explicit.stat_507505131"
+        },
+        {
+          "notableName": "Destructive Aspect",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_3860179422"
+        },
+        {
+          "notableName": "Electric Presence",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_3950683692"
+        },
+        {
+          "notableName": "Volatile Presence",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_2350668735"
+        },
+        {
+          "notableName": "Righteous Path",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_2620267328"
+        },
+        {
+          "notableName": "Pure Might",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_2372915005"
+        },
+        {
+          "notableName": "Pure Guile",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_1621496909"
+        },
+        {
+          "notableName": "Pure Aptitude",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_3509724289"
+        },
+        {
+          "notableName": "Self-Control",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_3025453294"
+        },
+        {
+          "notableName": "Uncompromising",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_382360671"
+        },
+        {
+          "notableName": "Sublime Form",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_2251304016"
+        },
+        {
+          "notableName": "Mortifying Aspect",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_3881737087"
+        },
+        {
+          "notableName": "Frantic Aspect",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_792262925"
+        },
+        {
+          "notableName": "Introspection",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_1309218394"
+        }
+      ]
+    },
+    "2increasedeffectofyourcurses": {
+      "clusterName": "2 % increased Effect of your Curses",
+      "notables": [
+        {
+          "notableName": "Evil Eye",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_156080652"
+        },
+        {
+          "notableName": "Doedre's Spite",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_462115791"
+        },
+        {
+          "notableName": "Victim Maker",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_1936135020"
+        },
+        {
+          "notableName": "Lord of Drought",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_2055715585"
+        },
+        {
+          "notableName": "Blizzard Caller",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_3758712376"
+        },
+        {
+          "notableName": "Tempt the Storm",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_348883745"
+        },
+        {
+          "notableName": "Misery Everlasting",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_3832665876"
+        },
+        {
+          "notableName": "Exploit Weakness",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_50129423"
+        },
+        {
+          "notableName": "Hound's Mark",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_555800967"
+        },
+        {
+          "notableName": "Doedre's Gluttony",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_2695848124"
+        },
+        {
+          "notableName": "Doedre's Apathy",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_1381945089"
+        },
+        {
+          "notableName": "Master of the Maelstrom",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_185592058"
+        }
+      ]
+    },
+    "10increaseddamagewhileaffectedbyaherald": {
+      "clusterName": "10 % increased Damage while affected by a Herald",
+      "notables": [
+        {
+          "notableName": "Purposeful Harbinger",
+          "level": 75,
+          "side": "prefix",
+          "notableId": "explicit.stat_507505131"
+        },
+        {
+          "notableName": "Heraldry",
+          "level": 75,
+          "side": "prefix",
+          "notableId": "explicit.stat_3274270612"
+        },
+        {
+          "notableName": "Endbringer",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_2150878631"
+        },
+        {
+          "notableName": "Empowered Envoy",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_2032453153"
+        },
+        {
+          "notableName": "Dark Messenger",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_3784610129"
+        },
+        {
+          "notableName": "Agent of Destruction",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_3122491961"
+        },
+        {
+          "notableName": "Lasting Impression",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_426715778"
+        },
+        {
+          "notableName": "Self-Fulfilling Prophecy",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_2644533453"
+        }
+      ]
+    },
+    "minionsdeal10increaseddamagewhileyouareaffectedbyaherald": {
+      "clusterName": "Minions deal 10 % increased Damage while you are affected by a Herald",
+      "notables": [
+        {
+          "notableName": "Purposeful Harbinger",
+          "level": 75,
+          "side": "prefix",
+          "notableId": "explicit.stat_507505131"
+        },
+        {
+          "notableName": "Heraldry",
+          "level": 75,
+          "side": "prefix",
+          "notableId": "explicit.stat_3274270612"
+        },
+        {
+          "notableName": "Endbringer",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_2150878631"
+        },
+        {
+          "notableName": "Cult-Leader",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_2026112251"
+        },
+        {
+          "notableName": "Lasting Impression",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_426715778"
+        },
+        {
+          "notableName": "Invigorating Portents",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_2262034536"
+        },
+        {
+          "notableName": "Pure Agony",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_1507409483"
+        },
+        {
+          "notableName": "Disciples",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_3177526694"
+        }
+      ]
+    },
+    "exertedattacksdeal20increaseddamage": {
+      "clusterName": "Exerted Attacks deal 20 % increased Damage",
+      "notables": [
+        {
+          "notableName": "Mob Mentality",
+          "level": 75,
+          "side": "prefix",
+          "notableId": "explicit.stat_1048879642"
+        },
+        {
+          "notableName": "Cry Wolf",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_1821748178"
+        },
+        {
+          "notableName": "Haunting Shout",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_1080363357"
+        },
+        {
+          "notableName": "Lead By Example",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_2195406641"
+        },
+        {
+          "notableName": "Provocateur",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_814369372"
+        },
+        {
+          "notableName": "Warning Call",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_578355556"
+        },
+        {
+          "notableName": "Rattling Bellow",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_4288473380"
+        },
+        {
+          "notableName": "Holy Word",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_3697635701"
+        }
+      ]
+    },
+    "15increasedcriticalstrikechance": {
+      "clusterName": "15 % increased Critical Strike Chance",
+      "notables": [
+        {
+          "notableName": "Precise Retaliation",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_2335364359"
+        },
+        {
+          "notableName": "Skullbreaker",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_315697256"
+        },
+        {
+          "notableName": "Pressure Points",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_3391925584"
+        },
+        {
+          "notableName": "Overwhelming Malice",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_770408103"
+        },
+        {
+          "notableName": "Magnifier",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_2886441936"
+        },
+        {
+          "notableName": "Savage Response",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_4222635921"
+        },
+        {
+          "notableName": "Eye of the Storm",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_3818661553"
+        },
+        {
+          "notableName": "Basics of Pain",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_3084359503"
+        },
+        {
+          "notableName": "Quick Getaway",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_1626818279"
+        },
+        {
+          "notableName": "Provocateur",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_814369372"
+        },
+        {
+          "notableName": "Haemorrhage",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_72129119"
+        }
+      ]
+    },
+    "minionshave12increasedmaximumlife": {
+      "clusterName": "Minions have 12 % increased maximum Life",
+      "notables": [
+        {
+          "notableName": "Renewal",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_3607300552"
+        },
+        {
+          "notableName": "Hulking Corpses",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_3467711950"
+        },
+        {
+          "notableName": "Dread March",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_3087667389"
+        },
+        {
+          "notableName": "Blessed Rebirth",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_1424794574"
+        },
+        {
+          "notableName": "Life from Death",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_2337273077"
+        },
+        {
+          "notableName": "Feasting Fiends",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_383245807"
+        },
+        {
+          "notableName": "Bodyguards",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_791125124"
+        }
+      ]
+    },
+    "10increasedareadamage": {
+      "clusterName": "10 % increased Area Damage",
+      "notables": [
+        {
+          "notableName": "Magnifier",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_2886441936"
+        },
+        {
+          "notableName": "Assert Dominance",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_4222265138"
+        },
+        {
+          "notableName": "Vast Power",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_1996576560"
+        },
+        {
+          "notableName": "Powerful Assault",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_1005475168"
+        },
+        {
+          "notableName": "Titanic Swings",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_2930275641"
+        },
+        {
+          "notableName": "Towering Threat",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_3536778624"
+        },
+        {
+          "notableName": "Expansive Might",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_394918362"
+        }
+      ]
+    },
+    "10increasedprojectiledamage": {
+      "clusterName": "10 % increased Projectile Damage",
+      "notables": [
+        {
+          "notableName": "Follow-Through",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_3984980429"
+        },
+        {
+          "notableName": "Streamlined",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_1397498432"
+        },
+        {
+          "notableName": "Shrieking Bolts",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_2783012144"
+        },
+        {
+          "notableName": "Eye to Eye",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_392942015"
+        },
+        {
+          "notableName": "Repeater",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_2233272527"
+        },
+        {
+          "notableName": "Aerodynamics",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_4120556534"
+        }
+      ]
+    },
+    "12increasedtrapdamage12increasedminedamage": {
+      "clusterName": "12 % increased Trap Damage12 % increased Mine Damage",
+      "notables": [
+        {
+          "notableName": "Set and Forget",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_1101250813"
+        },
+        {
+          "notableName": "Expert Sabotage",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_2084371547"
+        },
+        {
+          "notableName": "Guerilla Tactics",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_1882129725"
+        },
+        {
+          "notableName": "Expendability",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_2020075345"
+        },
+        {
+          "notableName": "Arcane Pyrotechnics",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_2043503530"
+        },
+        {
+          "notableName": "Surprise Sabotage",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_3051562738"
+        },
+        {
+          "notableName": "Careful Handling",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_456502758"
+        }
+      ]
+    },
+    "12increasedtotemdamage": {
+      "clusterName": "12 % increased Totem Damage",
+      "notables": [
+        {
+          "notableName": "Ancestral Echo",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_957679205"
+        },
+        {
+          "notableName": "Ancestral Reach",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_3294884567"
+        },
+        {
+          "notableName": "Ancestral Might",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_3998316"
+        },
+        {
+          "notableName": "Ancestral Preservation",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_3746703776"
+        },
+        {
+          "notableName": "Snaring Spirits",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_3319205340"
+        },
+        {
+          "notableName": "Sleepless Sentries",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_3993957711"
+        },
+        {
+          "notableName": "Ancestral Guidance",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_2387747995"
+        },
+        {
+          "notableName": "Ancestral Inspiration",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_77045106"
+        }
+      ]
+    },
+    "12increasedbranddamagebranddamageisanydamagedealtbybrandskillsorbyskillstriggeredbyabrand": {
+      "clusterName": "12 % increased Brand Damage(Brand Damage is any Damage dealt by Brand Skills or by Skills Triggered by a Brand)",
+      "notables": [
+        {
+          "notableName": "Chip Away",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_968069586"
+        },
+        {
+          "notableName": "Seeker Runes",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_2261237498"
+        },
+        {
+          "notableName": "Remarkable",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_691431951"
+        },
+        {
+          "notableName": "Brand Loyalty",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_3198006994"
+        },
+        {
+          "notableName": "Holy Conquest",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_3898572660"
+        },
+        {
+          "notableName": "Grand Design",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_2350900742"
+        }
+      ]
+    },
+    "channellingskillsdeal12increaseddamage": {
+      "clusterName": "Channelling Skills deal 12 % increased Damage",
+      "notables": [
+        {
+          "notableName": "Vital Focus",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_2134141047"
+        },
+        {
+          "notableName": "Unrestrained Focus",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_1570474940"
+        },
+        {
+          "notableName": "Unwavering Focus",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_367638058"
+        },
+        {
+          "notableName": "Enduring Focus",
+          "level": 75,
+          "side": "prefix",
+          "notableId": "explicit.stat_2522970386"
+        },
+        {
+          "notableName": "Precise Focus",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_2913581789"
+        },
+        {
+          "notableName": "Stoic Focus",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_1088949570"
+        },
+        {
+          "notableName": "Hex Breaker",
+          "level": 75,
+          "side": "prefix",
+          "notableId": "explicit.stat_2341828832"
+        }
+      ]
+    },
+    "6increasedflaskeffectduration": {
+      "clusterName": "6 % increased Flask Effect Duration",
+      "notables": [
+        {
+          "notableName": "Distilled Perfection",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_3652138990"
+        },
+        {
+          "notableName": "Spiked Concoction",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_3372255769"
+        },
+        {
+          "notableName": "Fasting",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_37078857"
+        },
+        {
+          "notableName": "Mender's Wellspring",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_4291434923"
+        },
+        {
+          "notableName": "Special Reserve",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_4235300427"
+        },
+        {
+          "notableName": "Numbing Elixir",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_1028754276"
+        },
+        {
+          "notableName": "Brewed for Potency",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_3250272113"
+        },
+        {
+          "notableName": "Peak Vigour",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_1722821275"
+        },
+        {
+          "notableName": "Liquid Inspiration",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_1094635162"
+        }
+      ]
+    },
+    "10increasedliferecoveryfromflasks10increasedmanarecoveryfromflasks": {
+      "clusterName": "10 % increased Life Recovery from Flasks10 % increased Mana Recovery from Flasks",
+      "notables": [
+        {
+          "notableName": "Distilled Perfection",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_3652138990"
+        },
+        {
+          "notableName": "Spiked Concoction",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_3372255769"
+        },
+        {
+          "notableName": "Fasting",
+          "level": 50,
+          "side": "prefix",
+          "notableId": "explicit.stat_37078857"
+        },
+        {
+          "notableName": "Mender's Wellspring",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_4291434923"
+        },
+        {
+          "notableName": "Special Reserve",
+          "level": 1,
+          "side": "prefix",
+          "notableId": "explicit.stat_4235300427"
+        },
+        {
+          "notableName": "Numbing Elixir",
+          "level": 68,
+          "side": "prefix",
+          "notableId": "explicit.stat_1028754276"
+        }
+      ]
+    }
+  }
+}

@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import json
 import re
+from pathlib import Path
 
 
 PROFILE_NORMAL = "normal"
@@ -17,6 +19,48 @@ THRESHOLD_SPECS = (
     ("Rarity", "map_rarity_thresh", "rarity"),
     ("Pack size", "map_pack_size_thresh", "pack_size"),
 )
+
+
+def load_affix_groups(path) -> list[dict]:
+    source = Path(path)
+    if not source.exists():
+        return []
+    raw = json.loads(source.read_text(encoding="utf-8-sig"))
+    groups = []
+    for entry in raw:
+        if not isinstance(entry, dict):
+            continue
+        mods = [
+            mod.strip()
+            for mod in entry.get("mods", [])
+            if isinstance(mod, str) and mod.strip()
+        ]
+        if not mods:
+            continue
+        groups.append({
+            "tier": entry.get("tier", ""),
+            "affix_type": entry.get("affix_type", ""),
+            "mods": mods,
+            "quantity": int(entry.get("quantity", 0) or 0),
+            "rarity": int(entry.get("rarity", 0) or 0),
+            "pack": int(entry.get("pack", 0) or 0),
+            "currency": int(entry.get("currency", 0) or 0),
+            "scarab": int(entry.get("scarab", 0) or 0),
+            "divination": int(entry.get("divination", 0) or 0),
+            "maps": int(entry.get("maps", 0) or 0),
+        })
+    return groups
+
+
+def unique_affixes(groups: list[dict]) -> list[str]:
+    seen = set()
+    affixes = []
+    for group in groups:
+        for mod in group.get("mods", []):
+            if mod not in seen:
+                seen.add(mod)
+                affixes.append(mod)
+    return affixes
 
 
 def normalize_profile(value) -> str:
@@ -80,7 +124,10 @@ def evaluate(forbidden_match_count: int, summary_stats: dict, settings: dict) ->
 
 
 def parse_map_tier(item_text: str) -> int | None:
-    match = re.search(r"(?im)^\s*Map Tier:\s*(\d+)\s*$", item_text or "")
+    match = re.search(
+        r"(?im)^\s*(?:Map\s+)?Tier\s*:\s*(\d+)\b",
+        item_text or "",
+    )
     return int(match.group(1)) if match else None
 
 
@@ -96,12 +143,18 @@ def is_unidentified(item_text: str) -> bool:
     return bool(re.search(r"(?im)^\s*Unidentified\s*$", item_text or ""))
 
 
-def alchemy_vaal_start_failures(item_text: str, required_tier: int = 16) -> list[str]:
+def alchemy_vaal_start_failures(
+    item_text: str,
+    required_tier: int = 16,
+    allow_missing_tier: bool = False,
+) -> list[str]:
     failures = []
     if not is_map_item(item_text):
         failures.append("item map değil")
     tier = parse_map_tier(item_text)
-    if tier != required_tier:
+    if tier is None and not allow_missing_tier:
+        failures.append(f"Map Tier=? (hedef {required_tier})")
+    elif tier is not None and tier != required_tier:
         failures.append(f"Map Tier={tier if tier is not None else '?'} (hedef {required_tier})")
     rarity_match = re.search(r"(?im)^\s*Rarity:\s*(\w+)\s*$", item_text or "")
     rarity = rarity_match.group(1).casefold() if rarity_match else ""

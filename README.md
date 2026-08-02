@@ -12,27 +12,29 @@ ekraninda Vaal Orb konumu ayarlanmalidir.
 
 ## Kurulum
 
-1. En son GitHub Release icindeki `Waukeen-Crafting-Assistant-Windows.zip`
+1. En son GitHub Release icindeki `Waukeen-Crafting-Assistant-Setup-vX.Y.Z.exe`
    dosyasini indirin.
-2. ZIP dosyasini kalici bir klasore cikartin.
-3. `Waukeen Crafting Assistant.exe` dosyasini calistirin.
+2. Setup'i calistirin ve kurulum adimlarini tamamlayin.
+3. Masaustu veya Baslat menusu kisayolundan WCA'yi acin.
 
-Uygulama klasorunun tamaminin korunmasi gerekir; yalnizca EXE dosyasini tasimayin.
+ZIP paketi tasinabilir kurulum gerektiren durumlar icin ayrica sunulur.
 
 ## Guncellemeler
 
-`Settings > Auto Update` acikken WCA baslangicta GitHub Releases kanalini arka
-planda kontrol eder. `Check for Updates` dugmesi ayni kontrolu elle baslatir.
-Yeni paket SHA-256 ile dogrulanir ve ayarlar ile loglar korunarak harici updater
-tarafindan uygulanir. Craft aktifse otomatik guncelleme uygulamayi kapatmaz.
+WCA her baslangicta GitHub Releases kanalini zorunlu olarak kontrol eder. Kontrol
+tamamlanmadan ana ekran kullanilamaz. Yeni paket SHA-256 ile dogrulanir; ayarlar,
+loglar ve kullanici tarafindan duzenlenen template'ler korunarak harici updater
+tarafindan uygulanir.
 
 ## Gelistirme
 
 ```powershell
 python -m pip install -r requirements.txt
 python -m pip install pyinstaller==6.17.0
-.\tools\build_release.ps1 -Version 1.0.0
+.\tools\build_setup.ps1 -Version 1.0.42
 ```
 
 Olusan uygulama `build\main-dist\Waukeen Crafting Assistant` altinda, yayin
-dosyalari ise `release` altinda bulunur.
+dosyalari ve Windows setup ise `release` altinda bulunur. Setup derlemek icin
+Inno Setup 6 gerekir. Dagitim paketine WCA'nin `.py`/`.pyw` kaynak dosyalari
+eklenmez.

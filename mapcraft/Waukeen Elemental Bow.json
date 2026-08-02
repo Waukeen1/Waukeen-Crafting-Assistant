@@ -1,0 +1,33 @@
+{
+  "app_mode": "map",
+  "craft_logic": "Alchemy + Vaal",
+  "chain_craft": false,
+  "chain_count": 1,
+  "map_profile": "normal",
+  "map_normal_forbidden": [
+    "Rare Monsters have Elemental Thorns reflecting # Elemental Damage",
+    "Players have 60% reduced effect of Non-Curse Auras from Skills",
+    "Monsters cannot be Leeched from",
+    "Players have #% reduced Maximum total Life, Mana and Energy Shield Recovery per second from Leech",
+    "Players have #% less Recovery Rate of Life and Energy Shield",
+    "Players have 25% less Accuracy Rating",
+    "Monsters take #% reduced Extra Damage from Critical Strikes",
+    "#% less effect of Curses on Monsters",
+    "Monsters have 70% chance to Avoid Elemental Ailments"
+  ],
+  "map_memory_forbidden": [
+    "Rare Monsters have Elemental Thorns reflecting # Elemental Damage",
+    "Players have 60% reduced effect of Non-Curse Auras from Skills",
+    "Monsters cannot be Leeched from",
+    "Players have #% reduced Maximum total Life, Mana and Energy Shield Recovery per second from Leech",
+    "Players have #% less Recovery Rate of Life and Energy Shield",
+    "Players have 25% less Accuracy Rating",
+    "Monsters take #% reduced Extra Damage from Critical Strikes",
+    "#% less effect of Curses on Monsters",
+    "Monsters have 70% chance to Avoid Elemental Ailments"
+  ],
+  "map_quantity_thresh": null,
+  "map_rarity_thresh": null,
+  "map_pack_size_thresh": null,
+  "map_use_exalt": false
+}

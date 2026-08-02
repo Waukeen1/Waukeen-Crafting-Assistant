@@ -1,0 +1,347 @@
+{
+  "app_mode": "cluster",
+  "craft_logic": "Rare (regal)",
+  "augment_mode": "Always use",
+  "use_exalt": false,
+  "use_annul": false,
+  "chain_craft": false,
+  "chain_count": 1,
+  "cluster_meta": {
+    "base": "12% increased Chaos Damage over Time",
+    "passive_count": 5,
+    "minimum_item_level": 68,
+    "source": "PoEDB + official trade API market discovery",
+    "minimum_chaos": 40
+  },
+  "comb_craft_data": {
+    "1": [
+      "[P][1] 1 Added Passive Skill is Eldritch Inspiration",
+      "[P][1] 1 Added Passive Skill is Low Tolerance"
+    ],
+    "2": [
+      "[P][1] 1 Added Passive Skill is Flow of Life",
+      "[P][1] 1 Added Passive Skill is Wicked Pall"
+    ],
+    "3": [
+      "[P][1] 1 Added Passive Skill is Brush with Death",
+      "[P][1] 1 Added Passive Skill is Flow of Life"
+    ],
+    "4": [
+      "[P][1] 1 Added Passive Skill is Brush with Death",
+      "[P][1] 1 Added Passive Skill is Wicked Pall"
+    ],
+    "5": [
+      "[P][1] 1 Added Passive Skill is Brush with Death",
+      "[P][1] 1 Added Passive Skill is Wasting Affliction"
+    ],
+    "6": [
+      "[P][1] 1 Added Passive Skill is Low Tolerance",
+      "[P][1] 1 Added Passive Skill is Wasting Affliction"
+    ],
+    "7": [
+      "[P][1] 1 Added Passive Skill is Circling Oblivion",
+      "[P][1] 1 Added Passive Skill is Septic Spells"
+    ],
+    "8": [
+      "[P][1] 1 Added Passive Skill is Flow of Life",
+      "[P][1] 1 Added Passive Skill is Unwaveringly Evil"
+    ],
+    "9": [
+      "[P][1] 1 Added Passive Skill is Circling Oblivion",
+      "[P][1] 1 Added Passive Skill is Wicked Pall"
+    ],
+    "10": [
+      "[P][1] 1 Added Passive Skill is Circling Oblivion",
+      "[P][1] 1 Added Passive Skill is Flow of Life"
+    ],
+    "11": [
+      "[P][1] 1 Added Passive Skill is Flow of Life",
+      "[P][1] 1 Added Passive Skill is Septic Spells"
+    ],
+    "12": [
+      "[P][1] 1 Added Passive Skill is Flow of Life",
+      "[P][1] 1 Added Passive Skill is Student of Decay"
+    ],
+    "13": [
+      "[P][1] 1 Added Passive Skill is Dark Ideation",
+      "[P][1] 1 Added Passive Skill is Eldritch Inspiration"
+    ],
+    "14": [
+      "[P][1] 1 Added Passive Skill is Brewed for Potency",
+      "[P][1] 1 Added Passive Skill is Flow of Life"
+    ],
+    "15": [
+      "[P][1] 1 Added Passive Skill is Eldritch Inspiration",
+      "[P][1] 1 Added Passive Skill is Vile Reinvigoration"
+    ],
+    "16": [
+      "[P][1] 1 Added Passive Skill is Flow of Life",
+      "[P][1] 1 Added Passive Skill is Wasting Affliction"
+    ],
+    "17": [
+      "[P][1] 1 Added Passive Skill is Unwaveringly Evil",
+      "[P][1] 1 Added Passive Skill is Wicked Pall"
+    ]
+  },
+  "combo_prices": {
+    "1": {
+      "min_chaos": 815.0,
+      "max_chaos": 815.0,
+      "avg_chaos": 815.0,
+      "listings": 116,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/4mPKKKvgH9",
+      "scanned_at": "2026-08-01T15:46:27.111758+00:00"
+    },
+    "2": {
+      "min_chaos": 652.0,
+      "max_chaos": 652.0,
+      "avg_chaos": 652.0,
+      "listings": 37,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/WvKGk2gzCm",
+      "scanned_at": "2026-08-01T15:33:31.280916+00:00"
+    },
+    "3": {
+      "min_chaos": 480.0,
+      "max_chaos": 960.0,
+      "avg_chaos": 706.0,
+      "listings": 10,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/kyD0Qz2Qi5",
+      "scanned_at": "2026-08-01T16:40:44.750523+00:00"
+    },
+    "4": {
+      "min_chaos": 326.0,
+      "max_chaos": 489.0,
+      "avg_chaos": 358.6,
+      "listings": 19,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/WvKGk2gzCm",
+      "scanned_at": "2026-08-01T15:33:31.280925+00:00"
+    },
+    "5": {
+      "min_chaos": 160.0,
+      "max_chaos": 200.0,
+      "avg_chaos": 174.5,
+      "listings": 50,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/vevYlbXLCE",
+      "scanned_at": "2026-08-01T16:37:25.460950+00:00"
+    },
+    "6": {
+      "min_chaos": 130.0,
+      "max_chaos": 163.0,
+      "avg_chaos": 159.7,
+      "listings": 47,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/BgzPPw2XU8",
+      "scanned_at": "2026-08-01T15:47:44.751532+00:00"
+    },
+    "7": {
+      "min_chaos": 100.0,
+      "max_chaos": 136.0,
+      "avg_chaos": 115.5,
+      "listings": 100,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/aLG0GWRaTe",
+      "scanned_at": "2026-08-01T15:41:46.015851+00:00"
+    },
+    "8": {
+      "min_chaos": 84.0,
+      "max_chaos": 90.0,
+      "avg_chaos": 87.8,
+      "listings": 117,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/vevDMGQWIE",
+      "scanned_at": "2026-07-31T21:28:02.920809+00:00"
+    },
+    "9": {
+      "min_chaos": 80.0,
+      "max_chaos": 90.0,
+      "avg_chaos": 86.5,
+      "listings": 40,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/jWRQ5qJofX",
+      "scanned_at": "2026-08-01T15:34:21.786580+00:00"
+    },
+    "10": {
+      "min_chaos": 70.0,
+      "max_chaos": 100.0,
+      "avg_chaos": 86.4,
+      "listings": 12,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/7nREMBOBf5",
+      "scanned_at": "2026-08-01T16:41:47.897218+00:00"
+    },
+    "11": {
+      "min_chaos": 65.0,
+      "max_chaos": 130.0,
+      "avg_chaos": 83.0,
+      "listings": 20,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/7nRERW76H5",
+      "scanned_at": "2026-08-01T15:39:27.883541+00:00"
+    },
+    "12": {
+      "min_chaos": 60.0,
+      "max_chaos": 70.0,
+      "avg_chaos": 63.9,
+      "listings": 31,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/7nREMBOBf5",
+      "scanned_at": "2026-08-01T16:41:47.897228+00:00"
+    },
+    "13": {
+      "min_chaos": 55.0,
+      "max_chaos": 2445.0,
+      "avg_chaos": 566.25,
+      "listings": 8,
+      "sample_size": 8,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/jWRQ32PXtX",
+      "scanned_at": "2026-08-01T15:28:27.791815+00:00"
+    },
+    "14": {
+      "min_chaos": 40.0,
+      "max_chaos": 50.0,
+      "avg_chaos": 44.6,
+      "listings": 32,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/7nREMBOBf5",
+      "scanned_at": "2026-08-01T16:41:47.897226+00:00"
+    },
+    "15": {
+      "min_chaos": 40.0,
+      "max_chaos": 80.0,
+      "avg_chaos": 55.4,
+      "listings": 19,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/EBVPGmWYf5",
+      "scanned_at": "2026-08-01T16:00:34.155580+00:00"
+    },
+    "16": {
+      "min_chaos": 40.0,
+      "max_chaos": 160.0,
+      "avg_chaos": 82.78,
+      "listings": 9,
+      "sample_size": 9,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/vevYlbXLCE",
+      "scanned_at": "2026-08-01T16:37:25.460945+00:00"
+    },
+    "17": {
+      "min_chaos": 40.0,
+      "max_chaos": 45.0,
+      "avg_chaos": 42.5,
+      "listings": 190,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/KldjZp6gs5",
+      "scanned_at": "2026-07-31T21:23:12.566253+00:00"
+    }
+  },
+  "price_meta": {
+    "league": "Allflame",
+    "scanned_at": "2026-08-01T17:08:49.468642+00:00",
+    "currency": "chaos",
+    "range_basis": "complete priced securable result set",
+    "market_scan_complete": true,
+    "minimum_chaos": 40.0,
+    "trade_url": "",
+    "minimum_popularity": 1,
+    "candidate_universe_count": 136,
+    "candidate_universe_sha256": "52be97e60973b2480e149111a6133cc1ce8465e37955d7bb50b7731b123e4393",
+    "market_results_total": 3804,
+    "market_results_fetched": 1287,
+    "candidates_scanned": 136,
+    "audit_version": 3,
+    "pinned_combinations": 0,
+    "divine_chaos": 161.0
+  },
+  "stop_on_two_match": [
+    [
+      "[P][1] 1 Added Passive Skill is Eldritch Inspiration",
+      "[P][1] 1 Added Passive Skill is Low Tolerance"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Flow of Life",
+      "[P][1] 1 Added Passive Skill is Wicked Pall"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Brush with Death",
+      "[P][1] 1 Added Passive Skill is Flow of Life"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Brush with Death",
+      "[P][1] 1 Added Passive Skill is Wicked Pall"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Brush with Death",
+      "[P][1] 1 Added Passive Skill is Wasting Affliction"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Low Tolerance",
+      "[P][1] 1 Added Passive Skill is Wasting Affliction"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Circling Oblivion",
+      "[P][1] 1 Added Passive Skill is Septic Spells"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Flow of Life",
+      "[P][1] 1 Added Passive Skill is Unwaveringly Evil"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Circling Oblivion",
+      "[P][1] 1 Added Passive Skill is Wicked Pall"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Circling Oblivion",
+      "[P][1] 1 Added Passive Skill is Flow of Life"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Flow of Life",
+      "[P][1] 1 Added Passive Skill is Septic Spells"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Flow of Life",
+      "[P][1] 1 Added Passive Skill is Student of Decay"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Dark Ideation",
+      "[P][1] 1 Added Passive Skill is Eldritch Inspiration"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Brewed for Potency",
+      "[P][1] 1 Added Passive Skill is Flow of Life"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Eldritch Inspiration",
+      "[P][1] 1 Added Passive Skill is Vile Reinvigoration"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Flow of Life",
+      "[P][1] 1 Added Passive Skill is Wasting Affliction"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Unwaveringly Evil",
+      "[P][1] 1 Added Passive Skill is Wicked Pall"
+    ]
+  ],
+  "annul_combs": [],
+  "no_annul_combs": [],
+  "solo_regal_mods": [
+    "[P][1] 1 Added Passive Skill is Eldritch Inspiration",
+    "[P][1] 1 Added Passive Skill is Low Tolerance",
+    "[P][1] 1 Added Passive Skill is Flow of Life",
+    "[P][1] 1 Added Passive Skill is Wicked Pall",
+    "[P][1] 1 Added Passive Skill is Brush with Death",
+    "[P][1] 1 Added Passive Skill is Wasting Affliction",
+    "[P][1] 1 Added Passive Skill is Circling Oblivion",
+    "[P][1] 1 Added Passive Skill is Septic Spells",
+    "[P][1] 1 Added Passive Skill is Unwaveringly Evil",
+    "[P][1] 1 Added Passive Skill is Student of Decay",
+    "[P][1] 1 Added Passive Skill is Dark Ideation",
+    "[P][1] 1 Added Passive Skill is Brewed for Potency",
+    "[P][1] 1 Added Passive Skill is Vile Reinvigoration"
+  ],
+  "no_regal_mods": []
+}

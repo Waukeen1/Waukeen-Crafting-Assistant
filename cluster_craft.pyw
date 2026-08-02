@@ -14,9 +14,24 @@ import functools
 import hashlib
 import shutil
 import tempfile
+import webbrowser
 from collections import deque
 import urllib.request
 import urllib.parse
+
+from phone_notifications import (
+    DEFAULT_NTFY_SERVER,
+    generate_ntfy_topic,
+    ntfy_subscription_url,
+    publish_ntfy,
+)
+from post_craft_actions import (
+    POST_ACTION_CLOSE_GAME,
+    POST_ACTION_NONE,
+    POST_ACTION_SHUTDOWN_PC,
+    normalize_post_action,
+    post_craft_command_plan,
+)
 
 APP_NAME = "Waukeen Crafting Assistant"
 APP_SHORT_NAME = "WCA"
@@ -268,7 +283,10 @@ except ModuleNotFoundError as exc:
     import pyautogui, keyboard, pyperclip, requests
 import generic_item_craft as generic_item
 import flask_craft_guide as flask_guide
+import auto_flask
+import cluster_trade
 import map_craft_rules as map_rules
+import voyage_planner as voyage
 try:
     import dxcam
 except ModuleNotFoundError as exc:
@@ -305,6 +323,10 @@ RE_NORMALIZE_SMALL_HAVE = re.compile(r"added small passive skills have\s*", re.I
 RE_ADVANCED_ROLL_RANGE = re.compile(
     r"(?<=\d)\([+-]?\d+(?:\.\d+)?(?:-[+-]?\d+(?:\.\d+)?)?\)"
 )
+RE_INTANGIBILITY_METADATA = re.compile(
+    r"^intangibility\s*:\s*\d+(?:\.\d+)?%?$",
+    re.IGNORECASE,
+)
 MATCH_WILDCARD_PATTERN = r"[\d\.]+%?"
 
 # ================ PATHS & CONSTANTS ================
@@ -324,6 +346,7 @@ CLUSTER_P_PATH = os.path.join(DATA_DIR, "cluster_p.txt")
 CLUSTER_S_PATH = os.path.join(DATA_DIR, "cluster_s.txt")
 BASE_JEWEL_AFFIX_PATH = os.path.join(DATA_DIR, "base_jewel_affixes.json")
 ITEM_AFFIX_CATALOG_PATH = os.path.join(DATA_DIR, "item_affixes.json")
+MAP_MODS_PATH = os.path.join(DATA_DIR, "map_mods.json")
 DEFAULT_BASE_JEWEL_CRIT_MODS = [
     "+#% to Global Critical Strike Multiplier",
     "+#% to Critical Strike Multiplier with Fire Skills",
@@ -343,9 +366,11 @@ except Exception:
 
 # cluster paths korunuyor — classify_mod_type() combcraft prefix/suffix tespiti için kullanıyor
 
-WINDOW_W, WINDOW_H = 360, 470
+WINDOW_W, WINDOW_H = 420, 470
 FLASK_GUIDE_W, FLASK_GUIDE_H = 344, WINDOW_H
 FLASK_GUIDE_GAP = 4
+CLUSTER_TRADE_W, CLUSTER_TRADE_H = 390, WINDOW_H
+CLUSTER_TRADE_GAP = 4
 PADX, PADY = 5, 5
 shift_spam_active = False
 socket_shift_spam_orb = None
@@ -462,7 +487,7 @@ if os.path.exists(SETTINGS_INI):
         # guard against corrupt ini
         pass
 
-for sec in ("OrbLocations", "General", "Hotkeys"):
+for sec in ("OrbLocations", "General", "Hotkeys", "Voyage", "Notifications", "AutoFlask"):
     if not settings_cfg.has_section(sec):
         settings_cfg.add_section(sec)
 
@@ -470,8 +495,24 @@ defaults = {
     ("General", "delay"): "30",
     ("General", "safe_mode"): "False",
     ("General", "auto_update"): "True",
+    ("General", "post_craft_action"): POST_ACTION_NONE,
     ("Hotkeys", "start"): "F4",
     ("Hotkeys", "stop"): "F5",
+    ("Voyage", "chart_grid_tl"): "",
+    ("Voyage", "chart_grid_br"): "",
+    ("Voyage", "board_grid_tl"): "",
+    ("Voyage", "board_grid_br"): "",
+    ("Voyage", "auto_place"): "True",
+    ("Notifications", "enabled"): "False",
+    ("Notifications", "provider"): "ntfy",
+    ("Notifications", "server"): DEFAULT_NTFY_SERVER,
+    ("Notifications", "topic"): generate_ntfy_topic(),
+    ("AutoFlask", "life_enabled"): "True",
+    ("AutoFlask", "life_threshold"): "98",
+    ("AutoFlask", "life_key"): "1",
+    ("AutoFlask", "mana_enabled"): "False",
+    ("AutoFlask", "mana_threshold"): "25",
+    ("AutoFlask", "mana_key"): "2",
 }
 
 for (sec, key), val in defaults.items():
@@ -514,6 +555,7 @@ SAFE_CRITICAL_ORBS = {
     "Orb of Scouring",
     "Orb of Annulment",
     "Exalted Orb",
+    "Orb of Chance",
     "Vaal Orb",
 }
 SAFE_ALTER_VERIFY_EVERY = 20
@@ -653,6 +695,7 @@ def get_currency_rates_chaos_craft(league_id: str):
         "regal": ["regal", "regal orb"],
         "annul": ["annul", "annulment orb", "orb of annulment"],
         "transmute": ["transmute", "transmutation", "transmutation orb", "orb of transmutation"],
+        "chance": ["chance", "chance orb", "orb of chance"],
         "chaos-orb": ["chaos-orb", "chaos orb"],
         "vaal": ["vaal", "vaal orb"],
     }
@@ -694,6 +737,7 @@ def _orb_name_to_rate_alias(orb_name: str):
         "Regal Orb": "regal orb",
         "Exalted Orb": "exalted orb",
         "Orb of Transmutation": "orb of transmutation",
+        "Orb of Chance": "orb of chance",
         "Orb of Alchemy": "orb of alchemy",
         "Vaal Orb": "vaal orb",
         "Chaos Orb": "chaos orb",
@@ -748,8 +792,11 @@ def log_currency_cost_summary():
     for line in get_currency_cost_summary_lines():
         log_message(line)
 
-DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), "data")
-CURSOR_CALIBRATION_DIR = os.path.join(DATA_DIR, "cursor_calibration")
+RUNTIME_DATA_DIR = os.path.join(
+    os.path.dirname(os.path.abspath(sys.argv[0])),
+    "data",
+)
+CURSOR_CALIBRATION_DIR = os.path.join(RUNTIME_DATA_DIR, "cursor_calibration")
 CURSOR_DEFAULT_CROP_PNG = os.path.join(CURSOR_CALIBRATION_DIR, "default_crop.png")
 CURSOR_ACTIVE_CROP_PNG = os.path.join(CURSOR_CALIBRATION_DIR, "active_crop.png")
 FAST_CURSOR_PATCH_BOX = (2, 9, 5, 12)
@@ -818,6 +865,175 @@ LOG_GUI_LINE_LIMIT = 2500
 LOG_GUI_ORB_CONTEXT = 10
 LOG_GUI_PRE_ORB_LINES = 12
 LOG_GUI_FALLBACK_LINES = 180
+
+CRAFT_NOTIFICATION_LOCK = threading.Lock()
+CRAFT_NOTIFICATION_STATE = {
+    "active": False,
+    "sent": False,
+    "mode": "Craft",
+    "started_at": 0.0,
+    "reason": "",
+    "kind": "completed",
+    "rank": 0,
+}
+
+
+def _notification_mode_label(settings):
+    logic = str(settings.get("craft_logic") or "craft").replace("_", " ").title()
+    if settings.get("chain_craft"):
+        return f"{logic} Chain"
+    return logic
+
+
+def _notification_session_begin(settings):
+    with CRAFT_NOTIFICATION_LOCK:
+        CRAFT_NOTIFICATION_STATE.update(
+            active=True,
+            sent=False,
+            mode=_notification_mode_label(settings),
+            started_at=time.time(),
+            reason="",
+            kind="completed",
+            rank=0,
+        )
+
+
+def _notification_set_reason(reason, kind="stopped", rank=1):
+    reason = str(reason or "").strip().splitlines()[0]
+    if not reason:
+        return
+    with CRAFT_NOTIFICATION_LOCK:
+        if not CRAFT_NOTIFICATION_STATE["active"]:
+            return
+        if int(rank) >= int(CRAFT_NOTIFICATION_STATE["rank"]):
+            CRAFT_NOTIFICATION_STATE["reason"] = reason[:280]
+            CRAFT_NOTIFICATION_STATE["kind"] = kind
+            CRAFT_NOTIFICATION_STATE["rank"] = int(rank)
+
+
+def _notification_observe_log(message):
+    text = str(message or "").strip().splitlines()[0]
+    low = text.translate(
+        str.maketrans("çğıöşüÇĞİÖŞÜ", "cgiosuCGIOSU")
+    ).lower()
+    if not text:
+        return
+    if "stop komutu" in low:
+        _notification_set_reason("F5 ile manuel olarak durduruldu.", "manual", 100)
+        return
+    if any(token in low for token in ("[hata]", "[safe-fatal]", "beklenmeyen hata")):
+        _notification_set_reason(text, "error", 90)
+        return
+    if any(
+        token in low
+        for token in (
+            "currency bitmis",
+            "currency bitti",
+            "hata limiti asildi",
+            "uygulanmamis olabilir",
+            "monitor hazir olmadan",
+            "pozisyonu bulunamadi",
+            "rota bulunamadi",
+            "durduruluyor",
+        )
+    ):
+        _notification_set_reason(text, "error", 80)
+        return
+    if "craft durduruldu" in low and not low.startswith("[craft]"):
+        _notification_set_reason(text, "error", 80)
+        return
+    if any(
+        token in low
+        for token in (
+            "craft tamamlandi",
+            "hedef tamamlandi",
+            "hedefe ulasildi",
+            "target reached",
+        )
+    ):
+        _notification_set_reason(text, "completed", 30)
+
+
+def _send_phone_notification_worker(server, topic, title, message, priority):
+    try:
+        publish_ntfy(server, topic, title, message, priority=priority)
+        log_message("[NOTIFY] Telefon bildirimi gonderildi.")
+    except Exception as exc:
+        log_message(f"[NOTIFY] Telefon bildirimi gonderilemedi: {exc}")
+
+
+def _notification_session_finish():
+    with CRAFT_NOTIFICATION_LOCK:
+        if not CRAFT_NOTIFICATION_STATE["active"] or CRAFT_NOTIFICATION_STATE["sent"]:
+            return
+        state = dict(CRAFT_NOTIFICATION_STATE)
+        CRAFT_NOTIFICATION_STATE["active"] = False
+        CRAFT_NOTIFICATION_STATE["sent"] = True
+
+    if not settings_cfg.getboolean("Notifications", "enabled", fallback=False):
+        return
+    topic = settings_cfg.get("Notifications", "topic", fallback="").strip()
+    if not topic:
+        log_message("[NOTIFY] Bildirim acik ancak ntfy topic bos.")
+        return
+
+    elapsed = max(0, int(time.time() - float(state["started_at"] or time.time())))
+    minutes, seconds = divmod(elapsed, 60)
+    reason = state["reason"]
+    if not reason:
+        reason = "Islem tamamlandi." if not stop_event.is_set() else "Craft durduruldu."
+    kind = state["kind"]
+    if kind == "error":
+        title, priority = "WCA - Craft hatayla durdu", 4
+    elif kind == "manual":
+        title, priority = "WCA - Craft durduruldu", 3
+    else:
+        title, priority = "WCA - Craft tamamlandi", 3
+    message = f"Mod: {state['mode']}\nSure: {minutes} dk {seconds} sn\nNeden: {reason}"
+    server = settings_cfg.get("Notifications", "server", fallback=DEFAULT_NTFY_SERVER)
+    threading.Thread(
+        target=_send_phone_notification_worker,
+        args=(server, topic, title, message, priority),
+        daemon=True,
+    ).start()
+
+
+def _notification_session_kind():
+    with CRAFT_NOTIFICATION_LOCK:
+        return str(CRAFT_NOTIFICATION_STATE.get("kind") or "completed")
+
+
+def _execute_post_craft_action(settings, end_kind):
+    action = normalize_post_action(settings.get("post_craft_action"))
+    commands = post_craft_command_plan(action, end_kind, shutdown_delay=30)
+    if not commands:
+        if action != POST_ACTION_NONE and end_kind == "manual":
+            log_message("[POST] Manuel durdurmada otomatik kapatma atlandi.")
+        return
+
+    flags = getattr(subprocess, "CREATE_NO_WINDOW", 0)
+    for command in commands:
+        try:
+            if command[0].lower() == "shutdown.exe":
+                subprocess.Popen(command, creationflags=flags)
+                log_message(
+                    "[POST] Bilgisayar 30 saniye icinde kapatilacak. "
+                    "Iptal: shutdown /a"
+                )
+            else:
+                subprocess.run(
+                    command,
+                    check=False,
+                    timeout=5,
+                    creationflags=flags,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                )
+        except Exception as exc:
+            log_message(f"[POST] Kapatma komutu uygulanamadi: {exc}")
+
+    if action == POST_ACTION_CLOSE_GAME:
+        log_message("[POST] Path of Exile kapatma komutu uygulandi.")
 
 PERF_STATS = {}
 PERF_STATS_LOCK = threading.Lock()
@@ -932,6 +1148,7 @@ def stop_session_log():
             session_log_file = None
 
 def log_message(msg: str):
+    _notification_observe_log(msg)
     try:
         sys.__stdout__.write(msg + "\n")
     except Exception:
@@ -956,6 +1173,7 @@ def gui_warn(msg, title="UyarÄ±"): _queue_put_drop_oldest(gui_queue, ("warning
 # ================ GITHUB RELEASE UPDATES ================
 UPDATE_CHECK_LOCK = threading.Lock()
 UPDATE_CHECK_RUNNING = False
+STARTUP_UPDATE_WINDOW = None
 
 def _version_parts(value):
     raw = str(value or "").strip().lower()
@@ -1049,7 +1267,29 @@ def _start_downloaded_update(package_path, expected_sha, version):
         log_message(f"[UPDATE] Updater baslatilamadi: {exc}")
         gui_error(f"Guncelleme baslatilamadi:\n{exc}", "Update")
 
-def _update_check_worker(manual):
+def _complete_startup_update_check(success, error_message=""):
+    global STARTUP_UPDATE_WINDOW
+    window = STARTUP_UPDATE_WINDOW
+    STARTUP_UPDATE_WINDOW = None
+    if window is not None:
+        try:
+            window.grab_release()
+            window.destroy()
+        except Exception:
+            pass
+    if success:
+        return
+    message = (
+        "Zorunlu guncelleme kontrolu tamamlanamadi.\n\n"
+        f"{error_message}\n\n"
+        "Internet baglantisini kontrol edip programi yeniden acin."
+    )
+    try:
+        messagebox.showerror("WCA Update", message, parent=root)
+    finally:
+        root.after(0, on_main_close)
+
+def _update_check_worker(manual, startup=False):
     global UPDATE_CHECK_RUNNING
     try:
         if not getattr(sys, "frozen", False):
@@ -1057,6 +1297,8 @@ def _update_check_worker(manual):
             log_message(f"[UPDATE] {message}")
             if manual:
                 gui_info(message, "Check for Updates")
+            if startup:
+                root.after(0, lambda: _complete_startup_update_check(True))
             return
         headers = {
             "Accept": "application/vnd.github+json",
@@ -1075,6 +1317,8 @@ def _update_check_worker(manual):
             log_message(f"[UPDATE] Guncel surum kullaniliyor: v{APP_VERSION}.")
             if manual:
                 gui_info(f"WCA guncel.\nKurulu surum: v{APP_VERSION}", "Check for Updates")
+            if startup:
+                root.after(0, lambda: _complete_startup_update_check(True))
             return
 
         package_asset = _release_asset(release, UPDATE_PACKAGE_NAME)
@@ -1095,13 +1339,16 @@ def _update_check_worker(manual):
         root.after(0, lambda: _start_downloaded_update(package_path, expected_sha, remote_version))
     except Exception as exc:
         log_message(f"[UPDATE] Kontrol basarisiz: {exc}")
-        if manual:
+        if startup:
+            error_message = str(exc)
+            root.after(0, lambda message=error_message: _complete_startup_update_check(False, message))
+        elif manual:
             gui_error(f"Update kontrolu basarisiz:\n{exc}", "Check for Updates")
     finally:
         with UPDATE_CHECK_LOCK:
             UPDATE_CHECK_RUNNING = False
 
-def check_for_updates(manual=False):
+def check_for_updates(manual=False, startup=False):
     global UPDATE_CHECK_RUNNING
     with UPDATE_CHECK_LOCK:
         if UPDATE_CHECK_RUNNING:
@@ -1109,16 +1356,207 @@ def check_for_updates(manual=False):
                 gui_info("Update kontrolu zaten devam ediyor.", "Check for Updates")
             return
         UPDATE_CHECK_RUNNING = True
-    threading.Thread(target=_update_check_worker, args=(bool(manual),), daemon=True).start()
+    threading.Thread(
+        target=_update_check_worker,
+        args=(bool(manual), bool(startup)),
+        daemon=True,
+    ).start()
 
-def schedule_auto_update_check():
-    if settings_cfg.getboolean("General", "auto_update", fallback=True):
-        check_for_updates(manual=False)
+def begin_required_update_check():
+    global STARTUP_UPDATE_WINDOW
+    settings_cfg.set("General", "auto_update", "True")
+    save_settings_now()
+    window = tk.Toplevel(root)
+    STARTUP_UPDATE_WINDOW = window
+    window.title("WCA Update")
+    window.configure(bg="#202020")
+    window.resizable(False, False)
+    window.transient(root)
+    window.protocol("WM_DELETE_WINDOW", lambda: None)
+    try:
+        window.iconbitmap(default=APP_ICON_ICO)
+    except Exception:
+        pass
+    ttk.Label(
+        window,
+        text="Guncellemeler kontrol ediliyor...",
+        font=("Tahoma", 10, "bold"),
+    ).pack(padx=30, pady=(22, 8))
+    ttk.Label(
+        window,
+        text="Kontrol tamamlanana kadar lutfen bekleyin.",
+    ).pack(padx=30, pady=(0, 22))
+    window.update_idletasks()
+    x = root.winfo_rootx() + max(0, (root.winfo_width() - window.winfo_width()) // 2)
+    y = root.winfo_rooty() + max(0, (root.winfo_height() - window.winfo_height()) // 2)
+    window.geometry(f"+{x}+{y}")
+    window.grab_set()
+    check_for_updates(startup=True)
 
 def safe_wait(s: float):
     if s <= 0:
         return
     time.sleep(s)
+
+
+def _poe_window_if_foreground():
+    import win32gui
+
+    game_window = win32gui.FindWindow(None, "Path of Exile")
+    if not game_window or win32gui.GetForegroundWindow() != game_window:
+        return None
+    return game_window
+
+
+def _poe_resource_counts_if_foreground(resources):
+    """Capture only the small resource-globe regions while PoE is foreground."""
+    from PIL import ImageGrab
+    import win32gui
+
+    game_window = _poe_window_if_foreground()
+    if not game_window:
+        return None
+    left, top = win32gui.ClientToScreen(game_window, (0, 0))
+    right, bottom = win32gui.ClientToScreen(
+        game_window,
+        win32gui.GetClientRect(game_window)[2:4],
+    )
+    if right <= left or bottom <= top:
+        return None
+    client_size = (right - left, bottom - top)
+    counts = {}
+    for resource in resources:
+        roi_left, roi_top, roi_right, roi_bottom = auto_flask.resource_roi_box(
+            client_size, resource
+        )
+        crop = ImageGrab.grab(
+            bbox=(
+                left + roi_left,
+                top + roi_top,
+                left + roi_right,
+                top + roi_bottom,
+            ),
+            all_screens=True,
+        )
+        counts[resource] = auto_flask.resource_color_count_crop(crop, resource)
+    return counts
+
+
+def _set_auto_flask_status(value):
+    try:
+        auto_flask_status_var.set(str(value))
+    except Exception:
+        pass
+
+
+def run_auto_flask(settings):
+    enabled = {
+        "life": bool(settings.get("auto_flask_life_enabled")),
+        "mana": bool(settings.get("auto_flask_mana_enabled")),
+    }
+    thresholds = {
+        "life": float(settings.get("auto_flask_life_threshold", 98)),
+        "mana": float(settings.get("auto_flask_mana_threshold", 25)),
+    }
+    keys = {
+        "life": str(settings.get("auto_flask_life_key", "1")),
+        "mana": str(settings.get("auto_flask_mana_key", "2")),
+    }
+    meters = {
+        resource: auto_flask.RelativeGlobeMeter()
+        for resource in enabled
+        if enabled[resource]
+    }
+    triggers = {
+        "life": auto_flask.ThresholdTrigger(thresholds["life"], 0.80),
+        "mana": auto_flask.ThresholdTrigger(thresholds["mana"], 1.00),
+    }
+    names = {"life": "Life", "mana": "Mana"}
+    calibration_started = None
+    calibrated_logged = False
+    last_status_update = 0.0
+    paused_logged = False
+
+    log_message(
+        "[AUTO FLASK] Kalibrasyon basladi. Baslangictaki kullanilabilir dolu "
+        "Life/Mana alani %100 kabul edilir; reserve alanlari hesaba katilmaz."
+    )
+    try:
+        while not stop_event.is_set():
+            counts = _poe_resource_counts_if_foreground(meters)
+            if counts is None:
+                if not paused_logged:
+                    log_message("[AUTO FLASK] PoE onde degil; izleme ve tuslar duraklatildi.")
+                    paused_logged = True
+                root.after(0, lambda: _set_auto_flask_status("Duraklatildi: Path of Exile onde degil."))
+                stop_event.wait(0.20)
+                continue
+            if paused_logged:
+                log_message("[AUTO FLASK] PoE yeniden onde; izleme devam ediyor.")
+                paused_logged = False
+
+            now = time.monotonic()
+            if calibration_started is None:
+                calibration_started = now
+            percentages = {}
+            for resource, meter in meters.items():
+                percentages[resource] = meter.feed(counts[resource])
+
+            if not all(meter.calibrated for meter in meters.values()):
+                if now - calibration_started > 8.0:
+                    missing = ", ".join(
+                        names[resource]
+                        for resource, meter in meters.items()
+                        if not meter.calibrated
+                    )
+                    log_message(
+                        f"[AUTO FLASK] {missing} globu kalibre edilemedi. "
+                        "HUD gorunur ve kaynak doluyken tekrar baslat."
+                    )
+                    stop_event.set()
+                    break
+                root.after(0, lambda: _set_auto_flask_status("Kalibrasyon yapiliyor... Life/Mana dolu olmali."))
+                stop_event.wait(0.06)
+                continue
+
+            if not calibrated_logged:
+                details = ", ".join(
+                    f"{names[resource]} baseline={int(meter.baseline)}"
+                    for resource, meter in meters.items()
+                )
+                log_message(f"[AUTO FLASK] Kalibrasyon tamamlandi: {details}.")
+                calibrated_logged = True
+
+            for resource, percent in percentages.items():
+                if stop_event.is_set():
+                    break
+                if triggers[resource].feed(percent, now=now):
+                    # Re-check foreground immediately before emitting any key.
+                    if not _poe_window_if_foreground() or stop_event.is_set():
+                        break
+                    keyboard.press_and_release(keys[resource])
+                    log_message(
+                        f"[AUTO FLASK] {names[resource]} {percent:.1f}% <= "
+                        f"{thresholds[resource]:.0f}% -> flask {keys[resource]}."
+                    )
+
+            if now - last_status_update >= 0.25:
+                status = " | ".join(
+                    f"{names[resource]}: {percentages[resource]:.0f}%"
+                    for resource in meters
+                    if percentages.get(resource) is not None
+                )
+                root.after(0, lambda value=status: _set_auto_flask_status(value))
+                last_status_update = now
+            stop_event.wait(0.06)
+    except Exception as exc:
+        log_message(f"[AUTO FLASK] Beklenmeyen hata: {exc}\n{traceback.format_exc()}")
+        stop_event.set()
+    finally:
+        root.after(0, lambda: _set_auto_flask_status("Durduruldu. F4 ile yeniden baslat."))
+        log_message("[AUTO FLASK] Izleme durduruldu.")
+        log_message("[CRAFT] Dongu durduruldu.")
+        stop_session_log()
 
 def _craft_stop_requested():
     event = globals().get("stop_event")
@@ -1881,6 +2319,487 @@ def capture_text_at_pos(pos, pre_wait=0.035, post_copy_wait=0.045, tries=2):
     except Exception:
         return ""
 
+def _voyage_parse_point(raw_value):
+    try:
+        x, y = str(raw_value or "").split(",", 1)
+        return int(x.strip()), int(y.strip())
+    except (TypeError, ValueError):
+        return None
+
+def _voyage_point_setting(key):
+    return _voyage_parse_point(
+        settings_cfg.get("Voyage", key, fallback="")
+    )
+
+def _voyage_save_point(key, point):
+    settings_cfg.set("Voyage", key, f"{int(point[0])},{int(point[1])}")
+    save_settings_now()
+
+def _voyage_grid_points(top_left, bottom_right, columns, rows):
+    x0, y0 = top_left
+    x1, y1 = bottom_right
+    result = []
+    for row in range(rows):
+        y = round(y0 + (y1 - y0) * row / max(1, rows - 1))
+        for column in range(columns):
+            x = round(x0 + (x1 - x0) * column / max(1, columns - 1))
+            result.append((x, y))
+    return result
+
+def _voyage_board_points(top_left, bottom_right):
+    return _voyage_grid_points(top_left, bottom_right, 3, 3)
+
+def _voyage_border_probes(top_left, bottom_right):
+    x0, y0 = top_left
+    x2, y2 = bottom_right
+    dx = (x2 - x0) / 2.0
+    dy = (y2 - y0) / 2.0
+    # Border modifier hover targets are on the decorative frame, not aligned
+    # with the visual centers used to place Charts.
+    xs = [
+        round(x0 - dx * 0.39),
+        round(x0 + dx),
+        round(x2 + dx * 0.41),
+    ]
+    ys = [
+        round(y0 + dy * 0.03),
+        round(y0 + dy * 1.14),
+        round(y2 + dy * 0.24),
+    ]
+    side_offset = round(abs(dx) * 0.75)
+    top_offset = round(abs(dy) * 0.74)
+    bottom_offset = round(abs(dy) * 0.83)
+    probes = []
+    for column, x in enumerate(xs):
+        probes.append(((x, round(y0 - top_offset)), column, "top"))
+    for row, y in enumerate(ys):
+        probes.append(((round(x2 + side_offset), y), row * 3 + 2, "right"))
+    for column, x in enumerate(xs):
+        probes.append(((x, round(y2 + bottom_offset)), 6 + column, "bottom"))
+    for row, y in enumerate(ys):
+        probes.append(((round(x0 - side_offset), y), row * 3, "left"))
+    return probes
+
+def _voyage_wait(seconds):
+    return not stop_event.wait(max(0.0, float(seconds)))
+
+def _voyage_ocr_image(image):
+    """Use the built-in Windows OCR engine without an external OCR process."""
+    import asyncio
+    import io
+    from winrt.windows.graphics.imaging import BitmapDecoder
+    from winrt.windows.media.ocr import OcrEngine
+    from winrt.windows.storage.streams import DataWriter, InMemoryRandomAccessStream
+
+    async def recognize():
+        buffer = io.BytesIO()
+        image.convert("RGB").save(buffer, format="BMP")
+        stream = InMemoryRandomAccessStream()
+        writer = DataWriter(stream)
+        writer.write_bytes(buffer.getvalue())
+        await writer.store_async()
+        writer.detach_stream()
+        stream.seek(0)
+        decoder = await BitmapDecoder.create_async(stream)
+        bitmap = await decoder.get_software_bitmap_async()
+        engine = OcrEngine.try_create_from_user_profile_languages()
+        if engine is None:
+            return ""
+        result = await engine.recognize_async(bitmap)
+        return (result.text or "").strip()
+
+    return asyncio.run(recognize())
+
+def _voyage_blue_text_mask(image):
+    from PIL import Image as PilImage
+
+    source = image.convert("RGB")
+    result = PilImage.new("L", source.size, 0)
+    source_pixels = source.load()
+    result_pixels = result.load()
+    for y in range(source.height):
+        for x in range(source.width):
+            r, g, b = source_pixels[x, y]
+            if b > 110 and (b - r) > 30 and (b - g) > 15:
+                result_pixels[x, y] = 255
+    return result.resize(
+        (result.width * 2, result.height * 2),
+        PilImage.Resampling.NEAREST,
+    )
+
+def _voyage_clean_border_ocr(text):
+    cleaned = re.sub(
+        r"\b[LIi1][':;.,]?\s*\d{1,3}\b",
+        " ",
+        text or "",
+        flags=re.I,
+    )
+    cleaned = re.sub(r"\bArea\s+Modifiers\b", " ", cleaned, flags=re.I)
+    cleaned = re.sub(r"\b(\d{1,3})96\b", r"\1%", cleaned)
+    cleaned = re.sub(r"\s+", " ", cleaned).strip(" -|")
+    cues = (
+        "adjacent",
+        "monster",
+        "pack",
+        "chart",
+        "voyage",
+        "lantern",
+        "strongbox",
+        "orb",
+        "currency",
+        "scarab",
+        "altar",
+        "sulphur",
+        "quantity",
+        "rarity",
+        "gold",
+        "map",
+        "sea beast",
+        "crab",
+        "drowned",
+        "filth",
+    )
+    if not any(cue in cleaned.lower() for cue in cues):
+        return ""
+    return cleaned
+
+def _voyage_scan_borders(board_tl, board_br):
+    from PIL import ImageGrab
+
+    board_points = _voyage_board_points(board_tl, board_br)
+    xs = [p[0] for p in board_points]
+    ys = [p[1] for p in board_points]
+    screen_w, screen_h = pyautogui.size()
+    crop = (
+        max(0, min(xs) - 430),
+        max(0, min(ys) - 180),
+        min(screen_w, max(xs) + 430),
+        min(screen_h, max(ys) + 180),
+    )
+    cell_mods = [[] for _ in range(9)]
+    for index, (point, cell, edge_name) in enumerate(
+        _voyage_border_probes(board_tl, board_br), start=1
+    ):
+        if stop_event.is_set():
+            return None
+        offsets = (
+            ((0, 0), (4, 0), (-4, 0))
+            if edge_name in ("top", "bottom")
+            else ((0, 0), (0, 4), (0, -4))
+        )
+        normalized = ""
+        for attempt, (offset_x, offset_y) in enumerate(offsets, start=1):
+            _instant_move(point[0] + offset_x, point[1] + offset_y)
+            # Border tooltips animate in; side tooltips can take longer to settle.
+            if not _voyage_wait(0.35):
+                return None
+            screenshot = ImageGrab.grab(bbox=crop, all_screens=True)
+            try:
+                text = _voyage_ocr_image(_voyage_blue_text_mask(screenshot))
+            except Exception as exc:
+                log_message(f"[VOYAGE] Kenar OCR hatasi ({edge_name}): {exc}")
+                return None
+            normalized = _voyage_clean_border_ocr(text)
+            if normalized:
+                if attempt > 1:
+                    log_message(
+                        f"[VOYAGE] Kenar {index}/12 OCR retry {attempt} ile okundu."
+                    )
+                break
+        if not normalized:
+            log_message(
+                f"[VOYAGE] Kenar {index}/12 uc denemede okunamadi "
+                f"({edge_name}, cell {cell + 1})."
+            )
+            return None
+        cell_mods[cell].append(normalized)
+        log_message(
+            f"[VOYAGE] Kenar {index}/12 -> cell {cell + 1}: {normalized}"
+        )
+    return cell_mods
+
+def _voyage_scan_charts(chart_tl, chart_br):
+    points = _voyage_grid_points(chart_tl, chart_br, 6, 10)
+    charts = []
+    for index, point in enumerate(points, start=1):
+        if stop_event.is_set():
+            return None
+        text = capture_text_at_pos(
+            point,
+            pre_wait=0.025,
+            post_copy_wait=0.08,
+            tries=3,
+        )
+        if not text or not re.search(r"Item Class:\s*Chart\b", text, re.I):
+            continue
+        provisional = voyage.parse_chart_text(
+            text,
+            uid=f"slot-{index}",
+            source=point,
+        )
+        if provisional is None:
+            continue
+        parsed = voyage.parse_chart_text(
+            text,
+            uid=f"slot-{index}",
+            source=point,
+            initial_edges=None,
+        )
+        if parsed is not None:
+            charts.append(parsed)
+            log_message(
+                f"[VOYAGE] Chart {index}: L{parsed.area_level} "
+                f"{parsed.shape}"
+            )
+    log_message(f"[VOYAGE] {len(charts)} kullanilabilir Chart okundu.")
+    return charts
+
+def _voyage_drag_safely(source, target):
+    if stop_event.is_set():
+        return False
+    _instant_move(*source)
+    if not _voyage_wait(0.04):
+        return False
+    pyautogui.mouseDown(button="left")
+    try:
+        steps = 9
+        for step in range(1, steps + 1):
+            if stop_event.is_set():
+                return False
+            x = round(source[0] + (target[0] - source[0]) * step / steps)
+            y = round(source[1] + (target[1] - source[1]) * step / steps)
+            _instant_move(x, y)
+            if not _voyage_wait(0.015):
+                return False
+        return True
+    finally:
+        pyautogui.mouseUp(button="left")
+
+def _voyage_edge_code(edges):
+    return "".join(
+        direction
+        for direction, active in zip("NESW", edges or ())
+        if active
+    ) or "?"
+
+def _voyage_rotate_placed(placement, target, cell_span):
+    from PIL import ImageGrab
+    import win32api
+    import win32con
+
+    screen_w, _screen_h = pyautogui.size()
+    delivered_rotations = 0
+    previous_edges = None
+    for click_attempt in range(9):
+        if stop_event.is_set():
+            return None
+        win32api.SetCursorPos((screen_w // 2, 80))
+        if not _voyage_wait(0.18):
+            return None
+        current_edges = voyage.detect_board_edges(
+            ImageGrab.grab(all_screens=True),
+            target,
+            placement.chart.shape,
+            cell_span=cell_span,
+        )
+        log_message(
+            f"[VOYAGE] Cell {placement.cell + 1} board yonu "
+            f"{_voyage_edge_code(current_edges)}; "
+            f"hedef {_voyage_edge_code(placement.required_edges)}."
+        )
+        if previous_edges is not None:
+            if current_edges == previous_edges:
+                log_message(
+                    f"[VOYAGE] Cell {placement.cell + 1} sag tik oyuna "
+                    "ulasamadi; ayni yon icin tekrar deneniyor."
+                )
+            else:
+                delivered_rotations += 1
+        if current_edges == placement.required_edges:
+            return delivered_rotations
+        if click_attempt == 8:
+            break
+        previous_edges = current_edges
+        cursor_ready = False
+        for _move_attempt in range(3):
+            win32api.SetCursorPos((int(target[0]), int(target[1])))
+            if not _voyage_wait(0.04):
+                return None
+            actual_x, actual_y = win32api.GetCursorPos()
+            if abs(actual_x - target[0]) <= 1 and abs(actual_y - target[1]) <= 1:
+                cursor_ready = True
+                break
+        if not cursor_ready:
+            log_message(
+                f"[VOYAGE] Cell {placement.cell + 1} fiziksel imlec "
+                "hedef koordinata ulasamadi."
+            )
+            return None
+        # A left click picks the placed Chart back up. Rotate the Chart under
+        # the verified cursor directly so placement can advance to next cell.
+        win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTDOWN, 0, 0, 0, 0)
+        try:
+            if not _voyage_wait(0.045):
+                return None
+        finally:
+            win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTUP, 0, 0, 0, 0)
+        # The Voyage UI can process rotation input several frames late. Wait
+        # for it to settle so retries never queue extra rotations.
+        if not _voyage_wait(0.65):
+            return None
+    return None
+
+def _voyage_validate_placed_plan(plan, board_points, cell_span):
+    from PIL import ImageGrab
+
+    _instant_move(pyautogui.size().width // 2, 80)
+    if not _voyage_wait(0.2):
+        return False
+    screenshot = ImageGrab.grab(all_screens=True)
+    actual_edges = []
+    for placement in sorted(plan.placements, key=lambda item: item.cell):
+        detected = voyage.detect_board_edges(
+            screenshot,
+            board_points[placement.cell],
+            placement.chart.shape,
+            cell_span=cell_span,
+        )
+        actual_edges.append(detected)
+        if detected != placement.required_edges:
+            log_message(
+                f"[VOYAGE] Final kontrol cell {placement.cell + 1}: "
+                f"{_voyage_edge_code(detected)} != "
+                f"{_voyage_edge_code(placement.required_edges)}."
+            )
+            return False
+    if not voyage.is_connected(tuple(actual_edges)):
+        log_message("[VOYAGE] Final board baglanti grafigi kesintili.")
+        return False
+    log_message("[VOYAGE] Final board kontrolu: 9/9 yon ve baglanti dogru.")
+    return True
+
+def _voyage_place_plan(plan, board_tl, board_br):
+    board_points = _voyage_board_points(board_tl, board_br)
+    x_span = abs(board_points[1][0] - board_points[0][0])
+    y_span = abs(board_points[3][1] - board_points[0][1])
+    cell_span = min(x_span, y_span)
+    for placement in voyage.placement_order(plan):
+        if stop_event.is_set():
+            return False
+        source = placement.chart.source
+        target = board_points[placement.cell]
+        log_message(
+            f"[VOYAGE] Yerlestirme {placement.chart.uid}: "
+            f"source={source} -> cell {placement.cell + 1} target={target}."
+        )
+        if not source or not _voyage_drag_safely(source, target):
+            return False
+        if not _voyage_wait(0.12):
+            return False
+        source_text = capture_text_at_pos(
+            source,
+            pre_wait=0.03,
+            post_copy_wait=0.08,
+            tries=3,
+        )
+        if re.search(r"Item Class:\s*Chart\b", source_text or "", re.I):
+            log_message(
+                f"[VOYAGE] {placement.chart.uid} kaynak slottan alinmadi; "
+                f"cell {placement.cell + 1} yerlestirmesi durduruldu."
+            )
+            stop_event.set()
+            return False
+        rotation_clicks = _voyage_rotate_placed(
+            placement,
+            target,
+            cell_span,
+        )
+        if rotation_clicks is None:
+            log_message(
+                f"[VOYAGE] Cell {placement.cell + 1} hedef yone "
+                "dondurulemedi; yerlestirme durduruldu."
+            )
+            stop_event.set()
+            return False
+        log_message(
+            f"[VOYAGE] Cell {placement.cell + 1}: "
+            f"{placement.chart.uid}, board'da R x{rotation_clicks}; "
+            "kaynak slot bosaldi."
+        )
+    return _voyage_validate_placed_plan(plan, board_points, cell_span)
+
+def _voyage_focus_game():
+    try:
+        import win32con
+        import win32gui
+
+        game_window = win32gui.FindWindow(None, "Path of Exile")
+        if not game_window:
+            return False
+        win32gui.ShowWindow(game_window, win32con.SW_RESTORE)
+        win32gui.SetForegroundWindow(game_window)
+        return True
+    except Exception as exc:
+        log_message(f"[VOYAGE] PoE penceresi odaklanamadi: {exc}")
+        return False
+
+def _voyage_restore_window():
+    try:
+        root.deiconify()
+        root.lift()
+        root.attributes("-topmost", True)
+    except Exception:
+        pass
+
+def run_voyage_craft(settings):
+    chart_tl = settings["voyage_chart_tl"]
+    chart_br = settings["voyage_chart_br"]
+    board_tl = settings["voyage_board_tl"]
+    board_br = settings["voyage_board_br"]
+    try:
+        root.after(0, root.withdraw)
+    except Exception:
+        pass
+    if not _voyage_wait(0.25) or not _voyage_focus_game():
+        log_message("[VOYAGE] Path of Exile penceresi bulunamadi; tarama baslatilmadi.")
+        return
+    if not _voyage_wait(0.2):
+        return
+    log_message("[VOYAGE] 12 kenar akimi okunuyor.")
+    border_mods = _voyage_scan_borders(board_tl, board_br)
+    if border_mods is None or stop_event.is_set():
+        return
+    _instant_move(*board_tl)
+    if not _voyage_wait(0.08):
+        return
+    log_message("[VOYAGE] 6x10 Chart paneli taraniyor.")
+    charts = _voyage_scan_charts(chart_tl, chart_br)
+    if charts is None or stop_event.is_set():
+        return
+    if len(charts) < 9:
+        log_message("[VOYAGE] En az 9 acik Chart bulunamadi; plan olusturulamadi.")
+        return
+    plan = voyage.plan_voyage(charts, border_mods)
+    if plan is None:
+        log_message(
+            "[VOYAGE] Mevcut Chart sekilleriyle 9 parcali baglantili rota bulunamadi."
+        )
+        return
+    summary = voyage.summarize_plan(plan)
+    log_message("[VOYAGE] Plan hazir:\n" + summary)
+    try:
+        root.after(0, lambda value=summary: _voyage_set_status(value))
+    except Exception:
+        pass
+    if settings.get("voyage_auto_place", True):
+        if _voyage_place_plan(plan, board_tl, board_br):
+            log_message(
+                "[VOYAGE] 9 Chart yerlestirildi ve dogrulandi. "
+                "Begin Voyage otomatik tiklanmadi."
+            )
+    else:
+        log_message("[VOYAGE] Auto Place kapali; yalnizca plan olusturuldu.")
+
 def parse_currency_stack(text: str):
     if not text:
         return None
@@ -2150,18 +3069,18 @@ AFFIX_BOILERPLATE = [
 
 def clean_advanced_explicit_mod_block(block):
     has_advanced_headers = any(line.lstrip().startswith("{") for line in block)
-    if not has_advanced_headers:
-        return block
-
     cleaned = []
     for raw in block:
         line = raw.strip()
-        if not line or line.startswith("{"):
+        if not line or RE_INTANGIBILITY_METADATA.fullmatch(line):
             continue
-        # Advanced descriptions add explanatory parenthetical lines that are not affixes.
-        if line.startswith("(") and line.endswith(")"):
-            continue
-        line = RE_ADVANCED_ROLL_RANGE.sub("", line)
+        if has_advanced_headers:
+            if line.startswith("{"):
+                continue
+            # Advanced descriptions add explanatory parenthetical lines that are not affixes.
+            if line.startswith("(") and line.endswith(")"):
+                continue
+            line = RE_ADVANCED_ROLL_RANGE.sub("", line)
         if line:
             cleaned.append(line)
     return cleaned
@@ -2633,32 +3552,8 @@ def handle_map_craft_state(mods, settings, item_text=""):
     return handle_map_craft_state_v2(mods, settings, item_text)
 
 def load_map_affix_groups():
-    path = os.path.join(DATA_DIR, "map_mods.json")
-    if not os.path.exists(path):
-        return []
     try:
-        with open(path, "r", encoding="utf-8-sig") as f:
-            raw = json.load(f)
-        groups = []
-        for entry in raw:
-            if not isinstance(entry, dict):
-                continue
-            mods = [m.strip() for m in entry.get("mods", []) if isinstance(m, str) and m.strip()]
-            if not mods:
-                continue
-            groups.append({
-                "tier": entry.get("tier", ""),
-                "affix_type": entry.get("affix_type", ""),
-                "mods": mods,
-                "quantity": int(entry.get("quantity", 0) or 0),
-                "rarity": int(entry.get("rarity", 0) or 0),
-                "pack": int(entry.get("pack", 0) or 0),
-                "currency": int(entry.get("currency", 0) or 0),
-                "scarab": int(entry.get("scarab", 0) or 0),
-                "divination": int(entry.get("divination", 0) or 0),
-                "maps": int(entry.get("maps", 0) or 0),
-            })
-        return groups
+        return map_rules.load_affix_groups(MAP_MODS_PATH)
     except Exception as e:
         log_message(f"[MAP] map_mods.json okunamadi: {e}")
         return []
@@ -2831,10 +3726,20 @@ def _wait_for_map_item_change(before_text, predicate, operation, attempts=5):
     raise CraftFatalError(f"[MAP BATCH] {operation} sonucu doğrulanamadı.")
 
 def handle_map_alchemy_vaal_batch_item(item_text, settings):
-    start_failures = map_rules.alchemy_vaal_start_failures(item_text, required_tier=16)
+    map_tier = map_rules.parse_map_tier(item_text)
+    start_failures = map_rules.alchemy_vaal_start_failures(
+        item_text,
+        required_tier=16,
+        allow_missing_tier=True,
+    )
     if start_failures:
         log_message(f"[MAP BATCH] Slot atlandı: {', '.join(start_failures)}.")
         return "done"
+    if map_tier is None:
+        log_message(
+            "[MAP BATCH] Tier satiri okunamadi; Maps sinifi ve rarity "
+            "dogrulandigi icin devam ediliyor."
+        )
 
     starting_rarity, _starting_mods = parse_item_text(item_text)
     if starting_rarity.casefold() == "normal":
@@ -2896,6 +3801,16 @@ def handle_map_alchemy_vaal_batch_item(item_text, settings):
             "[MAP BATCH] Item stashe taşınmadı; stash dolu veya açık olmayabilir."
         )
     log_message("[MAP BATCH] Reddedilen map stashe taşındı.")
+    currency_tab = get_orb_location("Currency Stash Tab")
+    if not currency_tab:
+        stop_event.set()
+        raise CraftFatalError(
+            "[MAP BATCH] Currency Stash Tab konumu ayarlanmamış."
+        )
+    if not item_left_click(currency_tab[0], currency_tab[1]):
+        return "stopped"
+    safe_wait(0.18)
+    log_message("[MAP BATCH] Currency stash sekmesine geri dönüldü.")
     return "done"
 
 def _socket_craft_stop(message):
@@ -3543,6 +4458,24 @@ def handle_generic_item_craft_state(rarity, mods, item_text, settings):
         stop_shift_spam()
         return "done"
 
+    if settings.get("item_chance_to_unique", False):
+        action, reason = generic_item.choose_chance_to_unique_action(rarity)
+        log_message(f"[ITEM CHANCE] {reason}")
+        if action == "done":
+            stop_shift_spam()
+            return "done"
+        if action == "chance":
+            stop_shift_spam()
+            apply_orb("Orb of Chance", ITEM_POS)
+            return "continue"
+        if action == "scour":
+            stop_shift_spam()
+            apply_orb("Orb of Scouring", ITEM_POS)
+            return "continue"
+        stop_event.set()
+        stop_shift_spam()
+        return "done"
+
     catalog = get_item_affix_catalog()
     target_ids = list(settings.get("item_target_ids", []))
     summary = generic_item.analyze(
@@ -3766,6 +4699,29 @@ def _select_best_combo_progress(mods, settings, pots=None):
         return "annul", pot, state
     return None, None, None
 
+def _medium_single_target_exalt_pot(mods, settings, pots):
+    """Allow a two-target cluster combo to use the fourth rare affix."""
+    if int(settings.get("cluster_passive_count", 0) or 0) not in (4, 5):
+        return None
+    if not settings.get("use_exalt", True):
+        return None
+    for pot in pots:
+        match_count = int(pot.get("match_count", 0))
+        missing_mods = pot.get("missing_mods", [])
+        target_count = match_count + len(missing_mods)
+        if (
+            target_count == 2
+            and match_count == 1
+            and len(missing_mods) == 1
+            and pot.get("can_spend")
+            and _pot_affix_state(pot, mods)["has_open_slot"]
+        ):
+            return pot
+    return None
+
+def is_cluster_notable_mod(mod):
+    return bool(re.search(r"\b1\s+Added\s+Passive\s+Skill\s+is\b", str(mod or ""), re.IGNORECASE))
+
 def handle_comb_craft_state(mods, settings):
     typed = mods_with_types(mods)
     stop_pairs = settings.get("stop_on_two_match", [])
@@ -3780,7 +4736,7 @@ def handle_comb_craft_state(mods, settings):
                 return "done"
 
     pots = _analyze_item_potential(mods, settings.get("comb_craft_data", {}))
-    notable_mods = [m for m in mods if not any(m in p["junk_mods"] for p in pots)]
+    notable_mods = [m for m in mods if is_cluster_notable_mod(m)]
 
     if any(p["is_perfect_match"] for p in pots):
         first = [p["comb_no"] for p in pots if p["is_perfect_match"]][0]
@@ -3799,10 +4755,15 @@ def handle_comb_craft_state(mods, settings):
                 apply_orb("Orb of Scouring", ITEM_POS)
                 return "reset_to_magic"
         else:
-            log_message("[COMB] Hedeflenmeyen 3+ notable var → DUR.")
-            return "done"
+            log_message("[COMB] Hedeflenmeyen 3+ notable var, Annul kapalı → Scouring.")
+            apply_orb("Orb of Scouring", ITEM_POS)
+            return "reset_to_magic"
 
     actionable = [p for p in pots if p["match_count"] == 2 and p["can_spend"]]
+    if not actionable:
+        medium_progress = _medium_single_target_exalt_pot(mods, settings, pots)
+        if medium_progress:
+            actionable = [medium_progress]
     if not actionable:
         log_message("[COMB] Değerli 2'li alt küme yok → Scouring")
         apply_orb("Orb of Scouring", ITEM_POS)
@@ -4136,6 +5097,11 @@ def stop_craft_hotkey():
         keyboard.release("ctrl")
     except Exception:
         pass
+    try:
+        pyautogui.mouseUp(button="left")
+        pyautogui.mouseUp(button="right")
+    except Exception:
+        pass
     log_message("[CRAFT] STOP komutu alındı.")
 
 def start_hotkey_listener():
@@ -4163,6 +5129,8 @@ def start_craft():
             is_socket = mode == "socket"
             is_base_jewel = mode == "base_jewel"
             is_item = mode == "item"
+            is_voyage = mode == "voyage"
+            is_auto_flask = mode == "auto_flask"
 
             def _parse_optional_nonnegative(raw_value, label):
                 raw = (raw_value or "").strip()
@@ -4178,7 +5146,82 @@ def start_craft():
                     raise ValueError(label)
                 return value
 
-            if is_map:
+            if is_auto_flask:
+                try:
+                    life_threshold = int(auto_flask_life_threshold_var.get().strip())
+                    mana_threshold = int(auto_flask_mana_threshold_var.get().strip())
+                except (ValueError, AttributeError):
+                    gui_error("Life ve Mana esikleri tam sayi olmali.")
+                    return
+                life_enabled = bool(auto_flask_life_enabled_var.get())
+                mana_enabled = bool(auto_flask_mana_enabled_var.get())
+                if not life_enabled and not mana_enabled:
+                    gui_error("Auto Flask icin Life veya Mana'dan en az birini ac.")
+                    return
+                if not 1 <= life_threshold <= 99 or not 1 <= mana_threshold <= 99:
+                    gui_error("Auto Flask esikleri 1 ile 99 arasinda olmali.")
+                    return
+                life_key = auto_flask_life_key_var.get().strip()
+                mana_key = auto_flask_mana_key_var.get().strip()
+                if life_enabled and life_key not in {"1", "2", "3", "4", "5"}:
+                    gui_error("Life flask tusu 1-5 arasinda olmali.")
+                    return
+                if mana_enabled and mana_key not in {"1", "2", "3", "4", "5"}:
+                    gui_error("Mana flask tusu 1-5 arasinda olmali.")
+                    return
+                if life_enabled and mana_enabled and life_key == mana_key:
+                    gui_error("Life ve Mana flasklari farkli tuslarda olmali.")
+                    return
+                snapshot = {
+                    "craft_logic": "auto_flask",
+                    "auto_flask_life_enabled": life_enabled,
+                    "auto_flask_life_threshold": life_threshold,
+                    "auto_flask_life_key": life_key,
+                    "auto_flask_mana_enabled": mana_enabled,
+                    "auto_flask_mana_threshold": mana_threshold,
+                    "auto_flask_mana_key": mana_key,
+                    "chain_craft": False,
+                    "comb_craft": False,
+                    "safe_mode": False,
+                }
+                if not settings_cfg.has_section("AutoFlask"):
+                    settings_cfg.add_section("AutoFlask")
+                settings_cfg.set("AutoFlask", "life_enabled", str(life_enabled))
+                settings_cfg.set("AutoFlask", "life_threshold", str(life_threshold))
+                settings_cfg.set("AutoFlask", "life_key", life_key)
+                settings_cfg.set("AutoFlask", "mana_enabled", str(mana_enabled))
+                settings_cfg.set("AutoFlask", "mana_threshold", str(mana_threshold))
+                settings_cfg.set("AutoFlask", "mana_key", mana_key)
+                save_settings_now()
+            elif is_voyage:
+                chart_tl = _voyage_point_setting("chart_grid_tl")
+                chart_br = _voyage_point_setting("chart_grid_br")
+                board_tl = _voyage_point_setting("board_grid_tl")
+                board_br = _voyage_point_setting("board_grid_br")
+                if not all((chart_tl, chart_br, board_tl, board_br)):
+                    gui_error(
+                        "Voyage icin dort kalibrasyon noktasini ayarla: "
+                        "Chart TL/BR ve Board TL/BR."
+                    )
+                    return
+                if chart_tl[0] >= chart_br[0] or chart_tl[1] >= chart_br[1]:
+                    gui_error("Chart TL noktasi, Chart BR noktasinin sol-ustunde olmali.")
+                    return
+                if board_tl[0] >= board_br[0] or board_tl[1] >= board_br[1]:
+                    gui_error("Board TL noktasi, Board BR noktasinin sol-ustunde olmali.")
+                    return
+                snapshot = {
+                    "craft_logic": "voyage",
+                    "voyage_chart_tl": chart_tl,
+                    "voyage_chart_br": chart_br,
+                    "voyage_board_tl": board_tl,
+                    "voyage_board_br": board_br,
+                    "voyage_auto_place": voyage_auto_place_var.get(),
+                    "chain_craft": False,
+                    "comb_craft": False,
+                    "safe_mode": False,
+                }
+            elif is_map:
                 try:
                     qthresh = int(map_quantity_thresh.get().strip()) if map_quantity_thresh.get().strip() else None
                     rthresh = int(map_rarity_thresh.get().strip()) if map_rarity_thresh.get().strip() else None
@@ -4198,7 +5241,11 @@ def start_craft():
                 if map_mode == "alchemy_vaal":
                     missing_orbs = [
                         orb_name
-                        for orb_name in ("Orb of Alchemy", "Vaal Orb")
+                        for orb_name in (
+                            "Orb of Alchemy",
+                            "Vaal Orb",
+                            "Currency Stash Tab",
+                        )
                         if not get_orb_location(orb_name)
                     ]
                     if missing_orbs:
@@ -4236,6 +5283,12 @@ def start_craft():
                     snapshot["inventory_slots"] = slots
                 else:
                     ITEM_POS = pyautogui.position()
+                if map_mode == "alchemy_vaal":
+                    log_message(
+                        "[MAP BATCH] Alchemy + Vaal modu: Normal T16 maplere önce "
+                        "Alchemy, Rare T16 maplere direkt Vaal uygulanır; reddedilenler "
+                        "açık stashe Ctrl+sol tık ile gönderilir."
+                    )
             elif is_socket:
                 try:
                     target_sockets = _parse_optional_nonnegative(socket_target_sockets_var.get(), "Target sockets")
@@ -4304,6 +5357,7 @@ def start_craft():
                 catalog = get_item_affix_catalog()
                 base_name = item_base_var.get().strip()
                 influence = item_influence_var.get().strip() or "None"
+                chance_to_unique = item_chance_to_unique_var.get()
                 base = generic_item.find_base(catalog, base_name)
                 if not base:
                     gui_error("Gecerli bir item base sec.")
@@ -4320,7 +5374,19 @@ def start_craft():
                 if item_level < 1 or item_level > 100:
                     gui_error("Item Level 1 ile 100 arasinda olmali.")
                     return
-                if not item_target_ids:
+                if chance_to_unique and not get_orb_location("Orb of Chance"):
+                    gui_error(
+                        "Chance + Scour modu icin Settings > Orb Locations ekraninda "
+                        "Orb of Chance konumunu ayarla."
+                    )
+                    return
+                if chance_to_unique and not get_orb_location("Orb of Scouring"):
+                    gui_error(
+                        "Chance + Scour modu icin Settings > Orb Locations ekraninda "
+                        "Orb of Scouring konumunu ayarla."
+                    )
+                    return
+                if not chance_to_unique and not item_target_ids:
                     gui_error("Item Craft icin en az bir hedef mod sec.")
                     return
                 eligible = generic_item.eligible_mods(
@@ -4335,7 +5401,7 @@ def start_craft():
                     for target_id in item_target_ids
                     if target_id in eligible_by_id
                 ]
-                if len(selected_targets) != len(item_target_ids):
+                if not chance_to_unique and len(selected_targets) != len(item_target_ids):
                     gui_error(
                         "Secili hedeflerden biri mevcut base/influence/ilvl havuzunda yok. "
                         "Mod havuzunu yenileyip hedefi tekrar sec."
@@ -4348,9 +5414,12 @@ def start_craft():
                     }
                 )
                 if (
-                    required_count < 1
-                    or required_count > len(selected_targets)
-                    or required_count > target_group_capacity
+                    not chance_to_unique
+                    and (
+                        required_count < 1
+                        or required_count > len(selected_targets)
+                        or required_count > target_group_capacity
+                    )
                 ):
                     gui_error(
                         "Gerekli hedef sayisi secili modlardan ve birlikte gelebilen "
@@ -4369,6 +5438,7 @@ def start_craft():
                     "item_use_regal": item_use_regal_var.get(),
                     "item_use_exalt": item_use_exalt_var.get(),
                     "item_use_annul": item_use_annul_var.get(),
+                    "item_chance_to_unique": chance_to_unique,
                     "comb_craft": False,
                     "chain_craft": chain_craft.get(),
                     "chain_count": int(chain_count_var.get() or 1),
@@ -4382,12 +5452,6 @@ def start_craft():
                     snapshot["inventory_slots"] = slots
                 else:
                     ITEM_POS = pyautogui.position()
-                if map_mode == "alchemy_vaal":
-                    log_message(
-                        "[MAP BATCH] Alchemy + Vaal modu: Normal T16 maplere önce "
-                        "Alchemy, Rare T16 maplere direkt Vaal uygulanır; reddedilenler "
-                        "açık stashe Ctrl+sol tık ile gönderilir."
-                    )
             elif is_base_jewel:
                 try:
                     crit_count = int(base_jewel_crit_count_var.get().strip())
@@ -4456,6 +5520,9 @@ def start_craft():
                     "chain_craft": chain_craft.get(),
                     "chain_count": int(chain_count_var.get() or 1),
                     "comb_craft_data": comb_craft_data,
+                    "cluster_passive_count": int(
+                        template_cluster_meta.get("passive_count", 0) or 0
+                    ),
                     "stop_on_two_match": stop_on_two_match_config,
                     "annul_combs": annul_combs_config,
                     "no_annul_combs": no_annul_combs_config,
@@ -4481,29 +5548,42 @@ def start_craft():
             gui_error(f"Ayarlar okunamadı: {e}")
             return
         snapshot["safe_mode"] = False
+        snapshot["post_craft_action"] = (
+            POST_ACTION_NONE
+            if is_auto_flask
+            else normalize_post_action(post_craft_action_var.get())
+        )
         RUNTIME_SAFE_MODE = False
         reset_currency_usage_tracking()
         log_path = start_session_log()
         log_message(f"[LOG] Session log: {os.path.basename(log_path)}")
         mode_label = (
-            "Map"
-            if is_map
+            "Auto Flask"
+            if is_auto_flask
             else (
-                "Socket"
-                if is_socket
+                "Voyage"
+                if is_voyage
                 else (
-                    "Item Chain"
-                    if is_item and snapshot.get("chain_craft")
+                    "Map"
+                    if is_map
                     else (
-                        "Item"
-                        if is_item
+                        "Socket"
+                        if is_socket
                         else (
-                            "Base Jewel Chain"
-                            if is_base_jewel and snapshot.get("chain_craft")
+                            "Item Chain"
+                            if is_item and snapshot.get("chain_craft")
                             else (
-                                "Base Jewel"
-                                if is_base_jewel
-                                else ("Chain" if snapshot.get("chain_craft") else "Single")
+                                "Item"
+                                if is_item
+                                else (
+                                    "Base Jewel Chain"
+                                    if is_base_jewel and snapshot.get("chain_craft")
+                                    else (
+                                        "Base Jewel"
+                                        if is_base_jewel
+                                        else ("Chain" if snapshot.get("chain_craft") else "Single")
+                                    )
+                                )
                             )
                         )
                     )
@@ -4521,6 +5601,26 @@ def start_craft():
 def craft_thread_loop(settings):
     global shift_spam_active
     global ITEM_POS
+
+    if settings.get("craft_logic") == "voyage":
+        try:
+            run_voyage_craft(settings)
+        except Exception as exc:
+            log_message(f"[VOYAGE] Beklenmeyen hata: {exc}\n{traceback.format_exc()}")
+        finally:
+            try:
+                pyautogui.mouseUp(button="left")
+                pyautogui.mouseUp(button="right")
+                keyboard.release("ctrl")
+            except Exception:
+                pass
+            try:
+                root.after(0, _voyage_restore_window)
+            except Exception:
+                pass
+            log_message("[CRAFT] Dongu durduruldu.")
+            stop_session_log()
+        return
 
     def get_item_info():
         """
@@ -5210,8 +6310,10 @@ def craft_thread_loop_safe(settings):
         log_message("[CRAFT] Dongu durduruldu.")
         stop_session_log()
 
-def craft_thread_loop(settings):
+def _craft_thread_loop_dispatch(settings):
     global RUNTIME_SAFE_MODE
+    if settings.get("craft_logic") == "auto_flask":
+        return run_auto_flask(settings)
     RUNTIME_SAFE_MODE = bool(settings.get("safe_mode"))
     if RUNTIME_SAFE_MODE:
         reset_safe_runtime_tracking()
@@ -5244,10 +6346,24 @@ def craft_thread_loop(settings):
     finally:
         stop_fast_cursor_monitor()
 
+
+def craft_thread_loop(settings):
+    _notification_session_begin(settings)
+    try:
+        return _craft_thread_loop_dispatch(settings)
+    except Exception as exc:
+        _notification_set_reason(f"Beklenmeyen hata: {exc}", "error", 95)
+        raise
+    finally:
+        end_kind = _notification_session_kind()
+        _notification_session_finish()
+        _execute_post_craft_action(settings, end_kind)
+
 # ================ TEMPLATE & COMB UI HELPERS ================
 comb_craft_data = {}
 combo_price_data = {}
 template_price_meta = {}
+template_cluster_meta = {}
 template_comb_craft_data = {}
 template_combo_price_data = {}
 template_stop_on_two_match_config = []
@@ -5381,6 +6497,9 @@ def refresh_templates():
     current_name = template_var.get().strip()
     if current_name and current_name not in names:
         template_var.set("")
+    refresh_trade_panel = globals().get("refresh_cluster_trade_templates")
+    if callable(refresh_trade_panel):
+        refresh_trade_panel()
 
 def _copy_combo_data(data):
     return {
@@ -5499,6 +6618,7 @@ def on_cluster_price_filter_changed(event=None):
 
 def load_template():
     global comb_craft_data, combo_price_data, template_price_meta
+    global template_cluster_meta
     global template_comb_craft_data, template_combo_price_data
     global template_stop_on_two_match_config, template_annul_combs_config
     global template_no_annul_combs_config, template_solo_regal_mods_config
@@ -5586,6 +6706,7 @@ def load_template():
             item_use_regal_var.set(bool(data.get("item_use_regal", False)))
             item_use_exalt_var.set(bool(data.get("item_use_exalt", False)))
             item_use_annul_var.set(bool(data.get("item_use_annul", False)))
+            item_chance_to_unique_var.set(bool(data.get("item_chance_to_unique", False)))
             item_target_ids[:] = [
                 str(target_id)
                 for target_id in data.get("item_target_ids", [])
@@ -5613,6 +6734,7 @@ def load_template():
             var.set("" if val is None else str(val))
 
         if not is_map_template and not is_base_jewel_template and not is_item_template:
+            template_cluster_meta = dict(data.get("cluster_meta", {}))
             template_comb_craft_data = _copy_combo_data(
                 data.get("comb_craft_data", {})
             )
@@ -5634,7 +6756,10 @@ def load_template():
                 data.get("no_regal_mods", [])
             )
             market_cluster_template_active = bool(
-                re.fullmatch(r"L(?:8|12) - [A-Za-z0-9]+", name)
+                re.fullmatch(
+                    r"L(?:8|12) - [A-Za-z0-9]+(?: - ilvl\d+)?",
+                    name,
+                )
                 and template_price_meta.get("market_scan_complete")
             )
             if market_cluster_template_active:
@@ -5650,6 +6775,7 @@ def load_template():
                 _clear_comb_match_caches()
                 apply_cluster_price_filter()
         elif is_map_template or is_base_jewel_template or is_item_template:
+            template_cluster_meta = {}
             comb_craft_data = {}
             combo_price_data = {}
             template_price_meta = {}
@@ -5739,9 +6865,13 @@ def save_template():
         elif is_item:
             item_level = int(item_level_var.get().strip())
             required_count = int(item_required_count_var.get().strip())
-            if not item_target_ids:
+            chance_to_unique = item_chance_to_unique_var.get()
+            if not chance_to_unique and not item_target_ids:
                 raise ValueError("En az bir Item Craft hedef modu sec.")
-            if required_count < 1 or required_count > len(item_target_ids):
+            if (
+                not chance_to_unique
+                and (required_count < 1 or required_count > len(item_target_ids))
+            ):
                 raise ValueError("Gerekli hedef sayisi secili hedef sayisini asamaz.")
             data.update({
                 "item_base": item_base_var.get().strip(),
@@ -5753,6 +6883,7 @@ def save_template():
                 "item_use_regal": item_use_regal_var.get(),
                 "item_use_exalt": item_use_exalt_var.get(),
                 "item_use_annul": item_use_annul_var.get(),
+                "item_chance_to_unique": chance_to_unique,
             })
         elif is_base_jewel:
             crit_count = int(base_jewel_crit_count_var.get().strip())
@@ -5979,9 +7110,11 @@ class OrbLocationsWindow(tk.Toplevel):
             "Orb of Fusing",
             "Chromatic Orb",
             "Orb of Scouring",
+            "Orb of Chance",
             "Orb of Annulment",
             "Orb of Alchemy",
             "Vaal Orb",
+            "Currency Stash Tab",
             "Regal Orb",
             "Chaos Orb",
             "Exalted Orb",
@@ -6285,6 +7418,9 @@ def _do_drag(event):
     positioner = globals().get("position_flask_guide_panel")
     if positioner:
         positioner()
+    trade_positioner = globals().get("position_cluster_trade_panel")
+    if trade_positioner:
+        trade_positioner()
 
 def _apply_rounded_corners():
     try:
@@ -6435,6 +7571,11 @@ affix_weight_var = tk.StringVar(value="1")
 delay_var = tk.StringVar(value=settings_cfg.get("General", "delay", fallback="30"))
 safe_mode_var = tk.BooleanVar(value=False)
 chain_count_var = tk.StringVar(value="1")
+post_craft_action_var = tk.StringVar(
+    value=normalize_post_action(
+        settings_cfg.get("General", "post_craft_action", fallback=POST_ACTION_NONE)
+    )
+)
 _saved_cluster_price_filter = settings_cfg.get(
     "General", "cluster_price_filter", fallback="2d+"
 )
@@ -6473,38 +7614,93 @@ item_use_augment_var = tk.BooleanVar(value=True)
 item_use_regal_var = tk.BooleanVar(value=False)
 item_use_exalt_var = tk.BooleanVar(value=False)
 item_use_annul_var = tk.BooleanVar(value=False)
+item_chance_to_unique_var = tk.BooleanVar(value=False)
 item_mod_search_var = tk.StringVar(value="")
 item_affix_filter_var = tk.StringVar(value="All")
 item_target_ids = []
 item_mod_pool_entries = []
 item_mod_pool_visible = [False]
 flask_guide_visible = [False]
+cluster_trade_visible = [False]
+voyage_auto_place_var = tk.BooleanVar(
+    value=settings_cfg.getboolean("Voyage", "auto_place", fallback=True)
+)
+auto_flask_life_enabled_var = tk.BooleanVar(
+    value=settings_cfg.getboolean("AutoFlask", "life_enabled", fallback=True)
+)
+auto_flask_life_threshold_var = tk.StringVar(
+    value=settings_cfg.get("AutoFlask", "life_threshold", fallback="98")
+)
+auto_flask_life_key_var = tk.StringVar(
+    value=settings_cfg.get("AutoFlask", "life_key", fallback="1")
+)
+auto_flask_mana_enabled_var = tk.BooleanVar(
+    value=settings_cfg.getboolean("AutoFlask", "mana_enabled", fallback=False)
+)
+auto_flask_mana_threshold_var = tk.StringVar(
+    value=settings_cfg.get("AutoFlask", "mana_threshold", fallback="25")
+)
+auto_flask_mana_key_var = tk.StringVar(
+    value=settings_cfg.get("AutoFlask", "mana_key", fallback="2")
+)
 
-# ── top bar: Cluster Craft / Map Craft toggle + gear ──────────────────────
+# Global mode and completion controls.
 settings_bar = ttk.Frame(root)
 settings_bar.place(x=PADX, y=PADY + 14, width=WINDOW_W - 2 * PADX, height=24)
-settings_bar.grid_columnconfigure(0, weight=1, uniform="mode_row")
-settings_bar.grid_columnconfigure(1, weight=1, uniform="mode_row")
-settings_bar.grid_columnconfigure(2, weight=1, uniform="mode_row")
-settings_bar.grid_columnconfigure(3, weight=1, uniform="mode_row")
-settings_bar.grid_columnconfigure(4, weight=1, uniform="mode_row")
-settings_bar.grid_columnconfigure(5, weight=0)
-settings_bar.grid_columnconfigure(6, weight=0)
+settings_bar.grid_columnconfigure(1, weight=1)
+settings_bar.grid_columnconfigure(3, weight=1)
 
 app_mode = tk.StringVar(value="cluster")
+MODE_DISPLAY_TO_VALUE = {
+    "Cluster": "cluster",
+    "Map": "map",
+    "Socket": "socket",
+    "Jewel": "base_jewel",
+    "Item": "item",
+    "Voyage": "voyage",
+    "Auto Flask": "auto_flask",
+}
+MODE_VALUE_TO_DISPLAY = {value: label for label, value in MODE_DISPLAY_TO_VALUE.items()}
+POST_ACTION_DISPLAY_TO_VALUE = {
+    "Bir sey yapma": POST_ACTION_NONE,
+    "Oyunu kapat": POST_ACTION_CLOSE_GAME,
+    "PC'yi kapat": POST_ACTION_SHUTDOWN_PC,
+}
+POST_ACTION_VALUE_TO_DISPLAY = {
+    value: label for label, value in POST_ACTION_DISPLAY_TO_VALUE.items()
+}
 
-btn_cluster = ttk.Button(settings_bar, text="Cluster", style="Dark.TButton")
-btn_map     = ttk.Button(settings_bar, text="Map",     style="Dark.TButton")
-btn_socket  = ttk.Button(settings_bar, text="Socket",  style="Dark.TButton")
-btn_base_jewel = ttk.Button(settings_bar, text="Jewel", style="Dark.TButton")
-btn_item = ttk.Button(settings_bar, text="Item", style="Dark.TButton")
-btn_cluster.grid(row=0, column=0, sticky="ew")
-btn_map.grid(row=0, column=1, sticky="ew", padx=(2, 2))
-btn_socket.grid(row=0, column=2, sticky="ew", padx=(0, 2))
-btn_base_jewel.grid(row=0, column=3, sticky="ew", padx=(0, 2))
-btn_item.grid(row=0, column=4, sticky="ew", padx=(0, 4))
+mode_selector_var = tk.StringVar(value=MODE_VALUE_TO_DISPLAY["cluster"])
+post_action_display_var = tk.StringVar(
+    value=POST_ACTION_VALUE_TO_DISPLAY.get(
+        post_craft_action_var.get(), POST_ACTION_VALUE_TO_DISPLAY[POST_ACTION_NONE]
+    )
+)
 
-settings_btn = ttk.Button(settings_bar, text="⚙", style="Dark.TButton")
+ttk.Label(settings_bar, text="Mod:").grid(row=0, column=0, sticky="w", padx=(0, 3))
+mode_selector = ttk.Combobox(
+    settings_bar,
+    textvariable=mode_selector_var,
+    values=tuple(MODE_DISPLAY_TO_VALUE),
+    state="readonly",
+    width=12,
+    style="Dark.TCombobox",
+)
+mode_selector.grid(row=0, column=1, sticky="ew", padx=(0, 5))
+
+ttk.Label(settings_bar, text="Bitince:").grid(row=0, column=2, sticky="w", padx=(0, 3))
+post_action_selector = ttk.Combobox(
+    settings_bar,
+    textvariable=post_action_display_var,
+    values=tuple(POST_ACTION_DISPLAY_TO_VALUE),
+    state="readonly",
+    width=12,
+    style="Dark.TCombobox",
+)
+post_action_selector.grid(row=0, column=3, sticky="ew", padx=(0, 4))
+
+global_settings_btn = ttk.Button(settings_bar, text="⚙", width=3, style="Dark.TButton")
+global_settings_btn.grid(row=0, column=4, sticky="e", padx=(0, 3))
 
 always_on_top_var = tk.BooleanVar(value=True)
 def toggle_always_on_top():
@@ -6522,7 +7718,7 @@ always_on_top_cb = ttk.Checkbutton(
     variable=always_on_top_var,
     command=toggle_always_on_top,
 )
-always_on_top_cb.grid(row=0, column=5, sticky="e", padx=(0, 4))
+always_on_top_cb.grid(row=0, column=5, sticky="e", padx=(0, 3))
 always_on_top_cb.config(text="\U0001F4CC", width=2)
 safe_mode_cb = ttk.Checkbutton(
     settings_bar,
@@ -6669,6 +7865,191 @@ ttk.Label(
     wraplength=WINDOW_W - 2 * PADX - 20,
     justify="left",
 ).grid(row=6, column=0, columnspan=8, sticky="w")
+
+auto_flask_frame = ttk.Frame(root)
+auto_flask_frame.configure(padding=(9, 9))
+auto_flask_frame.grid_columnconfigure(1, weight=1)
+
+ttk.Label(
+    auto_flask_frame,
+    text="Auto Flask",
+    font=("Segoe UI", 10, "bold"),
+).grid(row=0, column=0, columnspan=5, sticky="w", pady=(0, 10))
+
+ttk.Checkbutton(
+    auto_flask_frame,
+    text="Life Flask",
+    variable=auto_flask_life_enabled_var,
+).grid(row=1, column=0, sticky="w")
+ttk.Label(auto_flask_frame, text="Life <=").grid(row=1, column=1, sticky="e", padx=(12, 3))
+tk.Entry(
+    auto_flask_frame,
+    width=4,
+    textvariable=auto_flask_life_threshold_var,
+    bg="#000",
+    fg="#fff",
+    insertbackground="#fff",
+).grid(row=1, column=2, sticky="w")
+ttk.Label(auto_flask_frame, text="%   Tus:").grid(row=1, column=3, sticky="w", padx=(3, 3))
+tk.Entry(
+    auto_flask_frame,
+    width=3,
+    textvariable=auto_flask_life_key_var,
+    bg="#000",
+    fg="#fff",
+    insertbackground="#fff",
+).grid(row=1, column=4, sticky="w")
+
+ttk.Checkbutton(
+    auto_flask_frame,
+    text="Mana Flask",
+    variable=auto_flask_mana_enabled_var,
+).grid(row=2, column=0, sticky="w", pady=(7, 0))
+ttk.Label(auto_flask_frame, text="Mana <=").grid(row=2, column=1, sticky="e", padx=(12, 3), pady=(7, 0))
+tk.Entry(
+    auto_flask_frame,
+    width=4,
+    textvariable=auto_flask_mana_threshold_var,
+    bg="#000",
+    fg="#fff",
+    insertbackground="#fff",
+).grid(row=2, column=2, sticky="w", pady=(7, 0))
+ttk.Label(auto_flask_frame, text="%   Tus:").grid(row=2, column=3, sticky="w", padx=(3, 3), pady=(7, 0))
+tk.Entry(
+    auto_flask_frame,
+    width=3,
+    textvariable=auto_flask_mana_key_var,
+    bg="#000",
+    fg="#fff",
+    insertbackground="#fff",
+).grid(row=2, column=4, sticky="w", pady=(7, 0))
+
+ttk.Separator(auto_flask_frame, orient="horizontal").grid(
+    row=3, column=0, columnspan=5, sticky="ew", pady=(12, 9)
+)
+ttk.Label(
+    auto_flask_frame,
+    text=(
+        "F4'e basmadan once kullanilabilir Life/Mana dolu olmali. Program "
+        "baslangictaki kullanilabilir dolu alani %100 kabul eder; reserve edilen "
+        "Life/Mana hesaba katilmaz. Utility flasklara dokunulmaz."
+    ),
+    wraplength=WINDOW_W - 2 * PADX - 28,
+    justify="left",
+).grid(row=4, column=0, columnspan=5, sticky="w")
+
+auto_flask_status_var = tk.StringVar(value="Hazir. Path of Exile ondeyken F4 ile baslat.")
+ttk.Label(
+    auto_flask_frame,
+    textvariable=auto_flask_status_var,
+    foreground="#d6ad63",
+    wraplength=WINDOW_W - 2 * PADX - 28,
+    justify="left",
+).grid(row=5, column=0, columnspan=5, sticky="w", pady=(12, 0))
+
+voyage_frame = ttk.Frame(root)
+voyage_frame.configure(padding=(7, 7))
+voyage_frame.grid_columnconfigure(0, weight=1)
+voyage_frame.grid_columnconfigure(1, weight=1)
+
+ttk.Label(
+    voyage_frame,
+    text="Voyage Planner",
+    font=("Segoe UI", 9, "bold"),
+).grid(row=0, column=0, columnspan=2, sticky="w", pady=(0, 5))
+ttk.Label(
+    voyage_frame,
+    text=(
+        "Her butona bas, 2 saniye icinde imleci istenen merkeze gotur. "
+        "Chart paneli tamamen gorunur ve en ustte olmali."
+    ),
+    wraplength=WINDOW_W - 2 * PADX - 24,
+    justify="left",
+).grid(row=1, column=0, columnspan=2, sticky="w", pady=(0, 6))
+
+voyage_status_var = tk.StringVar(value="Kalibrasyon bekleniyor.")
+
+def _voyage_set_status(value):
+    try:
+        voyage_status_var.set(str(value))
+    except Exception:
+        pass
+
+def _voyage_calibrate_point(key, label):
+    _voyage_set_status(f"{label}: 2 saniye icinde imleci hedefe gotur...")
+
+    def worker():
+        time.sleep(2.0)
+        point = pyautogui.position()
+        _voyage_save_point(key, point)
+        root.after(
+            0,
+            lambda: _voyage_set_status(
+                f"{label} kaydedildi: {point.x},{point.y}"
+            ),
+        )
+
+    threading.Thread(target=worker, daemon=True).start()
+
+calibration_specs = (
+    ("chart_grid_tl", "Chart TL"),
+    ("chart_grid_br", "Chart BR"),
+    ("board_grid_tl", "Board TL Cell"),
+    ("board_grid_br", "Board BR Cell"),
+)
+for button_index, (setting_key, label) in enumerate(calibration_specs):
+    ttk.Button(
+        voyage_frame,
+        text=label,
+        style="Dark.TButton",
+        command=lambda key=setting_key, text=label: _voyage_calibrate_point(
+            key, text
+        ),
+    ).grid(
+        row=2 + button_index // 2,
+        column=button_index % 2,
+        sticky="ew",
+        padx=(0, 3) if button_index % 2 == 0 else (3, 0),
+        pady=(0, 4),
+    )
+
+def _voyage_save_auto_place():
+    settings_cfg.set(
+        "Voyage",
+        "auto_place",
+        "True" if voyage_auto_place_var.get() else "False",
+    )
+    save_settings_now()
+
+ttk.Checkbutton(
+    voyage_frame,
+    text="Auto Place (Begin Voyage tiklanmaz)",
+    variable=voyage_auto_place_var,
+    command=_voyage_save_auto_place,
+).grid(row=4, column=0, columnspan=2, sticky="w", pady=(3, 4))
+
+ttk.Button(
+    voyage_frame,
+    text="Scan & Plan",
+    style="Dark.TButton",
+    command=start_craft,
+).grid(row=5, column=0, columnspan=2, sticky="ew", pady=(2, 4))
+
+voyage_status_label = ttk.Label(
+    voyage_frame,
+    textvariable=voyage_status_var,
+    wraplength=WINDOW_W - 2 * PADX - 24,
+    justify="left",
+)
+voyage_status_label.grid(row=6, column=0, columnspan=2, sticky="w", pady=(4, 0))
+
+ttk.Label(
+    voyage_frame,
+    text="F4: kenarlari oku -> Chart'lari tara -> planla/yerlestir. F5: aninda kes.",
+    wraplength=WINDOW_W - 2 * PADX - 24,
+    justify="left",
+    font=("Segoe UI", 8, "italic"),
+).grid(row=7, column=0, columnspan=2, sticky="w", pady=(9, 0))
 
 base_jewel_frame = ttk.Frame(root)
 base_jewel_frame.configure(padding=(7, 7))
@@ -6831,8 +8212,14 @@ ttk.Checkbutton(item_flags, text="Regal", variable=item_use_regal_var).pack(side
 ttk.Checkbutton(item_flags, text="Exalt", variable=item_use_exalt_var).pack(side="left", padx=(6, 0))
 ttk.Checkbutton(item_flags, text="Annul", variable=item_use_annul_var).pack(side="left", padx=(6, 0))
 
+ttk.Checkbutton(
+    item_frame,
+    text="Chance + Scour -> Unique",
+    variable=item_chance_to_unique_var,
+).grid(row=4, column=0, columnspan=4, sticky="w", pady=(2, 2))
+
 item_goal_line = ttk.Frame(item_frame)
-item_goal_line.grid(row=4, column=0, columnspan=4, sticky="w", pady=(2, 5))
+item_goal_line.grid(row=5, column=0, columnspan=4, sticky="w", pady=(2, 5))
 ttk.Label(item_goal_line, text="Need:").pack(side="left")
 tk.Entry(
     item_goal_line,
@@ -6856,7 +8243,7 @@ tk.Entry(
 ).pack(side="left")
 
 item_target_header = ttk.Frame(item_frame)
-item_target_header.grid(row=5, column=0, columnspan=4, sticky="ew")
+item_target_header.grid(row=6, column=0, columnspan=4, sticky="ew")
 ttk.Label(item_target_header, text="Selected target tiers:").pack(side="left")
 
 item_target_list = tk.Listbox(
@@ -6868,7 +8255,7 @@ item_target_list = tk.Listbox(
     highlightbackground="#000",
     font=("Tahoma", 8),
 )
-item_target_list.grid(row=6, column=0, columnspan=4, sticky="nsew", pady=(2, 5))
+item_target_list.grid(row=7, column=0, columnspan=4, sticky="nsew", pady=(2, 5))
 
 def format_item_mod_label(mod):
     tag = "P" if mod.get("type") == "prefix" else "S"
@@ -7093,14 +8480,14 @@ ttk.Button(
     text="Open Mod Pool",
     style="Dark.TButton",
     command=toggle_item_mod_pool,
-).grid(row=7, column=0, columnspan=4, sticky="ew")
+).grid(row=8, column=0, columnspan=4, sticky="ew")
 ttk.Label(
     item_frame,
-    text="Single junk + compatible open slot uses Augment first.",
+    text="Chance mode: Normal -> Chance, Magic/Rare -> Scour, Unique -> stop.",
     wraplength=WINDOW_W - 2 * PADX - 22,
     justify="left",
     font=("Segoe UI", 8, "italic"),
-).grid(row=8, column=0, columnspan=4, sticky="w", pady=(5, 0))
+).grid(row=9, column=0, columnspan=4, sticky="w", pady=(5, 0))
 reload_item_mod_pool()
 
 # Offline flask recommendation drawer for Item Craft.
@@ -7383,6 +8770,412 @@ flask_guide_type_cb.bind("<<ComboboxSelected>>", refresh_flask_guide)
 flask_guide_combo_list.bind("<<ListboxSelect>>", show_selected_flask_guide)
 flask_guide_combo_list.bind("<Double-Button-1>", use_flask_guide_base)
 refresh_flask_guide()
+
+# Cluster template drawer that opens a pre-filled official PoE Trade search.
+cluster_trade_panel = tk.Toplevel(root)
+cluster_trade_panel.withdraw()
+cluster_trade_panel.overrideredirect(True)
+cluster_trade_panel.resizable(False, False)
+cluster_trade_panel.configure(bg="#2b2b2b")
+cluster_trade_panel.attributes("-topmost", True)
+try:
+    cluster_trade_panel.transient(root)
+except tk.TclError:
+    pass
+
+cluster_trade_title_bar = tk.Frame(
+    cluster_trade_panel,
+    bg="#2b2b2b",
+    height=21,
+    highlightthickness=0,
+    bd=0,
+)
+cluster_trade_title_bar.place(x=0, y=0, width=CLUSTER_TRADE_W, height=21)
+cluster_trade_title_label = tk.Label(
+    cluster_trade_title_bar,
+    text="Cluster Trade Rehberi",
+    bg="#2b2b2b",
+    fg="#d6ad63",
+    font=("Tahoma", 8, "bold"),
+)
+cluster_trade_title_label.place(x=7, y=1, height=18)
+
+cluster_trade_body = ttk.Frame(cluster_trade_panel, padding=(8, 6))
+cluster_trade_body.place(
+    x=0,
+    y=21,
+    width=CLUSTER_TRADE_W,
+    height=CLUSTER_TRADE_H - 21,
+)
+cluster_trade_body.grid_columnconfigure(0, weight=1)
+cluster_trade_body.grid_rowconfigure(3, weight=1)
+
+cluster_trade_search_var = tk.StringVar(value="")
+cluster_trade_status_var = tk.StringVar(value="Template secin.")
+cluster_trade_current_entries = []
+cluster_trade_default_league = ["Allflame"]
+cluster_trade_request_active = [False]
+cluster_trade_open_after = [None]
+
+ttk.Label(
+    cluster_trade_body,
+    text="Template ara:",
+    font=("Segoe UI", 9, "bold"),
+).grid(row=0, column=0, sticky="w")
+cluster_trade_search_entry = ttk.Entry(
+    cluster_trade_body,
+    textvariable=cluster_trade_search_var,
+)
+cluster_trade_search_entry.grid(row=1, column=0, sticky="ew", pady=(2, 5))
+ttk.Label(
+    cluster_trade_body,
+    text="Bir isme tiklayinca hazir PoE Trade aramasi acilir:",
+).grid(row=2, column=0, sticky="w", pady=(0, 3))
+
+cluster_trade_list_wrap = ttk.Frame(cluster_trade_body)
+cluster_trade_list_wrap.grid(row=3, column=0, sticky="nsew")
+cluster_trade_listbox = tk.Listbox(
+    cluster_trade_list_wrap,
+    exportselection=False,
+    bg="#090909",
+    fg="#f2f2f2",
+    selectbackground="#5a4a2b",
+    selectforeground="#ffffff",
+    highlightbackground="#111111",
+    font=("Tahoma", 8),
+)
+cluster_trade_list_scroll = ttk.Scrollbar(
+    cluster_trade_list_wrap,
+    orient="vertical",
+    command=cluster_trade_listbox.yview,
+)
+cluster_trade_listbox.configure(yscrollcommand=cluster_trade_list_scroll.set)
+cluster_trade_listbox.pack(side="left", fill="both", expand=True)
+cluster_trade_list_scroll.pack(side="right", fill="y")
+
+cluster_trade_detail = tk.Text(
+    cluster_trade_body,
+    height=7,
+    wrap="word",
+    bg="#111111",
+    fg="#e7e0d2",
+    insertbackground="#ffffff",
+    selectbackground="#5a4a2b",
+    relief="sunken",
+    bd=1,
+    font=("Tahoma", 8),
+    padx=6,
+    pady=5,
+)
+cluster_trade_detail.grid(row=4, column=0, sticky="ew", pady=(6, 3))
+cluster_trade_detail.configure(state="disabled")
+ttk.Label(
+    cluster_trade_body,
+    textvariable=cluster_trade_status_var,
+    wraplength=CLUSTER_TRADE_W - 24,
+    justify="left",
+    font=("Segoe UI", 8, "italic"),
+).grid(row=5, column=0, sticky="ew", pady=(0, 4))
+cluster_trade_buttons = ttk.Frame(cluster_trade_body)
+cluster_trade_buttons.grid(row=6, column=0, sticky="ew")
+
+
+def position_cluster_trade_panel(_event=None):
+    if not cluster_trade_visible[0]:
+        return
+    try:
+        root.update_idletasks()
+        x = root.winfo_x() - CLUSTER_TRADE_W - CLUSTER_TRADE_GAP
+        y = root.winfo_y()
+        cluster_trade_panel.geometry(
+            f"{CLUSTER_TRADE_W}x{CLUSTER_TRADE_H}{x:+d}{y:+d}"
+        )
+    except tk.TclError:
+        pass
+
+
+def _cluster_trade_entry_from_selection():
+    selection = cluster_trade_listbox.curselection()
+    if not selection:
+        return None
+    index = selection[0]
+    if index >= len(cluster_trade_current_entries):
+        return None
+    return cluster_trade_current_entries[index]
+
+
+def show_selected_cluster_trade(_event=None):
+    entry = _cluster_trade_entry_from_selection()
+    if not entry:
+        return
+    metadata = entry.get("metadata") or {}
+    if entry.get("error"):
+        detail = f"Template: {entry['name']}\n\n{entry['error']}"
+    else:
+        league = metadata.get("league") or cluster_trade_default_league[0]
+        passive_min, passive_max = cluster_trade.passive_count_range(
+            metadata["passive_count"]
+        )
+        passive_text = (
+            f"{passive_min}-{passive_max}"
+            if passive_min != passive_max
+            else f"tam {passive_min}"
+        )
+        detail = (
+            f"Template: {entry['name']}\n"
+            f"Base: {metadata['base']}\n"
+            f"Tur: {metadata['item_type']}\n"
+            f"Pasif: {passive_text}\n"
+            f"Minimum iLvl: {metadata['minimum_item_level']}\n"
+            f"Lig: {league}\n"
+            "Corrupted: No | Fractured: No"
+        )
+    cluster_trade_detail.configure(state="normal")
+    cluster_trade_detail.delete("1.0", "end")
+    cluster_trade_detail.insert("1.0", detail)
+    cluster_trade_detail.configure(state="disabled")
+
+
+def refresh_cluster_trade_templates(*_args):
+    selected = _cluster_trade_entry_from_selection()
+    selected_name = selected.get("name") if selected else ""
+    search = cluster_trade_search_var.get().strip().casefold()
+    all_entries = []
+    leagues = {}
+    os.makedirs(TEMPLATE_DIR, exist_ok=True)
+    for file_name in sorted(os.listdir(TEMPLATE_DIR), key=str.casefold):
+        if not file_name.endswith(".json"):
+            continue
+        name = os.path.splitext(file_name)[0]
+        path = os.path.join(TEMPLATE_DIR, file_name)
+        try:
+            with open(path, "r", encoding="utf-8") as handle:
+                data = json.load(handle)
+            metadata = cluster_trade.template_metadata(name, data)
+            league = metadata.get("league")
+            if league:
+                leagues[league] = leagues.get(league, 0) + 1
+            entry = {
+                "name": name,
+                "path": path,
+                "data": data,
+                "metadata": metadata,
+                "error": "",
+            }
+        except Exception as exc:
+            entry = {
+                "name": name,
+                "path": path,
+                "data": {},
+                "metadata": {},
+                "error": str(exc),
+            }
+        all_entries.append(entry)
+
+    if leagues:
+        cluster_trade_default_league[0] = max(
+            leagues,
+            key=lambda league: (leagues[league], league),
+        )
+    visible = [
+        entry
+        for entry in all_entries
+        if not search or search in entry["name"].casefold()
+    ]
+    cluster_trade_current_entries[:] = visible
+    cluster_trade_listbox.delete(0, "end")
+    selected_index = 0
+    for index, entry in enumerate(visible):
+        cluster_trade_listbox.insert("end", entry["name"])
+        if entry["name"] == selected_name:
+            selected_index = index
+    if visible:
+        cluster_trade_listbox.selection_set(selected_index)
+        cluster_trade_listbox.activate(selected_index)
+        cluster_trade_listbox.see(selected_index)
+        show_selected_cluster_trade()
+    else:
+        cluster_trade_detail.configure(state="normal")
+        cluster_trade_detail.delete("1.0", "end")
+        cluster_trade_detail.configure(state="disabled")
+        cluster_trade_status_var.set("Eslesen cluster template bulunamadi.")
+
+
+def _finish_cluster_trade_search(entry, url=None, error=None):
+    cluster_trade_request_active[0] = False
+    if error:
+        cluster_trade_status_var.set(f"Trade aramasi acilamadi: {error}")
+        log_message(f"[CLUSTER TRADE] Hata: {error}")
+        return
+    opened = webbrowser.open(url, new=2)
+    state = "tarayicida acildi" if opened else "tarayiciya gonderildi"
+    cluster_trade_status_var.set(f"{entry['name']}: {state}.")
+    log_message(f"[CLUSTER TRADE] {entry['name']} -> {url}")
+
+
+def open_selected_cluster_trade(_event=None):
+    cluster_trade_open_after[0] = None
+    entry = _cluster_trade_entry_from_selection()
+    if not entry or cluster_trade_request_active[0]:
+        return
+    if entry.get("error"):
+        cluster_trade_status_var.set(entry["error"])
+        return
+
+    metadata = entry["metadata"]
+    league = metadata.get("league") or cluster_trade_default_league[0]
+    cluster_trade_request_active[0] = True
+    cluster_trade_status_var.set(
+        f"{entry['name']}: {league} icin sorgu olusturuluyor..."
+    )
+
+    def worker():
+        try:
+            stats = cluster_trade.load_stats(os.path.join(DATA_DIR, "stats.json"))
+            url, _metadata, _payload = cluster_trade.create_trade_search(
+                requests,
+                stats,
+                entry["name"],
+                entry["data"],
+                league,
+                headers={"User-Agent": f"Waukeen-Crafting-Assistant/{APP_VERSION}"},
+            )
+            root.after(
+                0,
+                lambda: _finish_cluster_trade_search(entry, url=url),
+            )
+        except Exception as exc:
+            root.after(
+                0,
+                lambda message=str(exc): _finish_cluster_trade_search(
+                    entry,
+                    error=message,
+                ),
+            )
+
+    threading.Thread(target=worker, daemon=True).start()
+
+
+def on_cluster_trade_name_click(event):
+    if cluster_trade_listbox.size() <= 0:
+        return
+    index = cluster_trade_listbox.nearest(event.y)
+    bbox = cluster_trade_listbox.bbox(index)
+    if not bbox or not (bbox[1] <= event.y <= bbox[1] + bbox[3]):
+        return
+    cluster_trade_listbox.selection_clear(0, "end")
+    cluster_trade_listbox.selection_set(index)
+    cluster_trade_listbox.activate(index)
+    show_selected_cluster_trade()
+    if cluster_trade_open_after[0] is not None:
+        root.after_cancel(cluster_trade_open_after[0])
+    cluster_trade_open_after[0] = root.after(160, open_selected_cluster_trade)
+
+
+def hide_cluster_trade_panel(hide_arrow=False):
+    cluster_trade_visible[0] = False
+    try:
+        cluster_trade_panel.withdraw()
+        cluster_trade_arrow.config(text="<")
+        if hide_arrow:
+            cluster_trade_arrow.place_forget()
+    except tk.TclError:
+        pass
+
+
+def show_cluster_trade_panel():
+    if app_mode.get() != "cluster":
+        return
+    cluster_trade_visible[0] = True
+    refresh_cluster_trade_templates()
+    position_cluster_trade_panel()
+    try:
+        cluster_trade_panel.deiconify()
+        cluster_trade_panel.lift()
+        cluster_trade_panel.attributes("-topmost", True)
+        cluster_trade_arrow.config(text=">")
+        cluster_trade_panel.after(
+            20,
+            lambda: _apply_window_rounding(
+                cluster_trade_panel,
+                CLUSTER_TRADE_W,
+                CLUSTER_TRADE_H,
+                radius=18,
+            ),
+        )
+    except tk.TclError:
+        cluster_trade_visible[0] = False
+
+
+def toggle_cluster_trade_panel():
+    if cluster_trade_visible[0]:
+        hide_cluster_trade_panel()
+    else:
+        show_cluster_trade_panel()
+
+
+def show_cluster_trade_arrow():
+    cluster_trade_arrow.config(text=">" if cluster_trade_visible[0] else "<")
+    cluster_trade_arrow.place(x=0, y=107, width=19, height=27)
+
+
+def sync_cluster_trade_position(event=None):
+    if event is not None and event.widget is not root:
+        return
+    if cluster_trade_visible[0]:
+        position_cluster_trade_panel()
+
+
+ttk.Button(
+    cluster_trade_buttons,
+    text="PoE Trade'de Ac",
+    style="Dark.TButton",
+    command=open_selected_cluster_trade,
+).pack(side="left", fill="x", expand=True, padx=(0, 2))
+ttk.Button(
+    cluster_trade_buttons,
+    text="Kapat",
+    style="Dark.TButton",
+    command=hide_cluster_trade_panel,
+).pack(side="left", padx=(2, 0))
+
+cluster_trade_arrow = tk.Button(
+    root,
+    text="<",
+    command=toggle_cluster_trade_panel,
+    bg="#3a3a3a",
+    fg="#d6ad63",
+    activebackground="#4a4a4a",
+    activeforeground="#ffffff",
+    relief="raised",
+    bd=1,
+    font=("Tahoma", 9, "bold"),
+    padx=0,
+    pady=0,
+    highlightthickness=0,
+)
+cluster_trade_close = tk.Button(
+    cluster_trade_panel,
+    text=">",
+    command=hide_cluster_trade_panel,
+    bg="#2b2b2b",
+    fg="#e6e6e6",
+    activebackground="#3a3a3a",
+    activeforeground="#ffffff",
+    relief="flat",
+    bd=0,
+    font=("Tahoma", 9, "bold"),
+    padx=0,
+    pady=0,
+    highlightthickness=0,
+)
+cluster_trade_close.place(x=CLUSTER_TRADE_W - 22, y=0, width=22, height=18)
+cluster_trade_panel.protocol("WM_DELETE_WINDOW", hide_cluster_trade_panel)
+cluster_trade_search_var.trace_add("write", refresh_cluster_trade_templates)
+cluster_trade_listbox.bind("<<ListboxSelect>>", show_selected_cluster_trade)
+cluster_trade_listbox.bind("<ButtonRelease-1>", on_cluster_trade_name_click)
+cluster_trade_listbox.bind("<Return>", open_selected_cluster_trade)
+refresh_cluster_trade_templates()
 
 # craft logic + flags
 mid = ttk.Frame(root)
@@ -7729,14 +9522,7 @@ map_pack_size_thresh.set("")
 map_use_exalt.set(False)
 
 def read_map_affixes():
-    seen = set()
-    items = []
-    for group in load_map_affix_groups():
-        for mod in group.get("mods", []):
-            if mod not in seen:
-                seen.add(mod)
-                items.append(mod)
-    return items
+    return map_rules.unique_affixes(load_map_affix_groups())
 
 # ── MAP CRAFT UI ─────────────────────────────────────────────────────────────
 map_frame = ttk.Frame(root)
@@ -7865,10 +9651,12 @@ map_tabs.bind("<<NotebookTabChanged>>", on_map_profile_tab_changed)
 map_pool_frame = ttk.Frame(root)
 map_search_var = tk.StringVar()
 map_roll_var = tk.StringVar(value="")
+map_pool_status_var = tk.StringVar(value="")
 all_map_affixes = []
 
 def reload_map_affixes():
     all_map_affixes[:] = read_map_affixes()
+    map_pool_status_var.set(f"{len(all_map_affixes)} mod")
     on_map_search()
 
 def on_map_search(*_):
@@ -7889,6 +9677,7 @@ tk.Entry(
     fg="#fff",
     insertbackground="#fff",
 ).pack(side="left", padx=(4, 0))
+ttk.Label(map_pool_header, textvariable=map_pool_status_var).pack(side="right")
 
 tk.Entry(map_pool_frame, textvariable=map_search_var,
          bg="#000", fg="#fff", insertbackground="#fff").pack(fill="x", padx=4, pady=(0, 2))
@@ -7952,6 +9741,8 @@ def show_mode(mode: str):
         base_jewel_frame,
         item_frame,
         item_mod_pool_frame,
+        voyage_frame,
+        auto_flask_frame,
     ]:
         w.place_forget()
     if mode == "normal":
@@ -7986,13 +9777,9 @@ settings_btn.config(command=toggle_settings_panel)
 # ── APP MODE SWITCHING: Cluster ↔ Map ───────────────────────────────────────
 def switch_to_cluster():
     app_mode.set("cluster")
+    mode_selector_var.set(MODE_VALUE_TO_DISPLAY["cluster"])
     hide_flask_guide_panel(hide_arrow=True)
     refresh_templates()
-    btn_cluster.state(["pressed"])
-    btn_map.state(["!pressed"])
-    btn_socket.state(["!pressed"])
-    btn_base_jewel.state(["!pressed"])
-    btn_item.state(["!pressed"])
     configure_top_controls_for_socket_mode(False)
     # Map UI gizle
     map_frame.place_forget()
@@ -8002,6 +9789,8 @@ def switch_to_cluster():
     base_jewel_frame.place_forget()
     item_frame.place_forget()
     item_mod_pool_frame.place_forget()
+    voyage_frame.place_forget()
+    auto_flask_frame.place_forget()
     item_mod_pool_visible[0] = False
     map_affix_visible[0] = False
     # Logic butonları cluster moduna döndür
@@ -8028,22 +9817,22 @@ def switch_to_cluster():
     show_top_controls()
     style.configure("TNotebook.Tab", width=(WINDOW_W - 2 * PADX) // 5, padding=[0, 4])
     show_mode("normal")
+    show_cluster_trade_arrow()
 
 def switch_to_map():
     app_mode.set("map")
+    mode_selector_var.set(MODE_VALUE_TO_DISPLAY["map"])
     hide_flask_guide_panel(hide_arrow=True)
+    hide_cluster_trade_panel(hide_arrow=True)
     refresh_templates()
-    btn_map.state(["pressed"])
-    btn_cluster.state(["!pressed"])
-    btn_socket.state(["!pressed"])
-    btn_base_jewel.state(["!pressed"])
-    btn_item.state(["!pressed"])
     configure_top_controls_for_socket_mode(False)
     # Cluster UI gizle
     socket_frame.place_forget()
     base_jewel_frame.place_forget()
     item_frame.place_forget()
     item_mod_pool_frame.place_forget()
+    voyage_frame.place_forget()
+    auto_flask_frame.place_forget()
     item_mod_pool_visible[0] = False
     pool.place_forget()
     settings_panel.place_forget()
@@ -8088,13 +9877,10 @@ def switch_to_map():
 def switch_to_socket():
     global current_mode
     app_mode.set("socket")
+    mode_selector_var.set(MODE_VALUE_TO_DISPLAY["socket"])
     hide_flask_guide_panel(hide_arrow=True)
+    hide_cluster_trade_panel(hide_arrow=True)
     current_mode = "normal"
-    btn_socket.state(["pressed"])
-    btn_cluster.state(["!pressed"])
-    btn_map.state(["!pressed"])
-    btn_base_jewel.state(["!pressed"])
-    btn_item.state(["!pressed"])
     configure_top_controls_for_socket_mode(True)
     map_frame.place_forget()
     map_tabs.place_forget()
@@ -8110,21 +9896,20 @@ def switch_to_socket():
     base_jewel_frame.place_forget()
     item_frame.place_forget()
     item_mod_pool_frame.place_forget()
+    voyage_frame.place_forget()
+    auto_flask_frame.place_forget()
     item_mod_pool_visible[0] = False
-    show_top_controls()
-    socket_frame.place(x=PADX, y=104, width=WINDOW_W - 2 * PADX, height=170)
+    hide_top_controls()
+    socket_frame.place(x=PADX, y=70, width=WINDOW_W - 2 * PADX, height=204)
 
 def switch_to_base_jewel():
     global current_mode
     app_mode.set("base_jewel")
+    mode_selector_var.set(MODE_VALUE_TO_DISPLAY["base_jewel"])
     hide_flask_guide_panel(hide_arrow=True)
+    hide_cluster_trade_panel(hide_arrow=True)
     current_mode = "normal"
     refresh_templates()
-    btn_base_jewel.state(["pressed"])
-    btn_cluster.state(["!pressed"])
-    btn_map.state(["!pressed"])
-    btn_socket.state(["!pressed"])
-    btn_item.state(["!pressed"])
     configure_top_controls_for_socket_mode(False)
     settings_btn.config(text="Orb Locations", command=lambda: OrbLocationsWindow(root))
 
@@ -8142,6 +9927,8 @@ def switch_to_base_jewel():
     weights.place_forget()
     item_frame.place_forget()
     item_mod_pool_frame.place_forget()
+    voyage_frame.place_forget()
+    auto_flask_frame.place_forget()
     item_mod_pool_visible[0] = False
 
     show_top_controls()
@@ -8155,13 +9942,10 @@ def switch_to_base_jewel():
 def switch_to_item():
     global current_mode
     app_mode.set("item")
+    mode_selector_var.set(MODE_VALUE_TO_DISPLAY["item"])
+    hide_cluster_trade_panel(hide_arrow=True)
     current_mode = "normal"
     refresh_templates()
-    btn_item.state(["pressed"])
-    btn_cluster.state(["!pressed"])
-    btn_map.state(["!pressed"])
-    btn_socket.state(["!pressed"])
-    btn_base_jewel.state(["!pressed"])
     configure_top_controls_for_socket_mode(False)
     settings_btn.config(text="Orb Locations", command=lambda: OrbLocationsWindow(root))
 
@@ -8172,6 +9956,8 @@ def switch_to_item():
     map_affix_visible[0] = False
     socket_frame.place_forget()
     base_jewel_frame.place_forget()
+    voyage_frame.place_forget()
+    auto_flask_frame.place_forget()
     pool.place_forget()
     settings_panel.place_forget()
     bottom.place_forget()
@@ -8190,15 +9976,223 @@ def switch_to_item():
     )
     show_flask_guide_arrow()
 
-btn_cluster.config(command=switch_to_cluster)
-btn_map.config(command=switch_to_map)
-btn_socket.config(command=switch_to_socket)
-btn_base_jewel.config(command=switch_to_base_jewel)
-btn_item.config(command=switch_to_item)
+def switch_to_voyage():
+    global current_mode
+    app_mode.set("voyage")
+    mode_selector_var.set(MODE_VALUE_TO_DISPLAY["voyage"])
+    hide_flask_guide_panel(hide_arrow=True)
+    hide_cluster_trade_panel(hide_arrow=True)
+    current_mode = "normal"
+    configure_top_controls_for_socket_mode(False)
+    settings_btn.config(text="Settings", command=toggle_settings_panel)
+
+    map_frame.place_forget()
+    map_tabs.place_forget()
+    map_bottom.place_forget()
+    map_pool_frame.place_forget()
+    map_affix_visible[0] = False
+    socket_frame.place_forget()
+    base_jewel_frame.place_forget()
+    item_frame.place_forget()
+    item_mod_pool_frame.place_forget()
+    item_mod_pool_visible[0] = False
+    pool.place_forget()
+    settings_panel.place_forget()
+    bottom.place_forget()
+    tabs.place_forget()
+    mid.place_forget()
+    weights.place_forget()
+    auto_flask_frame.place_forget()
+
+    hide_top_controls()
+    voyage_frame.place(
+        x=PADX,
+        y=70,
+        width=WINDOW_W - 2 * PADX,
+        height=364,
+    )
+
+
+def switch_to_auto_flask():
+    global current_mode
+    app_mode.set("auto_flask")
+    mode_selector_var.set(MODE_VALUE_TO_DISPLAY["auto_flask"])
+    hide_flask_guide_panel(hide_arrow=True)
+    hide_cluster_trade_panel(hide_arrow=True)
+    current_mode = "normal"
+    configure_top_controls_for_socket_mode(False)
+
+    map_frame.place_forget()
+    map_tabs.place_forget()
+    map_bottom.place_forget()
+    map_pool_frame.place_forget()
+    map_affix_visible[0] = False
+    socket_frame.place_forget()
+    base_jewel_frame.place_forget()
+    item_frame.place_forget()
+    item_mod_pool_frame.place_forget()
+    voyage_frame.place_forget()
+    item_mod_pool_visible[0] = False
+    pool.place_forget()
+    settings_panel.place_forget()
+    bottom.place_forget()
+    tabs.place_forget()
+    mid.place_forget()
+    weights.place_forget()
+
+    hide_top_controls()
+    auto_flask_frame.place(
+        x=PADX,
+        y=70,
+        width=WINDOW_W - 2 * PADX,
+        height=300,
+    )
+
+MODE_SWITCHERS = {
+    "cluster": switch_to_cluster,
+    "map": switch_to_map,
+    "socket": switch_to_socket,
+    "base_jewel": switch_to_base_jewel,
+    "item": switch_to_item,
+    "voyage": switch_to_voyage,
+    "auto_flask": switch_to_auto_flask,
+}
+
+
+def _on_mode_selected(_event=None):
+    mode = MODE_DISPLAY_TO_VALUE.get(mode_selector_var.get(), "cluster")
+    MODE_SWITCHERS[mode]()
+    post_action_selector.config(state="disabled" if mode == "auto_flask" else "readonly")
+    global_settings_btn.state(["disabled"] if mode == "auto_flask" else ["!disabled"])
+
+
+def _on_post_action_selected(_event=None):
+    action = POST_ACTION_DISPLAY_TO_VALUE.get(
+        post_action_display_var.get(), POST_ACTION_NONE
+    )
+    post_craft_action_var.set(action)
+    settings_cfg.set("General", "post_craft_action", action)
+    save_settings_now()
+
+
+def _open_global_settings():
+    if app_mode.get() in ("socket", "base_jewel", "item"):
+        OrbLocationsWindow(root)
+    else:
+        toggle_settings_panel()
+
+
+mode_selector.bind("<<ComboboxSelected>>", _on_mode_selected)
+post_action_selector.bind("<<ComboboxSelected>>", _on_post_action_selected)
+global_settings_btn.config(command=_open_global_settings)
 
 # ================ SETTINGS PANEL CONTENTS ================
 settings_panel = ttk.Frame(root)
 switch_to_cluster()
+
+
+def open_phone_notification_settings():
+    window = tk.Toplevel(root)
+    window.title("Phone Notifications")
+    window.geometry(f"430x265+{root.winfo_x() + 20}+{root.winfo_y() + 80}")
+    window.configure(bg="#2b2b2b")
+    window.resizable(False, False)
+    if always_on_top_var.get():
+        window.attributes("-topmost", True)
+
+    enabled_var = tk.BooleanVar(
+        value=settings_cfg.getboolean("Notifications", "enabled", fallback=False)
+    )
+    server_var = tk.StringVar(
+        value=settings_cfg.get("Notifications", "server", fallback=DEFAULT_NTFY_SERVER)
+    )
+    topic_var = tk.StringVar(
+        value=settings_cfg.get("Notifications", "topic", fallback=generate_ntfy_topic())
+    )
+    status_var = tk.StringVar(value="")
+
+    body = ttk.Frame(window, padding=(12, 10))
+    body.pack(fill="both", expand=True)
+    ttk.Checkbutton(body, text="Send notification whenever craft stops", variable=enabled_var).grid(
+        row=0, column=0, columnspan=3, sticky="w", pady=(0, 8)
+    )
+    ttk.Label(body, text="ntfy server:").grid(row=1, column=0, sticky="w")
+    server_entry = tk.Entry(
+        body, textvariable=server_var, bg="#000", fg="#fff", insertbackground="#fff"
+    )
+    server_entry.grid(row=1, column=1, columnspan=2, sticky="ew", padx=(8, 0))
+    ttk.Label(body, text="Private topic:").grid(row=2, column=0, sticky="w", pady=(7, 0))
+    topic_entry = tk.Entry(
+        body, textvariable=topic_var, bg="#000", fg="#fff", insertbackground="#fff"
+    )
+    topic_entry.grid(row=2, column=1, columnspan=2, sticky="ew", padx=(8, 0), pady=(7, 0))
+    body.columnconfigure(1, weight=1)
+
+    help_text = (
+        "Telefona ntfy uygulamasini kur. + ile yeni abonelik ekle; server ve topic "
+        "alanlarini burada yazan degerlerle ayni gir. Topic'i baskalariyla paylasma."
+    )
+    ttk.Label(body, text=help_text, wraplength=390, justify="left").grid(
+        row=3, column=0, columnspan=3, sticky="w", pady=(10, 6)
+    )
+    ttk.Label(body, textvariable=status_var, wraplength=390).grid(
+        row=4, column=0, columnspan=3, sticky="w", pady=(0, 8)
+    )
+
+    def _save(show_message=True):
+        topic = topic_var.get().strip()
+        if len(topic) < 12 or not re.fullmatch(r"[A-Za-z0-9_-]+", topic):
+            gui_error("Topic en az 12 karakter olmali; yalnizca harf, rakam, - ve _ kullan.")
+            return False
+        settings_cfg.set("Notifications", "enabled", "True" if enabled_var.get() else "False")
+        settings_cfg.set("Notifications", "provider", "ntfy")
+        settings_cfg.set("Notifications", "server", server_var.get().strip() or DEFAULT_NTFY_SERVER)
+        settings_cfg.set("Notifications", "topic", topic)
+        save_settings_now()
+        status_var.set(f"Subscription: {ntfy_subscription_url(server_var.get(), topic)}")
+        if show_message:
+            gui_info("Telefon bildirim ayarlari kaydedildi.")
+        return True
+
+    def _copy_topic():
+        window.clipboard_clear()
+        window.clipboard_append(topic_var.get().strip())
+        status_var.set("Topic panoya kopyalandi.")
+
+    def _test_worker(server, topic):
+        try:
+            publish_ntfy(
+                server,
+                topic,
+                "WCA - Test bildirimi",
+                "Telefon bildirimleri calisiyor.",
+                priority=3,
+            )
+            root.after(0, lambda: status_var.set("Test bildirimi gonderildi."))
+        except Exception as exc:
+            root.after(0, lambda: status_var.set(f"Test basarisiz: {exc}"))
+
+    def _test():
+        # A successful test should leave real craft notifications enabled too.
+        enabled_var.set(True)
+        if not _save(show_message=False):
+            return
+        status_var.set("Bildirimler acildi; test bildirimi gonderiliyor...")
+        threading.Thread(
+            target=_test_worker,
+            args=(server_var.get(), topic_var.get()),
+            daemon=True,
+        ).start()
+
+    buttons = ttk.Frame(body)
+    buttons.grid(row=5, column=0, columnspan=3, sticky="ew")
+    ttk.Button(buttons, text="Copy Topic", command=_copy_topic).pack(side="left")
+    ttk.Button(buttons, text="Test Notification", command=_test).pack(side="left", padx=6)
+    ttk.Button(buttons, text="Save", command=_save).pack(side="right")
+    status_var.set(
+        f"Subscription: {ntfy_subscription_url(server_var.get(), topic_var.get())}"
+    )
+
 
 def refresh_settings_panel():
     for w in settings_panel.winfo_children():
@@ -8296,28 +10290,16 @@ def refresh_settings_panel():
     stop_entry.grid(row=3, column=1, columnspan=2, padx=(4, 5), pady=(2, 0), sticky="w")
     _bind_hotkey_entry(stop_entry, "stop", stop_disp)
 
-    auto_update_var = tk.BooleanVar(
-        value=settings_cfg.getboolean("General", "auto_update", fallback=True)
-    )
-
-    def _save_auto_update():
-        enabled = bool(auto_update_var.get())
-        settings_cfg.set("General", "auto_update", "True" if enabled else "False")
-        save_settings_now()
-        log_message(f"[UPDATE] Otomatik kontrol {'acildi' if enabled else 'kapatildi'}.")
-
-    ttk.Checkbutton(
+    ttk.Label(
         settings_panel,
-        text="Auto Update",
-        variable=auto_update_var,
-        command=_save_auto_update,
-    ).grid(row=4, column=0, columnspan=2, padx=(6, 2), pady=(5, 0), sticky="w")
+        text="Updates: required at startup",
+    ).grid(row=4, column=0, columnspan=4, padx=(6, 5), pady=(5, 0), sticky="w")
     ttk.Button(
         settings_panel,
-        text="Check for Updates",
+        text="Phone Notifications",
         style="Dark.TButton",
-        command=lambda: check_for_updates(manual=True),
-    ).grid(row=4, column=2, columnspan=2, padx=(0, 5), pady=(5, 0), sticky="e")
+        command=open_phone_notification_settings,
+    ).grid(row=1, column=0, padx=(6, 5), pady=(0, 2), sticky="w")
 
 # ================ LOG WINDOW ================
 log_window, log_text = None, None
@@ -8576,6 +10558,7 @@ def process_log_queue():
 # ================ WINDOW EVENTS & MAIN ================
 def on_main_minimize(event=None):
     hide_flask_guide_panel()
+    hide_cluster_trade_panel()
     if log_window and log_window.winfo_exists():
         log_window.withdraw()
 
@@ -8592,7 +10575,10 @@ def on_main_restore(event=None):
 
 def on_main_close(event=None):
     _stop_tray_icon()
+    hide_flask_guide_panel(hide_arrow=True)
+    hide_cluster_trade_panel(hide_arrow=True)
     try:
+        _notification_set_reason("Program kullanici tarafindan kapatildi.", "manual", 100)
         stop_event.set()
     except Exception:
         pass
@@ -8613,10 +10599,11 @@ create_log_window()
 root.bind("<Configure>", _schedule_root_rounding, add="+")
 root.bind("<Configure>", update_log_window_position)
 root.bind("<Configure>", sync_flask_guide_position, add="+")
+root.bind("<Configure>", sync_cluster_trade_position, add="+")
 root.bind("<Unmap>", on_main_minimize)
 root.bind("<Map>", on_main_restore)
 root.protocol("WM_DELETE_WINDOW", on_main_close)
-root.after(3000, schedule_auto_update_check)
+root.after(0, begin_required_update_check)
 log_message(f"[INIT] {APP_NAME} v{APP_VERSION} (MicroDrift v2 + RAW FailSafe) hazır.")
 try:
     template_cb.config(state="readonly")

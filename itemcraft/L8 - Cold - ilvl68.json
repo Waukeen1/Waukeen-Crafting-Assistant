@@ -1,0 +1,279 @@
+{
+  "app_mode": "cluster",
+  "craft_logic": "Rare (regal)",
+  "augment_mode": "Always use",
+  "use_exalt": true,
+  "use_annul": true,
+  "chain_craft": false,
+  "chain_count": 1,
+  "cluster_meta": {
+    "base": "12% increased Cold Damage",
+    "passive_count": 8,
+    "source": "PoEDB + official trade API"
+  },
+  "comb_craft_data": {
+    "1": [
+      "[P][1] 1 Added Passive Skill is Blanketed Snow",
+      "[S][1] 1 Added Passive Skill is Doryani's Lesson",
+      "[P][1] 1 Added Passive Skill is Stormrider"
+    ],
+    "2": [
+      "[P][1] 1 Added Passive Skill is Blanketed Snow",
+      "[P][1] 1 Added Passive Skill is Cold to the Core",
+      "[S][1] 1 Added Passive Skill is Doryani's Lesson"
+    ],
+    "3": [
+      "[P][1] 1 Added Passive Skill is Blast-Freeze",
+      "[S][1] 1 Added Passive Skill is Doryani's Lesson",
+      "[P][1] 1 Added Passive Skill is Stormrider"
+    ],
+    "4": [
+      "[P][1] 1 Added Passive Skill is Blast-Freeze",
+      "[P][1] 1 Added Passive Skill is Prismatic Heart",
+      "[S][1] 1 Added Passive Skill is Widespread Destruction"
+    ],
+    "5": [
+      "[P][1] 1 Added Passive Skill is Blanketed Snow",
+      "[S][1] 1 Added Passive Skill is Doryani's Lesson",
+      "[P][1] 1 Added Passive Skill is Snowstorm"
+    ],
+    "6": [
+      "[P][1] 1 Added Passive Skill is Blanketed Snow",
+      "[P][1] 1 Added Passive Skill is Prismatic Heart",
+      "[S][1] 1 Added Passive Skill is Widespread Destruction"
+    ],
+    "7": [
+      "[P][1] 1 Added Passive Skill is Blanketed Snow",
+      "[S][1] 1 Added Passive Skill is Doryani's Lesson",
+      "[P][1] 1 Added Passive Skill is Prismatic Heart"
+    ],
+    "8": [
+      "[P][1] 1 Added Passive Skill is Blanketed Snow",
+      "[P][1] 1 Added Passive Skill is Blast-Freeze",
+      "[S][1] 1 Added Passive Skill is Doryani's Lesson"
+    ],
+    "9": [
+      "[S][1] 1 Added Passive Skill is Doryani's Lesson",
+      "[P][1] 1 Added Passive Skill is Prismatic Heart",
+      "[P][1] 1 Added Passive Skill is Stormrider"
+    ],
+    "10": [
+      "[P][1] 1 Added Passive Skill is Cold to the Core",
+      "[S][1] 1 Added Passive Skill is Doryani's Lesson",
+      "[P][1] 1 Added Passive Skill is Stormrider"
+    ],
+    "11": [
+      "[P][1] 1 Added Passive Skill is Deep Chill",
+      "[S][1] 1 Added Passive Skill is Doryani's Lesson",
+      "[P][1] 1 Added Passive Skill is Stormrider"
+    ],
+    "12": [
+      "[S][1] 1 Added Passive Skill is Doryani's Lesson",
+      "[P][1] 1 Added Passive Skill is Prismatic Heart",
+      "[P][1] 1 Added Passive Skill is Sadist"
+    ],
+    "13": [
+      "[S][1] 1 Added Passive Skill is Doryani's Lesson",
+      "[P][1] 1 Added Passive Skill is Snowstorm",
+      "[P][1] 1 Added Passive Skill is Stormrider"
+    ],
+    "14": [
+      "[P][1] 1 Added Passive Skill is Blanketed Snow",
+      "[P][1] 1 Added Passive Skill is Cold-Blooded Killer",
+      "[S][1] 1 Added Passive Skill is Doryani's Lesson"
+    ],
+    "15": [
+      "[P][1] 1 Added Passive Skill is Cold-Blooded Killer",
+      "[S][1] 1 Added Passive Skill is Doryani's Lesson",
+      "[P][1] 1 Added Passive Skill is Stormrider"
+    ],
+    "16": [
+      "[S][1] 1 Added Passive Skill is Doryani's Lesson",
+      "[P][1] 1 Added Passive Skill is Sadist",
+      "[P][1] 1 Added Passive Skill is Stormrider"
+    ]
+  },
+  "combo_prices": {
+    "1": {
+      "min_chaos": 4885.71,
+      "max_chaos": 5700.0,
+      "avg_chaos": 5211.43,
+      "listings": 4,
+      "sample_size": 4,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/opoXRRXYcl",
+      "scanned_at": "2026-08-02T08:59:19.569468+00:00"
+    },
+    "2": {
+      "min_chaos": 1954.29,
+      "max_chaos": 2442.86,
+      "avg_chaos": 2117.14,
+      "listings": 4,
+      "sample_size": 4,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/opoXRRXYcl",
+      "scanned_at": "2026-08-02T08:59:19.569448+00:00"
+    },
+    "3": {
+      "min_chaos": 1628.57,
+      "max_chaos": 3257.14,
+      "avg_chaos": 2573.14,
+      "listings": 12,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/kyDX90Wjh5",
+      "scanned_at": "2026-08-02T09:00:50.516229+00:00"
+    },
+    "4": {
+      "min_chaos": 1628.57,
+      "max_chaos": 1628.57,
+      "avg_chaos": 1628.57,
+      "listings": 101,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/8rRazeJbiV",
+      "scanned_at": "2026-08-02T09:10:52.036274+00:00"
+    },
+    "5": {
+      "min_chaos": 1465.71,
+      "max_chaos": 2117.14,
+      "avg_chaos": 1661.14,
+      "listings": 15,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/RJ9V6JBGs7",
+      "scanned_at": "2026-08-02T08:58:10.326005+00:00"
+    },
+    "6": {
+      "min_chaos": 1302.86,
+      "max_chaos": 1465.71,
+      "avg_chaos": 1449.43,
+      "listings": 74,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/vevlwlRWSE",
+      "scanned_at": "2026-08-02T09:09:35.097793+00:00"
+    },
+    "7": {
+      "min_chaos": 1140.0,
+      "max_chaos": 1140.0,
+      "avg_chaos": 1140.0,
+      "listings": 65,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/4mPd09eLt9",
+      "scanned_at": "2026-08-02T08:55:37.304308+00:00"
+    },
+    "8": {
+      "min_chaos": 977.14,
+      "max_chaos": 1791.43,
+      "avg_chaos": 1384.29,
+      "listings": 19,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/opoXRRXYcl",
+      "scanned_at": "2026-08-02T08:59:19.569464+00:00"
+    },
+    "9": {
+      "min_chaos": 814.29,
+      "max_chaos": 977.14,
+      "avg_chaos": 944.57,
+      "listings": 25,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/MdoVJGPGiJ",
+      "scanned_at": "2026-08-02T08:57:12.974663+00:00"
+    },
+    "10": {
+      "min_chaos": 488.57,
+      "max_chaos": 651.43,
+      "avg_chaos": 610.71,
+      "listings": 4,
+      "sample_size": 4,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/q9lXRjQLtg",
+      "scanned_at": "2026-08-02T08:59:40.534841+00:00"
+    },
+    "11": {
+      "min_chaos": 488.57,
+      "max_chaos": 488.57,
+      "avg_chaos": 488.57,
+      "listings": 20,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/eRDXpawgsL",
+      "scanned_at": "2026-08-02T09:00:43.499834+00:00"
+    },
+    "12": {
+      "min_chaos": 488.57,
+      "max_chaos": 488.57,
+      "avg_chaos": 488.57,
+      "listings": 18,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/rPaXlG4ECQ",
+      "scanned_at": "2026-08-02T08:50:41.251991+00:00"
+    },
+    "13": {
+      "min_chaos": 488.57,
+      "max_chaos": 488.57,
+      "avg_chaos": 488.57,
+      "listings": 20,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/rPaXR2ZGTQ",
+      "scanned_at": "2026-08-02T08:58:44.566106+00:00"
+    },
+    "14": {
+      "min_chaos": 325.71,
+      "max_chaos": 651.43,
+      "avg_chaos": 447.86,
+      "listings": 4,
+      "sample_size": 4,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/opoXRRXYcl",
+      "scanned_at": "2026-08-02T08:59:19.569457+00:00"
+    },
+    "15": {
+      "min_chaos": 325.71,
+      "max_chaos": 814.29,
+      "avg_chaos": 560.95,
+      "listings": 9,
+      "sample_size": 9,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/7nRlLOzBf5",
+      "scanned_at": "2026-08-02T09:00:15.558843+00:00"
+    },
+    "16": {
+      "min_chaos": 325.71,
+      "max_chaos": 1628.57,
+      "avg_chaos": 741.9,
+      "listings": 9,
+      "sample_size": 9,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/rPaXlG4ECQ",
+      "scanned_at": "2026-08-02T08:50:41.252003+00:00"
+    }
+  },
+  "price_meta": {
+    "league": "Allflame",
+    "scanned_at": "2026-08-02T09:17:35.799686+00:00",
+    "currency": "chaos",
+    "range_basis": "complete priced securable result set",
+    "market_scan_complete": true,
+    "minimum_divine": 2.0,
+    "divine_chaos": 162.86,
+    "minimum_popularity": 3,
+    "popularity_basis": "at least 3 priced online listings; candidate discovered in the latest 20 listings priced at 2+ Divine",
+    "minimum_chaos": 325.71,
+    "trade_url": "",
+    "candidate_universe_count": 135,
+    "candidate_universe_sha256": "a7b713a679d791e62131439b34918377cc54addd01c212d03091e1fdcb932917",
+    "market_results_total": 2622,
+    "market_results_fetched": 1001,
+    "candidates_scanned": 135,
+    "audit_version": 3,
+    "pinned_combinations": 0
+  },
+  "stop_on_two_match": [],
+  "annul_combs": [],
+  "no_annul_combs": [],
+  "solo_regal_mods": [
+    "[P][1] 1 Added Passive Skill is Blanketed Snow",
+    "[S][1] 1 Added Passive Skill is Doryani's Lesson",
+    "[P][1] 1 Added Passive Skill is Stormrider",
+    "[P][1] 1 Added Passive Skill is Cold to the Core",
+    "[P][1] 1 Added Passive Skill is Blast-Freeze",
+    "[P][1] 1 Added Passive Skill is Prismatic Heart",
+    "[S][1] 1 Added Passive Skill is Widespread Destruction",
+    "[P][1] 1 Added Passive Skill is Snowstorm",
+    "[P][1] 1 Added Passive Skill is Deep Chill",
+    "[P][1] 1 Added Passive Skill is Sadist",
+    "[P][1] 1 Added Passive Skill is Cold-Blooded Killer"
+  ],
+  "no_regal_mods": []
+}

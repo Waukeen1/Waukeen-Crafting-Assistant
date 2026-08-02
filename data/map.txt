@@ -147,7 +147,7 @@ Monsters have #% increased Critical Strike Chance
 Area contains Runes of the Searing Exarch
 Players are targeted by a Meteor when they use a Flask
 Monsters reflect 20% of Physical Damage
-Monsters reflect 20% of Elemental Damage
+Rare Monsters have Elemental Thorns reflecting # Elemental Damage
 Monsters have +1 to Maximum Frenzy Charges
 Monsters gain a Frenzy Charge on Hit
 Auras from Player Skills which affect Allies also affect Enemies

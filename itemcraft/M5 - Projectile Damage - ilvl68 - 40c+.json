@@ -1,0 +1,79 @@
+{
+  "app_mode": "cluster",
+  "craft_logic": "Rare (regal)",
+  "augment_mode": "Always use",
+  "use_exalt": false,
+  "use_annul": false,
+  "chain_craft": false,
+  "chain_count": 1,
+  "cluster_meta": {
+    "base": "10% increased Projectile Damage",
+    "passive_count": 5,
+    "minimum_item_level": 68,
+    "source": "PoEDB + official trade API",
+    "minimum_chaos": 40
+  },
+  "comb_craft_data": {
+    "1": [
+      "[P][1] 1 Added Passive Skill is Aerodynamics",
+      "[P][1] 1 Added Passive Skill is Streamlined"
+    ],
+    "2": [
+      "[P][1] 1 Added Passive Skill is Repeater",
+      "[P][1] 1 Added Passive Skill is Streamlined"
+    ]
+  },
+  "combo_prices": {
+    "1": {
+      "min_chaos": 150.0,
+      "max_chaos": 168.0,
+      "avg_chaos": 159.5,
+      "listings": 166,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/rPaozoZzTQ",
+      "scanned_at": "2026-08-01T17:36:44.724982+00:00"
+    }
+  },
+  "price_meta": {
+    "league": "Allflame",
+    "scanned_at": "2026-08-01T17:38:34.161289+00:00",
+    "currency": "chaos",
+    "range_basis": "complete priced securable result set",
+    "market_scan_complete": true,
+    "minimum_chaos": 40.0,
+    "minimum_popularity": 1,
+    "trade_url": "",
+    "candidate_universe_count": 15,
+    "candidate_universe_sha256": "4b0547c35494f38ad49ab348e994a20405abc81dde4df82f99984e9dfe5fe983",
+    "market_results_total": 3096,
+    "market_results_fetched": 150,
+    "candidates_scanned": 15,
+    "audit_version": 3,
+    "pinned_combinations": 1,
+    "divine_chaos": 161.0
+  },
+  "pinned_notable_combinations": [
+    [
+      "Repeater",
+      "Streamlined"
+    ]
+  ],
+  "stop_on_two_match": [
+    [
+      "[P][1] 1 Added Passive Skill is Aerodynamics",
+      "[P][1] 1 Added Passive Skill is Streamlined"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Repeater",
+      "[P][1] 1 Added Passive Skill is Streamlined"
+    ]
+  ],
+  "annul_combs": [],
+  "no_annul_combs": [],
+  "solo_regal_mods": [
+    "[P][1] 1 Added Passive Skill is Aerodynamics",
+    "[P][1] 1 Added Passive Skill is Streamlined",
+    "[P][1] 1 Added Passive Skill is Repeater"
+  ],
+  "no_regal_mods": []
+}

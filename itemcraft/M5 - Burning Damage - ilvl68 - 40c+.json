@@ -1,0 +1,398 @@
+{
+  "app_mode": "cluster",
+  "craft_logic": "Rare (regal)",
+  "augment_mode": "Always use",
+  "use_exalt": false,
+  "use_annul": false,
+  "chain_craft": false,
+  "chain_count": 1,
+  "cluster_meta": {
+    "base": "12% increased Burning Damage",
+    "passive_count": 5,
+    "minimum_item_level": 68,
+    "source": "PoEDB + official trade API market discovery",
+    "minimum_chaos": 40
+  },
+  "comb_craft_data": {
+    "1": [
+      "[P][1] 1 Added Passive Skill is Blowback",
+      "[P][1] 1 Added Passive Skill is Wasting Affliction"
+    ],
+    "2": [
+      "[P][1] 1 Added Passive Skill is Fan the Flames",
+      "[P][1] 1 Added Passive Skill is Flow of Life"
+    ],
+    "3": [
+      "[P][1] 1 Added Passive Skill is Cooked Alive",
+      "[P][1] 1 Added Passive Skill is Wasting Affliction"
+    ],
+    "4": [
+      "[P][1] 1 Added Passive Skill is Brush with Death",
+      "[P][1] 1 Added Passive Skill is Fan the Flames"
+    ],
+    "5": [
+      "[P][1] 1 Added Passive Skill is Brush with Death",
+      "[P][1] 1 Added Passive Skill is Wasting Affliction"
+    ],
+    "6": [
+      "[P][1] 1 Added Passive Skill is Burning Bright",
+      "[P][1] 1 Added Passive Skill is Flow of Life"
+    ],
+    "7": [
+      "[P][1] 1 Added Passive Skill is Burning Bright",
+      "[P][1] 1 Added Passive Skill is Fan the Flames"
+    ],
+    "8": [
+      "[P][1] 1 Added Passive Skill is Blowback",
+      "[P][1] 1 Added Passive Skill is Fan the Flames"
+    ],
+    "9": [
+      "[P][1] 1 Added Passive Skill is Brush with Death",
+      "[P][1] 1 Added Passive Skill is Flow of Life"
+    ],
+    "10": [
+      "[P][1] 1 Added Passive Skill is Fan the Flames",
+      "[P][1] 1 Added Passive Skill is Wrapped in Flame"
+    ],
+    "11": [
+      "[P][1] 1 Added Passive Skill is Flow of Life",
+      "[P][1] 1 Added Passive Skill is Student of Decay"
+    ],
+    "12": [
+      "[P][1] 1 Added Passive Skill is Fan the Flames",
+      "[P][1] 1 Added Passive Skill is Wasting Affliction"
+    ],
+    "13": [
+      "[P][1] 1 Added Passive Skill is Fan the Flames",
+      "[P][1] 1 Added Passive Skill is Smoking Remains"
+    ],
+    "14": [
+      "[P][1] 1 Added Passive Skill is Blowback",
+      "[P][1] 1 Added Passive Skill is Cooked Alive"
+    ],
+    "15": [
+      "[P][1] 1 Added Passive Skill is Fan the Flames",
+      "[P][1] 1 Added Passive Skill is Vile Reinvigoration"
+    ],
+    "16": [
+      "[P][1] 1 Added Passive Skill is Flow of Life",
+      "[P][1] 1 Added Passive Skill is Smoking Remains"
+    ],
+    "17": [
+      "[P][1] 1 Added Passive Skill is Burning Bright",
+      "[P][1] 1 Added Passive Skill is Wrapped in Flame"
+    ],
+    "18": [
+      "[P][1] 1 Added Passive Skill is Circling Oblivion",
+      "[P][1] 1 Added Passive Skill is Flow of Life"
+    ],
+    "19": [
+      "[P][1] 1 Added Passive Skill is Cooked Alive",
+      "[P][1] 1 Added Passive Skill is Fan the Flames"
+    ],
+    "20": [
+      "[P][1] 1 Added Passive Skill is Cremator",
+      "[P][1] 1 Added Passive Skill is Flow of Life"
+    ]
+  },
+  "combo_prices": {
+    "1": {
+      "min_chaos": 644.0,
+      "max_chaos": 805.0,
+      "avg_chaos": 660.1,
+      "listings": 26,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/yYKD34RWTR",
+      "scanned_at": "2026-07-31T21:01:45.642404+00:00"
+    },
+    "2": {
+      "min_chaos": 644.0,
+      "max_chaos": 1288.0,
+      "avg_chaos": 925.75,
+      "listings": 4,
+      "sample_size": 4,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/yYKDrqOeuR",
+      "scanned_at": "2026-07-31T21:05:45.242994+00:00"
+    },
+    "3": {
+      "min_chaos": 499.0,
+      "max_chaos": 966.0,
+      "avg_chaos": 749.78,
+      "listings": 9,
+      "sample_size": 9,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/4mP8qn3ET9",
+      "scanned_at": "2026-07-31T21:08:30.367082+00:00"
+    },
+    "4": {
+      "min_chaos": 299.0,
+      "max_chaos": 1449.0,
+      "avg_chaos": 476.0,
+      "listings": 10,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/lgDKPOLwIV",
+      "scanned_at": "2026-07-31T21:06:25.646013+00:00"
+    },
+    "5": {
+      "min_chaos": 250.0,
+      "max_chaos": 483.0,
+      "avg_chaos": 336.1,
+      "listings": 25,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/q9lBXyYkcg",
+      "scanned_at": "2026-07-31T21:15:18.760268+00:00"
+    },
+    "6": {
+      "min_chaos": 161.0,
+      "max_chaos": 322.0,
+      "avg_chaos": 268.6,
+      "listings": 65,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/zbrXe33qc4",
+      "scanned_at": "2026-07-31T21:11:44.704681+00:00"
+    },
+    "7": {
+      "min_chaos": 135.0,
+      "max_chaos": 161.0,
+      "avg_chaos": 148.5,
+      "listings": 42,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/opoEZlOKil",
+      "scanned_at": "2026-07-31T21:05:16.869655+00:00"
+    },
+    "8": {
+      "min_chaos": 100.0,
+      "max_chaos": 161.0,
+      "avg_chaos": 142.1,
+      "listings": 45,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/glD9Q4KOcQ",
+      "scanned_at": "2026-07-31T20:58:58.443555+00:00"
+    },
+    "9": {
+      "min_chaos": 100.0,
+      "max_chaos": 483.0,
+      "avg_chaos": 237.0,
+      "listings": 9,
+      "sample_size": 9,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/kyDpw6b3H5",
+      "scanned_at": "2026-07-31T21:17:37.824727+00:00"
+    },
+    "10": {
+      "min_chaos": 100.0,
+      "max_chaos": 161.0,
+      "avg_chaos": 126.6,
+      "listings": 14,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/opoEZlOKil",
+      "scanned_at": "2026-07-31T21:05:16.869660+00:00"
+    },
+    "11": {
+      "min_chaos": 95.0,
+      "max_chaos": 161.0,
+      "avg_chaos": 121.7,
+      "listings": 38,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/8rRWqRPBiV",
+      "scanned_at": "2026-07-31T21:18:33.731385+00:00"
+    },
+    "12": {
+      "min_chaos": 80.0,
+      "max_chaos": 120.0,
+      "avg_chaos": 98.5,
+      "listings": 23,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/yYKDrqOeuR",
+      "scanned_at": "2026-07-31T21:05:45.242978+00:00"
+    },
+    "13": {
+      "min_chaos": 58.0,
+      "max_chaos": 120.0,
+      "avg_chaos": 88.3,
+      "listings": 26,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/MdomPX76FJ",
+      "scanned_at": "2026-07-31T20:52:55.530645+00:00"
+    },
+    "14": {
+      "min_chaos": 50.0,
+      "max_chaos": 85.0,
+      "avg_chaos": 74.9,
+      "listings": 45,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/aLG8BZVafe",
+      "scanned_at": "2026-07-31T20:59:39.207224+00:00"
+    },
+    "15": {
+      "min_chaos": 50.0,
+      "max_chaos": 322.0,
+      "avg_chaos": 131.6,
+      "listings": 11,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/lgDKPOLwIV",
+      "scanned_at": "2026-07-31T21:06:25.646018+00:00"
+    },
+    "16": {
+      "min_chaos": 50.0,
+      "max_chaos": 161.0,
+      "avg_chaos": 120.33,
+      "listings": 3,
+      "sample_size": 3,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/zbrX3L8mI4",
+      "scanned_at": "2026-07-31T20:53:36.277530+00:00"
+    },
+    "17": {
+      "min_chaos": 49.0,
+      "max_chaos": 57.0,
+      "avg_chaos": 54.9,
+      "listings": 30,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/opoEX46rFl",
+      "scanned_at": "2026-07-31T21:10:18.156509+00:00"
+    },
+    "18": {
+      "min_chaos": 40.0,
+      "max_chaos": 66.0,
+      "avg_chaos": 55.6,
+      "listings": 27,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/8rRWqRPBiV",
+      "scanned_at": "2026-07-31T21:18:33.731367+00:00"
+    },
+    "19": {
+      "min_chaos": 40.0,
+      "max_chaos": 161.0,
+      "avg_chaos": 80.6,
+      "listings": 26,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/opoEZlOKil",
+      "scanned_at": "2026-07-31T21:05:16.869641+00:00"
+    },
+    "20": {
+      "min_chaos": 40.0,
+      "max_chaos": 161.0,
+      "avg_chaos": 148.3,
+      "listings": 14,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/vevD9vpMfE",
+      "scanned_at": "2026-07-31T20:57:00.043495+00:00"
+    }
+  },
+  "price_meta": {
+    "league": "Allflame",
+    "scanned_at": "2026-08-01T17:08:49.453870+00:00",
+    "currency": "chaos",
+    "range_basis": "complete priced securable result set",
+    "market_scan_complete": true,
+    "minimum_chaos": 40.0,
+    "trade_url": "",
+    "minimum_popularity": 1,
+    "candidate_universe_count": 136,
+    "candidate_universe_sha256": "4d7f7ee54833844e1acd447a605e3ae294397f35d3367976346f84a32eb69299",
+    "market_results_total": 2343,
+    "market_results_fetched": 1230,
+    "candidates_scanned": 136,
+    "audit_version": 3,
+    "divine_chaos": 161.0,
+    "pinned_combinations": 0
+  },
+  "stop_on_two_match": [
+    [
+      "[P][1] 1 Added Passive Skill is Blowback",
+      "[P][1] 1 Added Passive Skill is Wasting Affliction"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Fan the Flames",
+      "[P][1] 1 Added Passive Skill is Flow of Life"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Cooked Alive",
+      "[P][1] 1 Added Passive Skill is Wasting Affliction"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Brush with Death",
+      "[P][1] 1 Added Passive Skill is Fan the Flames"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Brush with Death",
+      "[P][1] 1 Added Passive Skill is Wasting Affliction"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Burning Bright",
+      "[P][1] 1 Added Passive Skill is Flow of Life"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Burning Bright",
+      "[P][1] 1 Added Passive Skill is Fan the Flames"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Blowback",
+      "[P][1] 1 Added Passive Skill is Fan the Flames"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Brush with Death",
+      "[P][1] 1 Added Passive Skill is Flow of Life"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Fan the Flames",
+      "[P][1] 1 Added Passive Skill is Wrapped in Flame"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Flow of Life",
+      "[P][1] 1 Added Passive Skill is Student of Decay"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Fan the Flames",
+      "[P][1] 1 Added Passive Skill is Wasting Affliction"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Fan the Flames",
+      "[P][1] 1 Added Passive Skill is Smoking Remains"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Blowback",
+      "[P][1] 1 Added Passive Skill is Cooked Alive"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Fan the Flames",
+      "[P][1] 1 Added Passive Skill is Vile Reinvigoration"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Flow of Life",
+      "[P][1] 1 Added Passive Skill is Smoking Remains"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Burning Bright",
+      "[P][1] 1 Added Passive Skill is Wrapped in Flame"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Circling Oblivion",
+      "[P][1] 1 Added Passive Skill is Flow of Life"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Cooked Alive",
+      "[P][1] 1 Added Passive Skill is Fan the Flames"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Cremator",
+      "[P][1] 1 Added Passive Skill is Flow of Life"
+    ]
+  ],
+  "annul_combs": [],
+  "no_annul_combs": [],
+  "solo_regal_mods": [
+    "[P][1] 1 Added Passive Skill is Blowback",
+    "[P][1] 1 Added Passive Skill is Wasting Affliction",
+    "[P][1] 1 Added Passive Skill is Fan the Flames",
+    "[P][1] 1 Added Passive Skill is Flow of Life",
+    "[P][1] 1 Added Passive Skill is Cooked Alive",
+    "[P][1] 1 Added Passive Skill is Brush with Death",
+    "[P][1] 1 Added Passive Skill is Burning Bright",
+    "[P][1] 1 Added Passive Skill is Wrapped in Flame",
+    "[P][1] 1 Added Passive Skill is Student of Decay",
+    "[P][1] 1 Added Passive Skill is Smoking Remains",
+    "[P][1] 1 Added Passive Skill is Vile Reinvigoration",
+    "[P][1] 1 Added Passive Skill is Circling Oblivion",
+    "[P][1] 1 Added Passive Skill is Cremator"
+  ],
+  "no_regal_mods": []
+}

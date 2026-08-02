@@ -337,12 +337,10 @@ class RateLimitedRequester:
                 retry_after = self._retry_after_seconds(response)
                 self._set_cooldown(is_fetch, retry_after + 1)
                 print(
-                    f"[RATE LIMIT] {retry_after + 1}s bekleniyor "
-                    f"({attempt}/3)...",
+                    f"[RATE LIMIT] {retry_after + 1}s cooldown kaydedildi; "
+                    "otomatik tekrar denenmeyecek.",
                     flush=True,
                 )
-                if attempt < 3:
-                    continue
                 return {}
 
             try:

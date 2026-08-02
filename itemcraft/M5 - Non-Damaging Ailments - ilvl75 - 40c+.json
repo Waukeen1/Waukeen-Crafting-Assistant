@@ -1,0 +1,239 @@
+{
+  "app_mode": "cluster",
+  "craft_logic": "Rare (regal)",
+  "augment_mode": "Always use",
+  "use_exalt": false,
+  "use_annul": false,
+  "chain_craft": false,
+  "chain_count": 1,
+  "cluster_meta": {
+    "base": "10% increased Effect of Non-Damaging Ailments",
+    "passive_count": 5,
+    "minimum_item_level": 75,
+    "source": "PoEDB + official trade API market discovery",
+    "minimum_chaos": 40
+  },
+  "comb_craft_data": {
+    "1": [
+      "[P][1] 1 Added Passive Skill is Cold Conduction",
+      "[P][1] 1 Added Passive Skill is Inspired Oppression"
+    ],
+    "2": [
+      "[P][1] 1 Added Passive Skill is Overshock",
+      "[P][1] 1 Added Passive Skill is Stormrider"
+    ],
+    "3": [
+      "[P][1] 1 Added Passive Skill is Blast-Freeze",
+      "[P][1] 1 Added Passive Skill is Stormrider"
+    ],
+    "4": [
+      "[P][1] 1 Added Passive Skill is Chilling Presence",
+      "[P][1] 1 Added Passive Skill is Inspired Oppression"
+    ],
+    "5": [
+      "[P][1] 1 Added Passive Skill is Chilling Presence",
+      "[P][1] 1 Added Passive Skill is Overshock"
+    ],
+    "6": [
+      "[P][1] 1 Added Passive Skill is Chilling Presence",
+      "[P][1] 1 Added Passive Skill is Stormrider"
+    ],
+    "7": [
+      "[P][1] 1 Added Passive Skill is Astonishing Affliction",
+      "[P][1] 1 Added Passive Skill is Blast-Freeze"
+    ],
+    "8": [
+      "[P][1] 1 Added Passive Skill is Inspired Oppression",
+      "[P][1] 1 Added Passive Skill is Stormrider"
+    ],
+    "9": [
+      "[P][1] 1 Added Passive Skill is Blast-Freeze",
+      "[P][1] 1 Added Passive Skill is Chilling Presence"
+    ],
+    "10": [
+      "[P][1] 1 Added Passive Skill is Inspired Oppression",
+      "[P][1] 1 Added Passive Skill is Overshock"
+    ],
+    "11": [
+      "[P][1] 1 Added Passive Skill is Blast-Freeze",
+      "[P][1] 1 Added Passive Skill is Inspired Oppression"
+    ]
+  },
+  "combo_prices": {
+    "1": {
+      "min_chaos": 483.0,
+      "max_chaos": 2093.0,
+      "avg_chaos": 1046.5,
+      "listings": 11,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/d860Yrw3cJ",
+      "scanned_at": "2026-08-01T17:29:37.487167+00:00"
+    },
+    "2": {
+      "min_chaos": 250.0,
+      "max_chaos": 483.0,
+      "avg_chaos": 428.3,
+      "listings": 22,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/02RegbdQFg",
+      "scanned_at": "2026-08-01T17:33:10.249447+00:00"
+    },
+    "3": {
+      "min_chaos": 161.0,
+      "max_chaos": 322.0,
+      "avg_chaos": 222.4,
+      "listings": 11,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/QLYGDpP7uw",
+      "scanned_at": "2026-08-01T17:33:02.957108+00:00"
+    },
+    "4": {
+      "min_chaos": 161.0,
+      "max_chaos": 161.0,
+      "avg_chaos": 161.0,
+      "listings": 1,
+      "sample_size": 1,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/pJZ0y8dwH0",
+      "scanned_at": "2026-08-01T17:30:42.978487+00:00"
+    },
+    "5": {
+      "min_chaos": 161.0,
+      "max_chaos": 483.0,
+      "avg_chaos": 242.9,
+      "listings": 14,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/8rR8GqvZFV",
+      "scanned_at": "2026-08-01T17:31:15.599325+00:00"
+    },
+    "6": {
+      "min_chaos": 161.0,
+      "max_chaos": 322.0,
+      "avg_chaos": 214.67,
+      "listings": 3,
+      "sample_size": 3,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/8rR8GqvZFV",
+      "scanned_at": "2026-08-01T17:31:15.599323+00:00"
+    },
+    "7": {
+      "min_chaos": 100.0,
+      "max_chaos": 322.0,
+      "avg_chaos": 180.88,
+      "listings": 8,
+      "sample_size": 8,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/5ndrJ9pVta",
+      "scanned_at": "2026-08-01T17:27:29.437141+00:00"
+    },
+    "8": {
+      "min_chaos": 80.0,
+      "max_chaos": 966.0,
+      "avg_chaos": 289.6,
+      "listings": 5,
+      "sample_size": 5,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/pJZ0y8dwH0",
+      "scanned_at": "2026-08-01T17:30:42.978506+00:00"
+    },
+    "9": {
+      "min_chaos": 60.0,
+      "max_chaos": 966.0,
+      "avg_chaos": 313.2,
+      "listings": 11,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/8rR8GqvZFV",
+      "scanned_at": "2026-08-01T17:31:15.599321+00:00"
+    },
+    "10": {
+      "min_chaos": 57.0,
+      "max_chaos": 80.0,
+      "avg_chaos": 69.5,
+      "listings": 20,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/pJZ0y8dwH0",
+      "scanned_at": "2026-08-01T17:30:42.978510+00:00"
+    },
+    "11": {
+      "min_chaos": 47.0,
+      "max_chaos": 200.0,
+      "avg_chaos": 89.4,
+      "listings": 13,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/pJZ0y8dwH0",
+      "scanned_at": "2026-08-01T17:30:42.978502+00:00"
+    }
+  },
+  "price_meta": {
+    "league": "Allflame",
+    "scanned_at": "2026-08-01T17:33:10.261725+00:00",
+    "currency": "chaos",
+    "range_basis": "complete priced securable result set",
+    "market_scan_complete": true,
+    "minimum_chaos": 40.0,
+    "trade_url": "",
+    "minimum_popularity": 1,
+    "candidate_universe_count": 36,
+    "candidate_universe_sha256": "aac0f2c3f8036ed5e07d7a078d131b94c66bbbceba4830c6b0e7d82ff4107f32",
+    "market_results_total": 684,
+    "market_results_fetched": 319,
+    "candidates_scanned": 36,
+    "audit_version": 3,
+    "pinned_combinations": 0,
+    "divine_chaos": 161.0
+  },
+  "stop_on_two_match": [
+    [
+      "[P][1] 1 Added Passive Skill is Cold Conduction",
+      "[P][1] 1 Added Passive Skill is Inspired Oppression"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Overshock",
+      "[P][1] 1 Added Passive Skill is Stormrider"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Blast-Freeze",
+      "[P][1] 1 Added Passive Skill is Stormrider"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Chilling Presence",
+      "[P][1] 1 Added Passive Skill is Inspired Oppression"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Chilling Presence",
+      "[P][1] 1 Added Passive Skill is Overshock"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Chilling Presence",
+      "[P][1] 1 Added Passive Skill is Stormrider"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Astonishing Affliction",
+      "[P][1] 1 Added Passive Skill is Blast-Freeze"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Inspired Oppression",
+      "[P][1] 1 Added Passive Skill is Stormrider"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Blast-Freeze",
+      "[P][1] 1 Added Passive Skill is Chilling Presence"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Inspired Oppression",
+      "[P][1] 1 Added Passive Skill is Overshock"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Blast-Freeze",
+      "[P][1] 1 Added Passive Skill is Inspired Oppression"
+    ]
+  ],
+  "annul_combs": [],
+  "no_annul_combs": [],
+  "solo_regal_mods": [
+    "[P][1] 1 Added Passive Skill is Cold Conduction",
+    "[P][1] 1 Added Passive Skill is Inspired Oppression",
+    "[P][1] 1 Added Passive Skill is Overshock",
+    "[P][1] 1 Added Passive Skill is Stormrider",
+    "[P][1] 1 Added Passive Skill is Blast-Freeze",
+    "[P][1] 1 Added Passive Skill is Chilling Presence",
+    "[P][1] 1 Added Passive Skill is Astonishing Affliction"
+  ],
+  "no_regal_mods": []
+}

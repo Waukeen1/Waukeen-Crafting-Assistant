@@ -1,0 +1,136 @@
+{
+  "app_mode": "cluster",
+  "craft_logic": "Rare (regal)",
+  "augment_mode": "Always use",
+  "use_exalt": true,
+  "use_annul": true,
+  "chain_craft": false,
+  "chain_count": 1,
+  "cluster_meta": {
+    "base": "Wand Attacks deal 12% increased Damage with Hits and Ailments",
+    "passive_count": 8,
+    "source": "PoEDB + official trade API"
+  },
+  "comb_craft_data": {
+    "1": [
+      "[P][1] 1 Added Passive Skill is Devastator",
+      "[P][1] 1 Added Passive Skill is Explosive Force",
+      "[S][1] 1 Added Passive Skill is Smite the Weak"
+    ],
+    "2": [
+      "[P][1] 1 Added Passive Skill is Explosive Force",
+      "[P][1] 1 Added Passive Skill is Feed the Fury",
+      "[S][1] 1 Added Passive Skill is Martial Prowess"
+    ],
+    "3": [
+      "[P][1] 1 Added Passive Skill is Calamitous",
+      "[P][1] 1 Added Passive Skill is Devastator",
+      "[S][1] 1 Added Passive Skill is Martial Prowess"
+    ],
+    "4": [
+      "[S][1] 1 Added Passive Skill is Martial Prowess",
+      "[P][1] 1 Added Passive Skill is Opportunistic Fusilade",
+      "[P][1] 1 Added Passive Skill is Storm's Hand"
+    ],
+    "5": [
+      "[P][1] 1 Added Passive Skill is Devastator",
+      "[S][1] 1 Added Passive Skill is Martial Prowess",
+      "[P][1] 1 Added Passive Skill is Opportunistic Fusilade"
+    ],
+    "6": [
+      "[P][1] 1 Added Passive Skill is Feed the Fury",
+      "[S][1] 1 Added Passive Skill is Martial Prowess",
+      "[P][1] 1 Added Passive Skill is Opportunistic Fusilade"
+    ]
+  },
+  "combo_prices": {
+    "1": {
+      "min_chaos": 2254.0,
+      "max_chaos": 4830.0,
+      "avg_chaos": 2754.89,
+      "listings": 9,
+      "sample_size": 9,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/pJZX685Jf0",
+      "scanned_at": "2026-08-02T10:14:07.624428+00:00"
+    },
+    "2": {
+      "min_chaos": 966.0,
+      "max_chaos": 1771.0,
+      "avg_chaos": 1320.2,
+      "listings": 5,
+      "sample_size": 5,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Yp2VkweXUY",
+      "scanned_at": "2026-08-02T10:15:04.629290+00:00"
+    },
+    "3": {
+      "min_chaos": 483.0,
+      "max_chaos": 966.0,
+      "avg_chaos": 676.2,
+      "listings": 13,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/V5pMp67dSp",
+      "scanned_at": "2026-08-02T10:24:08.625455+00:00"
+    },
+    "4": {
+      "min_chaos": 400.0,
+      "max_chaos": 450.0,
+      "avg_chaos": 436.5,
+      "listings": 67,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/X3rqdvedFP",
+      "scanned_at": "2026-08-02T10:16:15.484179+00:00"
+    },
+    "5": {
+      "min_chaos": 322.0,
+      "max_chaos": 644.0,
+      "avg_chaos": 472.3,
+      "listings": 20,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/3q6B9aJds5",
+      "scanned_at": "2026-08-02T10:17:55.244308+00:00"
+    },
+    "6": {
+      "min_chaos": 322.0,
+      "max_chaos": 483.0,
+      "avg_chaos": 338.1,
+      "listings": 43,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/zbreg7vgs4",
+      "scanned_at": "2026-08-02T10:19:04.394320+00:00"
+    }
+  },
+  "price_meta": {
+    "league": "Allflame",
+    "scanned_at": "2026-08-02T10:25:04.200981+00:00",
+    "currency": "chaos",
+    "range_basis": "complete priced securable result set",
+    "market_scan_complete": true,
+    "minimum_divine": 2.0,
+    "divine_chaos": 161.0,
+    "minimum_popularity": 3,
+    "popularity_basis": "at least 3 priced online listings; candidate discovered in the latest 20 listings priced at 2+ Divine",
+    "minimum_chaos": 322.0,
+    "trade_url": "",
+    "candidate_universe_count": 135,
+    "candidate_universe_sha256": "40be87ad12bbf839482215ca86f636e1a36bf01bf7c84ae95b2272a50fd927ab",
+    "market_results_total": 1014,
+    "market_results_fetched": 770,
+    "candidates_scanned": 135,
+    "audit_version": 3,
+    "pinned_combinations": 0
+  },
+  "stop_on_two_match": [],
+  "annul_combs": [],
+  "no_annul_combs": [],
+  "solo_regal_mods": [
+    "[P][1] 1 Added Passive Skill is Devastator",
+    "[P][1] 1 Added Passive Skill is Explosive Force",
+    "[S][1] 1 Added Passive Skill is Smite the Weak",
+    "[P][1] 1 Added Passive Skill is Feed the Fury",
+    "[S][1] 1 Added Passive Skill is Martial Prowess",
+    "[P][1] 1 Added Passive Skill is Calamitous",
+    "[P][1] 1 Added Passive Skill is Opportunistic Fusilade",
+    "[P][1] 1 Added Passive Skill is Storm's Hand"
+  ],
+  "no_regal_mods": []
+}

@@ -1,0 +1,23 @@
+{
+  "app_mode": "cluster",
+  "craft_logic": "Rare (regal)",
+  "augment_mode": "Always use",
+  "use_exalt": true,
+  "use_annul": false,
+  "chain_craft": false,
+  "chain_count": 1,
+  "cluster_meta": {
+    "base": "10 % increased Damage while affected by a Herald",
+    "passive_count": 5,
+    "minimum_item_level": 75,
+    "source": "PoEDB + official trade API",
+    "minimum_chaos": 40
+  },
+  "comb_craft_data": {},
+  "combo_prices": {},
+  "stop_on_two_match": [],
+  "annul_combs": [],
+  "no_annul_combs": [],
+  "solo_regal_mods": [],
+  "no_regal_mods": []
+}

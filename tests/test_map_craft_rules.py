@@ -1,7 +1,11 @@
+import json
 import unittest
+from pathlib import Path
 
 import map_craft_rules as rules
 
+
+ROOT = Path(__file__).resolve().parents[1]
 
 NORMAL_T16 = """Item Class: Maps
 Rarity: Normal
@@ -28,6 +32,37 @@ Corrupted
 
 
 class MapCraftRulesTests(unittest.TestCase):
+    def test_production_affix_pool_is_populated(self):
+        groups = rules.load_affix_groups(ROOT / "data" / "map_mods.json")
+        affixes = rules.unique_affixes(groups)
+        self.assertGreaterEqual(len(groups), 100)
+        self.assertGreaterEqual(len(affixes), 100)
+        self.assertIn("Area contains many Totems", affixes)
+        self.assertIn(
+            "Rare Monsters have Elemental Thorns reflecting # Elemental Damage",
+            affixes,
+        )
+        self.assertNotIn("Monsters reflect 18% of Elemental Damage", affixes)
+        self.assertNotIn("Monsters reflect 20% of Elemental Damage", affixes)
+
+    def test_elemental_bow_templates_use_current_thorns_mod(self):
+        current_mod = (
+            "Rare Monsters have Elemental Thorns reflecting # Elemental Damage"
+        )
+        retired_mods = {
+            "Monsters reflect 18% of Elemental Damage",
+            "Monsters reflect 20% of Elemental Damage",
+        }
+        for name in (
+            "Waukeen Elemental Bow.json",
+            "Waukeen Elemental Bow - Memory Nightmare.json",
+        ):
+            template = json.loads((ROOT / "mapcraft" / name).read_text(encoding="utf-8"))
+            for key in ("map_normal_forbidden", "map_memory_forbidden"):
+                blacklist = template[key]
+                self.assertIn(current_mod, blacklist)
+                self.assertTrue(retired_mods.isdisjoint(blacklist))
+
     def test_profile_selects_its_own_blacklist(self):
         settings = {
             "map_profile": rules.PROFILE_NORMAL,
@@ -93,6 +128,27 @@ class MapCraftRulesTests(unittest.TestCase):
             rules.alchemy_vaal_start_failures(
                 NORMAL_T16.replace("Rarity: Normal", "Rarity: Magic")
             )
+        )
+
+    def test_map_tier_parser_accepts_short_and_augmented_lines(self):
+        self.assertEqual(rules.parse_map_tier("Tier: 16"), 16)
+        self.assertEqual(rules.parse_map_tier("Map Tier: 16 (augmented)"), 16)
+
+    def test_batch_can_allow_missing_tier_but_rejects_explicit_wrong_tier(self):
+        missing_tier = NORMAL_T16.replace("Map Tier: 16\n", "")
+        self.assertEqual(
+            rules.alchemy_vaal_start_failures(
+                missing_tier,
+                allow_missing_tier=True,
+            ),
+            [],
+        )
+        self.assertEqual(
+            rules.alchemy_vaal_start_failures(
+                NORMAL_T16.replace("Map Tier: 16", "Tier: 15"),
+                allow_missing_tier=True,
+            ),
+            ["Map Tier=15 (hedef 16)"],
         )
 
     def test_corrupted_identified_result_can_pass(self):

@@ -127,6 +127,23 @@ def _preserve_user_data(backup, target):
             new_logs = target / relative
             shutil.copytree(old_logs, new_logs, dirs_exist_ok=True)
 
+    template_directories = (
+        "itemcraft",
+        "mapcraft",
+        "basejewelcraft",
+        "genericitemcraft",
+    )
+    for directory_name in template_directories:
+        for prefix in (Path("_internal"), Path()):
+            relative = prefix / directory_name
+            old_directory = backup / relative
+            if old_directory.is_dir():
+                shutil.copytree(
+                    old_directory,
+                    target / relative,
+                    dirs_exist_ok=True,
+                )
+
 
 def _validate_target(target):
     target = target.resolve()

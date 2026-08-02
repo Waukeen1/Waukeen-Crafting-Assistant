@@ -1,0 +1,153 @@
+{
+  "app_mode": "cluster",
+  "craft_logic": "Rare (regal)",
+  "augment_mode": "Always use",
+  "use_exalt": true,
+  "use_annul": false,
+  "chain_craft": false,
+  "chain_count": 1,
+  "cluster_meta": {
+    "base": "10% increased Area Damage",
+    "passive_count": 5,
+    "minimum_item_level": 68,
+    "source": "PoEDB + official trade API",
+    "minimum_chaos": 40
+  },
+  "comb_craft_data": {
+    "1": [
+      "[P][1] 1 Added Passive Skill is Assert Dominance",
+      "[P][1] 1 Added Passive Skill is Vast Power"
+    ],
+    "2": [
+      "[P][1] 1 Added Passive Skill is Expansive Might",
+      "[P][1] 1 Added Passive Skill is Towering Threat"
+    ],
+    "3": [
+      "[P][1] 1 Added Passive Skill is Assert Dominance",
+      "[P][1] 1 Added Passive Skill is Towering Threat"
+    ],
+    "4": [
+      "[P][1] 1 Added Passive Skill is Towering Threat",
+      "[P][1] 1 Added Passive Skill is Vast Power"
+    ],
+    "5": [
+      "[P][1] 1 Added Passive Skill is Titanic Swings",
+      "[P][1] 1 Added Passive Skill is Towering Threat"
+    ],
+    "6": [
+      "[P][1] 1 Added Passive Skill is Magnifier",
+      "[P][1] 1 Added Passive Skill is Vast Power"
+    ]
+  },
+  "combo_prices": {
+    "1": {
+      "min_chaos": 150.0,
+      "max_chaos": 170.0,
+      "avg_chaos": 162.6,
+      "listings": 392,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/Yp28PvpgiY",
+      "scanned_at": "2026-08-01T21:45:12.871789+00:00"
+    },
+    "2": {
+      "min_chaos": 100.0,
+      "max_chaos": 120.0,
+      "avg_chaos": 110.3,
+      "listings": 76,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/02RMGZJOIg",
+      "scanned_at": "2026-08-01T21:48:58.199951+00:00"
+    },
+    "3": {
+      "min_chaos": 69.0,
+      "max_chaos": 100.0,
+      "avg_chaos": 95.9,
+      "listings": 230,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/8rRowdPbFV",
+      "scanned_at": "2026-08-01T21:45:44.610991+00:00"
+    },
+    "4": {
+      "min_chaos": 49.0,
+      "max_chaos": 50.0,
+      "avg_chaos": 49.9,
+      "listings": 202,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/6zBQwB49hG",
+      "scanned_at": "2026-08-01T21:46:53.829099+00:00"
+    },
+    "5": {
+      "min_chaos": 45.0,
+      "max_chaos": 55.0,
+      "avg_chaos": 50.7,
+      "listings": 123,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/glDQobo5UQ",
+      "scanned_at": "2026-08-01T21:48:13.513720+00:00"
+    },
+    "6": {
+      "min_chaos": 44.0,
+      "max_chaos": 49.0,
+      "avg_chaos": 45.9,
+      "listings": 913,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/OglYMJk8sE",
+      "scanned_at": "2026-08-01T21:43:33.375137+00:00"
+    }
+  },
+  "stop_on_two_match": [
+    [
+      "[P][1] 1 Added Passive Skill is Assert Dominance",
+      "[P][1] 1 Added Passive Skill is Vast Power"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Expansive Might",
+      "[P][1] 1 Added Passive Skill is Towering Threat"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Assert Dominance",
+      "[P][1] 1 Added Passive Skill is Towering Threat"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Towering Threat",
+      "[P][1] 1 Added Passive Skill is Vast Power"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Titanic Swings",
+      "[P][1] 1 Added Passive Skill is Towering Threat"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Magnifier",
+      "[P][1] 1 Added Passive Skill is Vast Power"
+    ]
+  ],
+  "annul_combs": [],
+  "no_annul_combs": [],
+  "solo_regal_mods": [
+    "[P][1] 1 Added Passive Skill is Assert Dominance",
+    "[P][1] 1 Added Passive Skill is Vast Power",
+    "[P][1] 1 Added Passive Skill is Expansive Might",
+    "[P][1] 1 Added Passive Skill is Towering Threat",
+    "[P][1] 1 Added Passive Skill is Titanic Swings",
+    "[P][1] 1 Added Passive Skill is Magnifier"
+  ],
+  "no_regal_mods": [],
+  "price_meta": {
+    "league": "Allflame",
+    "scanned_at": "2026-08-02T08:22:40.038945+00:00",
+    "currency": "chaos",
+    "range_basis": "complete priced securable result set",
+    "market_scan_complete": true,
+    "minimum_chaos": 40.0,
+    "minimum_popularity": 1,
+    "trade_url": "",
+    "candidate_universe_count": 21,
+    "candidate_universe_sha256": "f9ae22a08f6d1b70dd194adec5adc757ee5d358609b5ebd21417dcfd31a0dbfb",
+    "market_results_total": 3868,
+    "market_results_fetched": 210,
+    "candidates_scanned": 21,
+    "audit_version": 3,
+    "pinned_combinations": 0,
+    "divine_chaos": 161.0
+  }
+}

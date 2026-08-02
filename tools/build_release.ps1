@@ -1,7 +1,7 @@
 param(
     [Parameter(Mandatory = $false)]
     [ValidatePattern('^\d+\.\d+\.\d+(?:\.\d+)?$')]
-    [string]$Version = "1.0.0",
+    [string]$Version = "1.0.42",
 
     [Parameter(Mandatory = $false)]
     [string]$Python = "python"
@@ -40,7 +40,8 @@ foreach ($path in @($GeneratedRoot, $UpdaterPayload, $DataPayload, $MainDist, $U
 $SensitiveRuntimeFiles = @(
     "proxies.json",
     "settings.json",
-    "trade_rate_limit_state.json"
+    "trade_rate_limit_state.json",
+    "cluster_template_audit_Allflame.json"
 )
 Copy-Item -Path (Join-Path $Root "data\*") -Destination $DataPayload -Recurse -Force
 foreach ($fileName in $SensitiveRuntimeFiles) {
@@ -154,6 +155,9 @@ try {
         "--hidden-import", "winrt.windows.graphics.capture.interop",
         "--hidden-import", "winrt.windows.graphics.directx",
         "--hidden-import", "winrt.windows.graphics.directx.direct3d11.interop",
+        "--hidden-import", "winrt.windows.graphics.imaging",
+        "--hidden-import", "winrt.windows.media.ocr",
+        "--hidden-import", "winrt.windows.storage.streams",
         "--collect-all", "dxcam",
         "--add-data", "$(Join-Path $Root 'settings.ini');.",
         "--add-data", "$(Join-Path $GeneratedRoot 'build_info.json');.",

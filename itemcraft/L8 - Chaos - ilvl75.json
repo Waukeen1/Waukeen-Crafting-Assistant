@@ -1,0 +1,234 @@
+{
+  "app_mode": "cluster",
+  "craft_logic": "Rare (regal)",
+  "augment_mode": "Always use",
+  "use_exalt": true,
+  "use_annul": true,
+  "chain_craft": false,
+  "chain_count": 1,
+  "cluster_meta": {
+    "base": "12% increased Chaos Damage",
+    "passive_count": 8,
+    "source": "PoEDB + official trade API"
+  },
+  "comb_craft_data": {
+    "1": [
+      "[P][1] 1 Added Passive Skill is Overwhelming Malice",
+      "[P][1] 1 Added Passive Skill is Touch of Cruelty",
+      "[S][1] 1 Added Passive Skill is Unspeakable Gifts"
+    ],
+    "2": [
+      "[P][1] 1 Added Passive Skill is Overwhelming Malice",
+      "[S][1] 1 Added Passive Skill is Unspeakable Gifts",
+      "[P][1] 1 Added Passive Skill is Unwaveringly Evil"
+    ],
+    "3": [
+      "[P][1] 1 Added Passive Skill is Dark Ideation",
+      "[S][1] 1 Added Passive Skill is Unspeakable Gifts",
+      "[P][1] 1 Added Passive Skill is Wicked Pall"
+    ],
+    "4": [
+      "[P][1] 1 Added Passive Skill is Overwhelming Malice",
+      "[S][1] 1 Added Passive Skill is Unspeakable Gifts",
+      "[P][1] 1 Added Passive Skill is Wicked Pall"
+    ],
+    "5": [
+      "[P][1] 1 Added Passive Skill is Overwhelming Malice",
+      "[S][1] 1 Added Passive Skill is Unholy Grace",
+      "[P][1] 1 Added Passive Skill is Unwaveringly Evil"
+    ],
+    "6": [
+      "[P][1] 1 Added Passive Skill is Dark Ideation",
+      "[P][1] 1 Added Passive Skill is Overwhelming Malice",
+      "[S][1] 1 Added Passive Skill is Unholy Grace"
+    ],
+    "7": [
+      "[P][1] 1 Added Passive Skill is Overwhelming Malice",
+      "[P][1] 1 Added Passive Skill is Touch of Cruelty",
+      "[S][1] 1 Added Passive Skill is Unholy Grace"
+    ],
+    "8": [
+      "[S][1] 1 Added Passive Skill is Unspeakable Gifts",
+      "[P][1] 1 Added Passive Skill is Unwaveringly Evil",
+      "[P][1] 1 Added Passive Skill is Wicked Pall"
+    ],
+    "9": [
+      "[S][1] 1 Added Passive Skill is Unholy Grace",
+      "[P][1] 1 Added Passive Skill is Unwaveringly Evil",
+      "[P][1] 1 Added Passive Skill is Wicked Pall"
+    ],
+    "10": [
+      "[S][1] 1 Added Passive Skill is Grim Oath",
+      "[P][1] 1 Added Passive Skill is Overwhelming Malice",
+      "[P][1] 1 Added Passive Skill is Unwaveringly Evil"
+    ],
+    "11": [
+      "[S][1] 1 Added Passive Skill is Grim Oath",
+      "[P][1] 1 Added Passive Skill is Overwhelming Malice",
+      "[P][1] 1 Added Passive Skill is Touch of Cruelty"
+    ],
+    "12": [
+      "[S][1] 1 Added Passive Skill is Grim Oath",
+      "[P][1] 1 Added Passive Skill is Overwhelming Malice",
+      "[P][1] 1 Added Passive Skill is Wicked Pall"
+    ],
+    "13": [
+      "[P][1] 1 Added Passive Skill is Overwhelming Malice",
+      "[S][1] 1 Added Passive Skill is Unholy Grace",
+      "[P][1] 1 Added Passive Skill is Wicked Pall"
+    ]
+  },
+  "combo_prices": {
+    "1": {
+      "min_chaos": 2768.57,
+      "max_chaos": 6514.29,
+      "avg_chaos": 4918.29,
+      "listings": 5,
+      "sample_size": 5,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/8rRa5MnbIV",
+      "scanned_at": "2026-08-02T08:45:43.724975+00:00"
+    },
+    "2": {
+      "min_chaos": 2605.71,
+      "max_chaos": 3745.71,
+      "avg_chaos": 3094.29,
+      "listings": 11,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/pJZXwQLXf0",
+      "scanned_at": "2026-08-02T08:46:12.145022+00:00"
+    },
+    "3": {
+      "min_chaos": 2442.86,
+      "max_chaos": 3908.57,
+      "avg_chaos": 3202.86,
+      "listings": 3,
+      "sample_size": 3,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/glDXr6e7hQ",
+      "scanned_at": "2026-08-02T08:49:12.166147+00:00"
+    },
+    "4": {
+      "min_chaos": 2442.86,
+      "max_chaos": 4885.71,
+      "avg_chaos": 2985.71,
+      "listings": 9,
+      "sample_size": 9,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/V5pMOKg8Sp",
+      "scanned_at": "2026-08-02T08:46:26.157305+00:00"
+    },
+    "5": {
+      "min_chaos": 1140.0,
+      "max_chaos": 1140.0,
+      "avg_chaos": 1140.0,
+      "listings": 22,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/pJZXwQLXf0",
+      "scanned_at": "2026-08-02T08:46:12.145031+00:00"
+    },
+    "6": {
+      "min_chaos": 814.29,
+      "max_chaos": 1302.86,
+      "avg_chaos": 1093.47,
+      "listings": 7,
+      "sample_size": 7,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/wv3a0jp9ib",
+      "scanned_at": "2026-08-02T08:46:33.154427+00:00"
+    },
+    "7": {
+      "min_chaos": 814.29,
+      "max_chaos": 1628.57,
+      "avg_chaos": 953.88,
+      "listings": 7,
+      "sample_size": 7,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/8rRa5MnbIV",
+      "scanned_at": "2026-08-02T08:45:43.724985+00:00"
+    },
+    "8": {
+      "min_chaos": 650.0,
+      "max_chaos": 651.43,
+      "avg_chaos": 651.29,
+      "listings": 23,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/RJ9VlL24I7",
+      "scanned_at": "2026-08-02T08:48:49.040917+00:00"
+    },
+    "9": {
+      "min_chaos": 390.0,
+      "max_chaos": 399.0,
+      "avg_chaos": 394.7,
+      "listings": 192,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/LgkmJvgjsn",
+      "scanned_at": "2026-08-02T08:49:03.042640+00:00"
+    },
+    "10": {
+      "min_chaos": 355.0,
+      "max_chaos": 470.0,
+      "avg_chaos": 406.8,
+      "listings": 17,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/nrDX7jVlH0",
+      "scanned_at": "2026-08-02T08:43:10.087200+00:00"
+    },
+    "11": {
+      "min_chaos": 325.71,
+      "max_chaos": 488.57,
+      "avg_chaos": 374.57,
+      "listings": 14,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/nrDX7jVlH0",
+      "scanned_at": "2026-08-02T08:43:10.087190+00:00"
+    },
+    "12": {
+      "min_chaos": 325.71,
+      "max_chaos": 488.57,
+      "avg_chaos": 472.29,
+      "listings": 28,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/JBnVKOKRIl",
+      "scanned_at": "2026-08-02T08:43:59.170127+00:00"
+    },
+    "13": {
+      "min_chaos": 325.71,
+      "max_chaos": 350.0,
+      "avg_chaos": 333.81,
+      "listings": 79,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/6zBZEm2XUG",
+      "scanned_at": "2026-08-02T08:46:40.266825+00:00"
+    }
+  },
+  "price_meta": {
+    "league": "Allflame",
+    "scanned_at": "2026-08-02T08:49:34.165146+00:00",
+    "currency": "chaos",
+    "range_basis": "complete priced securable result set",
+    "market_scan_complete": true,
+    "minimum_divine": 2.0,
+    "divine_chaos": 162.86,
+    "minimum_popularity": 3,
+    "popularity_basis": "at least 3 priced online listings; candidate discovered in the latest 20 listings priced at 2+ Divine",
+    "minimum_chaos": 325.71,
+    "trade_url": "",
+    "candidate_universe_count": 45,
+    "candidate_universe_sha256": "b90462c9429dfbf00948ab27e4e856b96e72044a44d0d7d6435116908221a428",
+    "market_results_total": 904,
+    "market_results_fetched": 264,
+    "candidates_scanned": 45,
+    "audit_version": 3,
+    "pinned_combinations": 0
+  },
+  "stop_on_two_match": [],
+  "annul_combs": [],
+  "no_annul_combs": [],
+  "solo_regal_mods": [
+    "[P][1] 1 Added Passive Skill is Overwhelming Malice",
+    "[P][1] 1 Added Passive Skill is Touch of Cruelty",
+    "[S][1] 1 Added Passive Skill is Unspeakable Gifts",
+    "[P][1] 1 Added Passive Skill is Unwaveringly Evil",
+    "[P][1] 1 Added Passive Skill is Dark Ideation",
+    "[P][1] 1 Added Passive Skill is Wicked Pall",
+    "[S][1] 1 Added Passive Skill is Unholy Grace",
+    "[S][1] 1 Added Passive Skill is Grim Oath"
+  ],
+  "no_regal_mods": []
+}

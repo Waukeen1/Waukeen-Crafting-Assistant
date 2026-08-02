@@ -441,7 +441,7 @@
         "tier":  "top",
         "affix_type":  "prefix",
         "mods":  [
-                     "Monsters reflect 18% of Elemental Damage"
+                     "Rare Monsters have Elemental Thorns reflecting # Elemental Damage"
                  ],
         "quantity":  10,
         "rarity":  6,
@@ -715,7 +715,7 @@
         "affix_type":  "prefix",
         "mods":  [
                      "Monsters reflect 20% of Physical Damage",
-                     "Monsters reflect 20% of Elemental Damage"
+                     "Rare Monsters have Elemental Thorns reflecting # Elemental Damage"
                  ],
         "quantity":  10,
         "rarity":  8,

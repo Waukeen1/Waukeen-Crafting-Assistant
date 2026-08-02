@@ -1,0 +1,154 @@
+{
+  "app_mode": "cluster",
+  "craft_logic": "Rare (regal)",
+  "augment_mode": "Always use",
+  "use_exalt": false,
+  "use_annul": false,
+  "chain_craft": false,
+  "chain_count": 1,
+  "cluster_meta": {
+    "base": "15% increased Critical Strike Chance",
+    "passive_count": 5,
+    "minimum_item_level": 68,
+    "source": "PoEDB + official trade API",
+    "minimum_chaos": 40
+  },
+  "comb_craft_data": {
+    "1": [
+      "[P][1] 1 Added Passive Skill is Eye of the Storm",
+      "[P][1] 1 Added Passive Skill is Precise Retaliation"
+    ],
+    "2": [
+      "[P][1] 1 Added Passive Skill is Overwhelming Malice",
+      "[P][1] 1 Added Passive Skill is Pressure Points"
+    ],
+    "3": [
+      "[P][1] 1 Added Passive Skill is Basics of Pain",
+      "[P][1] 1 Added Passive Skill is Pressure Points"
+    ],
+    "4": [
+      "[P][1] 1 Added Passive Skill is Pressure Points",
+      "[P][1] 1 Added Passive Skill is Skullbreaker"
+    ],
+    "5": [
+      "[P][1] 1 Added Passive Skill is Pressure Points",
+      "[P][1] 1 Added Passive Skill is Quick Getaway"
+    ],
+    "6": [
+      "[P][1] 1 Added Passive Skill is Precise Retaliation",
+      "[P][1] 1 Added Passive Skill is Pressure Points"
+    ]
+  },
+  "combo_prices": {
+    "1": {
+      "min_chaos": 800.0,
+      "max_chaos": 6080.0,
+      "avg_chaos": 4192.0,
+      "listings": 13,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/4mPKlKJLi9",
+      "scanned_at": "2026-08-01T16:51:05.011663+00:00"
+    },
+    "2": {
+      "min_chaos": 460.0,
+      "max_chaos": 640.0,
+      "avg_chaos": 510.0,
+      "listings": 29,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/yYKvyw58SR",
+      "scanned_at": "2026-08-01T16:55:34.687448+00:00"
+    },
+    "3": {
+      "min_chaos": 100.0,
+      "max_chaos": 120.0,
+      "avg_chaos": 114.5,
+      "listings": 282,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/kyD0lzpjt5",
+      "scanned_at": "2026-08-01T17:00:51.712357+00:00"
+    },
+    "4": {
+      "min_chaos": 54.0,
+      "max_chaos": 80.0,
+      "avg_chaos": 67.4,
+      "listings": 49,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/JBnPJrOYUl",
+      "scanned_at": "2026-08-01T16:53:38.656721+00:00"
+    },
+    "5": {
+      "min_chaos": 50.0,
+      "max_chaos": 70.0,
+      "avg_chaos": 61.9,
+      "listings": 726,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/pJZ0vpkbT0",
+      "scanned_at": "2026-08-01T17:02:02.887714+00:00"
+    },
+    "6": {
+      "min_chaos": 43.0,
+      "max_chaos": 90.0,
+      "avg_chaos": 62.3,
+      "listings": 61,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/8rR8ekbniV",
+      "scanned_at": "2026-08-01T16:49:08.555208+00:00"
+    }
+  },
+  "price_meta": {
+    "league": "Allflame",
+    "scanned_at": "2026-08-01T17:20:21.548736+00:00",
+    "currency": "chaos",
+    "range_basis": "complete priced securable result set",
+    "market_scan_complete": true,
+    "minimum_chaos": 40.0,
+    "minimum_popularity": 1,
+    "trade_url": "",
+    "candidate_universe_count": 55,
+    "candidate_universe_sha256": "8e43d182154956aa9b6e9b56381553df1b3e641f5b4807bb6213fc7ffea9b64d",
+    "market_results_total": 3289,
+    "market_results_fetched": 535,
+    "candidates_scanned": 55,
+    "audit_version": 3,
+    "pinned_combinations": 0,
+    "divine_chaos": 161.0
+  },
+  "stop_on_two_match": [
+    [
+      "[P][1] 1 Added Passive Skill is Eye of the Storm",
+      "[P][1] 1 Added Passive Skill is Precise Retaliation"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Overwhelming Malice",
+      "[P][1] 1 Added Passive Skill is Pressure Points"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Basics of Pain",
+      "[P][1] 1 Added Passive Skill is Pressure Points"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Pressure Points",
+      "[P][1] 1 Added Passive Skill is Skullbreaker"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Pressure Points",
+      "[P][1] 1 Added Passive Skill is Quick Getaway"
+    ],
+    [
+      "[P][1] 1 Added Passive Skill is Precise Retaliation",
+      "[P][1] 1 Added Passive Skill is Pressure Points"
+    ]
+  ],
+  "annul_combs": [],
+  "no_annul_combs": [],
+  "solo_regal_mods": [
+    "[P][1] 1 Added Passive Skill is Eye of the Storm",
+    "[P][1] 1 Added Passive Skill is Precise Retaliation",
+    "[P][1] 1 Added Passive Skill is Overwhelming Malice",
+    "[P][1] 1 Added Passive Skill is Pressure Points",
+    "[P][1] 1 Added Passive Skill is Basics of Pain",
+    "[P][1] 1 Added Passive Skill is Skullbreaker",
+    "[P][1] 1 Added Passive Skill is Quick Getaway"
+  ],
+  "no_regal_mods": []
+}

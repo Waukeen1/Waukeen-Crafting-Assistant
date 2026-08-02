@@ -381,6 +381,18 @@ def _missing_type_has_space(summary: dict, rarity: str) -> bool:
     return False
 
 
+def choose_chance_to_unique_action(rarity: str) -> tuple[str, str]:
+    """Return the next safe action for a Chance + Scour unique loop."""
+    rarity_low = (rarity or "").strip().casefold()
+    if rarity_low == "unique":
+        return "done", "Unique item bulundu."
+    if rarity_low == "normal":
+        return "chance", "Normal item -> Orb of Chance."
+    if rarity_low in {"magic", "rare"}:
+        return "scour", f"{rarity} sonuc -> Orb of Scouring ile normale donulecek."
+    return "stop", f"Desteklenmeyen veya okunamayan rarity: {rarity}"
+
+
 def choose_action(rarity: str, summary: dict, settings: dict) -> tuple[str, str]:
     rarity_low = (rarity or "").casefold()
     affix_limit = 2 if rarity_low == "magic" else (6 if rarity_low == "rare" else None)

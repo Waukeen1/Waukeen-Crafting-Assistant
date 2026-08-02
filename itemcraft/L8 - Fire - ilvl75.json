@@ -1,0 +1,250 @@
+{
+  "app_mode": "cluster",
+  "craft_logic": "Rare (regal)",
+  "augment_mode": "Always use",
+  "use_exalt": true,
+  "use_annul": true,
+  "chain_craft": false,
+  "chain_count": 1,
+  "cluster_meta": {
+    "base": "12% increased Fire Damage",
+    "passive_count": 8,
+    "source": "PoEDB + official trade API"
+  },
+  "comb_craft_data": {
+    "1": [
+      "[S][1] 1 Added Passive Skill is Doryani's Lesson",
+      "[P][1] 1 Added Passive Skill is Master of Fire",
+      "[P][1] 1 Added Passive Skill is Smoking Remains"
+    ],
+    "2": [
+      "[P][1] 1 Added Passive Skill is Burning Bright",
+      "[P][1] 1 Added Passive Skill is Smoking Remains",
+      "[S][1] 1 Added Passive Skill is Widespread Destruction"
+    ],
+    "3": [
+      "[S][1] 1 Added Passive Skill is Doryani's Lesson",
+      "[P][1] 1 Added Passive Skill is Prismatic Heart",
+      "[P][1] 1 Added Passive Skill is Smoking Remains"
+    ],
+    "4": [
+      "[P][1] 1 Added Passive Skill is Burning Bright",
+      "[P][1] 1 Added Passive Skill is Cremator",
+      "[S][1] 1 Added Passive Skill is Widespread Destruction"
+    ],
+    "5": [
+      "[S][1] 1 Added Passive Skill is Doryani's Lesson",
+      "[P][1] 1 Added Passive Skill is Prismatic Heart",
+      "[P][1] 1 Added Passive Skill is Sadist"
+    ],
+    "6": [
+      "[S][1] 1 Added Passive Skill is Disorienting Display",
+      "[P][1] 1 Added Passive Skill is Prismatic Heart",
+      "[P][1] 1 Added Passive Skill is Sadist"
+    ],
+    "7": [
+      "[P][1] 1 Added Passive Skill is Corrosive Elements",
+      "[S][1] 1 Added Passive Skill is Disorienting Display",
+      "[P][1] 1 Added Passive Skill is Master of Fire"
+    ],
+    "8": [
+      "[S][1] 1 Added Passive Skill is Disorienting Display",
+      "[P][1] 1 Added Passive Skill is Prismatic Heart",
+      "[P][1] 1 Added Passive Skill is Smoking Remains"
+    ],
+    "9": [
+      "[S][1] 1 Added Passive Skill is Disorienting Display",
+      "[P][1] 1 Added Passive Skill is Sadist",
+      "[P][1] 1 Added Passive Skill is Smoking Remains"
+    ],
+    "10": [
+      "[S][1] 1 Added Passive Skill is Disorienting Display",
+      "[P][1] 1 Added Passive Skill is Master of Fire",
+      "[P][1] 1 Added Passive Skill is Sadist"
+    ],
+    "11": [
+      "[P][1] 1 Added Passive Skill is Corrosive Elements",
+      "[S][1] 1 Added Passive Skill is Disorienting Display",
+      "[P][1] 1 Added Passive Skill is Prismatic Heart"
+    ],
+    "12": [
+      "[P][1] 1 Added Passive Skill is Cremator",
+      "[S][1] 1 Added Passive Skill is Doryani's Lesson",
+      "[P][1] 1 Added Passive Skill is Smoking Remains"
+    ],
+    "13": [
+      "[S][1] 1 Added Passive Skill is Disorienting Display",
+      "[P][1] 1 Added Passive Skill is Master of Fire",
+      "[P][1] 1 Added Passive Skill is Smoking Remains"
+    ],
+    "14": [
+      "[S][1] 1 Added Passive Skill is Doryani's Lesson",
+      "[P][1] 1 Added Passive Skill is Master of Fire",
+      "[P][1] 1 Added Passive Skill is Prismatic Heart"
+    ]
+  },
+  "combo_prices": {
+    "1": {
+      "min_chaos": 960.0,
+      "max_chaos": 1120.0,
+      "avg_chaos": 1013.33,
+      "listings": 3,
+      "sample_size": 3,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/rPaXwK0MfQ",
+      "scanned_at": "2026-08-02T09:45:11.150635+00:00"
+    },
+    "2": {
+      "min_chaos": 800.0,
+      "max_chaos": 800.0,
+      "avg_chaos": 800.0,
+      "listings": 34,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/glDXLp3PIQ",
+      "scanned_at": "2026-08-02T09:53:09.781706+00:00"
+    },
+    "3": {
+      "min_chaos": 800.0,
+      "max_chaos": 1280.0,
+      "avg_chaos": 1008.0,
+      "listings": 13,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/5ndo5W5Kua",
+      "scanned_at": "2026-08-02T09:44:45.531857+00:00"
+    },
+    "4": {
+      "min_chaos": 789.0,
+      "max_chaos": 825.0,
+      "avg_chaos": 801.3,
+      "listings": 118,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/X3rqan5biP",
+      "scanned_at": "2026-08-02T09:53:16.766279+00:00"
+    },
+    "5": {
+      "min_chaos": 651.43,
+      "max_chaos": 814.29,
+      "avg_chaos": 716.57,
+      "listings": 10,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/kyDXbwaWT5",
+      "scanned_at": "2026-08-02T09:18:27.217468+00:00"
+    },
+    "6": {
+      "min_chaos": 488.57,
+      "max_chaos": 488.57,
+      "avg_chaos": 488.57,
+      "listings": 16,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/KldJ5MyEs5",
+      "scanned_at": "2026-08-02T09:19:37.322407+00:00"
+    },
+    "7": {
+      "min_chaos": 480.0,
+      "max_chaos": 800.0,
+      "avg_chaos": 693.33,
+      "listings": 3,
+      "sample_size": 3,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/JBnVLvKRcl",
+      "scanned_at": "2026-08-02T09:42:31.114560+00:00"
+    },
+    "8": {
+      "min_chaos": 480.0,
+      "max_chaos": 640.0,
+      "avg_chaos": 496.0,
+      "listings": 57,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/BgzEvBm3u8",
+      "scanned_at": "2026-08-02T09:47:05.735699+00:00"
+    },
+    "9": {
+      "min_chaos": 380.0,
+      "max_chaos": 450.0,
+      "avg_chaos": 423.0,
+      "listings": 25,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/KldJ5MyEs5",
+      "scanned_at": "2026-08-02T09:19:37.322428+00:00"
+    },
+    "10": {
+      "min_chaos": 340.0,
+      "max_chaos": 814.29,
+      "avg_chaos": 547.62,
+      "listings": 3,
+      "sample_size": 3,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/KldJ5MyEs5",
+      "scanned_at": "2026-08-02T09:19:37.322425+00:00"
+    },
+    "11": {
+      "min_chaos": 320.0,
+      "max_chaos": 800.0,
+      "avg_chaos": 444.44,
+      "listings": 9,
+      "sample_size": 9,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/JBnVLvKRcl",
+      "scanned_at": "2026-08-02T09:42:31.114549+00:00"
+    },
+    "12": {
+      "min_chaos": 320.0,
+      "max_chaos": 640.0,
+      "avg_chaos": 464.0,
+      "listings": 15,
+      "sample_size": 10,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/MdoVbGq6FJ",
+      "scanned_at": "2026-08-02T09:46:20.336389+00:00"
+    },
+    "13": {
+      "min_chaos": 320.0,
+      "max_chaos": 960.0,
+      "avg_chaos": 533.33,
+      "listings": 3,
+      "sample_size": 3,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/RJ9VmbgGh7",
+      "scanned_at": "2026-08-02T09:48:47.342396+00:00"
+    },
+    "14": {
+      "min_chaos": 320.0,
+      "max_chaos": 1760.0,
+      "avg_chaos": 760.0,
+      "listings": 4,
+      "sample_size": 4,
+      "trade_url": "https://www.pathofexile.com/trade/search/Allflame/5ndo5W5Kua",
+      "scanned_at": "2026-08-02T09:44:45.531855+00:00"
+    }
+  },
+  "price_meta": {
+    "league": "Allflame",
+    "scanned_at": "2026-08-02T09:53:16.779459+00:00",
+    "currency": "chaos",
+    "range_basis": "complete priced securable result set",
+    "market_scan_complete": true,
+    "minimum_divine": 2.0,
+    "divine_chaos": 160.0,
+    "minimum_popularity": 3,
+    "popularity_basis": "at least 3 priced online listings; candidate discovered in the latest 20 listings priced at 2+ Divine",
+    "minimum_chaos": 320.0,
+    "trade_url": "",
+    "candidate_universe_count": 84,
+    "candidate_universe_sha256": "69745e631d5043b5244aeb6cbe415449d9e5ca0b6641ce28f06f940870ddc0c5",
+    "market_results_total": 1517,
+    "market_results_fetched": 503,
+    "candidates_scanned": 84,
+    "audit_version": 3,
+    "pinned_combinations": 0
+  },
+  "stop_on_two_match": [],
+  "annul_combs": [],
+  "no_annul_combs": [],
+  "solo_regal_mods": [
+    "[S][1] 1 Added Passive Skill is Doryani's Lesson",
+    "[P][1] 1 Added Passive Skill is Master of Fire",
+    "[P][1] 1 Added Passive Skill is Smoking Remains",
+    "[P][1] 1 Added Passive Skill is Burning Bright",
+    "[S][1] 1 Added Passive Skill is Widespread Destruction",
+    "[P][1] 1 Added Passive Skill is Prismatic Heart",
+    "[P][1] 1 Added Passive Skill is Cremator",
+    "[P][1] 1 Added Passive Skill is Sadist",
+    "[S][1] 1 Added Passive Skill is Disorienting Display",
+    "[P][1] 1 Added Passive Skill is Corrosive Elements"
+  ],
+  "no_regal_mods": []
+}

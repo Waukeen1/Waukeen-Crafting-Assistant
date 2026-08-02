@@ -10,3 +10,5 @@ assets/wca_icon_chroma.png
 data/proxies.json
 data/settings.json
 data/trade_rate_limit_state.json
+data/cluster_template_audit_*.json
+data/cluster_template_audit_*.tmp
