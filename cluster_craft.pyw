@@ -366,7 +366,7 @@ except Exception:
 
 # cluster paths korunuyor — classify_mod_type() combcraft prefix/suffix tespiti için kullanıyor
 
-WINDOW_W, WINDOW_H = 420, 470
+WINDOW_W, WINDOW_H = 420, 500
 FLASK_GUIDE_W, FLASK_GUIDE_H = 344, WINDOW_H
 FLASK_GUIDE_GAP = 4
 CLUSTER_TRADE_W, CLUSTER_TRADE_H = 390, WINDOW_H
@@ -2554,26 +2554,159 @@ def _voyage_scan_charts(chart_tl, chart_br):
     log_message(f"[VOYAGE] {len(charts)} kullanilabilir Chart okundu.")
     return charts
 
-def _voyage_drag_safely(source, target):
-    if stop_event.is_set():
+def _voyage_click(button="left", point=None, hover_origin=None):
+    import ctypes
+    from ctypes import wintypes
+
+    class MouseInput(ctypes.Structure):
+        _fields_ = (
+            ("dx", wintypes.LONG),
+            ("dy", wintypes.LONG),
+            ("mouse_data", wintypes.DWORD),
+            ("flags", wintypes.DWORD),
+            ("time", wintypes.DWORD),
+            ("extra_info", ctypes.c_size_t),
+        )
+
+    class InputUnion(ctypes.Union):
+        _fields_ = (("mouse", MouseInput),)
+
+    class Input(ctypes.Structure):
+        _anonymous_ = ("data",)
+        _fields_ = (("type", wintypes.DWORD), ("data", InputUnion))
+
+    if button == "left":
+        down_flag, up_flag = 0x0002, 0x0004
+    else:
+        down_flag, up_flag = 0x0008, 0x0010
+
+    def send_flag(flag, dx=0, dy=0):
+        event = Input(type=0, mouse=MouseInput(dx, dy, 0, flag, 0, 0))
+        return ctypes.windll.user32.SendInput(
+            1,
+            ctypes.byref(event),
+            ctypes.sizeof(Input),
+        ) == 1
+
+    def send_absolute(target):
+        virtual_left = ctypes.windll.user32.GetSystemMetrics(76)
+        virtual_top = ctypes.windll.user32.GetSystemMetrics(77)
+        virtual_width = max(1, ctypes.windll.user32.GetSystemMetrics(78))
+        virtual_height = max(1, ctypes.windll.user32.GetSystemMetrics(79))
+        normalized_x = round(
+            (target[0] - virtual_left) * 65535 / max(1, virtual_width - 1)
+        )
+        normalized_y = round(
+            (target[1] - virtual_top) * 65535 / max(1, virtual_height - 1)
+        )
+        return send_flag(0xC001, normalized_x, normalized_y)
+
+    if button == "right":
+        # SetCursorPos does not always refresh PoE's DirectInput hover state.
+        # Leave the chart cell and re-enter its exact centre using absolute
+        # SendInput movement before delivering the right-click.
+        if point is None or hover_origin is None:
+            return False
+        if not send_absolute(hover_origin):
+            return False
+        if not _voyage_wait(0.06):
+            return False
+        if not send_absolute(point):
+            return False
+        if not _voyage_wait(0.09):
+            return False
+    if not send_flag(down_flag):
         return False
-    _instant_move(*source)
-    if not _voyage_wait(0.04):
-        return False
-    pyautogui.mouseDown(button="left")
     try:
-        steps = 9
-        for step in range(1, steps + 1):
-            if stop_event.is_set():
-                return False
-            x = round(source[0] + (target[0] - source[0]) * step / steps)
-            y = round(source[1] + (target[1] - source[1]) * step / steps)
-            _instant_move(x, y)
-            if not _voyage_wait(0.015):
-                return False
-        return True
+        return _voyage_wait(0.1 if button == "right" else 0.06)
     finally:
-        pyautogui.mouseUp(button="left")
+        send_flag(up_flag)
+
+def _voyage_place_chart(source, target, placement, cell_span):
+    from PIL import ImageGrab
+
+    if stop_event.is_set():
+        return None
+
+    _instant_move(*source)
+    if not _voyage_wait(0.08):
+        return None
+    if not _voyage_click("left"):
+        return None
+
+    _instant_move(*target)
+    if not _voyage_wait(0.14):
+        return None
+    if not _voyage_click("left"):
+        return None
+    if not _voyage_wait(0.22):
+        return None
+
+    # Inventory glyph orientation is not reliable. Read the black route after
+    # placement while the cursor is still on the target, then rotate only when
+    # the next frame proves that PoE accepted the right click.
+    current_edges = voyage.detect_board_edges(
+        ImageGrab.grab(all_screens=True),
+        target,
+        placement.chart.shape,
+        cell_span=cell_span,
+    )
+    if current_edges is None:
+        log_message(
+            f"[VOYAGE] Cell {placement.cell + 1} anlik yonu okunamadi."
+        )
+        return None
+    log_message(
+        f"[VOYAGE] Cell {placement.cell + 1} birakma yonu "
+        f"{_voyage_edge_code(current_edges)}; "
+        f"hedef {_voyage_edge_code(placement.required_edges)}."
+    )
+
+    delivered_rotations = 0
+    unchanged_attempts = 0
+    for _attempt in range(8):
+        if current_edges == placement.required_edges:
+            return delivered_rotations
+        hover_origin = (
+            target[0] - max(84, round(cell_span * 0.65)),
+            target[1],
+        )
+        if stop_event.is_set() or not _voyage_click(
+            "right",
+            point=target,
+            hover_origin=hover_origin,
+        ):
+            return None
+        if not _voyage_wait(0.42):
+            return None
+        updated_edges = voyage.detect_board_edges(
+            ImageGrab.grab(all_screens=True),
+            target,
+            placement.chart.shape,
+            cell_span=cell_span,
+        )
+        log_message(
+            f"[VOYAGE] Cell {placement.cell + 1} sag tik sonucu: "
+            f"{_voyage_edge_code(current_edges)} -> "
+            f"{_voyage_edge_code(updated_edges)}."
+        )
+        if updated_edges is None:
+            return None
+        if updated_edges == current_edges:
+            unchanged_attempts += 1
+            if unchanged_attempts >= 3:
+                log_message(
+                    f"[VOYAGE] Cell {placement.cell + 1} sag tik uc kez "
+                    "oyuna ulasmadi."
+                )
+                return None
+            if not _voyage_wait(0.35):
+                return None
+            continue
+        delivered_rotations += 1
+        unchanged_attempts = 0
+        current_edges = updated_edges
+    return None
 
 def _voyage_edge_code(edges):
     return "".join(
@@ -2582,72 +2715,27 @@ def _voyage_edge_code(edges):
         if active
     ) or "?"
 
-def _voyage_rotate_placed(placement, target, cell_span):
+def _voyage_validate_placed_cell(placement, target, cell_span):
     from PIL import ImageGrab
-    import win32api
-    import win32con
 
-    screen_w, _screen_h = pyautogui.size()
-    delivered_rotations = 0
-    previous_edges = None
-    for click_attempt in range(9):
-        if stop_event.is_set():
-            return None
-        win32api.SetCursorPos((screen_w // 2, 80))
-        if not _voyage_wait(0.18):
-            return None
-        current_edges = voyage.detect_board_edges(
-            ImageGrab.grab(all_screens=True),
-            target,
-            placement.chart.shape,
-            cell_span=cell_span,
-        )
-        log_message(
-            f"[VOYAGE] Cell {placement.cell + 1} board yonu "
-            f"{_voyage_edge_code(current_edges)}; "
-            f"hedef {_voyage_edge_code(placement.required_edges)}."
-        )
-        if previous_edges is not None:
-            if current_edges == previous_edges:
-                log_message(
-                    f"[VOYAGE] Cell {placement.cell + 1} sag tik oyuna "
-                    "ulasamadi; ayni yon icin tekrar deneniyor."
-                )
-            else:
-                delivered_rotations += 1
-        if current_edges == placement.required_edges:
-            return delivered_rotations
-        if click_attempt == 8:
-            break
-        previous_edges = current_edges
-        cursor_ready = False
-        for _move_attempt in range(3):
-            win32api.SetCursorPos((int(target[0]), int(target[1])))
-            if not _voyage_wait(0.04):
-                return None
-            actual_x, actual_y = win32api.GetCursorPos()
-            if abs(actual_x - target[0]) <= 1 and abs(actual_y - target[1]) <= 1:
-                cursor_ready = True
-                break
-        if not cursor_ready:
-            log_message(
-                f"[VOYAGE] Cell {placement.cell + 1} fiziksel imlec "
-                "hedef koordinata ulasamadi."
-            )
-            return None
-        # A left click picks the placed Chart back up. Rotate the Chart under
-        # the verified cursor directly so placement can advance to next cell.
-        win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTDOWN, 0, 0, 0, 0)
-        try:
-            if not _voyage_wait(0.045):
-                return None
-        finally:
-            win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTUP, 0, 0, 0, 0)
-        # The Voyage UI can process rotation input several frames late. Wait
-        # for it to settle so retries never queue extra rotations.
-        if not _voyage_wait(0.65):
-            return None
-    return None
+    shape = placement.chart.shape
+    if stop_event.is_set():
+        return False
+    _instant_move(pyautogui.size().width // 2, 80)
+    if not _voyage_wait(0.22):
+        return False
+    detected = voyage.detect_board_edges(
+        ImageGrab.grab(all_screens=True),
+        target,
+        shape,
+        cell_span=cell_span,
+    )
+    log_message(
+        f"[VOYAGE] Cell {placement.cell + 1} board yonu "
+        f"{_voyage_edge_code(detected)}; "
+        f"hedef {_voyage_edge_code(placement.required_edges)}."
+    )
+    return detected == placement.required_edges
 
 def _voyage_validate_placed_plan(plan, board_points, cell_span):
     from PIL import ImageGrab
@@ -2680,6 +2768,13 @@ def _voyage_validate_placed_plan(plan, board_points, cell_span):
 
 def _voyage_place_plan(plan, board_tl, board_br):
     board_points = _voyage_board_points(board_tl, board_br)
+    if len(board_points) != 9 or len(set(board_points)) != 9:
+        log_message(
+            "[VOYAGE] Board koordinatlari 9 farkli hucre olusturmuyor; "
+            "yerlestirme baslatilmadi."
+        )
+        stop_event.set()
+        return False
     x_span = abs(board_points[1][0] - board_points[0][0])
     y_span = abs(board_points[3][1] - board_points[0][1])
     cell_span = min(x_span, y_span)
@@ -2692,7 +2787,25 @@ def _voyage_place_plan(plan, board_tl, board_br):
             f"[VOYAGE] Yerlestirme {placement.chart.uid}: "
             f"source={source} -> cell {placement.cell + 1} target={target}."
         )
-        if not source or not _voyage_drag_safely(source, target):
+        if not source:
+            log_message(
+                f"[VOYAGE] {placement.chart.uid} kaynak koordinati yok; "
+                "yerlestirme durduruldu."
+            )
+            stop_event.set()
+            return False
+        log_message(
+            f"[VOYAGE] {placement.chart.uid} tek tikla aliniyor; "
+            f"cell {placement.cell + 1} hedefine tek tikla birakilacak."
+        )
+        rotation_clicks = _voyage_place_chart(
+            source,
+            target,
+            placement,
+            cell_span,
+        )
+        if rotation_clicks is None:
+            stop_event.set()
             return False
         if not _voyage_wait(0.12):
             return False
@@ -2709,21 +2822,20 @@ def _voyage_place_plan(plan, board_tl, board_br):
             )
             stop_event.set()
             return False
-        rotation_clicks = _voyage_rotate_placed(
+        if not _voyage_validate_placed_cell(
             placement,
             target,
             cell_span,
-        )
-        if rotation_clicks is None:
+        ):
             log_message(
-                f"[VOYAGE] Cell {placement.cell + 1} hedef yone "
-                "dondurulemedi; yerlestirme durduruldu."
+                f"[VOYAGE] Cell {placement.cell + 1} yanlis yonle yerlesti; "
+                "guvenlik icin devam edilmedi."
             )
             stop_event.set()
             return False
         log_message(
             f"[VOYAGE] Cell {placement.cell + 1}: "
-            f"{placement.chart.uid}, board'da R x{rotation_clicks}; "
+            f"{placement.chart.uid}, hedefte R x{rotation_clicks}; "
             "kaynak slot bosaldi."
         )
     return _voyage_validate_placed_plan(plan, board_points, cell_span)
@@ -4719,6 +4831,42 @@ def _medium_single_target_exalt_pot(mods, settings, pots):
             return pot
     return None
 
+
+def find_small_stop_three_match(mods, settings):
+    """Return a four-mod Small Cluster combo when exactly three targets match."""
+    if settings.get("cluster_size") != "small":
+        return None
+    if not settings.get("cluster_small_stop_three"):
+        return None
+
+    candidates = []
+    comb_data = settings.get("comb_craft_data", {})
+    for pot in _analyze_item_potential(
+        mods,
+        comb_data,
+    ):
+        target_count = int(pot.get("match_count", 0)) + len(
+            pot.get("missing_mods", [])
+        )
+        missing_targets = list(pot.get("missing_mods", []))
+        if (
+            target_count < 4
+            or int(pot.get("match_count", 0)) != 3
+            or len(missing_targets) != 1
+        ):
+            continue
+        candidates.append(pot)
+    if not candidates:
+        return None
+    return sorted(
+        candidates,
+        key=lambda pot: (
+            -int(pot.get("match_count", 0)),
+            len(pot.get("junk_mods", [])),
+            _comb_no_int(pot.get("comb_no")),
+        ),
+    )[0]
+
 def is_cluster_notable_mod(mod):
     return bool(re.search(r"\b1\s+Added\s+Passive\s+Skill\s+is\b", str(mod or ""), re.IGNORECASE))
 
@@ -4903,7 +5051,10 @@ def _select_best_effect35_progress(mods, settings):
                     continue
                 return "exalt", pot, skipped_no_annul
             continue
-        if pot.get("match_count", 0) < 3:
+        # A full four-affix item with two targets and two junk mods can only
+        # progress by freeing a slot. Respect the template's Annul setting
+        # instead of scouring a still-valuable 2/4 subset immediately.
+        if pot.get("match_count", 0) < 2:
             continue
         if not use_annul:
             continue
@@ -4994,7 +5145,11 @@ def handle_effect35_rare_state(mods, settings):
         return "continue"
 
     if next_action == "annul" and chosen_pot:
-        log_message(f"[E35 RARE] Komb #{chosen_pot['comb_no']} icin 3/4 alt kume var, exalt yeri yok -> Annul.")
+        match_count = int(chosen_pot.get("match_count", 0))
+        log_message(
+            f"[E35 RARE] Komb #{chosen_pot['comb_no']} icin "
+            f"{match_count}/4 alt kume var, exalt yeri yok -> Annul."
+        )
         apply_orb("Orb of Annulment", ITEM_POS)
         return "continue"
 
@@ -5513,7 +5668,12 @@ def start_craft():
                 snapshot = {
                     "craft_logic": craft_logic.get(),
                     "augment_mode": augment_mode.get(),
+                    "cluster_size": cluster_size_var.get(),
                     "cluster_no_regal_two_mods": cluster_no_regal_two_var.get(),
+                    "cluster_small_stop_three": (
+                        cluster_size_var.get() == "small"
+                        and cluster_small_stop_three_var.get()
+                    ),
                     "use_exalt": use_exalt.get(),
                     "use_annul": use_annul.get(),
                     "comb_craft": True,
@@ -5755,6 +5915,15 @@ def craft_thread_loop(settings):
                     apply_orb("Orb of Transmutation", ITEM_POS)
                 safe_wait(get_delay_s())
                 continue
+
+            small_stop = find_small_stop_three_match(mods, settings)
+            if small_stop:
+                log_message(
+                    f"[SMALL] Komb #{small_stop['comb_no']} icin 3 hedef bulundu; "
+                    "Allflame craft icin duruldu."
+                )
+                stop_shift_spam()
+                return "done"
 
             # === GLOBAL STOP-ON-TWO MATCH ===
             if find_stop_on_two_match_pair(mods, settings):
@@ -6204,6 +6373,15 @@ def craft_thread_loop_safe(settings):
                     consecutive_errors = 0
                     continue
 
+                small_stop = find_small_stop_three_match(mods, settings)
+                if small_stop:
+                    log_message(
+                        f"[SMALL] Komb #{small_stop['comb_no']} icin 3 hedef bulundu; "
+                        "Allflame craft icin duruldu."
+                    )
+                    stop_shift_spam()
+                    return "done"
+
                 if find_stop_on_two_match_pair(mods, settings):
                     log_message("[GLOBAL] 2'li ozel kombinasyon bulundu, craft tamamlandi.")
                     stop_shift_spam()
@@ -6476,7 +6654,53 @@ def list_templates_from_folder():
         )
     )
     os.makedirs(template_dir, exist_ok=True)
-    return sorted(os.path.splitext(f)[0] for f in os.listdir(template_dir) if f.endswith(".json"))
+    names = sorted(
+        os.path.splitext(f)[0]
+        for f in os.listdir(template_dir)
+        if f.endswith(".json")
+    )
+    if mode != "cluster":
+        return names
+
+    selected_size = cluster_size_var.get()
+    visible = []
+    for name in names:
+        path = os.path.join(template_dir, f"{name}.json")
+        try:
+            with open(path, "r", encoding="utf-8") as handle:
+                data = json.load(handle)
+        except Exception:
+            data = {}
+        if cluster_template_size(name, data) == selected_size:
+            visible.append(name)
+    return visible
+
+
+def cluster_template_size(name, data=None):
+    """Classify templates while retaining compatibility with legacy names."""
+    data = data if isinstance(data, dict) else {}
+    explicit = str(data.get("cluster_size", "")).strip().lower()
+    if explicit in {"small", "medium", "large"}:
+        return explicit
+
+    meta = data.get("cluster_meta", {})
+    try:
+        passive_count = int(meta.get("passive_count", 0) or 0)
+    except (TypeError, ValueError):
+        passive_count = 0
+    if 1 <= passive_count <= 3:
+        return "small"
+    if 4 <= passive_count <= 6:
+        return "medium"
+    if passive_count >= 7:
+        return "large"
+
+    lowered = str(name or "").strip().lower()
+    if re.match(r"^s\d+\s*-", lowered):
+        return "small"
+    if re.match(r"^m\d+\s*-", lowered):
+        return "medium"
+    return "large"
 
 def template_path(name: str):
     mode = app_mode.get()
@@ -6514,6 +6738,39 @@ def _copy_price_data(data):
         for key, value in data.items()
         if isinstance(value, dict)
     }
+
+def _combo_visible_mods(combos):
+    return {
+        mod
+        for combo in combos.values()
+        for mod in combo
+    }
+
+def _filter_stop_pairs_for_combos(pairs, combos):
+    combo_sets = [set(combo) for combo in combos.values()]
+    return [
+        list(pair)
+        for pair in pairs
+        if isinstance(pair, (list, tuple))
+        and len(pair) == 2
+        and any(set(pair).issubset(combo) for combo in combo_sets)
+    ]
+
+def _prune_active_combo_rules():
+    visible_mods = _combo_visible_mods(comb_craft_data)
+    stop_on_two_match_config[:] = _filter_stop_pairs_for_combos(
+        stop_on_two_match_config,
+        comb_craft_data,
+    )
+    annul_combs_config[:] = [
+        mod for mod in annul_combs_config if mod in visible_mods
+    ]
+    solo_regal_mods_config[:] = [
+        mod for mod in solo_regal_mods_config if mod in visible_mods
+    ]
+    no_regal_mods_config[:] = [
+        mod for mod in no_regal_mods_config if mod in visible_mods
+    ]
 
 def _price_filter_floor():
     value = cluster_price_filter_var.get().strip()
@@ -6566,18 +6823,11 @@ def apply_cluster_price_filter(log_change=False):
         if source_key in template_combo_price_data
     }
 
-    visible_mods = {
-        mod
-        for combo in comb_craft_data.values()
-        for mod in combo
-    }
-    stop_on_two_match_config[:] = [
-        list(pair)
-        for pair in template_stop_on_two_match_config
-        if isinstance(pair, (list, tuple))
-        and len(pair) == 2
-        and all(mod in visible_mods for mod in pair)
-    ]
+    visible_mods = _combo_visible_mods(comb_craft_data)
+    stop_on_two_match_config[:] = _filter_stop_pairs_for_combos(
+        template_stop_on_two_match_config,
+        comb_craft_data,
+    )
     annul_combs_config[:] = [
         mod for mod in template_annul_combs_config if mod in visible_mods
     ]
@@ -6670,12 +6920,18 @@ def load_template():
         if not is_base_jewel_template and not is_item_template:
             craft_logic.set(logic_val)
         if not is_map_template and not is_base_jewel_template and not is_item_template:
+            cluster_size_var.set(cluster_template_size(name, data))
             augment_mode.set(data.get("augment_mode", "Use if needed"))
             cluster_no_regal_two_var.set(
                 bool(data.get("cluster_no_regal_two_mods", False))
             )
+            cluster_small_stop_three_var.set(
+                cluster_size_var.get() == "small"
+                and bool(data.get("cluster_small_stop_three_mods", False))
+            )
         else:
             cluster_no_regal_two_var.set(False)
+            cluster_small_stop_three_var.set(False)
         # Effect35 templatelerinde her kombinasyon 4 mod içerir → exalt şart
         comb_craft_data_raw = data.get("comb_craft_data", {}) if not is_map_template else {}
         is_effect35 = any(len(v) >= 4 for v in comb_craft_data_raw.values())
@@ -6793,6 +7049,9 @@ def load_template():
         populate_annul_combs_list()
         populate_solo_regal_list()
         populate_no_regal_list()
+        sync_cluster_size_controls = globals().get("_sync_cluster_size_controls")
+        if callable(sync_cluster_size_controls):
+            sync_cluster_size_controls()
         populate_map_normal_list()
         populate_map_memory_list()
         select_map_profile_tab()
@@ -6942,8 +7201,14 @@ def save_template():
                 else no_regal_mods_config
             )
             data.update({
+                "cluster_size": cluster_size_var.get(),
+                "cluster_meta": dict(template_cluster_meta),
                 "augment_mode": augment_mode.get(),
                 "cluster_no_regal_two_mods": cluster_no_regal_two_var.get(),
+                "cluster_small_stop_three_mods": (
+                    cluster_size_var.get() == "small"
+                    and cluster_small_stop_three_var.get()
+                ),
                 "use_exalt": use_exalt.get(),
                 "use_annul": use_annul.get(),
                 "comb_craft_data": save_combos,
@@ -7566,6 +7831,12 @@ craft_logic = tk.StringVar(value="Rare (regal)")
 augment_mode = tk.StringVar(value="Use if needed")
 use_exalt, use_annul = tk.BooleanVar(value=False), tk.BooleanVar(value=False)
 cluster_no_regal_two_var = tk.BooleanVar(value=False)
+cluster_small_stop_three_var = tk.BooleanVar(value=False)
+cluster_size_var = tk.StringVar(
+    value=settings_cfg.get("General", "cluster_size", fallback="large")
+)
+if cluster_size_var.get() not in {"small", "medium", "large"}:
+    cluster_size_var.set("large")
 chain_craft = tk.BooleanVar(value=False)
 affix_weight_var = tk.StringVar(value="1")
 delay_var = tk.StringVar(value=settings_cfg.get("General", "delay", fallback="30"))
@@ -7661,6 +7932,9 @@ MODE_DISPLAY_TO_VALUE = {
     "Auto Flask": "auto_flask",
 }
 MODE_VALUE_TO_DISPLAY = {value: label for label, value in MODE_DISPLAY_TO_VALUE.items()}
+startup_mode = settings_cfg.get("General", "last_mode", fallback="cluster")
+if startup_mode not in MODE_VALUE_TO_DISPLAY:
+    startup_mode = "cluster"
 POST_ACTION_DISPLAY_TO_VALUE = {
     "Bir sey yapma": POST_ACTION_NONE,
     "Oyunu kapat": POST_ACTION_CLOSE_GAME,
@@ -7670,7 +7944,7 @@ POST_ACTION_VALUE_TO_DISPLAY = {
     value: label for label, value in POST_ACTION_DISPLAY_TO_VALUE.items()
 }
 
-mode_selector_var = tk.StringVar(value=MODE_VALUE_TO_DISPLAY["cluster"])
+mode_selector_var = tk.StringVar(value=MODE_VALUE_TO_DISPLAY[startup_mode])
 post_action_display_var = tk.StringVar(
     value=POST_ACTION_VALUE_TO_DISPLAY.get(
         post_craft_action_var.get(), POST_ACTION_VALUE_TO_DISPLAY[POST_ACTION_NONE]
@@ -7731,9 +8005,98 @@ safe_mode_cb.state(["disabled"])
 toggle_safe_mode()
 root.attributes("-topmost", True)
 
+# Cluster template sections.
+cluster_size_bar = tk.Frame(root, bg="#202020", bd=0, highlightthickness=0)
+cluster_size_buttons = {}
+
+
+def _clear_cluster_section_session():
+    global template_price_meta, template_cluster_meta
+    global market_cluster_template_active, is_effect35_template
+
+    template_var.set("")
+    for mapping in (
+        comb_craft_data,
+        combo_price_data,
+        template_comb_craft_data,
+        template_combo_price_data,
+    ):
+        mapping.clear()
+    for collection in (
+        stop_on_two_match_config,
+        annul_combs_config,
+        no_annul_combs_config,
+        solo_regal_mods_config,
+        no_regal_mods_config,
+        template_stop_on_two_match_config,
+        template_annul_combs_config,
+        template_no_annul_combs_config,
+        template_solo_regal_mods_config,
+        template_no_regal_mods_config,
+    ):
+        collection.clear()
+    template_price_meta = {}
+    template_cluster_meta = {}
+    market_cluster_template_active = False
+    is_effect35_template = False
+    cluster_no_regal_two_var.set(False)
+    cluster_small_stop_three_var.set(False)
+    _clear_comb_match_caches()
+
+
+def _sync_cluster_size_controls():
+    is_small = cluster_size_var.get() == "small"
+    if is_small:
+        cluster_small_stop_three_cb.pack(
+            side="left",
+            padx=(0, 4),
+            before=cluster_no_regal_two_cb,
+        )
+    else:
+        cluster_small_stop_three_cb.pack_forget()
+
+
+def _on_cluster_size_selected():
+    settings_cfg.set("General", "cluster_size", cluster_size_var.get())
+    save_settings_debounced()
+    _clear_cluster_section_session()
+    refresh_templates()
+    populate_comb_list()
+    populate_stop_two_list()
+    populate_annul_combs_list()
+    populate_solo_regal_list()
+    populate_no_regal_list()
+    _sync_cluster_size_controls()
+
+
+for column, (label, value) in enumerate(
+    (("Small", "small"), ("Medium", "medium"), ("Large", "large"))
+):
+    button = tk.Radiobutton(
+        cluster_size_bar,
+        text=label,
+        value=value,
+        variable=cluster_size_var,
+        command=_on_cluster_size_selected,
+        indicatoron=False,
+        bg="#262626",
+        fg="#f0f0f0",
+        activebackground="#4b4028",
+        activeforeground="#ffffff",
+        selectcolor="#6a542b",
+        relief="flat",
+        bd=0,
+        highlightthickness=0,
+        font=("Segoe UI", 8, "bold"),
+    )
+    button.grid(row=0, column=column, sticky="nsew", padx=(0 if column == 0 else 2, 0))
+    cluster_size_bar.grid_columnconfigure(column, weight=1)
+    cluster_size_buttons[value] = button
+
+
 # template row
 top = ttk.Frame(root)
-top.place(x=PADX, y=PADY + 42, width=WINDOW_W - 2 * PADX, height=56)
+top.place(x=PADX, y=PADY + 66, width=WINDOW_W - 2 * PADX, height=56)
 top.grid_columnconfigure(0, weight=1, uniform="top_btns")
 top.grid_columnconfigure(1, weight=1, uniform="top_btns")
 top.grid_columnconfigure(2, weight=1, uniform="top_btns")
@@ -7760,9 +8123,21 @@ settings_btn.grid(row=1, column=3, sticky="ew")
 settings_btn.config(text="Settings")
 
 def show_top_controls():
-    top.place(x=PADX, y=PADY + 42, width=WINDOW_W - 2 * PADX, height=56)
+    if app_mode.get() == "cluster":
+        cluster_size_bar.place(
+            x=PADX,
+            y=PADY + 42,
+            width=WINDOW_W - 2 * PADX,
+            height=22,
+        )
+        top_y = PADY + 66
+    else:
+        cluster_size_bar.place_forget()
+        top_y = PADY + 42
+    top.place(x=PADX, y=top_y, width=WINDOW_W - 2 * PADX, height=56)
 
 def hide_top_controls():
+    cluster_size_bar.place_forget()
     top.place_forget()
 
 def configure_top_controls_for_socket_mode(enabled=False):
@@ -8980,7 +9355,9 @@ def refresh_cluster_trade_templates(*_args):
     visible = [
         entry
         for entry in all_entries
-        if not search or search in entry["name"].casefold()
+        if cluster_template_size(entry["name"], entry.get("data"))
+        == cluster_size_var.get()
+        and (not search or search in entry["name"].casefold())
     ]
     cluster_trade_current_entries[:] = visible
     cluster_trade_listbox.delete(0, "end")
@@ -9179,7 +9556,7 @@ refresh_cluster_trade_templates()
 
 # craft logic + flags
 mid = ttk.Frame(root)
-mid.place(x=PADX, y=100, width=WINDOW_W - 2 * PADX)
+mid.place(x=PADX, y=124, width=WINDOW_W - 2 * PADX)
 logic_label = ttk.Label(mid, text="", font=("Segoe UI", 9, "bold"))
 logic_label.grid(
     row=0, column=0, sticky="w"
@@ -9241,7 +9618,7 @@ for row_idx, (label, var) in enumerate(_map_summary_specs):
 
 # chain
 weights = ttk.Frame(root)
-weights.place(x=PADX, y=170, width=WINDOW_W - 2 * PADX)
+weights.place(x=PADX, y=194, width=WINDOW_W - 2 * PADX)
 weights.columnconfigure(4, weight=1)
 
 chain_line_frame = ttk.Frame(weights)
@@ -9252,6 +9629,11 @@ cluster_no_regal_two_cb = ttk.Checkbutton(
     variable=cluster_no_regal_two_var,
 )
 cluster_no_regal_two_cb.pack(side="left", padx=(0, 4))
+cluster_small_stop_three_cb = ttk.Checkbutton(
+    chain_line_frame,
+    text="3 hedefte dur",
+    variable=cluster_small_stop_three_var,
+)
 chain_toggle = ttk.Checkbutton(chain_line_frame, text="Chain", variable=chain_craft)
 chain_toggle.pack(side="left")
 ttk.Label(chain_line_frame, text="Count:").pack(side="left", padx=(0, 2))
@@ -9390,7 +9772,7 @@ pool_list.bind("<Double-Button-1>", on_affix_double)
 
 # tabs — 5 tab, programa tam yayılmış
 tabs = ttk.Notebook(root)
-tabs.place(x=PADX, y=204, width=WINDOW_W - 2 * PADX, height=220)
+tabs.place(x=PADX, y=228, width=WINDOW_W - 2 * PADX, height=220)
 tab_comb        = ttk.Frame(tabs)
 tab_stop_two    = ttk.Frame(tabs)
 tab_annul_combs = ttk.Frame(tabs)
@@ -9464,14 +9846,54 @@ def delete_from_listbox(event):
         event.widget.delete(sel[0])
 
 def delete_from_comb_list(event):
-    if not (sel_idx := comb_list.curselection()):
-        return
+    global template_stop_on_two_match_config
+    global template_annul_combs_config, template_no_annul_combs_config
+    global template_solo_regal_mods_config, template_no_regal_mods_config
+
+    row = comb_list.nearest(event.y)
     sorted_keys = sorted(comb_craft_data.keys(), key=int)
-    if sel_idx[0] < len(sorted_keys):
-        key = sorted_keys[sel_idx[0]]
-        del comb_craft_data[key]
+    if row < 0 or row >= len(sorted_keys):
+        return
+
+    if market_cluster_template_active and row < len(market_filter_source_keys):
+        source_key = str(market_filter_source_keys[row])
+        template_comb_craft_data.pop(source_key, None)
+        template_combo_price_data.pop(source_key, None)
+        template_no_annul_combs_config[:] = [
+            key for key in template_no_annul_combs_config
+            if str(key) != source_key
+        ]
+        template_visible = _combo_visible_mods(template_comb_craft_data)
+        template_stop_on_two_match_config = _filter_stop_pairs_for_combos(
+            template_stop_on_two_match_config,
+            template_comb_craft_data,
+        )
+        template_annul_combs_config = [
+            mod for mod in template_annul_combs_config if mod in template_visible
+        ]
+        template_solo_regal_mods_config = [
+            mod for mod in template_solo_regal_mods_config if mod in template_visible
+        ]
+        template_no_regal_mods_config = [
+            mod for mod in template_no_regal_mods_config if mod in template_visible
+        ]
+        apply_cluster_price_filter()
+    else:
+        key = sorted_keys[row]
+        comb_craft_data.pop(key, None)
         combo_price_data.pop(key, None)
         populate_comb_list()
+        _prune_active_combo_rules()
+        populate_stop_two_list()
+        populate_annul_combs_list()
+        populate_solo_regal_list()
+        populate_no_regal_list()
+
+    _clear_comb_match_caches()
+    log_message(
+        "[SESSION] Comb Craft kombinasyonu kaldirildi. "
+        "Save denmedikce template dosyasi degismez."
+    )
 
 def delete_from_stop_two_list(event):
     if not (sel_idx := stop_two_list.curselection()):
@@ -9726,7 +10148,7 @@ def toggle_map_affix_pool():
         map_show_btn.config(text="Hide Affix List")
 
 bottom = ttk.Frame(root)
-bottom.place(x=PADX, y=439, width=WINDOW_W - 2 * PADX, height=26)
+bottom.place(x=PADX, y=463, width=WINDOW_W - 2 * PADX, height=26)
 current_mode = "normal"
 
 def show_mode(mode: str):
@@ -9747,8 +10169,8 @@ def show_mode(mode: str):
         w.place_forget()
     if mode == "normal":
         show_top_controls()
-        mid.place(x=PADX, y=100, width=WINDOW_W - 2 * PADX)
-        weights.place(x=PADX, y=170, width=WINDOW_W - 2 * PADX)
+        mid.place(x=PADX, y=124, width=WINDOW_W - 2 * PADX)
+        weights.place(x=PADX, y=194, width=WINDOW_W - 2 * PADX)
     elif mode == "affix":
         hide_top_controls()
         pool.place(x=PADX, y=60, width=WINDOW_W - 2 * PADX, height=144)
@@ -9756,8 +10178,8 @@ def show_mode(mode: str):
         hide_top_controls()
         settings_panel.place(x=PADX, y=60, width=WINDOW_W - 2 * PADX, height=144)
         refresh_settings_panel()
-    tabs.place(x=PADX, y=204, width=WINDOW_W - 2 * PADX, height=220)
-    bottom.place(x=PADX, y=439, width=WINDOW_W - 2 * PADX, height=26)
+    tabs.place(x=PADX, y=228, width=WINDOW_W - 2 * PADX, height=220)
+    bottom.place(x=PADX, y=463, width=WINDOW_W - 2 * PADX, height=26)
     show_btn.config(text="Hide Affix List" if mode == "affix" else "Show Affix List")
 
 def toggle_affix_pool():
@@ -9808,6 +10230,7 @@ def switch_to_cluster():
         padx=(0, 4),
         before=chain_toggle,
     )
+    _sync_cluster_size_controls()
     # Chain disabled (cluster'da)
     try: chain_toggle.config(state="normal")
     except Exception: pass
@@ -10062,6 +10485,8 @@ MODE_SWITCHERS = {
 def _on_mode_selected(_event=None):
     mode = MODE_DISPLAY_TO_VALUE.get(mode_selector_var.get(), "cluster")
     MODE_SWITCHERS[mode]()
+    settings_cfg.set("General", "last_mode", mode)
+    save_settings_now()
     post_action_selector.config(state="disabled" if mode == "auto_flask" else "readonly")
     global_settings_btn.state(["disabled"] if mode == "auto_flask" else ["!disabled"])
 
@@ -10088,7 +10513,6 @@ global_settings_btn.config(command=_open_global_settings)
 
 # ================ SETTINGS PANEL CONTENTS ================
 settings_panel = ttk.Frame(root)
-switch_to_cluster()
 
 
 def open_phone_notification_settings():
@@ -10592,7 +11016,13 @@ def on_main_close(event=None):
     root.destroy()
 
 start_hotkey_listener()
-show_mode("normal")
+MODE_SWITCHERS[startup_mode]()
+post_action_selector.config(
+    state="disabled" if startup_mode == "auto_flask" else "readonly"
+)
+global_settings_btn.state(
+    ["disabled"] if startup_mode == "auto_flask" else ["!disabled"]
+)
 root.after(200, process_log_queue)
 root.after(200, process_gui_queue)
 create_log_window()

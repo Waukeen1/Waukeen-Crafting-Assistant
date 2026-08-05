@@ -1,3 +1,6 @@
+import ast
+from pathlib import Path
+
 from voyage_planner import (
     Chart,
     border_cell_scores,
@@ -13,6 +16,7 @@ from voyage_planner import (
     plan_voyage,
     required_edges_from_mask,
     rotate_edges,
+    right_click_rotations_between,
 )
 from PIL import Image, ImageDraw
 
@@ -75,6 +79,50 @@ def test_rotation_is_clockwise():
     )
 
 
+def test_carried_chart_right_click_rotation_is_counter_clockwise():
+    west = (False, False, False, True)
+    north = (True, False, False, False)
+    east_west = (False, True, False, True)
+    north_south = (True, False, True, False)
+
+    assert right_click_rotations_between(west, north, "end") == 3
+    assert right_click_rotations_between(north, west, "end") == 1
+    assert right_click_rotations_between(east_west, north_south, "straight") == 1
+    assert right_click_rotations_between((True,) * 4, (True,) * 4, "crossing") == 0
+
+
+def test_detect_chart_edges_reads_dark_gaps_for_every_shape_rotation():
+    center = (70, 70)
+    base_edges = {
+        "end": (True, False, False, False),
+        "corner": (True, True, False, False),
+        "straight": (True, False, True, False),
+        "junction": (True, True, True, False),
+        "crossing": (True, True, True, True),
+    }
+    for shape, base in base_edges.items():
+        for rotations in range(4):
+            edges = rotate_edges(base, rotations)
+            image = Image.new("RGB", (140, 140), (35, 30, 22))
+            draw = ImageDraw.Draw(image)
+            for active, (dx, dy) in zip(
+                edges,
+                ((0, -1), (1, 0), (0, 1), (-1, 0)),
+            ):
+                if not active:
+                    draw.line(
+                        (
+                            center[0],
+                            center[1],
+                            center[0] + dx * 10,
+                            center[1] + dy * 10,
+                        ),
+                        fill=(30, 240, 100),
+                        width=5,
+                    )
+            assert detect_chart_edges(image, center, shape) == edges
+
+
 def test_detect_board_edges_reads_each_rotation():
     center = (90, 90)
     for shape in ("end", "corner", "straight", "junction", "crossing"):
@@ -106,6 +154,33 @@ def test_detect_board_edges_reads_each_rotation():
             assert detect_board_edges(image, center, shape, 143) == edges
 
 
+def test_detect_board_edges_tolerates_calibrated_center_offset():
+    center = (90, 90)
+    ink_center = (center[0] + 4, center[1] + 6)
+    for edges in (
+        (True, False, True, False),
+        (False, True, False, True),
+    ):
+        image = Image.new("RGB", (180, 180), (220, 205, 170))
+        draw = ImageDraw.Draw(image)
+        for active, (dx, dy) in zip(
+            edges,
+            ((0, -1), (1, 0), (0, 1), (-1, 0)),
+        ):
+            if active:
+                draw.line(
+                    (
+                        ink_center[0],
+                        ink_center[1],
+                        ink_center[0] + dx * 62,
+                        ink_center[1] + dy * 62,
+                    ),
+                    fill=(18, 15, 12),
+                    width=5,
+                )
+        assert detect_board_edges(image, center, "straight", 143) == edges
+
+
 def test_disconnected_edge_mask_is_rejected():
     assert not is_connected(required_edges_from_mask(0))
 
@@ -123,7 +198,9 @@ def test_planner_builds_connected_nine_chart_route():
     plan = plan_voyage(charts, [()] * 9)
     assert plan is not None
     assert len(plan.placements) == 9
-    assert len(placement_order(plan)) == 9
+    order = placement_order(plan)
+    assert len(order) == 9
+    assert len({placement.cell for placement in order}) == 9
     assert len({placement.chart.uid for placement in plan.placements}) == 9
 
 
@@ -221,3 +298,71 @@ def test_global_modifier_position_value_is_constant():
         for cell in range(9)
     }
     assert len(values) == 1
+
+
+def test_live_placement_clicks_source_then_target_then_rotates_target():
+    source_path = Path(__file__).parents[1] / "cluster_craft.pyw"
+    module = ast.parse(source_path.read_text(encoding="utf-8-sig"))
+    place_plan = next(
+        node
+        for node in module.body
+        if isinstance(node, ast.FunctionDef)
+        and node.name == "_voyage_place_plan"
+    )
+    calls = [
+        node.func.id
+        for node in ast.walk(place_plan)
+        if isinstance(node, ast.Call) and isinstance(node.func, ast.Name)
+    ]
+
+    assert "_voyage_rotate_placed" not in calls
+    assert "_voyage_validate_placed_cell" in calls
+    assert "_voyage_drag_safely" not in calls
+    assert "_voyage_required_source_rotations" not in calls
+    plan_source = ast.get_source_segment(
+        source_path.read_text(encoding="utf-8-sig"),
+        place_plan,
+    )
+    assert plan_source.index("_voyage_place_chart") < plan_source.index(
+        "_voyage_validate_placed_cell"
+    )
+
+    place_chart = next(
+        node
+        for node in module.body
+        if isinstance(node, ast.FunctionDef)
+        and node.name == "_voyage_place_chart"
+    )
+    place_source = ast.get_source_segment(
+        source_path.read_text(encoding="utf-8-sig"),
+        place_chart,
+    )
+    assert "mouseDown" not in place_source
+    assert "mouseUp" not in place_source
+    assert place_source.count('_voyage_click("left")') == 2
+    assert place_source.count('_voyage_click(\n            "right"') == 1
+    assert "detect_board_edges" in place_source
+    assert "updated_edges == current_edges" in place_source
+    assert "hover_origin" in place_source
+    assert "cell_span * 0.65" in place_source
+    assert "_voyage_source_patch" not in place_source
+    assert place_source.count("_instant_move") == 2
+    assert (
+        place_source.rindex('_voyage_click("left")')
+        < place_source.index('_voyage_click(\n            "right"')
+    )
+
+    click_fn = next(
+        node
+        for node in module.body
+        if isinstance(node, ast.FunctionDef) and node.name == "_voyage_click"
+    )
+    click_source = ast.get_source_segment(
+        source_path.read_text(encoding="utf-8-sig"),
+        click_fn,
+    )
+    assert "SendInput" in click_source
+    assert "mouse_event" not in click_source
+    assert "send_absolute(hover_origin)" in click_source
+    assert "send_absolute(point)" in click_source
+    assert "0xC001" in click_source

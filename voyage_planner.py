@@ -260,6 +260,18 @@ def rotations_between(
     raise ValueError(f"{shape} cannot satisfy edge pattern {target}")
 
 
+def right_click_rotations_between(
+    initial: Sequence[bool] | None,
+    required: Sequence[bool],
+    shape: str,
+) -> int:
+    """Return clicks for PoE's counter-clockwise carried-chart rotation."""
+    clockwise = rotations_between(initial, required, shape)
+    canonical = SHAPE_ALIASES.get(normalize_text(shape), normalize_text(shape))
+    period = 1 if canonical == "crossing" else 2 if canonical == "straight" else 4
+    return (-clockwise) % period
+
+
 def detect_chart_edges(image, point: tuple[int, int], shape: str):
     """Read icon openings. Green square-border gaps are chart connections."""
     canonical = SHAPE_ALIASES.get(normalize_text(shape), normalize_text(shape))
@@ -312,7 +324,8 @@ def detect_chart_edges(image, point: tuple[int, int], shape: str):
                     for index, active in enumerate(candidate_edges)
                     if not active
                 ]
-                # Open sides are dark gaps; closed sides retain the green border.
+                # Open route sides are dark gaps in the green Chart glyph.
+                # This predicts the route that appears after placement.
                 open_mean = sum(openings) / max(1, len(openings))
                 closed_mean = (
                     sum(closed) / len(closed) if closed else open_mean + 1.0
@@ -346,34 +359,56 @@ def detect_board_edges(
     width, height = source.size
     ray_start = max(8, round(cell_span * 0.08))
     ray_end = max(ray_start + 8, round(cell_span * 0.40))
-    values = []
     cx, cy = int(point[0]), int(point[1])
-    for dx, dy in DIRS:
-        samples = []
-        for radius in range(ray_start, ray_end + 1):
-            for tangent in (-2, -1, 0, 1, 2):
-                x = cx + dx * radius + (tangent if dy else 0)
-                y = cy + dy * radius + (tangent if dx else 0)
-                if not (0 <= x < width and 0 <= y < height):
-                    return None
-                r, g, b = px[x, y]
-                samples.append(255 - max(r, g, b))
-        values.append(sum(samples) / max(1, len(samples)))
-
     best = None
-    seen = set()
-    for rotation in range(4):
-        candidate = rotate_edges(BASE_EDGES[canonical], rotation)
-        if candidate in seen:
-            continue
-        seen.add(candidate)
-        active = [values[index] for index, enabled in enumerate(candidate) if enabled]
-        inactive = [values[index] for index, enabled in enumerate(candidate) if not enabled]
-        score = sum(active) / len(active)
-        if inactive:
-            score -= sum(inactive) / len(inactive)
-        if best is None or score > best[0]:
-            best = (score, candidate)
+    # Calibrated board points can be several pixels away from the ink centre.
+    # Search a small neighbourhood so a horizontal route is not missed merely
+    # because its thin line sits outside the old +/-2 tangent strip.
+    offsets = range(-8, 9, 2)
+    for ox in offsets:
+        for oy in offsets:
+            values = []
+            valid = True
+            for dx, dy in DIRS:
+                samples = []
+                for radius in range(ray_start, ray_end + 1):
+                    for tangent in (-2, -1, 0, 1, 2):
+                        x = cx + ox + dx * radius + (tangent if dy else 0)
+                        y = cy + oy + dy * radius + (tangent if dx else 0)
+                        if not (0 <= x < width and 0 <= y < height):
+                            valid = False
+                            break
+                        r, g, b = px[x, y]
+                        samples.append(255 - max(r, g, b))
+                    if not valid:
+                        break
+                if not valid:
+                    break
+                values.append(sum(samples) / max(1, len(samples)))
+            if not valid:
+                continue
+
+            seen = set()
+            for rotation in range(4):
+                candidate = rotate_edges(BASE_EDGES[canonical], rotation)
+                if candidate in seen:
+                    continue
+                seen.add(candidate)
+                active = [
+                    values[index]
+                    for index, enabled in enumerate(candidate)
+                    if enabled
+                ]
+                inactive = [
+                    values[index]
+                    for index, enabled in enumerate(candidate)
+                    if not enabled
+                ]
+                score = sum(active) / len(active)
+                if inactive:
+                    score -= sum(inactive) / len(inactive)
+                if best is None or score > best[0]:
+                    best = (score, candidate)
     return best[1] if best else None
 
 
