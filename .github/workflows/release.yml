@@ -38,7 +38,10 @@ jobs:
       - name: Build release package
         shell: pwsh
         run: |
-          $version = "1.0.${{ github.run_number }}"
+          $version = (Get-Content -LiteralPath "build_info.json" -Raw | ConvertFrom-Json).version
+          if (-not $version -or $version -notmatch '^\d+\.\d+\.\d+(?:\.\d+)?$') {
+            throw "build_info.json contains an invalid version: '$version'"
+          }
           ./tools/build_release.ps1 -Version $version
           "WCA_VERSION=$version" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
 
