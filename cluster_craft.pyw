@@ -3096,26 +3096,38 @@ def get_orb_slot_candidates(orb_name: str):
     locs = get_orb_locations_dict()
     base = orb_name.lower().strip()
     candidates = []
+    seen_positions = set()
 
+    try:
+        x, y = map(int, locs.get(base, "").split(","))
+        candidates.append((1, base, (x, y)))
+        seen_positions.add((x, y))
+    except Exception:
+        pass
+
+    shared_bases = ("orb of alteration", "orb of augmentation")
+    accepted_bases = shared_bases if base in shared_bases else (base,)
+    backups = []
     for key, val in locs.items():
-        if key == base:
-            try:
-                x, y = map(int, val.split(","))
-                candidates.append((1, key, (x, y)))
-            except Exception:
-                pass
+        match = re.match(r"^(.+?)\s+slot\s+(\d+)$", key)
+        if not match or match.group(1) not in accepted_bases:
             continue
+        try:
+            x, y = map(int, val.split(","))
+            configured_slot = int(match.group(2))
+        except Exception:
+            continue
+        # Prefer labels belonging to the requested orb, but scan every configured
+        # Alteration/Augmentation backup location and verify its live contents.
+        owner_priority = 0 if match.group(1) == base else 1
+        backups.append((owner_priority, configured_slot, key, (x, y)))
 
-        m = re.match(rf"^{re.escape(base)}\s+slot\s+(\d+)$", key)
-        if m:
-            try:
-                slot_no = int(m.group(1))
-                x, y = map(int, val.split(","))
-                candidates.append((slot_no, key, (x, y)))
-            except Exception:
-                pass
-
-    candidates.sort(key=lambda t: t[0])
+    backups.sort(key=lambda item: (item[0], item[1], item[2]))
+    for _, _, key, pos in backups:
+        if pos in seen_positions:
+            continue
+        seen_positions.add(pos)
+        candidates.append((len(candidates) + 1, key, pos))
     return candidates
 
 def verify_cached_currency_slot(orb_name: str):
@@ -7616,6 +7628,8 @@ class OrbLocationsWindow(tk.Toplevel):
             "Orb of Augmentation Slot 4",
             "Orb of Augmentation Slot 5",
             "Orb of Augmentation Slot 6",
+            "Orb of Augmentation Slot 7",
+            "Orb of Augmentation Slot 8",
             "Inventory 1. Slotun Ortası",
             "Inventory 60. Slotun Ortası",
         ]
