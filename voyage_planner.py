@@ -66,6 +66,31 @@ SPECIAL_ENTRY_SCORES = {
     "voy-flask": 0.0,
 }
 
+# A guaranteed rare-currency border turns monster count into direct currency.
+# These values are relative planning units, not market prices.  Strongboxes use
+# the community-tested "3 guarded rares + stream of monsters" ceiling because
+# the player can roll them after entering the Voyage.
+RARE_DROP_DIVINE_BASE_SCORE = 120.0 * STAT_WEIGHTS["currency"]
+RARE_DROP_RARE_PERCENT_SCORE = 4.5
+RARE_DROP_PACK_PERCENT_SCORE = 1.25
+RARE_DROP_GUARANTEED_MONSTER_SCORE = 36.0
+RARE_SOURCE_UNITS = {
+    "adj-ess-1": 1.5,
+    "adj-ess-2": 3.0,
+    "adj-ess-3": 5.0,
+    "adj-box-1": 7.0,
+    "adj-box-2": 21.0,
+    "adj-box-3": 35.0,
+    "adj-divbox-1": 14.0,
+    "adj-divbox-2": 21.0,
+    "adj-arcbox-1": 14.0,
+    "adj-arcbox-2": 21.0,
+    "adj-opbox-1": 14.0,
+    "adj-opbox-2": 21.0,
+    "adj-star-1": 4.5,
+    "adj-star-2": 6.5,
+}
+
 # Reference offsets are relative to the centre of a 1920x1080 PoE client.
 # Scaling by client height also works for ultrawide displays because the Voyage
 # panel keeps its aspect and remains centred in the game client.
@@ -244,6 +269,96 @@ def catalog_entry_score(entry: dict, connections: int = 0) -> float:
     score += float(entry.get("magnitude", 0.0)) * 0.65
     score += SPECIAL_ENTRY_SCORES.get(entry.get("id"), 0.0)
     return score
+
+
+def _entry_effect_amount(entry: dict, stat: str, connections: int = 0) -> float:
+    wanted = normalize_text(stat)
+    amount = sum(
+        float(effect.get("percent", 0.0))
+        for effect in entry.get("effects", ())
+        if normalize_text(str(effect.get("stat", ""))) == wanted
+    )
+    amount += connections * sum(
+        float(effect.get("percent", 0.0))
+        for effect in entry.get("perConnEffects", ())
+        if normalize_text(str(effect.get("stat", ""))) == wanted
+    )
+    return amount
+
+
+def _entry_affects_cell(entry: dict, source_cell: int, target_cell: int) -> bool:
+    scope = entry.get("scope", "self")
+    if scope == "global":
+        return True
+    if scope == "adjacent":
+        return target_cell in {
+            neighbor for _, neighbor in cell_neighbors(source_cell)
+        }
+    return source_cell == target_cell
+
+
+def _rare_drop_border_value(mods: Sequence[str]) -> float:
+    """Return guaranteed rare-drop border value in Divine-drop equivalents."""
+    total = 0.0
+    for mod in mods:
+        for entry in match_catalog_entries(mod, ("border",)):
+            text = normalize_text(entry.get("text", ""))
+            if not text.startswith("rare monsters in area drop an additional"):
+                continue
+            total += max(0.0, catalog_entry_score(entry)) / RARE_DROP_DIVINE_BASE_SCORE
+    return total
+
+
+def _chart_rare_drop_synergy(
+    entries: Sequence[dict],
+    source_cell: int,
+    border_mods: Sequence[Sequence[str]],
+) -> float:
+    score = 0.0
+    for target_cell in range(9):
+        drop_value = _rare_drop_border_value(border_mods[target_cell])
+        if drop_value <= 0:
+            continue
+        rare_percent = 0.0
+        pack_percent = 0.0
+        guaranteed_rares = 0.0
+        for entry in entries:
+            if not _entry_affects_cell(entry, source_cell, target_cell):
+                continue
+            rare_percent += _entry_effect_amount(entry, "rares")
+            pack_percent += _entry_effect_amount(entry, "packsize")
+            guaranteed_rares += RARE_SOURCE_UNITS.get(entry.get("id"), 0.0)
+        score += drop_value * (
+            rare_percent * RARE_DROP_RARE_PERCENT_SCORE
+            + pack_percent * RARE_DROP_PACK_PERCENT_SCORE
+            + guaranteed_rares * RARE_DROP_GUARANTEED_MONSTER_SCORE
+        )
+    return score
+
+
+def _border_rare_drop_synergy(
+    border_mods: Sequence[Sequence[str]],
+    cell: int,
+    connections: int,
+) -> float:
+    drop_value = _rare_drop_border_value(border_mods[cell])
+    if drop_value <= 0:
+        return 0.0
+    entries = [
+        entry
+        for mod in border_mods[cell]
+        for entry in match_catalog_entries(mod, ("border",))
+    ]
+    rare_percent = sum(
+        _entry_effect_amount(entry, "rares", connections) for entry in entries
+    )
+    pack_percent = sum(
+        _entry_effect_amount(entry, "packsize", connections) for entry in entries
+    )
+    return drop_value * (
+        rare_percent * RARE_DROP_RARE_PERCENT_SCORE
+        + pack_percent * RARE_DROP_PACK_PERCENT_SCORE
+    )
 
 
 def parse_chart_text(
@@ -699,16 +814,15 @@ def chart_position_score(
     score += adjacent_score * min(0.9, neighbor_border / 260.0)
     if adjacent_score:
         score += neighbor_border * 0.18
-    if "rare monster" in low:
-        score += neighbor_border * 0.42
     if "strongbox" in low:
         score += neighbor_border * 0.25
 
+    # Score the actual area receiving a guaranteed rare-monster drop.  This
+    # keeps global rare modifiers position-independent, puts adjacent rare
+    # sources next to the reward cell, and does not mistake Fracture for rares.
+    score += _chart_rare_drop_synergy(matched, cell, border_mods)
+
     own_border_text = normalize_text(" ".join(border_mods[cell]))
-    if "divine orb" in own_border_text and (
-        "rare monster" in low or "pack" in low or "quantity" in low
-    ):
-        score += 150
     if "stacked deck" in own_border_text and (
         "currency" in low or "pack" in low or "quantity" in low
     ):
@@ -716,13 +830,8 @@ def chart_position_score(
     if "explicit modifier magnitude" in own_border_text:
         score += max(0.0, base) * 0.32
     for _, neighbor in cell_neighbors(cell):
-        neighbor_text = normalize_text(" ".join(border_mods[neighbor]))
         if "adjacent" in low and border_scores[neighbor] > 40:
             score += 38
-        if "divine orb" in neighbor_text and (
-            "rare monster" in low or "pack" in low
-        ):
-            score += 72
     return score
 
 
@@ -827,6 +936,9 @@ def plan_voyage(
             for border_mod in border_mods[cell]:
                 for entry in match_catalog_entries(border_mod, ("border",)):
                     total += _effects_score(entry.get("perConnEffects", ())) * connection_count
+            total += _border_rare_drop_synergy(
+                border_mods, cell, connection_count
+            )
         if best is None or total > best[0]:
             best = (total, mask, edges, selected_by_cell)
 
@@ -862,6 +974,16 @@ def plan_voyage(
         f"Known modifiers: {sum(len(modifier_catalog()[key]) for key in ('chart_self', 'chart_adjacent', 'chart_global', 'border'))}",
         f"Valid topologies evaluated: {len(valid_topologies())}",
     ]
+    rare_drop_cells = [
+        cell + 1
+        for cell in range(9)
+        if _rare_drop_border_value(border_mods[cell]) > 0
+    ]
+    if rare_drop_cells:
+        notes.append(
+            "Rare-drop anchors optimized: "
+            + ", ".join(str(cell) for cell in rare_drop_cells)
+        )
     return VoyagePlan(placements=placements, score=total, edge_mask=mask, notes=notes)
 
 

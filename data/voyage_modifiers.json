@@ -853,7 +853,7 @@
       "scope": "global",
       "effects": [
         {
-          "stat": "rares",
+          "stat": "magicmonsters",
           "percent": 50
         }
       ]

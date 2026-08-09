@@ -6,6 +6,7 @@ from voyage_planner import (
     auto_calibration_points,
     border_cell_scores,
     chart_position_score,
+    catalog_entry_score,
     chart_slot_occupied,
     cell_neighbors,
     detect_chart_edges,
@@ -321,6 +322,41 @@ def test_divine_border_prefers_rare_support_near_anchor():
     assert rare_support_cells.intersection({1, 3})
 
 
+def test_divine_corner_uses_both_adjacent_cells_for_best_rare_sources():
+    charts = [
+        chart(
+            "boxes",
+            "crossing",
+            ("Adjacent Areas contain 5 additional Strongboxes",),
+        ),
+        chart(
+            "rares",
+            "crossing",
+            ("60% increased number of Rare Monsters",),
+        ),
+        chart(
+            "global-rares",
+            "crossing",
+            ("25% increased number of Rare Monsters",),
+        ),
+        chart(
+            "fracture",
+            "crossing",
+            ("50% chance for Rare Monsters to Fracture on death",),
+        ),
+    ]
+    charts.extend(chart(f"junk-{index}", "crossing") for index in range(5))
+    border = [()] * 9
+    border[0] = ("Rare Monsters in Area drop an additional Divine Orb",)
+
+    plan = plan_voyage(charts, border)
+
+    assert plan is not None
+    by_uid = {placement.chart.uid: placement.cell for placement in plan.placements}
+    assert {by_uid["boxes"], by_uid["rares"]} == {1, 3}
+    assert "Rare-drop anchors optimized: 1" in plan.notes
+
+
 def test_adjacent_modifier_prefers_more_affected_areas():
     adjacent_chart = chart(
         "adjacent",
@@ -351,6 +387,75 @@ def test_global_modifier_position_value_is_constant():
         for cell in range(9)
     }
     assert len(values) == 1
+
+
+def test_fracture_is_magic_density_not_additional_rares():
+    catalog = modifier_catalog()
+    fracture = next(
+        entry for entry in catalog["chart_global"] if entry["id"] == "voy-fracture"
+    )
+    global_rares = next(
+        entry for entry in catalog["chart_global"] if entry["id"] == "voy-rare"
+    )
+
+    assert fracture["effects"] == [{"stat": "magicmonsters", "percent": 50}]
+    assert catalog_entry_score(fracture) < catalog_entry_score(global_rares) * 2
+
+
+def test_fracture_does_not_move_towards_divine_border():
+    fracture = chart(
+        "fracture",
+        "crossing",
+        ("50% chance for Rare Monsters to Fracture on death",),
+    )
+    borders = [()] * 9
+    borders[0] = ("Rare Monsters in Area drop an additional Divine Orb",)
+    scores = border_cell_scores(borders)
+
+    assert chart_position_score(fracture, 0, borders, scores) == chart_position_score(
+        fracture, 8, borders, scores
+    )
+
+
+def test_divine_border_strongboxes_beat_plain_adjacent_rares():
+    strongboxes = chart(
+        "boxes",
+        "crossing",
+        ("Adjacent Areas contain 5 additional Strongboxes",),
+    )
+    rare_percent = chart(
+        "rares",
+        "crossing",
+        ("60% increased number of Rare Monsters",),
+    )
+    borders = [()] * 9
+    borders[0] = ("Rare Monsters in Area drop an additional Divine Orb",)
+    scores = border_cell_scores(borders)
+
+    assert chart_position_score(strongboxes, 1, borders, scores) > chart_position_score(
+        rare_percent, 1, borders, scores
+    )
+
+
+def test_divine_border_connection_rare_bonus_changes_topology_score():
+    borders = [()] * 9
+    borders[1] = (
+        "Rare Monsters in Area drop an additional Divine Orb",
+        "50% increased number of Rare monsters in Area per Chart connection",
+    )
+    charts = []
+    for shape in ("end", "corner", "straight", "junction", "crossing"):
+        charts.extend(chart(f"{shape}-{index}", shape) for index in range(9))
+
+    plan = plan_voyage(charts, borders)
+
+    assert plan is not None
+    anchor = plan.placement_for_cell(1)
+    internal_connections = sum(
+        anchor.required_edges[direction]
+        for direction, _ in cell_neighbors(1)
+    )
+    assert internal_connections == 3
 
 
 def test_live_placement_clicks_source_then_target_then_rotates_target():
