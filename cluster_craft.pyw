@@ -3715,12 +3715,7 @@ def apply_orb(orb_name, item_pos):
 
 # ================ CRAFT LOGIC (Magic/Rare/Comb) ================
 def apply_augmentation_with_failover(chain_craft=False):
-    """Augment at - tekli craftta eski davranis, chainde ilk dolu yedek slot."""
-    if not chain_craft:
-        log_message("[AUG] Orb of Augmentation deneniyor.")
-        apply_orb("Orb of Augmentation", ITEM_POS)
-        return
-
+    """Apply Augmentation from the first live verified configured slot."""
     orb_loc = _find_fast_stack_tracked_orb_slot("Orb of Augmentation")
     if not orb_loc:
         log_message("[HATA] Orb of Augmentation slotu yok veya tum yedek slotlar bos!")
@@ -3747,30 +3742,6 @@ def apply_alteration_with_failover(chain_craft=False):
     LClick(item)
     """
     global shift_spam_active
-
-    if not chain_craft:
-        orb_loc = get_orb_location("Orb of Alteration")
-        if not orb_loc:
-            log_message("[HATA] Orb of Alteration konumu yok!")
-            return
-
-        if not shift_spam_active:
-            if not _recover_default_after_shift_stream("Orb of Alteration"):
-                return
-            if not _pick_orb_with_verify("Orb of Alteration", orb_loc):
-                return
-            try:
-                keyboard.press("shift")
-            except Exception:
-                pass
-            time.sleep(0.005)
-            shift_spam_active = True
-            log_message("[ALT] Orb of Alteration alindi, spam basliyor.")
-
-        if not _stream_click_item_with_verify("Orb of Alteration", ITEM_POS):
-            return
-        record_currency_use("Orb of Alteration")
-        return
 
     if shift_spam_active:
         FAST_ORB_USE_COUNTERS["Orb of Alteration"] += 1

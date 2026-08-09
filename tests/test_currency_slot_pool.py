@@ -49,3 +49,29 @@ def test_alteration_can_use_augmentation_labeled_backup_location():
     )("Orb of Alteration")
 
     assert candidates[-1] == (3, "orb of augmentation slot 6", (71, 81))
+
+
+def test_fast_failover_is_not_limited_to_chain_craft():
+    source_path = Path(__file__).parents[1] / "cluster_craft.pyw"
+    module = ast.parse(source_path.read_text(encoding="utf-8-sig"))
+    functions = {
+        node.name: node
+        for node in module.body
+        if isinstance(node, ast.FunctionDef)
+    }
+
+    for name in (
+        "apply_augmentation_with_failover",
+        "apply_alteration_with_failover",
+    ):
+        function = functions[name]
+        chain_guards = [
+            node
+            for node in ast.walk(function)
+            if isinstance(node, ast.If)
+            and any(
+                isinstance(child, ast.Name) and child.id == "chain_craft"
+                for child in ast.walk(node.test)
+            )
+        ]
+        assert chain_guards == []
