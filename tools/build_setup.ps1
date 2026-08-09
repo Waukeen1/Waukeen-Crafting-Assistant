@@ -1,7 +1,7 @@
 param(
     [Parameter(Mandatory = $false)]
     [ValidatePattern('^\d+\.\d+\.\d+(?:\.\d+)?$')]
-    [string]$Version = "1.0.44",
+    [string]$Version = "1.0.48",
 
     [Parameter(Mandatory = $false)]
     [string]$Python = "python",

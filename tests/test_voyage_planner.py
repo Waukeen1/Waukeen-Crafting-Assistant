@@ -394,9 +394,10 @@ def test_live_placement_clicks_source_then_target_then_rotates_target():
     assert "mouseUp" not in place_source
     assert place_source.count('_voyage_click("left")') == 2
     assert place_source.count('_voyage_click(\n            "right"') == 1
-    assert "_voyage_read_stable_board_edges" in place_source
+    assert "ImageGrab.grab(all_screens=True)" in place_source
     assert "updated_edges == current_edges" in place_source
-    assert "hover_origin=safe_point" in place_source
+    assert "cell_span * 0.65" in place_source
+    assert "hover_origin=hover_origin" in place_source
 
 
 def test_live_scan_validates_scaled_borders_before_chart_inventory():
@@ -426,7 +427,7 @@ def test_live_scan_validates_scaled_borders_before_chart_inventory():
         if isinstance(node, ast.FunctionDef) and node.name == "_voyage_place_chart"
     )
     place_source = ast.get_source_segment(source, place_chart)
-    assert "cell_span * 0.65" not in place_source
+    assert "cell_span * 0.65" in place_source
     assert "_voyage_source_patch" not in place_source
     assert place_source.count("_instant_move") == 2
     assert (
@@ -446,6 +447,6 @@ def test_live_scan_validates_scaled_borders_before_chart_inventory():
     assert "SendInput" in click_source
     assert "mouse_event" not in click_source
     assert "send_absolute(hover_origin)" in click_source
-    assert "send_absolute(approach)" in click_source
+    assert "send_absolute(approach)" not in click_source
     assert "send_absolute(point)" in click_source
     assert "0xC001" in click_source

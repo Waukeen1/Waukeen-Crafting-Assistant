@@ -2701,11 +2701,6 @@ def _voyage_click(button="left", point=None, hover_origin=None):
             return False
         if not _voyage_wait(0.06):
             return False
-        approach = (point[0] + 3, point[1])
-        if not send_absolute(approach):
-            return False
-        if not _voyage_wait(0.04):
-            return False
         if not send_absolute(point):
             return False
         if not _voyage_wait(0.09):
@@ -2717,41 +2712,8 @@ def _voyage_click(button="left", point=None, hover_origin=None):
     finally:
         send_flag(up_flag)
 
-def _voyage_read_stable_board_edges(
-    target,
-    shape,
-    cell_span,
-    safe_point,
-    timeout=1.4,
-):
+def _voyage_place_chart(source, target, placement, cell_span):
     from PIL import ImageGrab
-
-    _instant_move(*safe_point)
-    if not _voyage_wait(0.16):
-        return None
-    deadline = time.monotonic() + timeout
-    previous = None
-    stable_count = 0
-    while time.monotonic() < deadline and not stop_event.is_set():
-        detected = voyage.detect_board_edges(
-            ImageGrab.grab(all_screens=True),
-            target,
-            shape,
-            cell_span=cell_span,
-        )
-        if detected is not None and detected == previous:
-            stable_count += 1
-            if stable_count >= 2:
-                return detected
-        else:
-            previous = detected
-            stable_count = 1 if detected is not None else 0
-        if not _voyage_wait(0.12):
-            return None
-    return None
-
-
-def _voyage_place_chart(source, target, placement, cell_span, safe_point):
 
     if stop_event.is_set():
         return None
@@ -2770,13 +2732,14 @@ def _voyage_place_chart(source, target, placement, cell_span, safe_point):
     if not _voyage_wait(0.22):
         return None
 
-    # Hover paints the route red and makes dark-route detection unreliable.
-    # Move outside the board and require two matching black-route frames.
-    current_edges = _voyage_read_stable_board_edges(
+    # Keep the proven v1.0.44 placement path: read and rotate the chart while
+    # the cursor is on its cell. Moving to a distant safe point between clicks
+    # causes PoE to lose the board hover state on some systems.
+    current_edges = voyage.detect_board_edges(
+        ImageGrab.grab(all_screens=True),
         target,
         placement.chart.shape,
-        cell_span,
-        safe_point,
+        cell_span=cell_span,
     )
     if current_edges is None:
         log_message(
@@ -2794,17 +2757,23 @@ def _voyage_place_chart(source, target, placement, cell_span, safe_point):
     for _attempt in range(8):
         if current_edges == placement.required_edges:
             return delivered_rotations
+        hover_origin = (
+            target[0] - max(84, round(cell_span * 0.65)),
+            target[1],
+        )
         if stop_event.is_set() or not _voyage_click(
             "right",
             point=target,
-            hover_origin=safe_point,
+            hover_origin=hover_origin,
         ):
             return None
-        updated_edges = _voyage_read_stable_board_edges(
+        if not _voyage_wait(0.42):
+            return None
+        updated_edges = voyage.detect_board_edges(
+            ImageGrab.grab(all_screens=True),
             target,
             placement.chart.shape,
-            cell_span,
-            safe_point,
+            cell_span=cell_span,
         )
         log_message(
             f"[VOYAGE] Cell {placement.cell + 1} sag tik sonucu: "
@@ -2836,15 +2805,20 @@ def _voyage_edge_code(edges):
         if active
     ) or "?"
 
-def _voyage_validate_placed_cell(placement, target, cell_span, safe_point):
+def _voyage_validate_placed_cell(placement, target, cell_span):
+    from PIL import ImageGrab
+
     shape = placement.chart.shape
     if stop_event.is_set():
         return False
-    detected = _voyage_read_stable_board_edges(
+    _instant_move(pyautogui.size().width // 2, 80)
+    if not _voyage_wait(0.22):
+        return False
+    detected = voyage.detect_board_edges(
+        ImageGrab.grab(all_screens=True),
         target,
         shape,
-        cell_span,
-        safe_point,
+        cell_span=cell_span,
     )
     log_message(
         f"[VOYAGE] Cell {placement.cell + 1} board yonu "
@@ -2853,10 +2827,10 @@ def _voyage_validate_placed_cell(placement, target, cell_span, safe_point):
     )
     return detected == placement.required_edges
 
-def _voyage_validate_placed_plan(plan, board_points, cell_span, safe_point):
+def _voyage_validate_placed_plan(plan, board_points, cell_span):
     from PIL import ImageGrab
 
-    _instant_move(*safe_point)
+    _instant_move(pyautogui.size().width // 2, 80)
     if not _voyage_wait(0.2):
         return False
     screenshot = ImageGrab.grab(all_screens=True)
@@ -2894,10 +2868,6 @@ def _voyage_place_plan(plan, board_tl, board_br, chart_tl, chart_br):
     x_span = abs(board_points[1][0] - board_points[0][0])
     y_span = abs(board_points[3][1] - board_points[0][1])
     cell_span = min(x_span, y_span)
-    safe_point = (
-        board_tl[0] - max(70, round(cell_span * 0.8)),
-        board_tl[1] - max(70, round(cell_span * 0.8)),
-    )
     active_page = 1
     for placement in voyage.placement_order(plan):
         if stop_event.is_set():
@@ -2931,7 +2901,6 @@ def _voyage_place_plan(plan, board_tl, board_br, chart_tl, chart_br):
             target,
             placement,
             cell_span,
-            safe_point,
         )
         if rotation_clicks is None:
             stop_event.set()
@@ -2955,7 +2924,6 @@ def _voyage_place_plan(plan, board_tl, board_br, chart_tl, chart_br):
             placement,
             target,
             cell_span,
-            safe_point,
         ):
             log_message(
                 f"[VOYAGE] Cell {placement.cell + 1} yanlis yonle yerlesti; "
@@ -2968,12 +2936,7 @@ def _voyage_place_plan(plan, board_tl, board_br, chart_tl, chart_br):
             f"{placement.chart.uid}, hedefte R x{rotation_clicks}; "
             "kaynak slot bosaldi."
         )
-    return _voyage_validate_placed_plan(
-        plan,
-        board_points,
-        cell_span,
-        safe_point,
-    )
+    return _voyage_validate_placed_plan(plan, board_points, cell_span)
 
 def _voyage_focus_game():
     try:
