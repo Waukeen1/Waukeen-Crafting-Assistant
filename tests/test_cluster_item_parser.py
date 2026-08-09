@@ -85,3 +85,35 @@ def test_only_actual_cluster_notables_are_counted_as_notables():
     assert is_notable("1 Added Passive Skill is Haemorrhage")
     assert not is_notable("Added Small Passive Skills also grant: +4% to Chaos Resistance")
     assert not is_notable("Added Small Passive Skills also grant: +2 to All Attributes")
+
+
+def test_advanced_parser_preserves_only_the_fractured_affix_marker():
+    parser = load_parser_namespace()["_parse_item_text_cached"]
+    rarity, mods = parser(
+        """Item Class: Jewels
+Rarity: Rare
+Chimeric Desire
+Large Cluster Jewel
+--------
+Item Level: 84
+--------
+{ Prefix Modifier "Glimmering" (Tier: 2) }
+Added Small Passive Skills also grant: +8(6-9) to Maximum Energy Shield
+{ Prefix Modifier "Powerful" (Tier: 1) }
+Added Small Passive Skills have 35% increased Effect
+{ Fractured Suffix Modifier "of the Kaleidoscope" (Tier: 1) }
+Added Small Passive Skills also grant: +4% to all Elemental Resistances
+{ Suffix Modifier "of the Cloud" (Tier: 3) }
+Added Small Passive Skills also grant: +2 to All Attributes
+--------
+Place into an allocated Large Jewel Socket.
+"""
+    )
+
+    assert rarity == "Rare"
+    assert mods == (
+        "Added Small Passive Skills also grant: +8 to Maximum Energy Shield",
+        "Added Small Passive Skills have 35% increased Effect",
+        "Added Small Passive Skills also grant: +4% to all Elemental Resistances (fractured)",
+        "Added Small Passive Skills also grant: +2 to All Attributes",
+    )

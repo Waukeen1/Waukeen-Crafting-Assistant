@@ -748,45 +748,9 @@ def _orb_name_to_rate_alias(orb_name: str):
 def get_currency_cost_summary_lines():
     counts = get_currency_usage_snapshot()
     if not counts:
-        return ["[COST] Harcanan currency: 0 div (0c)"]
-    league_name = CRAFT_RATE_LEAGUE_OVERRIDE or CRAFT_LEAGUE_ID_CACHE or "Mirage"
-    try:
-        league_id = CRAFT_RATE_LEAGUE_OVERRIDE or get_current_challenge_league_id_craft()
-        rates = get_currency_rates_chaos_craft(league_id)
-    except Exception as e:
-        rates = None
-        lines = [f"[COST] Rate alinamadigi icin div ozeti hesaplanamadi: {e}"]
-        lines.append(f"[COST] Detay: {', '.join(f'{k} x{v}' for k, v in sorted(counts.items()))}")
-        return lines
-
-    total_chaos = 0.0
-    unknown = []
-    parts = []
-    if rates:
-        for orb_name, amount in sorted(counts.items()):
-            alias = _orb_name_to_rate_alias(orb_name)
-            chaos_rate = rates.get(alias)
-            if chaos_rate is None and alias == "divine orb":
-                chaos_rate = rates.get("divine")
-            if chaos_rate is None:
-                unknown.append(f"{orb_name} x{amount}")
-                continue
-            total_chaos += float(amount) * float(chaos_rate)
-            parts.append(f"{orb_name} x{amount}")
-        divine_rate = float(rates.get("divine", rates.get("divine orb", 200.0)) or 200.0)
-        total_div = total_chaos / divine_rate if divine_rate > 0 else 0.0
-        lines = [f"[COST] Harcanan currency: {total_div:.2f} div ({total_chaos:.1f}c)"]
-        lines.append(f"[COST] Rate source: poe.ninja exchange current overview ({league_name}) | 1 div = {divine_rate:.4f}c")
-        if parts:
-            lines.append(f"[COST] Detay: {', '.join(parts)}")
-        if unknown:
-            lines.append(f"[COST] Rate bulunamayanlar: {', '.join(unknown)}")
-        return lines
-
-    return [
-        "[COST] Harcanan currency: rate yok",
-        f"[COST] Detay: {', '.join(f'{k} x{v}' for k, v in sorted(counts.items()))}",
-    ]
+        return ["[COST] Kullanilan currency: yok"]
+    detail = ", ".join(f"{name} x{amount}" for name, amount in sorted(counts.items()))
+    return [f"[COST] Kullanilan currency: {detail}"]
 
 def log_currency_cost_summary():
     for line in get_currency_cost_summary_lines():
@@ -2518,10 +2482,59 @@ def _voyage_scan_borders(board_tl, board_br):
         )
     return cell_mods
 
-def _voyage_scan_charts(chart_tl, chart_br):
+def _voyage_chart_page_point(chart_tl, chart_br, page):
+    width = chart_br[0] - chart_tl[0]
+    row_height = (chart_br[1] - chart_tl[1]) / 9.0
+    fraction = 0.37 if int(page) == 1 else 0.61
+    return (
+        round(chart_tl[0] + width * fraction),
+        round(chart_tl[1] - row_height * 0.92),
+    )
+
+
+def _voyage_select_chart_page(chart_tl, chart_br, page):
+    point = _voyage_chart_page_point(chart_tl, chart_br, page)
+    _instant_move(*point)
+    if not _voyage_wait(0.08) or not _voyage_click("left"):
+        return False
+    return _voyage_wait(0.3)
+
+
+def _voyage_chart_panel_image():
+    from PIL import ImageGrab
+
+    return ImageGrab.grab(all_screens=True)
+
+
+def _voyage_occupied_chart_slots(image, chart_tl, chart_br):
+    points = _voyage_grid_points(chart_tl, chart_br, 6, 10)
+    return {
+        index
+        for index, point in enumerate(points, start=1)
+        if voyage.chart_slot_occupied(image, point)
+    }
+
+
+def _voyage_chart_panel_changed(before, after, chart_tl, chart_br):
+    from PIL import ImageChops, ImageStat
+
+    row_height = max(1, round((chart_br[1] - chart_tl[1]) / 9.0))
+    box = (
+        max(0, chart_tl[0] - 30),
+        max(0, chart_tl[1] - row_height - 25),
+        min(before.width, chart_br[0] + 30),
+        min(before.height, chart_br[1] + 30),
+    )
+    difference = ImageChops.difference(before.crop(box), after.crop(box))
+    return max(ImageStat.Stat(difference).mean) >= 1.0
+
+
+def _voyage_scan_charts(chart_tl, chart_br, page=1, occupied_slots=None):
     points = _voyage_grid_points(chart_tl, chart_br, 6, 10)
     charts = []
     for index, point in enumerate(points, start=1):
+        if occupied_slots is not None and index not in occupied_slots:
+            continue
         if stop_event.is_set():
             return None
         text = capture_text_at_pos(
@@ -2534,24 +2547,73 @@ def _voyage_scan_charts(chart_tl, chart_br):
             continue
         provisional = voyage.parse_chart_text(
             text,
-            uid=f"slot-{index}",
+            uid=f"page-{page}-slot-{index}",
             source=point,
+            source_page=page,
         )
         if provisional is None:
             continue
         parsed = voyage.parse_chart_text(
             text,
-            uid=f"slot-{index}",
+            uid=f"page-{page}-slot-{index}",
             source=point,
             initial_edges=None,
+            source_page=page,
         )
         if parsed is not None:
             charts.append(parsed)
             log_message(
-                f"[VOYAGE] Chart {index}: L{parsed.area_level} "
+                f"[VOYAGE] Sayfa {page} Chart {index}: L{parsed.area_level} "
                 f"{parsed.shape}"
             )
-    log_message(f"[VOYAGE] {len(charts)} kullanilabilir Chart okundu.")
+    log_message(
+        f"[VOYAGE] Sayfa {page}: {len(charts)} kullanilabilir Chart okundu."
+    )
+    return charts
+
+
+def _voyage_scan_chart_pages(chart_tl, chart_br):
+    page_one_image = _voyage_chart_panel_image()
+    charts = _voyage_scan_charts(chart_tl, chart_br, page=1)
+    if charts is None or stop_event.is_set():
+        return None
+
+    if not _voyage_select_chart_page(chart_tl, chart_br, 2):
+        return None
+    page_two_image = _voyage_chart_panel_image()
+    page_changed = _voyage_chart_panel_changed(
+        page_one_image,
+        page_two_image,
+        chart_tl,
+        chart_br,
+    )
+    if not page_changed:
+        log_message("[VOYAGE] Ikinci Chart sayfasi bulunamadi; sayfa 1 kullaniliyor.")
+    else:
+        occupied = _voyage_occupied_chart_slots(
+            page_two_image,
+            chart_tl,
+            chart_br,
+        )
+        if occupied:
+            log_message(
+                f"[VOYAGE] Sayfa 2'de {len(occupied)} dolu Chart slotu algilandi."
+            )
+            page_two_charts = _voyage_scan_charts(
+                chart_tl,
+                chart_br,
+                page=2,
+                occupied_slots=occupied,
+            )
+            if page_two_charts is None or stop_event.is_set():
+                return None
+            charts.extend(page_two_charts)
+        else:
+            log_message("[VOYAGE] Sayfa 2 tamamen bos; clipboard taramasi atlandi.")
+
+    if not _voyage_select_chart_page(chart_tl, chart_br, 1):
+        return None
+    log_message(f"[VOYAGE] Iki sayfada toplam {len(charts)} Chart kullanilabilir.")
     return charts
 
 def _voyage_click(button="left", point=None, hover_origin=None):
@@ -2611,6 +2673,11 @@ def _voyage_click(button="left", point=None, hover_origin=None):
             return False
         if not _voyage_wait(0.06):
             return False
+        approach = (point[0] + 3, point[1])
+        if not send_absolute(approach):
+            return False
+        if not _voyage_wait(0.04):
+            return False
         if not send_absolute(point):
             return False
         if not _voyage_wait(0.09):
@@ -2622,8 +2689,41 @@ def _voyage_click(button="left", point=None, hover_origin=None):
     finally:
         send_flag(up_flag)
 
-def _voyage_place_chart(source, target, placement, cell_span):
+def _voyage_read_stable_board_edges(
+    target,
+    shape,
+    cell_span,
+    safe_point,
+    timeout=1.4,
+):
     from PIL import ImageGrab
+
+    _instant_move(*safe_point)
+    if not _voyage_wait(0.16):
+        return None
+    deadline = time.monotonic() + timeout
+    previous = None
+    stable_count = 0
+    while time.monotonic() < deadline and not stop_event.is_set():
+        detected = voyage.detect_board_edges(
+            ImageGrab.grab(all_screens=True),
+            target,
+            shape,
+            cell_span=cell_span,
+        )
+        if detected is not None and detected == previous:
+            stable_count += 1
+            if stable_count >= 2:
+                return detected
+        else:
+            previous = detected
+            stable_count = 1 if detected is not None else 0
+        if not _voyage_wait(0.12):
+            return None
+    return None
+
+
+def _voyage_place_chart(source, target, placement, cell_span, safe_point):
 
     if stop_event.is_set():
         return None
@@ -2642,14 +2742,13 @@ def _voyage_place_chart(source, target, placement, cell_span):
     if not _voyage_wait(0.22):
         return None
 
-    # Inventory glyph orientation is not reliable. Read the black route after
-    # placement while the cursor is still on the target, then rotate only when
-    # the next frame proves that PoE accepted the right click.
-    current_edges = voyage.detect_board_edges(
-        ImageGrab.grab(all_screens=True),
+    # Hover paints the route red and makes dark-route detection unreliable.
+    # Move outside the board and require two matching black-route frames.
+    current_edges = _voyage_read_stable_board_edges(
         target,
         placement.chart.shape,
-        cell_span=cell_span,
+        cell_span,
+        safe_point,
     )
     if current_edges is None:
         log_message(
@@ -2667,23 +2766,17 @@ def _voyage_place_chart(source, target, placement, cell_span):
     for _attempt in range(8):
         if current_edges == placement.required_edges:
             return delivered_rotations
-        hover_origin = (
-            target[0] - max(84, round(cell_span * 0.65)),
-            target[1],
-        )
         if stop_event.is_set() or not _voyage_click(
             "right",
             point=target,
-            hover_origin=hover_origin,
+            hover_origin=safe_point,
         ):
             return None
-        if not _voyage_wait(0.42):
-            return None
-        updated_edges = voyage.detect_board_edges(
-            ImageGrab.grab(all_screens=True),
+        updated_edges = _voyage_read_stable_board_edges(
             target,
             placement.chart.shape,
-            cell_span=cell_span,
+            cell_span,
+            safe_point,
         )
         log_message(
             f"[VOYAGE] Cell {placement.cell + 1} sag tik sonucu: "
@@ -2715,20 +2808,15 @@ def _voyage_edge_code(edges):
         if active
     ) or "?"
 
-def _voyage_validate_placed_cell(placement, target, cell_span):
-    from PIL import ImageGrab
-
+def _voyage_validate_placed_cell(placement, target, cell_span, safe_point):
     shape = placement.chart.shape
     if stop_event.is_set():
         return False
-    _instant_move(pyautogui.size().width // 2, 80)
-    if not _voyage_wait(0.22):
-        return False
-    detected = voyage.detect_board_edges(
-        ImageGrab.grab(all_screens=True),
+    detected = _voyage_read_stable_board_edges(
         target,
         shape,
-        cell_span=cell_span,
+        cell_span,
+        safe_point,
     )
     log_message(
         f"[VOYAGE] Cell {placement.cell + 1} board yonu "
@@ -2737,10 +2825,10 @@ def _voyage_validate_placed_cell(placement, target, cell_span):
     )
     return detected == placement.required_edges
 
-def _voyage_validate_placed_plan(plan, board_points, cell_span):
+def _voyage_validate_placed_plan(plan, board_points, cell_span, safe_point):
     from PIL import ImageGrab
 
-    _instant_move(pyautogui.size().width // 2, 80)
+    _instant_move(*safe_point)
     if not _voyage_wait(0.2):
         return False
     screenshot = ImageGrab.grab(all_screens=True)
@@ -2766,7 +2854,7 @@ def _voyage_validate_placed_plan(plan, board_points, cell_span):
     log_message("[VOYAGE] Final board kontrolu: 9/9 yon ve baglanti dogru.")
     return True
 
-def _voyage_place_plan(plan, board_tl, board_br):
+def _voyage_place_plan(plan, board_tl, board_br, chart_tl, chart_br):
     board_points = _voyage_board_points(board_tl, board_br)
     if len(board_points) != 9 or len(set(board_points)) != 9:
         log_message(
@@ -2778,10 +2866,16 @@ def _voyage_place_plan(plan, board_tl, board_br):
     x_span = abs(board_points[1][0] - board_points[0][0])
     y_span = abs(board_points[3][1] - board_points[0][1])
     cell_span = min(x_span, y_span)
+    safe_point = (
+        board_tl[0] - max(70, round(cell_span * 0.8)),
+        board_tl[1] - max(70, round(cell_span * 0.8)),
+    )
+    active_page = 1
     for placement in voyage.placement_order(plan):
         if stop_event.is_set():
             return False
         source = placement.chart.source
+        source_page = int(getattr(placement.chart, "source_page", 1) or 1)
         target = board_points[placement.cell]
         log_message(
             f"[VOYAGE] Yerlestirme {placement.chart.uid}: "
@@ -2794,6 +2888,12 @@ def _voyage_place_plan(plan, board_tl, board_br):
             )
             stop_event.set()
             return False
+        if source_page != active_page:
+            log_message(f"[VOYAGE] Chart kaynak sayfasi {source_page} seciliyor.")
+            if not _voyage_select_chart_page(chart_tl, chart_br, source_page):
+                stop_event.set()
+                return False
+            active_page = source_page
         log_message(
             f"[VOYAGE] {placement.chart.uid} tek tikla aliniyor; "
             f"cell {placement.cell + 1} hedefine tek tikla birakilacak."
@@ -2803,6 +2903,7 @@ def _voyage_place_plan(plan, board_tl, board_br):
             target,
             placement,
             cell_span,
+            safe_point,
         )
         if rotation_clicks is None:
             stop_event.set()
@@ -2826,6 +2927,7 @@ def _voyage_place_plan(plan, board_tl, board_br):
             placement,
             target,
             cell_span,
+            safe_point,
         ):
             log_message(
                 f"[VOYAGE] Cell {placement.cell + 1} yanlis yonle yerlesti; "
@@ -2838,7 +2940,12 @@ def _voyage_place_plan(plan, board_tl, board_br):
             f"{placement.chart.uid}, hedefte R x{rotation_clicks}; "
             "kaynak slot bosaldi."
         )
-    return _voyage_validate_placed_plan(plan, board_points, cell_span)
+    return _voyage_validate_placed_plan(
+        plan,
+        board_points,
+        cell_span,
+        safe_point,
+    )
 
 def _voyage_focus_game():
     try:
@@ -2855,6 +2962,24 @@ def _voyage_focus_game():
         log_message(f"[VOYAGE] PoE penceresi odaklanamadi: {exc}")
         return False
 
+
+def _voyage_poe_client_rect():
+    try:
+        import win32gui
+
+        game_window = win32gui.FindWindow(None, "Path of Exile")
+        if not game_window:
+            return None
+        client_left, client_top = win32gui.ClientToScreen(game_window, (0, 0))
+        client_right, client_bottom = win32gui.ClientToScreen(
+            game_window,
+            win32gui.GetClientRect(game_window)[2:4],
+        )
+        return client_left, client_top, client_right, client_bottom
+    except Exception as exc:
+        log_message(f"[VOYAGE] PoE istemci alani okunamadi: {exc}")
+        return None
+
 def _voyage_restore_window():
     try:
         root.deiconify()
@@ -2864,10 +2989,12 @@ def _voyage_restore_window():
         pass
 
 def run_voyage_craft(settings):
-    chart_tl = settings["voyage_chart_tl"]
-    chart_br = settings["voyage_chart_br"]
-    board_tl = settings["voyage_board_tl"]
-    board_br = settings["voyage_board_br"]
+    manual_points = {
+        "chart_tl": settings.get("voyage_chart_tl"),
+        "chart_br": settings.get("voyage_chart_br"),
+        "board_tl": settings.get("voyage_board_tl"),
+        "board_br": settings.get("voyage_board_br"),
+    }
     try:
         root.after(0, root.withdraw)
     except Exception:
@@ -2877,19 +3004,40 @@ def run_voyage_craft(settings):
         return
     if not _voyage_wait(0.2):
         return
+    client_rect = _voyage_poe_client_rect()
+    points = voyage.auto_calibration_points(client_rect)
+    if points:
+        log_message(
+            f"[VOYAGE] Otomatik kalibrasyon: client={client_rect}, "
+            f"chart={points['chart_tl']}..{points['chart_br']}, "
+            f"board={points['board_tl']}..{points['board_br']}."
+        )
+    elif all(manual_points.values()):
+        points = manual_points
+        log_message("[VOYAGE] Otomatik kalibrasyon yok; manuel noktalar kullaniliyor.")
+    else:
+        log_message("[VOYAGE] Otomatik ve manuel kalibrasyon bulunamadi.")
+        return
+    chart_tl, chart_br = points["chart_tl"], points["chart_br"]
+    board_tl, board_br = points["board_tl"], points["board_br"]
+    log_message("[VOYAGE] 6x10 Chart paneli taraniyor.")
+    charts = _voyage_scan_chart_pages(chart_tl, chart_br)
+    if charts is None or stop_event.is_set():
+        return
+    if len(charts) < 9 and points != manual_points and all(manual_points.values()):
+        log_message("[VOYAGE] Otomatik Chart kalibrasyonu dogrulanamadi; manuel deneniyor.")
+        points = manual_points
+        chart_tl, chart_br = points["chart_tl"], points["chart_br"]
+        board_tl, board_br = points["board_tl"], points["board_br"]
+        charts = _voyage_scan_chart_pages(chart_tl, chart_br)
+        if charts is None or stop_event.is_set():
+            return
+    if len(charts) < 9:
+        log_message("[VOYAGE] En az 9 acik Chart bulunamadi; plan olusturulamadi.")
+        return
     log_message("[VOYAGE] 12 kenar akimi okunuyor.")
     border_mods = _voyage_scan_borders(board_tl, board_br)
     if border_mods is None or stop_event.is_set():
-        return
-    _instant_move(*board_tl)
-    if not _voyage_wait(0.08):
-        return
-    log_message("[VOYAGE] 6x10 Chart paneli taraniyor.")
-    charts = _voyage_scan_charts(chart_tl, chart_br)
-    if charts is None or stop_event.is_set():
-        return
-    if len(charts) < 9:
-        log_message("[VOYAGE] En az 9 acik Chart bulunamadi; plan olusturulamadi.")
         return
     plan = voyage.plan_voyage(charts, border_mods)
     if plan is None:
@@ -2904,7 +3052,7 @@ def run_voyage_craft(settings):
     except Exception:
         pass
     if settings.get("voyage_auto_place", True):
-        if _voyage_place_plan(plan, board_tl, board_br):
+        if _voyage_place_plan(plan, board_tl, board_br, chart_tl, chart_br):
             log_message(
                 "[VOYAGE] 9 Chart yerlestirildi ve dogrulandi. "
                 "Begin Voyage otomatik tiklanmadi."
@@ -3182,18 +3330,22 @@ AFFIX_BOILERPLATE = [
 def clean_advanced_explicit_mod_block(block):
     has_advanced_headers = any(line.lstrip().startswith("{") for line in block)
     cleaned = []
+    current_fractured = False
     for raw in block:
         line = raw.strip()
         if not line or RE_INTANGIBILITY_METADATA.fullmatch(line):
             continue
         if has_advanced_headers:
             if line.startswith("{"):
+                current_fractured = "fractured" in line.lower()
                 continue
             # Advanced descriptions add explanatory parenthetical lines that are not affixes.
             if line.startswith("(") and line.endswith(")"):
                 continue
             line = RE_ADVANCED_ROLL_RANGE.sub("", line)
         if line:
+            if current_fractured and "(fractured)" not in line.lower():
+                line = f"{line} (fractured)"
             cleaned.append(line)
     return cleaned
 
@@ -4248,6 +4400,21 @@ def _item_has_fractured_mod_cached(mods_key):
 def item_has_fractured_mod(mods):
     return _item_has_fractured_mod_cached(tuple(mods))
 
+
+def validate_cluster_fracture_mode(mods, settings):
+    mode = settings.get("cluster_fracture_mode", "unfractured")
+    fractured_mods = [m for m in mods if "(fractured)" in (m or "").lower()]
+    if mode == "unfractured":
+        return not fractured_mods
+    if mode != "fractured":
+        return True
+    if not fractured_mods:
+        return False
+    target = settings.get("cluster_fractured_target", "")
+    if not target:
+        return True
+    return any(_mod_matches_any(mod, [target]) for mod in fractured_mods)
+
 def find_stop_on_two_match_pair(mods, settings):
     stop_pairs = settings.get("stop_on_two_match", [])
     if not stop_pairs or not mods or item_has_fractured_mod(mods):
@@ -4710,7 +4877,11 @@ def _pot_affix_state(pot, mods):
         open_types.add("suffix")
     preferred_missing_type = next((t for t in missing_types if t in open_types), (missing_types[0] if missing_types else "unknown"))
     has_open_slot = any(t in open_types for t in missing_types)
-    has_matching_junk = any(classify_mod_type(m) in missing_types for m in pot.get("junk_mods", []))
+    has_matching_junk = any(
+        "(fractured)" not in (m or "").lower()
+        and classify_mod_type(m) in missing_types
+        for m in pot.get("junk_mods", [])
+    )
     return {
         "missing_type": preferred_missing_type,
         "missing_types": missing_types,
@@ -4945,7 +5116,11 @@ def handle_comb_craft_state(mods, settings):
             log_message("[COMB] Boş prefix için Exalt.")
             apply_orb("Exalted Orb", ITEM_POS)
         elif p_count >= 2 and settings["use_annul"]:
-            if [m for m in chosen["junk_mods"] if classify_mod_type(m) == "prefix"]:
+            if [
+                m for m in chosen["junk_mods"]
+                if "(fractured)" not in (m or "").lower()
+                and classify_mod_type(m) == "prefix"
+            ]:
                 if item_has_annul_combo(mods, annul_combs):
                     log_message("[COMB] Prefix boşaltmak için Annul.")
                     apply_orb("Orb of Annulment", ITEM_POS)
@@ -4966,7 +5141,11 @@ def handle_comb_craft_state(mods, settings):
             log_message("[COMB] Boş suffix için Exalt.")
             apply_orb("Exalted Orb", ITEM_POS)
         elif s_count >= 2 and settings["use_annul"]:
-            if [m for m in chosen["junk_mods"] if classify_mod_type(m) == "suffix"]:
+            if [
+                m for m in chosen["junk_mods"]
+                if "(fractured)" not in (m or "").lower()
+                and classify_mod_type(m) == "suffix"
+            ]:
                 if item_has_annul_combo(mods, annul_combs):
                     log_message("[COMB] Suffix boşaltmak için Annul.")
                     apply_orb("Orb of Annulment", ITEM_POS)
@@ -5055,6 +5234,11 @@ def _select_best_effect35_progress(mods, settings):
         # progress by freeing a slot. Respect the template's Annul setting
         # instead of scouring a still-valuable 2/4 subset immediately.
         if pot.get("match_count", 0) < 2:
+            continue
+        if not any(
+            "(fractured)" not in (junk or "").lower()
+            for junk in pot.get("junk_mods", [])
+        ):
             continue
         if not use_annul:
             continue
@@ -5353,16 +5537,16 @@ def start_craft():
                 chart_br = _voyage_point_setting("chart_grid_br")
                 board_tl = _voyage_point_setting("board_grid_tl")
                 board_br = _voyage_point_setting("board_grid_br")
-                if not all((chart_tl, chart_br, board_tl, board_br)):
-                    gui_error(
-                        "Voyage icin dort kalibrasyon noktasini ayarla: "
-                        "Chart TL/BR ve Board TL/BR."
-                    )
-                    return
-                if chart_tl[0] >= chart_br[0] or chart_tl[1] >= chart_br[1]:
+                if chart_tl and chart_br and (
+                    chart_tl[0] >= chart_br[0]
+                    or chart_tl[1] >= chart_br[1]
+                ):
                     gui_error("Chart TL noktasi, Chart BR noktasinin sol-ustunde olmali.")
                     return
-                if board_tl[0] >= board_br[0] or board_tl[1] >= board_br[1]:
+                if board_tl and board_br and (
+                    board_tl[0] >= board_br[0]
+                    or board_tl[1] >= board_br[1]
+                ):
                     gui_error("Board TL noktasi, Board BR noktasinin sol-ustunde olmali.")
                     return
                 snapshot = {
@@ -5669,6 +5853,8 @@ def start_craft():
                     "craft_logic": craft_logic.get(),
                     "augment_mode": augment_mode.get(),
                     "cluster_size": cluster_size_var.get(),
+                    "cluster_fracture_mode": cluster_fracture_mode_var.get(),
+                    "cluster_fractured_target": cluster_fractured_target_var.get(),
                     "cluster_no_regal_two_mods": cluster_no_regal_two_var.get(),
                     "cluster_small_stop_three": (
                         cluster_size_var.get() == "small"
@@ -5916,6 +6102,15 @@ def craft_thread_loop(settings):
                 safe_wait(get_delay_s())
                 continue
 
+            if not validate_cluster_fracture_mode(mods, settings):
+                log_message(
+                    "[CLUSTER] Item fracture secimiyle uyusmuyor; "
+                    "yanlis itemi degistirmemek icin craft durduruldu."
+                )
+                stop_shift_spam()
+                stop_event.set()
+                return "stopped"
+
             small_stop = find_small_stop_three_match(mods, settings)
             if small_stop:
                 log_message(
@@ -5964,7 +6159,7 @@ def craft_thread_loop(settings):
 
             if result == "done":
                 single_done = True
-            elif result == "reset_to_magic":
+            elif result == "reset_to_magic" and not item_has_fractured_mod(mods):
                 safe_wait(0.2)
                 apply_orb("Orb of Transmutation", ITEM_POS)
 
@@ -6373,6 +6568,15 @@ def craft_thread_loop_safe(settings):
                     consecutive_errors = 0
                     continue
 
+                if not validate_cluster_fracture_mode(mods, settings):
+                    log_message(
+                        "[CLUSTER] Item fracture secimiyle uyusmuyor; "
+                        "yanlis itemi degistirmemek icin craft durduruldu."
+                    )
+                    stop_shift_spam()
+                    stop_event.set()
+                    return "stopped"
+
                 small_stop = find_small_stop_three_match(mods, settings)
                 if small_stop:
                     log_message(
@@ -6420,7 +6624,7 @@ def craft_thread_loop_safe(settings):
 
                 if result == "done":
                     single_done = True
-                elif result == "reset_to_magic":
+                elif result == "reset_to_magic" and not item_has_fractured_mod(mods):
                     safe_wait(0.2)
                     apply_orb("Orb of Transmutation", ITEM_POS)
 
@@ -6991,6 +7195,12 @@ def load_template():
 
         if not is_map_template and not is_base_jewel_template and not is_item_template:
             template_cluster_meta = dict(data.get("cluster_meta", {}))
+            cluster_fracture_mode_var.set(
+                str(data.get("cluster_fracture_mode", "unfractured"))
+            )
+            cluster_fractured_target_var.set(
+                str(data.get("cluster_fractured_target", ""))
+            )
             template_comb_craft_data = _copy_combo_data(
                 data.get("comb_craft_data", {})
             )
@@ -7204,6 +7414,8 @@ def save_template():
                 "cluster_size": cluster_size_var.get(),
                 "cluster_meta": dict(template_cluster_meta),
                 "augment_mode": augment_mode.get(),
+                "cluster_fracture_mode": cluster_fracture_mode_var.get(),
+                "cluster_fractured_target": cluster_fractured_target_var.get(),
                 "cluster_no_regal_two_mods": cluster_no_regal_two_var.get(),
                 "cluster_small_stop_three_mods": (
                     cluster_size_var.get() == "small"
@@ -7832,6 +8044,8 @@ augment_mode = tk.StringVar(value="Use if needed")
 use_exalt, use_annul = tk.BooleanVar(value=False), tk.BooleanVar(value=False)
 cluster_no_regal_two_var = tk.BooleanVar(value=False)
 cluster_small_stop_three_var = tk.BooleanVar(value=False)
+cluster_fracture_mode_var = tk.StringVar(value="unfractured")
+cluster_fractured_target_var = tk.StringVar(value="")
 cluster_size_var = tk.StringVar(
     value=settings_cfg.get("General", "cluster_size", fallback="large")
 )
@@ -8040,6 +8254,8 @@ def _clear_cluster_section_session():
     market_cluster_template_active = False
     is_effect35_template = False
     cluster_no_regal_two_var.set(False)
+    cluster_fracture_mode_var.set("unfractured")
+    cluster_fractured_target_var.set("")
     cluster_small_stop_three_var.set(False)
     _clear_comb_match_caches()
 
@@ -8050,7 +8266,6 @@ def _sync_cluster_size_controls():
         cluster_small_stop_three_cb.pack(
             side="left",
             padx=(0, 4),
-            before=cluster_no_regal_two_cb,
         )
     else:
         cluster_small_stop_three_cb.pack_forget()
@@ -9628,7 +9843,6 @@ cluster_no_regal_two_cb = ttk.Checkbutton(
     text="No Regal: 2 hedefte dur",
     variable=cluster_no_regal_two_var,
 )
-cluster_no_regal_two_cb.pack(side="left", padx=(0, 4))
 cluster_small_stop_three_cb = ttk.Checkbutton(
     chain_line_frame,
     text="3 hedefte dur",
@@ -9731,16 +9945,16 @@ def on_affix_double(_event):
             last_list = comb_craft_data[last_key]
             pc = sum(1 for s in last_list if s.startswith("[P]"))
             sc = sum(1 for s in last_list if s.startswith("[S]"))
-            if pc >= 2 and sc >= 1:
+            if pc >= 2 and sc >= 2:
                 comb_craft_data[str(int(last_key) + 1)] = [prefixed_text]
             else:
                 if tag == "[P]" and pc < 2:
                     last_list.append(prefixed_text)
-                elif tag == "[S]" and sc < 1:
+                elif tag == "[S]" and sc < 2:
                     last_list.append(prefixed_text)
                 else:
                     log_message(
-                        "[UYARI] Kombinasyon dolu (Max 2P/1S). Yeni kombinasyona başlayın."
+                        "[UYARI] Kombinasyon dolu (Max 2P/2S). Yeni kombinasyona baslayin."
                     )
                     return
         populate_comb_list()
@@ -9770,6 +9984,23 @@ def on_affix_double(_event):
 
 pool_list.bind("<Double-Button-1>", on_affix_double)
 
+def on_affix_set_fracture(event):
+    row = pool_list.nearest(event.y)
+    if row < 0 or row >= pool_list.size():
+        return "break"
+    text = pool_list.get(row)
+    tag = "[P]" if affix_mode.get() == "prefix" else "[S]"
+    try:
+        weight = int(affix_weight_var.get() or 1)
+    except (ValueError, TypeError):
+        weight = 1
+    cluster_fracture_mode_var.set("fractured")
+    cluster_fractured_target_var.set(f"{tag}[{weight}] {text}")
+    log_message(f"[CLUSTER] Fractured hedef secildi: {text}")
+    return "break"
+
+pool_list.bind("<Button-3>", on_affix_set_fracture)
+
 # tabs — 5 tab, programa tam yayılmış
 tabs = ttk.Notebook(root)
 tabs.place(x=PADX, y=228, width=WINDOW_W - 2 * PADX, height=220)
@@ -9778,13 +10009,34 @@ tab_stop_two    = ttk.Frame(tabs)
 tab_annul_combs = ttk.Frame(tabs)
 tab_solo_regal  = ttk.Frame(tabs)
 tab_no_regal    = ttk.Frame(tabs)
-tab_width = (WINDOW_W - 2 * PADX) // 5
+tab_width = WINDOW_W - 2 * PADX
 style.configure("TNotebook.Tab", width=tab_width, padding=[0, 4])
 tabs.add(tab_comb,        text="Comb\nCraft")
-tabs.add(tab_stop_two,    text="İki Modda\nDur")
-tabs.add(tab_annul_combs, text="Annul\nKullan")
-tabs.add(tab_solo_regal,  text="Regal\nSalla")
-tabs.add(tab_no_regal,    text="Regalle\nArama")
+
+cluster_fracture_bar = ttk.Frame(tab_comb)
+cluster_fracture_bar.pack(fill="x", padx=3, pady=(3, 0))
+ttk.Label(cluster_fracture_bar, text="Base:").pack(side="left")
+ttk.Radiobutton(
+    cluster_fracture_bar,
+    text="Fracsiz",
+    variable=cluster_fracture_mode_var,
+    value="unfractured",
+).pack(side="left", padx=(3, 2))
+ttk.Radiobutton(
+    cluster_fracture_bar,
+    text="Fractured",
+    variable=cluster_fracture_mode_var,
+    value="fractured",
+).pack(side="left", padx=(0, 4))
+ttk.Label(
+    cluster_fracture_bar,
+    textvariable=cluster_fractured_target_var,
+).pack(side="left", fill="x", expand=True)
+ttk.Button(
+    cluster_fracture_bar,
+    text="Clear Frac",
+    command=lambda: cluster_fractured_target_var.set(""),
+).pack(side="right")
 
 cluster_price_filter_bar = ttk.Frame(tab_comb)
 cluster_price_filter_bar.pack(fill="x", padx=3, pady=(3, 0))

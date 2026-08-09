@@ -1,7 +1,7 @@
 param(
     [Parameter(Mandatory = $false)]
     [ValidatePattern('^\d+\.\d+\.\d+(?:\.\d+)?$')]
-    [string]$Version = "1.0.44",
+    [string]$Version = "1.0.46",
 
     [Parameter(Mandatory = $false)]
     [string]$Python = "python"
@@ -67,6 +67,17 @@ $buildInfo = [ordered]@{
     "$buildInfo`n",
     $Utf8NoBom
 )
+
+# Never ship the developer machine's Voyage coordinates. The application now
+# calibrates from the active PoE client and keeps these values as manual fallback.
+$ReleaseSettingsPath = Join-Path $GeneratedRoot "settings.ini"
+$releaseSettings = Get-Content -LiteralPath (Join-Path $Root "settings.ini") -Raw
+$releaseSettings = [regex]::Replace(
+    $releaseSettings,
+    '(?m)^(chart_grid_tl|chart_grid_br|board_grid_tl|board_grid_br)\s*=.*$',
+    '$1 ='
+)
+[System.IO.File]::WriteAllText($ReleaseSettingsPath, $releaseSettings, $Utf8NoBom)
 
 function Write-VersionInfo {
     param(
@@ -159,7 +170,7 @@ try {
         "--hidden-import", "winrt.windows.media.ocr",
         "--hidden-import", "winrt.windows.storage.streams",
         "--collect-all", "dxcam",
-        "--add-data", "$(Join-Path $Root 'settings.ini');.",
+        "--add-data", "$ReleaseSettingsPath;.",
         "--add-data", "$(Join-Path $GeneratedRoot 'build_info.json');.",
         "--add-data", "$(Join-Path $Root 'assets\wca_icon.png');assets",
         "--add-data", "$(Join-Path $Root 'assets\wca_icon.ico');assets",

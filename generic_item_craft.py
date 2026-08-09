@@ -21,7 +21,11 @@ RARITY_RE = re.compile(r"^rarity:\s*(.+?)\s*$", re.I)
 ADVANCED_ROLL_RANGE_RE = re.compile(
     r"(?<=\d)\([+-]?\d+(?:\.\d+)?(?:-[+-]?\d+(?:\.\d+)?)?\)"
 )
-DISPLAY_ANNOTATION_RE = re.compile(r"\s+\((?:crafted|fractured)\)\s*$", re.I)
+DISPLAY_ANNOTATION_RE = re.compile(
+    r"\s+\((?:crafted|fractured|prefix|suffix)\)\s*$",
+    re.I,
+)
+AFFIX_TYPE_ANNOTATION_RE = re.compile(r"\s+\((prefix|suffix)\)\s*$", re.I)
 NON_EXPLICIT_BLOCK_MARKERS = (
     "(enchant)",
     "enchantment modifier",
@@ -126,6 +130,11 @@ def _line_matches(line_spec: dict, actual: str) -> bool:
     return all(float(low) <= value <= float(high) for value, (low, high) in zip(values, ranges))
 
 
+def _actual_affix_type(actual: str) -> str | None:
+    match = AFFIX_TYPE_ANNOTATION_RE.search((actual or "").strip())
+    return match.group(1).lower() if match else None
+
+
 def _match_line_indices(mod: dict, actual_mods: list[str], available: set[int] | None = None):
     available_indices = set(range(len(actual_mods))) if available is None else set(available)
     line_specs = mod.get("lines", [])
@@ -135,6 +144,9 @@ def _match_line_indices(mod: dict, actual_mods: list[str], available: set[int] |
             return chosen
         spec = line_specs[spec_index]
         for index in sorted(available_indices - set(chosen)):
+            actual_type = _actual_affix_type(actual_mods[index])
+            if actual_type and actual_type != mod.get("type"):
+                continue
             if _line_matches(spec, actual_mods[index]):
                 result = search(spec_index + 1, chosen + [index])
                 if result is not None:
@@ -264,14 +276,26 @@ def _separator_blocks(item_text: str) -> list[list[str]]:
 
 def _clean_explicit_candidate(block: list[str]) -> list[str]:
     cleaned = []
+    current_affix_type = None
     for raw in block:
         line = raw.strip()
-        if not line or line.startswith("{"):
+        if not line:
+            continue
+        if line.startswith("{"):
+            lowered = line.casefold()
+            if "prefix modifier" in lowered:
+                current_affix_type = "prefix"
+            elif "suffix modifier" in lowered:
+                current_affix_type = "suffix"
+            else:
+                current_affix_type = None
             continue
         if line.startswith("(") and line.endswith(")"):
             continue
         line = ADVANCED_ROLL_RANGE_RE.sub("", line)
         if line:
+            if current_affix_type:
+                line = f"{line} ({current_affix_type})"
             cleaned.append(line)
     return cleaned
 

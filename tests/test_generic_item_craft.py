@@ -110,6 +110,58 @@ class GenericItemCraftTests(unittest.TestCase):
         self.assertTrue(summary["goal_met"])
         self.assertEqual(summary["matched_count"], 1)
 
+    def test_overlapping_rarity_ranges_keep_advanced_prefix_suffix_types(self):
+        item_text = "\n".join(
+            [
+                "Item Class: Rings",
+                "Rarity: Magic",
+                "Dragon's Gold Ring of Plunder",
+                "--------",
+                "Item Level: 84",
+                "--------",
+                "{ Implicit Modifier }",
+                "15% increased Rarity of Items found",
+                "--------",
+                '{ Prefix Modifier "Dragon\'s" (Tier: 3) }',
+                "24(19-24)% increased Rarity of Items found",
+                '{ Suffix Modifier "of Plunder" (Tier: 4) }',
+                "9(6-10)% increased Rarity of Items found",
+                "--------",
+            ]
+        )
+        rarity, mods, item_level = item_craft.parse_item_for_craft(
+            self.catalog,
+            "Gold Ring",
+            "None",
+            item_text,
+        )
+        self.assertEqual(rarity, "Magic")
+        self.assertEqual(
+            mods,
+            [
+                "24% increased Rarity of Items found (prefix)",
+                "9% increased Rarity of Items found (suffix)",
+            ],
+        )
+
+        summary = item_craft.analyze(
+            self.catalog,
+            "Gold Ring",
+            "None",
+            item_level,
+            mods,
+            [
+                "ItemFoundRarityIncrease4",
+                "ItemFoundRarityIncreasePrefix4_",
+                "ItemFoundRarityIncreasePrefix3",
+            ],
+            2,
+        )
+        self.assertEqual(summary["matched_count"], 1)
+        self.assertFalse(summary["goal_met"])
+        self.assertEqual(summary["prefix_count"], 1)
+        self.assertEqual(summary["suffix_count"], 1)
+
     def test_t1_suppression_is_available_on_matching_base_and_level(self):
         eligible_ids = {
             mod["id"]

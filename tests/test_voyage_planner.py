@@ -3,8 +3,10 @@ from pathlib import Path
 
 from voyage_planner import (
     Chart,
+    auto_calibration_points,
     border_cell_scores,
     chart_position_score,
+    chart_slot_occupied,
     cell_neighbors,
     detect_chart_edges,
     detect_board_edges,
@@ -52,6 +54,14 @@ Adjacent Areas contain 40% increased number of Rare Monsters
     assert parsed.area_level == 83
     assert parsed.source == (100, 200)
     assert "22% increased Pack Size" in parsed.modifiers
+
+
+def test_chart_slot_occupancy_detects_green_icon_and_rejects_empty_cell():
+    image = Image.new("RGB", (120, 60), (12, 14, 13))
+    draw = ImageDraw.Draw(image)
+    draw.rectangle((15, 15, 39, 39), fill=(25, 135, 82))
+    assert chart_slot_occupied(image, (27, 27))
+    assert not chart_slot_occupied(image, (90, 27))
 
 
 def test_static_modifier_catalog_is_complete():
@@ -179,6 +189,29 @@ def test_detect_board_edges_tolerates_calibrated_center_offset():
                     width=5,
                 )
         assert detect_board_edges(image, center, "straight", 143) == edges
+
+
+def test_auto_calibration_uses_client_height_and_center():
+    full_hd = auto_calibration_points((0, 0, 1920, 1080))
+    assert full_hd == {
+        "chart_tl": (1312, 312),
+        "chart_br": (1567, 766),
+        "board_tl": (791, 395),
+        "board_br": (1083, 683),
+    }
+
+    scaled = auto_calibration_points((100, 50, 1636, 914))
+    assert scaled == {
+        "chart_tl": (1150, 300),
+        "chart_br": (1354, 663),
+        "board_tl": (733, 366),
+        "board_br": (966, 596),
+    }
+
+
+def test_auto_calibration_rejects_tiny_or_invalid_clients():
+    assert auto_calibration_points((0, 0, 800, 450)) is None
+    assert auto_calibration_points((10, 10, 10, 10)) is None
 
 
 def test_disconnected_edge_mask_is_rejected():
@@ -341,10 +374,10 @@ def test_live_placement_clicks_source_then_target_then_rotates_target():
     assert "mouseUp" not in place_source
     assert place_source.count('_voyage_click("left")') == 2
     assert place_source.count('_voyage_click(\n            "right"') == 1
-    assert "detect_board_edges" in place_source
+    assert "_voyage_read_stable_board_edges" in place_source
     assert "updated_edges == current_edges" in place_source
-    assert "hover_origin" in place_source
-    assert "cell_span * 0.65" in place_source
+    assert "hover_origin=safe_point" in place_source
+    assert "cell_span * 0.65" not in place_source
     assert "_voyage_source_patch" not in place_source
     assert place_source.count("_instant_move") == 2
     assert (
@@ -364,5 +397,6 @@ def test_live_placement_clicks_source_then_target_then_rotates_target():
     assert "SendInput" in click_source
     assert "mouse_event" not in click_source
     assert "send_absolute(hover_origin)" in click_source
+    assert "send_absolute(approach)" in click_source
     assert "send_absolute(point)" in click_source
     assert "0xC001" in click_source

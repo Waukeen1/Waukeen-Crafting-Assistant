@@ -66,6 +66,43 @@ SPECIAL_ENTRY_SCORES = {
     "voy-flask": 0.0,
 }
 
+# Reference offsets are relative to the centre of a 1920x1080 PoE client.
+# Scaling by client height also works for ultrawide displays because the Voyage
+# panel keeps its aspect and remains centred in the game client.
+VOYAGE_REFERENCE_HEIGHT = 1080.0
+VOYAGE_REFERENCE_OFFSETS = {
+    "chart_tl": (352.0, -228.0),
+    "chart_br": (607.0, 226.0),
+    "board_tl": (-169.0, -145.0),
+    "board_br": (123.0, 143.0),
+}
+
+
+def auto_calibration_points(client_rect: Sequence[int]):
+    """Return Voyage grid points scaled to the active PoE client rectangle."""
+    if not client_rect or len(client_rect) != 4:
+        return None
+    left, top, right, bottom = (int(value) for value in client_rect)
+    width, height = right - left, bottom - top
+    if width < 960 or height < 540:
+        return None
+    scale = height / VOYAGE_REFERENCE_HEIGHT
+    center_x = left + width / 2.0
+    center_y = top + height / 2.0
+    points = {
+        name: (
+            round(center_x + offset_x * scale),
+            round(center_y + offset_y * scale),
+        )
+        for name, (offset_x, offset_y) in VOYAGE_REFERENCE_OFFSETS.items()
+    }
+    if not all(
+        left <= x < right and top <= y < bottom
+        for x, y in points.values()
+    ):
+        return None
+    return points
+
 
 @dataclass(frozen=True)
 class Chart:
@@ -75,6 +112,7 @@ class Chart:
     raw_text: str
     modifiers: tuple[str, ...]
     source: tuple[int, int] | None = None
+    source_page: int = 1
     initial_edges: tuple[bool, bool, bool, bool] | None = None
 
 
@@ -190,6 +228,7 @@ def parse_chart_text(
     uid: str,
     source: tuple[int, int] | None = None,
     initial_edges: tuple[bool, bool, bool, bool] | None = None,
+    source_page: int = 1,
 ) -> Chart | None:
     if not text or not re.search(r"Item Class:\s*Chart\b", text, re.I):
         return None
@@ -236,8 +275,22 @@ def parse_chart_text(
         raw_text=text,
         modifiers=tuple(modifiers),
         source=source,
+        source_page=int(source_page),
         initial_edges=initial_edges,
     )
+
+
+def chart_slot_occupied(image, point, radius=14):
+    """Detect the green Chart icon without hovering or reading the clipboard."""
+    source = image.convert("RGB")
+    center_x, center_y = (int(point[0]), int(point[1]))
+    green_pixels = 0
+    for y in range(max(0, center_y - radius), min(source.height, center_y + radius + 1)):
+        for x in range(max(0, center_x - radius), min(source.width, center_x + radius + 1)):
+            red, green, blue = source.getpixel((x, y))
+            if green > 60 and green > red * 1.12 and green > blue * 0.8:
+                green_pixels += 1
+    return green_pixels >= 18
 
 
 def rotate_edges(
