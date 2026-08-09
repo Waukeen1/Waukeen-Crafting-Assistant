@@ -1,7 +1,7 @@
 param(
     [Parameter(Mandatory = $false)]
     [ValidatePattern('^\d+\.\d+\.\d+(?:\.\d+)?$')]
-    [string]$Version = "1.0.46",
+    [string]$Version = "1.0.47",
 
     [Parameter(Mandatory = $false)]
     [string]$Python = "python"
@@ -76,6 +76,16 @@ $releaseSettings = [regex]::Replace(
     $releaseSettings,
     '(?m)^(chart_grid_tl|chart_grid_br|board_grid_tl|board_grid_br)\s*=.*$',
     '$1 ='
+)
+$releaseSettings = [regex]::Replace(
+    $releaseSettings,
+    '(?m)^topic\s*=.*$',
+    'topic ='
+)
+$releaseSettings = [regex]::Replace(
+    $releaseSettings,
+    '(?m)^(enabled|life_enabled|mana_enabled)\s*=.*$',
+    '$1 = False'
 )
 [System.IO.File]::WriteAllText($ReleaseSettingsPath, $releaseSettings, $Utf8NoBom)
 

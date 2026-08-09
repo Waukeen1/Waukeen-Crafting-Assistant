@@ -2297,7 +2297,32 @@ def _voyage_point_setting(key):
 
 def _voyage_save_point(key, point):
     settings_cfg.set("Voyage", key, f"{int(point[0])},{int(point[1])}")
+    client_rect = _voyage_poe_client_rect()
+    if client_rect:
+        left, top, right, bottom = client_rect
+        settings_cfg.set("Voyage", "calibration_client_rect", f"{left},{top},{right},{bottom}")
     save_settings_now()
+
+
+def _voyage_scaled_manual_points(points, client_rect):
+    if not all(points.values()) or not client_rect:
+        return points
+    raw_rect = settings_cfg.get(
+        "Voyage",
+        "calibration_client_rect",
+        fallback="",
+    )
+    try:
+        old_left, old_top, old_right, old_bottom = (
+            int(value.strip()) for value in raw_rect.split(",")
+        )
+    except (TypeError, ValueError):
+        return points
+    return voyage.scale_calibration_points(
+        points,
+        (old_left, old_top, old_right, old_bottom),
+        client_rect,
+    )
 
 def _voyage_grid_points(top_left, bottom_right, columns, rows):
     x0, y0 = top_left
@@ -2433,12 +2458,15 @@ def _voyage_scan_borders(board_tl, board_br):
     board_points = _voyage_board_points(board_tl, board_br)
     xs = [p[0] for p in board_points]
     ys = [p[1] for p in board_points]
+    board_scale = max(0.75, min(2.5, (max(ys) - min(ys)) / 288.0))
+    crop_pad_x = round(430 * board_scale)
+    crop_pad_y = round(180 * board_scale)
     screen_w, screen_h = pyautogui.size()
     crop = (
-        max(0, min(xs) - 430),
-        max(0, min(ys) - 180),
-        min(screen_w, max(xs) + 430),
-        min(screen_h, max(ys) + 180),
+        max(0, min(xs) - crop_pad_x),
+        max(0, min(ys) - crop_pad_y),
+        min(screen_w, max(xs) + crop_pad_x),
+        min(screen_h, max(ys) + crop_pad_y),
     )
     cell_mods = [[] for _ in range(9)]
     for index, (point, cell, edge_name) in enumerate(
@@ -3005,40 +3033,58 @@ def run_voyage_craft(settings):
     if not _voyage_wait(0.2):
         return
     client_rect = _voyage_poe_client_rect()
-    points = voyage.auto_calibration_points(client_rect)
-    if points:
+    automatic_points = voyage.auto_calibration_points(client_rect)
+    scaled_manual_points = _voyage_scaled_manual_points(manual_points, client_rect)
+    candidates = []
+    if automatic_points:
         log_message(
             f"[VOYAGE] Otomatik kalibrasyon: client={client_rect}, "
-            f"chart={points['chart_tl']}..{points['chart_br']}, "
-            f"board={points['board_tl']}..{points['board_br']}."
+            f"chart={automatic_points['chart_tl']}..{automatic_points['chart_br']}, "
+            f"board={automatic_points['board_tl']}..{automatic_points['board_br']}."
         )
-    elif all(manual_points.values()):
-        points = manual_points
-        log_message("[VOYAGE] Otomatik kalibrasyon yok; manuel noktalar kullaniliyor.")
-    else:
+        candidates.append(("otomatik", automatic_points))
+    if all(scaled_manual_points.values()) and scaled_manual_points != automatic_points:
+        candidates.append(("kisisel-olcekli", scaled_manual_points))
+    if not candidates:
         log_message("[VOYAGE] Otomatik ve manuel kalibrasyon bulunamadi.")
         return
-    chart_tl, chart_br = points["chart_tl"], points["chart_br"]
-    board_tl, board_br = points["board_tl"], points["board_br"]
-    log_message("[VOYAGE] 6x10 Chart paneli taraniyor.")
-    charts = _voyage_scan_chart_pages(chart_tl, chart_br)
-    if charts is None or stop_event.is_set():
-        return
-    if len(charts) < 9 and points != manual_points and all(manual_points.values()):
-        log_message("[VOYAGE] Otomatik Chart kalibrasyonu dogrulanamadi; manuel deneniyor.")
-        points = manual_points
+
+    charts = None
+    border_mods = None
+    selected_points = None
+    for calibration_name, points in candidates:
+        if stop_event.is_set():
+            return
         chart_tl, chart_br = points["chart_tl"], points["chart_br"]
         board_tl, board_br = points["board_tl"], points["board_br"]
+        log_message(
+            f"[VOYAGE] {calibration_name} kalibrasyon ile once 12 kenar okunuyor."
+        )
+        border_mods = _voyage_scan_borders(board_tl, board_br)
+        if border_mods is None:
+            log_message(
+                f"[VOYAGE] {calibration_name} kenar dogrulamasi basarisiz."
+            )
+            continue
+        log_message("[VOYAGE] 6x10 Chart paneli taraniyor.")
         charts = _voyage_scan_chart_pages(chart_tl, chart_br)
         if charts is None or stop_event.is_set():
             return
-    if len(charts) < 9:
-        log_message("[VOYAGE] En az 9 acik Chart bulunamadi; plan olusturulamadi.")
+        if len(charts) < 9:
+            log_message(
+                f"[VOYAGE] {calibration_name} ile en az 9 Chart bulunamadi."
+            )
+            continue
+        selected_points = points
+        break
+    if selected_points is None:
+        log_message(
+            "[VOYAGE] Hicbir kalibrasyon hem board kenarlarini hem Chart panelini "
+            "dogrulayamadi."
+        )
         return
-    log_message("[VOYAGE] 12 kenar akimi okunuyor.")
-    border_mods = _voyage_scan_borders(board_tl, board_br)
-    if border_mods is None or stop_event.is_set():
-        return
+    chart_tl, chart_br = selected_points["chart_tl"], selected_points["chart_br"]
+    board_tl, board_br = selected_points["board_tl"], selected_points["board_br"]
     plan = voyage.plan_voyage(charts, border_mods)
     if plan is None:
         log_message(

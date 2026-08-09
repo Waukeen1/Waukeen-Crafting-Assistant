@@ -104,6 +104,29 @@ def auto_calibration_points(client_rect: Sequence[int]):
     return points
 
 
+def scale_calibration_points(points, old_client_rect, new_client_rect):
+    """Map manually calibrated client-relative points to a new PoE client."""
+    if not points or not all(points.values()):
+        return points
+    if not old_client_rect or not new_client_rect:
+        return points
+    old_left, old_top, old_right, old_bottom = map(int, old_client_rect)
+    new_left, new_top, new_right, new_bottom = map(int, new_client_rect)
+    old_width, old_height = old_right - old_left, old_bottom - old_top
+    new_width, new_height = new_right - new_left, new_bottom - new_top
+    if min(old_width, old_height, new_width, new_height) <= 0:
+        return points
+    scale_x = new_width / old_width
+    scale_y = new_height / old_height
+    return {
+        name: (
+            round(new_left + (point[0] - old_left) * scale_x),
+            round(new_top + (point[1] - old_top) * scale_y),
+        )
+        for name, point in points.items()
+    }
+
+
 @dataclass(frozen=True)
 class Chart:
     uid: str

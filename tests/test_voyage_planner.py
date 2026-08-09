@@ -19,6 +19,7 @@ from voyage_planner import (
     required_edges_from_mask,
     rotate_edges,
     right_click_rotations_between,
+    scale_calibration_points,
 )
 from PIL import Image, ImageDraw
 
@@ -214,6 +215,25 @@ def test_auto_calibration_rejects_tiny_or_invalid_clients():
     assert auto_calibration_points((10, 10, 10, 10)) is None
 
 
+def test_manual_calibration_scales_with_client_resolution_and_offset():
+    points = {
+        "chart_tl": (1312, 312),
+        "chart_br": (1567, 766),
+        "board_tl": (791, 395),
+        "board_br": (1083, 683),
+    }
+    assert scale_calibration_points(
+        points,
+        (0, 0, 1920, 1080),
+        (100, 50, 2660, 1490),
+    ) == {
+        "chart_tl": (1849, 466),
+        "chart_br": (2189, 1071),
+        "board_tl": (1155, 577),
+        "board_br": (1544, 961),
+    }
+
+
 def test_disconnected_edge_mask_is_rejected():
     assert not is_connected(required_edges_from_mask(0))
 
@@ -377,6 +397,35 @@ def test_live_placement_clicks_source_then_target_then_rotates_target():
     assert "_voyage_read_stable_board_edges" in place_source
     assert "updated_edges == current_edges" in place_source
     assert "hover_origin=safe_point" in place_source
+
+
+def test_live_scan_validates_scaled_borders_before_chart_inventory():
+    source_path = Path(__file__).parents[1] / "cluster_craft.pyw"
+    source = source_path.read_text(encoding="utf-8-sig")
+    module = ast.parse(source)
+    runner = next(
+        node
+        for node in module.body
+        if isinstance(node, ast.FunctionDef) and node.name == "run_voyage_craft"
+    )
+    runner_source = ast.get_source_segment(source, runner)
+    assert runner_source.index("_voyage_scan_borders") < runner_source.index(
+        "_voyage_scan_chart_pages"
+    )
+    border_scanner = next(
+        node
+        for node in module.body
+        if isinstance(node, ast.FunctionDef) and node.name == "_voyage_scan_borders"
+    )
+    border_source = ast.get_source_segment(source, border_scanner)
+    assert "crop_pad_x = round(430 * board_scale)" in border_source
+    assert "crop_pad_y = round(180 * board_scale)" in border_source
+    place_chart = next(
+        node
+        for node in module.body
+        if isinstance(node, ast.FunctionDef) and node.name == "_voyage_place_chart"
+    )
+    place_source = ast.get_source_segment(source, place_chart)
     assert "cell_span * 0.65" not in place_source
     assert "_voyage_source_patch" not in place_source
     assert place_source.count("_instant_move") == 2
